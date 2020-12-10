@@ -1,0 +1,270 @@
+{% extends 'base.html' %}  {% load static %} {% block title %}Register{% endblock %} {% load crispy_forms_tags %}
+
+{% block content %}
+
+    <style>
+    .control-label{
+        display: none;
+    }
+    </style>
+
+    <!-- Content
+    ================================================== -->
+    <div uk-height-viewport class="uk-flex uk-flex-middle" style="background: linear-gradient(80deg, rgb(7, 24, 41) 0px, rgb(13, 49, 80) 100%) !important">
+        <div class="uk-width-2-3@m uk-width-1-2@s m-auto rounded">
+            <div class="uk-child-width-1-2@m uk-grid-collapse bg-gradient-grey" uk-grid style="border-radius: 5px 5px 5px 5px; background: transparent">
+
+                <!-- column one -->
+                <!-- column one -->
+                <div class="uk-margin-auto-vertical uk-text-center uk-animation-scale-up p-3 uk-light">
+                    <div class="logo uk-visible@s">
+                <a href="#" class="logo" tabindex="-1">
+                           <img src="{% static 'images/VES.png' %}" alt="">
+                            </a>
+            </div>
+
+
+                </div>
+
+                <!-- column two -->
+                <div class="uk-card-default rounded uk-width-expand mt-5 pt-4 px-4 ">
+                  <div class="mb-2 uk-text-center">{% include 'partials/_alert.html' %}
+                      <h3 class="mb-0"> Create new Account</h3>
+                      <p class="my-2">Login to manage your account.</p>
+                  </div>
+                    <ul class="uk-child-width-expand uk-tab"
+                        uk-switcher="connect: #course-edit-tab ; animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium" hidden>
+                        <li><a href="#" id="back">Register</a></li>
+                        <li><a href="#" id="next">License</a></li>
+                    </ul>
+                    <form class="uk-child-width-1-1 uk-grid-small" uk-grid method="post">
+                        {% csrf_token %}
+                    <div class="card-body pb-4 pt-2">
+                        <ul class="uk-switcher uk-margin" id="course-edit-tab">
+                            <li>
+                              <!-- column two -->
+                              <div class="row mx-1">
+                                <div class="uk-width-1-2@s">
+                                    <div class="uk-form-group mr-1 ">
+                                        <label class="uk-form-label"> First name</label>
+
+                                        <div class="uk-position-relative w-100">
+                                            <span class="uk-form-icon">
+                                                <i class="icon-feather-user"></i>
+                                            </span>
+                                            <input class="uk-input" type="text" name="first" placeholder="John" required tabindex="1">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <div class="uk-form-group">
+                                        <label class="uk-form-label"> Last name</label>
+
+                                        <div class="uk-position-relative w-100">
+                                            <span class="uk-form-icon">
+                                                <i class="icon-feather-user"></i>
+                                            </span>
+                                            <input class="uk-input" type="text" name="last" placeholder="Deo" required tabindex="2">
+                                        </div>
+
+                                    </div>
+                                </div>
+                              </div>
+
+
+
+                                      <div>
+                                          <div class="uk-form-group mx-1">
+                                              <label class="uk-form-label"> Email</label>
+
+                                              <div class="uk-position-relative w-100">
+                                                  <span class="uk-form-icon">
+                                                      <i class="icon-feather-mail"></i>
+                                                  </span>
+                                                  <input class="uk-input" type="email" name="email" placeholder="name@example.com" required tabindex="3">
+                                              </div>
+
+                                          </div>
+                                      </div>
+
+                                       <div>
+                                          <div class="uk-form-group">
+                                              <label class="uk-form-label"> Contact</label>
+
+                                              <div class="uk-position-relative w-100">
+
+                                                  {{ form|crispy }}
+                                              </div>
+
+                                          </div>
+                                      </div>
+
+
+
+                                      <script>
+                                          function togglePassword(button) {
+                                          var password = document.getElementById("password1");
+                                          if (password.type == "password") {
+                                              button.innerHTML = "<i class='icon-feather-eye-off'></i>";
+                                              password.type = "text";
+                                          }
+                                          else {
+                                              button.innerHTML = "<i class='icon-feather-eye'></i>";
+                                              password.type = "password";
+                                          }
+                                      }
+                                  </script>
+                                  <script>
+                                      function toggle(button) {
+                                          var password = document.getElementById("password2");
+                                          if (password.type == "password") {
+                                              button.innerHTML = "<i class='icon-feather-eye-off'></i>";
+                                              password.type = "text";
+                                          }
+                                          else {
+                                              button.innerHTML = "<i class='icon-feather-eye'></i>";
+                                              password.type = "password";
+                                          }
+                                      }
+                                      </script>
+
+                                      <div class="text-right uk-width-expand mt-1">
+                                        <button class="btn btn-default ml-auto px-5" type="button" id="bb" onclick="next();" name="button">Next <i class="uil-angle-right"></i> </button>
+
+                                        <!-- tab switch -->
+                                        <script>
+                                         function next()
+                                            {
+                                              document.getElementById("next").click();
+                                            }
+                                        </script>
+                                      </div>
+
+
+                            </li>
+
+
+                            <li>
+
+                              <div class="text-left uk-width-expand mt-2">
+                                <button class="btn btn-default ml-auto pr-5 pl-4" id="bb" type="button" onclick="back();" name="button"><i class="uil-angle-left"></i>Back</button>
+
+                                <!-- tab switch -->
+                                <script>
+                                 function back()
+                                    {
+                                      document.getElementById("back").click();
+                                    }
+                                </script>
+                              </div>
+
+
+                              <div>
+                                  <div class="row mx-1">
+                                        <div class="uk-width-1-2@s ">
+                                            <div class="uk-form-group mr-1">
+                                                <label class="uk-form-label"> Password</label>
+
+                                                <div class="uk-position-relative w-100">
+                                                    <span class="uk-form-icon">
+                                                        <i class="icon-feather-lock"></i>
+                                                    </span>
+
+                                                    <button type="button" class="uk-form-icon uk-form-icon-flip" onclick="togglePassword(this);" style="background: transparent;border:none;outline: none;"><i class="icon-feather-eye"></i></button>
+                                                    <input class="uk-input" type="password" name="password1" id="password1" placeholder="*****" required tabindex="5">
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-1-2@s">
+                                            <div class="uk-form-group">
+                                                <label class="uk-form-label"> Confirm password</label>
+
+                                                <div class="uk-position-relative w-100">
+                                                    <span class="uk-form-icon">
+                                                        <i class="icon-feather-lock"></i>
+                                                    </span>
+                                                    <button type="button" class="uk-form-icon uk-form-icon-flip" onclick="toggle(this);" style="background: transparent;border:none;outline: none;"><i class="icon-feather-eye"></i></button>
+                                                    <input class="uk-input" type="password" name="password2" id="password2" placeholder="*****" required tabindex="6">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                      </div>
+                              </div>
+
+
+
+                          <div class="uk-width-auto@s uk-width-expand ml-5 mt-4">
+                              <button id="bb" type="submit" class=" uk-width-expand"><span></span><span></span><span></span><span></span>Get Started</button>
+
+                          </div>
+
+                          <hr>
+
+                          <div class="uk-width-expand text-center">
+
+                            <p><a href="{% url 'login' %}">Already Have An Account? <strong>Log In</strong></a></p>
+                          </div>
+
+
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    </form>
+
+                    </div>     <!--End Of card body -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -End
+    ================================================== -->
+
+
+    <!-- For Night mode -->
+    <script>
+    document.getElementsByClassName(control-label).style.display = "none";
+    </script>
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+
+{% endblock %}

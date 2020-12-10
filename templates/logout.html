@@ -1,0 +1,81 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}
+{% block content %}{% load static %}
+    <!-- Content
+    ================================================== -->
+    <div uk-height-viewport class="uk-flex uk-flex-middle" style="background: linear-gradient(80deg, rgb(7, 24, 41) 0, rgb(13, 49, 80) 100%) !important">
+        <div class="uk-width-2-3@m uk-width-1-2@s m-auto rounded">
+            <div class="uk-child-width-1-2@m uk-grid-collapse bg-gradient-grey" uk-grid style="border-radius: 5px 5px 5px 5px; background: transparent">
+
+                <!-- column one -->
+                <div class="uk-margin-auto-vertical uk-text-center uk-animation-scale-up p-3 uk-light">
+                    <div class="logo uk-visible@s">
+                <a href="" class="logo">
+                           <img src="{% static 'images/VES.png' %}" alt="">
+
+                        </a>
+            </div>
+                </div>
+
+                <!-- column two -->
+                <div class="uk-card-default p-5 rounded text-center">{% include 'partials/_alert.html' %}
+
+                    <div class="mb-4 uk-text-center">
+                        <h3 class="mb-0"> Welcome back</h3>
+                        <p class="my-2">Login to Your Account.</p>
+                    </div>
+
+                        <div class="mt-4  uk-text-center" >
+
+                            <div class="uk-width-auto@s uk-text-center">
+                                <a href="{% url 'login' %}" id="bb" class="btn btn-default uk-text-center">Click Here To Login</a>
+                            </div>
+                        </div>
+
+                </div><!--  End column two -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -End
+    ================================================== -->
+
+
+
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+
+{% endblock %}

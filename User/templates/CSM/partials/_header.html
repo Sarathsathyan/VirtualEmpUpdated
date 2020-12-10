@@ -1,0 +1,145 @@
+{% load static %}
+
+ <header class="header uk-light">
+
+            <div class="container">
+                <nav uk-navbar>
+                    <!-- left Side Content -->
+                    <div class="uk-navbar-left">
+                        <!-- menu icon -->
+                        <span class="mmenu-trigger" uk-toggle="target: #wrapper ; cls: mobile-active">
+                            <button class="hamburger hamburger--collapse" type="button">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </span>
+                        <!-- logo -->
+                        <div class="searchbox uk-visible@s">
+                            <input class="uk-search-input" type="search" placeholder="Search...">
+                            <button class="btn-searchbox"> </button
+                        </div>
+                        <!-- Search box dropdown -->
+                        <div uk-dropdown="pos: top;mode:click;animation: uk-animation-slide-bottom-small"
+                            class="dropdown-search">
+                            <div class="erh BR9 MIw"
+                                style="top: -26px;position: absolute ; left: 24px;fill: currentColor;height: 24px;pointer-events: none;color: #f5f5f5;">
+                                <svg width="22" height="22">
+                                    <path d="M0 24 L12 12 L24 24"></path>
+                                </svg></div>
+                            <!-- User menu -->
+
+                            <ul class="dropdown-search-list">
+                                <li class="list-title">
+                                    Recent Searches
+                                </li>
+                                <li>
+                                    <a href="course-intro.html">
+                                        Ultimate Web Designer And Developer Course</a>
+                                </li>
+                                <li><a href="course-intro.html">
+                                        The Complete Ruby on Rails Developer Course </a>
+                                </li>
+                                <li><a href="course-intro.html">
+                                        Bootstrap 4 From Scratch With 5 Real Projects </a>
+                                </li>
+                                <li> <a href="course-intro.html">
+                                        The Complete 2020 Web Development Bootcamp </a>
+                                </li>
+                                <li class="menu-divider">
+                                <li><a href="course-intro.html">
+                                        Bootstrap 4 From Scratch With 5 Real Projects </a>
+                                </li>
+                                <li> <a href="course-intro.html">
+                                        The Complete 2020 Web Development Bootcamp </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+
+                    <!--  Right Side Content   -->
+
+                    <div class="uk-navbar-right">
+
+
+
+                        <div class="header-widget">
+
+
+
+                            <!-- profile-icon-->
+
+                            <div class="dropdown-user-details">
+                                <div class="dropdown-user-avatar">
+                                    <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="">
+                                </div>
+                                {% if user.is_authenticated %}
+                                <div class="dropdown-user-name">
+                                    {{ user.first_name }} {{ user.last_name }} <span>CSM - ADMIN</span>
+                                </div>
+                                {% else %}
+                                {% endif %}
+                            </div>
+
+
+                            <div uk-dropdown="pos: top-right ;mode:click" class="dropdown-notifications small">
+
+                                <!-- User menu -->
+
+                                <ul class="dropdown-user-menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="icon-material-outline-dashboard"></i> Dashboard</a>
+                                    </li>
+
+                                    <li><a href="{% url 'csmSettings' %}">
+                                            <i class="icon-feather-settings"></i> Account Settings</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" id="night-mode" class="btn-night-mode">
+                                            <i class="icon-feather-moon"></i> Night mode
+                                            <span class="btn-night-mode-switch">
+                                                <span class="uk-switch-button"></span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    {% if user.is_authenticated %}
+                                    <ul class="menu-divider">
+
+                                        <li><a href="{% url 'logout' %}">
+                                                <i class="icon-feather-log-out"></i> Logout</a>
+                                        </li>
+                                    </ul>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+                        <!-- icon search-->
+                        <a class="uk-navbar-toggle uk-hidden@s"
+                            uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#">
+                            <i class="uil-search icon-small"></i>
+                        </a>
+                        <!-- User icons -->
+                        <span class="uil-user icon-small uk-hidden@s"
+                            uk-toggle="target: .header-widget ; cls: is-active">
+                            </span>
+
+                    </div>
+                    <!-- End Right Side Content / End -->
+
+
+                </nav>
+
+            </div>
+
+
+            <!-- container  / End -->
+
+        </header>

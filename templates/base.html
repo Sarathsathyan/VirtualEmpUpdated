@@ -1,0 +1,102 @@
+{% load static %}
+{#Base file#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+
+    <title>Virtual Employee |{% block title %}{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="VE - Turn students into industrial experts ">
+    {% block extrahead %}
+    {% endblock %}
+    <style>
+        .loader_box {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: absolute;
+            z-index: 99999999;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid blue;
+            border-right: 8px solid white;
+            border-bottom: 8px solid red;
+            border-left: 8px solid white;
+            width: 60px;
+            height: 60px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+
+            top: 49%;
+            position: relative;
+            left: 50%;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <link href="{% static 'images/favicon.ico' %}" rel="icon" type="img/ico">
+    <!-- CSS ================================================== -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/night-mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/framework.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/button-style.css' %}">
+    <!-- icons
+    ================================================== -->
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bowlby+One"/>
+
+    <!-- video js new code -->
+
+    <link rel="stylesheet" href="{% static 'css/video-js.min.css' %}">
+    <script src="{% static 'js/video.js' %}"></script>
+    <script src="{% static 'js/Youtube.js' %}"></script>
+
+
+    <script src="{% static 'js/courses.js' %}"></script>
+
+
+</head>
+<body>
+<div class="loader_box">
+    <div class="loader"></div>
+</div>
+<!-- Body -->
+
+{% block content %}
+
+
+{% endblock %}
+
+
+<script src="{% static 'js/framework.js' %}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/simplebar.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+
+
+</body>
+</html>

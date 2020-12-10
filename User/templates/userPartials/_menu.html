@@ -1,0 +1,35 @@
+
+{% load static %}
+
+
+<!-- menu -->
+        <div class="page-menu">
+            <!-- btn close on small devices -->
+            <span class="btn-menu-close" uk-toggle="target: #wrapper ; cls: mobile-active"></span>
+            <!-- traiger btn -->
+            <span class="btn-menu-trigger" uk-toggle="target: .page-menu ; cls: menu-large"></span>
+
+            <!-- logo -->
+             <div class="logo uk-visible@s">
+                <a href="#" class="logo">
+                            <img width="20px" src="{% static 'images/VES.png' %}" alt="">
+
+                        </a>
+
+            </div>
+            <div class="page-menu-inner" data-simplebar>
+                <ul data-submenu-title="Browse">
+                    <li><a href="#" ><i class="icon-brand-earlybirds" ></i> <span> My profile</span></a> </li>
+                    <li><a href="#"><i class="uil-book-open"></i> <span> All Courses</span></a> </li>
+                    <li><a href="#"><i class="uil-box"></i> <span> Projects</span></a> </li>
+                    <li><a href="#"><i class="uil-blogger"></i> <span> Blogs</span></a> </li>
+                </ul>
+
+                <ul data-submenu-title="Extra">
+
+                    <li><a href="#"><i class="uil-info-circle"></i> <span>Terms</span> </a></li>
+                    <li><a href="#"><i class="uil-shield-question"></i><span>Privacy</span> </a>
+                    </li>
+                </ul>
+            </div>
+        </div>

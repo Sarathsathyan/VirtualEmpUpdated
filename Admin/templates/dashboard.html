@@ -1,0 +1,394 @@
+{% extends 'base.html' %}
+{% block title %}
+Admin Page
+{% endblock %}
+{% block content %}
+
+    <div id="wrapper" class="admin-panel">
+
+    {% include 'partials/_header.html' %}
+
+        <!-- content -->
+        <div class="page-content">
+            <div class="page-content-inner pt-lg-0  pr-lg-0">
+
+                <div class="ro" uk-grid>
+                    <div class="uk-width-expand@m">
+
+
+                        <div class="section-small">
+                            {% include 'partials/_alert.html' %}
+
+                            <h3> Welcome {{ user.first_name }}  ! </h3>
+
+                            <div class="uk-position-relative uk-visible-toggle " tabindex="-1" uk-slider="finite: true">
+
+                                <ul class="uk-slider-items uk-child-width-1-2@m uk-child-width-1-2@s uk-grid">
+
+                                    <li>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="uk-flex-middle" uk-grid>
+                                                    <div class="uk-width-auto">
+                                                        <h5 class="mb-2"> Total sales </h5>
+                                                        <h1>&#x20B9; {{total_sales}}</h1>
+                                                        <span class="badge badge-soft-success mt-n1"> +12.9%</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="card-footer d-flex justify-content-between py-2">
+                                                <p class="mb-0"> {{total_students}} total sales </p>
+                                                <a href="#" class=" "> View report</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="uk-flex-middle" uk-grid>
+                                                    <div class="uk-width-auto">
+                                                        <h5 class="mb-2"> Total Students </h5>
+                                                        <h1> {{total_students}}</h1>
+                                                        <span class="badge badge-soft-primary mt-n1"> +56.6%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-footer d-flex justify-content-between py-2">
+                                                <p class="mb-0"> 120 New students </p>
+                                                <a href="#" class=" "> View report</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="uk-flex-middle" uk-grid>
+                                                    <div class="uk-width-auto">
+                                                        <h5 class="mb-2"> Total Courses </h5>
+                                                        <h1> 190</h1>
+                                                        <span class="badge badge-soft-success mt-n1"> +16</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="card-footer d-flex justify-content-between py-2">
+                                                <p class="mb-0"> 230 total Courses </p>
+                                                <a href="#" class=" "> View report</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+                           <ul class="uk-slider-nav uk-dotnav uk-flex-center mt-3"></ul>
+
+                            </div>
+
+                            <div class="uk-child-width-1-2@m" uk-grid>
+
+                                <div>
+
+                                </div>
+
+                                <div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="uk-card-default uk-card-small rounded">
+
+
+                            <!-- <div class="uk-height-large" data-simplebar> -->
+
+                              <div class="p-3 row align-items-center">
+
+                                  <div class="col-auto">
+                                   <h5 class=" mb-0 text-center text-muted"> View data on </h5>
+
+                                  </div>
+                                  <div class="col-md-5">
+
+                                  <select class="selectpicker" class="text-muted">
+                                      <option value=""> Today </option>
+                                      <option value="1"> This week </option>
+                                      <option value="2"> Last week</option>
+                                  </select>
+
+                                </div>
+                              </div>
+
+                              <hr class="m-0" style="width:65%;">
+
+                              <div class="p-3">
+                                <h5> Total Sales </h5>
+                                <div class="row">
+
+                                  <div class="col-md-8">
+
+                                    <h2> &#x20B9; {{total_sales}}</h2>
+                                    <canvas id="cjs-linechart"></canvas>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="text-center">
+                                        <h5>Growth/ Fall</h5>
+                                    </div>
+
+
+
+                                      <div class="uk-grid-small uk-flex-middle pl-0 pt-3" uk-grid>
+                                        <div class="indicator1">
+
+
+                                        </div>
+                                        <div class="p-1 uk-width-expand">
+                                            <h6 class="h6"> Total Students</h6>
+                                        </div>
+                                        <div class=""> <span class="badge badge-soft-secondary text-success mt-n1">
+                                                +20.9%</span>
+                                        </div>
+                                      </div>
+
+
+                                      <div class="uk-grid-small uk-flex-middle pl-0 mt-1" uk-grid>
+                                        <div class="indicator2">
+
+
+                                        </div>
+                                        <div class="pl-1 uk-width-expand">
+                                            <h6 class="h6"> Total Sales</h6>
+                                        </div>
+                                        <div class=""> <span class=" badge badge-soft-success text-danger mt-n1">
+                                                +20.9%</span>
+                                        </div>
+                                      </div>
+
+
+
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+
+                            <!-- </div> -->
+
+
+                        </div>
+
+                        <!-- Popular Instructers -->
+                        <div class="section-small">
+
+                            <div class="uk-position-relative uk-visible-toggle " tabindex="-1" uk-slider="finite: true">
+
+                                <ul class="uk-slider-items uk-child-width-1-3@m uk-child-width-1-2@s pb-3 uk-grid">
+
+
+                                    <li>
+                                            <div class="card">
+
+                                                    <div class="card-body text-center">
+
+                                                        <h6 class="h6 mt-0 mb-0"> Total Live Projects </h6>
+
+
+                                                        <div class="uk-width-auto">
+
+                                                            <h1 class="display-4 mt-2"><strong> 23 </strong></h1>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+                                            <li>
+                                              <div class="card">
+
+                                                      <div class="card-body text-center">
+
+                                                          <h6 class="h6 mt-0 mb-0"> Total Paid Projects </h6>
+
+                                                          <div class="uk-width-auto">
+
+                                                              <h1 class=" display-4 mt-2"><strong> 10 </strong></h1>
+
+                                                          </div>
+
+                                                      </div>
+
+                                                  </div>
+
+                                            </li>
+                                            <li>
+                                              <div class="card">
+
+                                                      <div class="card-body text-center">
+
+                                                          <h6 class="h6 mt-0 mb-0"> Total Management Works </h6>
+
+
+                                                          <div class="uk-width-auto">
+
+                                                              <h1 class=" display-4 mt-2"><strong> 77 </strong></h1>
+
+                                                          </div>
+
+                                                      </div>
+
+                                                  </div>
+
+                                            </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="uk-width-1-3@m">
+
+                        <div class="bg-white uk-card-default uk-height-1-1" data-simplebar
+                            uk-sticky="offset:70; bottom:true">
+
+                            <hr class="m-0">
+
+                            <div class="p-3">
+                                <h5> Latest Enrolled</h5>
+
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+
+                                    <div class="uk-width-expand">
+                                        <p class="uk-text-truncate mb-0"> JavaScript for Beginners</p>
+                                    </div>
+                                    <div class="uk-width-auto"> <span class="badge badge-soft-success mt-n1">
+                                            +12.9%</span>
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+
+                                    <div class="uk-width-expand">
+                                        <p class="uk-text-truncate mb-0"> JavaScript for Beginners</p>
+                                    </div>
+                                    <div class="uk-width-auto"> <span class="badge badge-soft-success mt-n1">
+                                            +12.9%</span>
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid-small  uk-flex-middle" uk-grid>
+
+                                    <div class="uk-width-expand">
+                                        <p class="uk-text-small uk-text-truncate mb-0"> Learn Bootstrap framework</p>
+                                    </div>
+                                    <div class="uk-width-auto"> <span class="badge badge-soft-success mt-n1">
+                                            +10.9%</span>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <a href="#">
+                                    <p class="uk-heading-line uk-text-center mt-2 uk-text-small"><span> View more
+                                        </span>
+                                    </p>
+                                </a>
+
+
+                                <h5> Top Sales</h5>
+
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+
+                                    <div class="uk-width-expand">
+                                        <p class="uk-text-truncate mb-0"> JavaScript for Beginners</p>
+                                        <span class="badge badge-soft-secondary mt-n1"> 5 enrolled</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+
+                                    <div class="uk-width-expand">
+                                        <p class="uk-text-truncate mb-0"> JavaScript for Beginners</p>
+                                        <span class="badge badge-soft-secondary mt-n1"> 5 enrolled</span>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- footer
+                ================================================== -->
+                {% include 'partials/_footer.html' %}
+
+            </div>
+
+        </div>
+
+        <!-- For Night mode -->
+        <script>
+            (function (window, document, undefined) {
+                'use strict';
+                if (!('localStorage' in window)) return;
+                var nightMode = localStorage.getItem('gmtNightMode');
+                if (nightMode) {
+                    document.documentElement.className += ' night-mode';
+                }
+            })(window, document);
+
+
+            (function (window, document, undefined) {
+
+                'use strict';
+
+                // Feature test
+                if (!('localStorage' in window)) return;
+
+                // Get our newly insert toggle
+                var nightMode = document.querySelector('#night-mode');
+                if (!nightMode) return;
+
+                // When clicked, toggle night mode on or off
+                nightMode.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    document.documentElement.classList.toggle('night-mode');
+                    if (document.documentElement.classList.contains('night-mode')) {
+                        localStorage.setItem('gmtNightMode', true);
+                        return;
+                    }
+                    localStorage.removeItem('gmtNightMode');
+                }, false);
+
+            })(window, document);
+        </script>
+    </div>
+
+{% endblock %}

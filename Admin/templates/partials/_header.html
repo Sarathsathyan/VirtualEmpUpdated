@@ -1,0 +1,238 @@
+{% load static %}
+
+<!-- menu -->
+<div class="page-menu">
+    <!-- btn close on small devices -->
+    <span class="btn-menu-close" uk-toggle="target: #wrapper ; cls: mobile-active"></span>
+    <!-- traiger btn -->
+    <span class="btn-menu-trigger" uk-toggle="target: .page-menu ; cls: menu-large"></span>
+
+    <!-- logo -->
+    <div class="logo uk-visible@s">
+        <a href="{% url 'admindashboard' %}" class="logo">
+            <img src="{% static 'images/VES.png' %}" alt="">
+
+        </a>
+
+    </div>
+    <div class="page-menu-inner" data-simplebar>
+        <ul class="mt-0">
+            <li><a href="{% url 'admindashboard' %}"><i class="uil-home-alt"></i> <span> Dashboard</span></a></li>
+            <li><a href="{% url 'rolecreation' %}"><i class="uil-user-check"></i> <span>Role Creations</span></a></li>
+            <li><a href="{% url 'cfpcreation' %}"><i class="uil-user-check"></i> <span>CFP Creations</span></a></li>
+            <li><a href="{% url 'cfplist' %}"><i class="uil-user-check"></i> <span>CFP List</span></a></li>
+            <li><a href="#"><i class="uil-user-check"></i> <span>MC categories</span></a></li>
+            <li><a href="#"><i class="uil-youtube-alt"></i> <span> Courses</span></a></li>
+            <li><a href="#"><i class="uil-robot"></i> <span>ProjectsmicroDash/</span></a></li>
+            <li>
+                <div id="modal-example" class="uk-flex-top" uk-modal>
+                    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                        <form name="requestotp" method="POST">
+                            {% csrf_token %}
+
+                            <h2 class="uk-modal-title">Request OTP</h2>
+                            <p>Before accessing the admin license page, please request the admin, an OTP.</p>
+                            <p class="uk-text-center">
+                                <input class="uk-button uk-button-primary" name="requestotp" type="Submit"
+                                       value="Request OTP" required>
+                            </p>
+                        </form>
+                        <form name="obtainedotp" method="POST">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Enter OTP" id="receivedOtp" name="receivedOtp">
+                            <div class="uk-flex uk-flex-between">
+                                <button class="uk-button uk-button-small uk-width-1-6 uk-modal-close" type="button">
+                                    Close
+                                </button>
+                                <input class="uk-button uk-button-primary" name="obtainedotp" required type="submit"
+                                       value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <a href="#modal-example" uk-toggle>
+                    <i class="uil-key-skeleton"></i> <span>Licence Key</span></a>
+
+            </li>
+
+            <li><a href=""><i class="uil-users-alt"></i> <span> Students</span></a></li>
+            <li><a href="instructors.html"><i class="uil-graduation-hat"></i> <span> Instructors</span></a>
+            </li>
+
+
+            <li><a href="#"><i class="uil-file-alt"></i> <span> News</span></a></li>
+            <li><a href="messages.html"><i class="uil-envelope-alt"></i> <span> Messages</span></a></li>
+        </ul>
+
+
+    </div>
+</div>
+
+<div id="modal-example" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <form name="requestotp" method="POST">
+            {% csrf_token %}
+
+            <h2 class="uk-modal-title">Request OTP</h2>
+            <p>Before accessing the admin license page, please request the admin, an OTP.</p>
+            <p class="uk-text-center">
+                <input class="uk-button uk-button-primary" name="requestotp" type="Submit" value="Request OTP" required>
+            </p>
+        </form>
+        <form name="obtainedotp" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter OTP" id="receivedOtp" name="receivedOtp">
+            <div class="uk-flex uk-flex-between">
+                <button class="uk-button uk-button-small uk-width-1-6 uk-modal-close" type="button">Close</button>
+                <input class="uk-button uk-button-primary" name="obtainedotp" required type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Header Container
+================================================== -->
+<header class="header uk-light">
+
+    <div class="container">
+        <nav uk-navbar>
+
+            <!-- left Side Content -->
+            <div class="uk-navbar-left">
+
+                <!-- menu icon -->
+                <span class="mmenu-trigger" uk-toggle="target: #wrapper ; cls: mobile-active">
+                            <button class="hamburger hamburger--collapse" type="button">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </span>
+
+
+                <!-- logo -->
+
+
+                <div class="searchbox uk-visible@s">
+
+                    <input class="uk-search-input" type="search" placeholder="Search...">
+                    <button class="btn-searchbox"></button>
+
+                </div>
+                <!-- Search box dropdown -->
+                <div uk-dropdown="pos: top;mode:click;animation: uk-animation-slide-bottom-small"
+                     class="dropdown-search">
+                    <div class="erh BR9 MIw"
+                         style="top: -26px;position: absolute ; left: 24px;fill: currentColor;height: 24px;pointer-events: none;color: #f5f5f5;">
+                        <svg width="22" height="22">
+                            <path d="M0 24 L12 12 L24 24"></path>
+                        </svg>
+                    </div>
+                    <!-- User menu -->
+
+                    <ul class="dropdown-search-list">
+                        <li class="list-title">
+                            Recent Searches
+                        </li>
+                        <li>
+                            <a href="course-intro.html">
+                                Ultimate Web Designer And Developer Course</a>
+                        </li>
+                        <li><a href="course-intro.html">
+                            The Complete Ruby on Rails Developer Course </a>
+                        </li>
+                        <li><a href="course-intro.html">
+                            Bootstrap 4 From Scratch With 5 Real Projects </a>
+                        </li>
+                        <li><a href="course-intro.html">
+                            The Complete 2020 Web Development Bootcamp </a>
+                        </li>
+                        <li class="menu-divider">
+                        <li><a href="course-intro.html">
+                            Bootstrap 4 From Scratch With 5 Real Projects </a>
+                        </li>
+                        <li><a href="course-intro.html">
+                            The Complete 2020 Web Development Bootcamp </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+            <!--  Right Side Content   -->
+
+            <div class="uk-navbar-right">
+
+
+                <div class="header-widget">
+
+
+                    <!-- profile-icon-->
+
+                    <div class="dropdown-user-details">
+
+                        {% if user.is_authenticated %}
+                            {% if user.is_staff %}
+                                <div class="dropdown-user-name">
+                                    {{ user.first_name }} {{ user.last_name }}<span>Administrator</span>
+                                </div>
+                            {% else %}
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+
+                    <div uk-dropdown="pos: top-right ;mode:click" class="dropdown-notifications small">
+
+                        <!-- User menu -->
+
+                        <ul class="dropdown-user-menu">
+                            <li>
+                                <a href="{% url 'admindashboard' %}">
+                                    <i class="icon-material-outline-dashboard"></i> Dashboard</a>
+                            </li>pyth
+                            <li>
+                                <a href="#" id="night-mode" class="btn-night-mode">
+                                    <i class="icon-feather-moon"></i> Night mode
+                                    <span class="btn-night-mode-switch">
+                                                <span class="uk-switch-button"></span>
+                                            </span>
+                                </a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <ul class="menu-divider">
+
+                                    <li><a href="{% url 'logout' %}">
+                                        <i class="icon-feather-log-out"></i> Log Out</a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- icon search-->
+                <a class="uk-navbar-toggle uk-hidden@s"
+                   uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#">
+                    <i class="uil-search icon-small"></i>
+                </a>
+                <!-- User icons -->
+                <span class="uil-user icon-small uk-hidden@s"
+                      uk-toggle="target: .header-widget ; cls: is-active">
+                            </span>
+
+            </div>
+            <!-- End Right Side Content / End -->
+
+
+        </nav>
+
+    </div>
+
+
+    <!-- container  / End -->
+
+</header>

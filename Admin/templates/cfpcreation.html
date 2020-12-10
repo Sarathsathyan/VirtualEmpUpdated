@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+{% block title %}
+    CFP Creation
+{% endblock %}
+{% block content %}
+
+    <div id="wrapper" class="admin-panel">
+
+        {% include 'partials/_header.html' %}
+
+        <div class="page-content">
+            <div class="page-content-inner">
+
+                <div class="d-flex">
+                    <nav id="breadcrumbs" class="mb-3">
+                        <ul>
+                            <li><a href="{% url 'admindashboard' %}"> <i class="uil-home-alt"></i> Dashboard</a></li>
+                            <li> Category/CFP Creation</li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="uk-width-4-4@m my-3">
+                                {% include 'partials/_alert.html' %}
+                                <div class="card rounded">
+                                    <div class=" py-2 px-4">
+                                        <h4 class="mb-0">Create Career Category </h4>
+
+                                    </div>
+                                    <hr class="m-0">
+                                    <div class=" container py-3 uk-width-expand">
+                                        <form name="categorycreate" method="POST">
+                                            {% csrf_token %}
+                                            <fieldset class="uk-fieldset">
+
+                                                <!-- <legend class="uk-legend text-center">Create Career Category</legend> -->
+                                                <div class="form-row">
+                                                    <div class="col-md-12">
+                                                        <input class="uk-input bg-secondary" name="cagname" type="text"
+                                                               placeholder="Type Category Here" required>
+                                                    </div>
+
+
+                                                    <div class="col-md-6 mt-4">
+                                                        <button class="btn btn-default" name="category_submit">Create
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="uk-width-4-4@m my-3">
+                                <div class="card rounded">
+                                    <div class=" py-2 px-4">
+                                        <h4 class="mb-0"> Create Sub category </h4>
+
+                                    </div>
+                                    <hr class="m-0">
+                                    <div class=" container mt-2 py-3 px-5 uk-width-expand">
+                                        <form name="cfpcreate" method="POST">
+                                            {% csrf_token %}
+                                            <fieldset class="uk-fieldset">
+                                                <div class="uk-margin uk-width-1-2">
+                                                    <select name="cfp_cag" class="uk-select" required>
+                                                        <option disabled selected value>Choose Career Category</option>
+                                                        {% for cag in category_list %}
+                                                            <option value="{{ cag.category }}">{{ cag.category }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-8">
+                                                        <input name="sub" type="text" class="uk-input bg-secondary"
+                                                               placeholder="CFP sub category" required>
+                                                    </div>
+
+
+                                                    <div class="col-md-4">
+                                                        <button class="btn btn-default" name="sub_category"
+                                                                onclick="Skillsubmit()">Create
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="card rounded">
+                                        <div class=" py-2 px-4">
+                                            <h4 class="mb-0"> Create CFP </h4>
+                                        </div>
+                                        <hr class="m-0">
+                                        <div class=" container mt-2 py-3 px-5 uk-width-expand">
+                                            <form name="cfpcreate" method="POST">
+                                                {% csrf_token %}
+                                                <fieldset class="uk-fieldset">
+                                                    <div class="form-row">
+                                                        <div class="col-md-6">
+                                                            <div class="uk-margin ">
+                                                            {% if not i %}
+                                                                <select name="career_cat" class="uk-select" required
+                                                                        onchange="this.form.submit()">
+                                                                    <option disabled selected value>Choose Career
+                                                                        Category
+                                                                    </option>
+                                                                    {% for cag in category_list %}
+                                                                        <option value="{{ cag.category }}">{{ cag.category }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            {% else %}
+                                                                <select name="career_cat" class="uk-select" required
+                                                                        onchange="this.form.submit()">
+                                                                    <option selected value="{{ category }}">{{ category }}
+                                                                    </option>
+                                                                    {% for cag in category_list %}
+                                                                        <option value="{{ cag.category }}">{{ cag.category }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+
+                                                            {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="uk-margin ">
+                                                                <select name="cfp_cat" class="uk-select" required>
+                                                                    <option disabled selected value>Choose Sub
+                                                                        category
+                                                                    </option>
+                                                                    {% for data in sub %}
+                                                                        <option value="{{ data.pk }}">{{ data.sub_category }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-margin">
+                                                        <input class="uk-input bg-secondary" name="cfp_role" type="text"
+                                                               placeholder="Create CFP" required>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <button class="btn btn-default" name="cfp_submit"
+                                                                onclick="Skillsubmit()">Create
+                                                        </button>
+                                                    </div>
+
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer
+                ================================================== -->
+                {% include 'partials/_footer.html' %}
+            </div>
+        </div>
+        <!-- For Night mode -->
+        <script>
+            (function (window, document, undefined) {
+                'use strict';
+                if (!('localStorage' in window)) return;
+                var nightMode = localStorage.getItem('gmtNightMode');
+                if (nightMode) {
+                    document.documentElement.className += ' night-mode';
+                }
+            })(window, document);
+
+
+            (function (window, document, undefined) {
+
+                'use strict';
+
+                // Feature test
+                if (!('localStorage' in window)) return;
+
+                // Get our newly insert toggle
+                var nightMode = document.querySelector('#night-mode');
+                if (!nightMode) return;
+
+                // When clicked, toggle night mode on or off
+                nightMode.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    document.documentElement.classList.toggle('night-mode');
+                    if (document.documentElement.classList.contains('night-mode')) {
+                        localStorage.setItem('gmtNightMode', true);
+                        return;
+                    }
+                    localStorage.removeItem('gmtNightMode');
+                }, false);
+
+            })(window, document);
+
+
+            // Random Password Generator
+
+            var keylist = "abcdefghijklmnopqrstuvwxyz123456789"
+            var temp = ''
+
+            function generatepass(plength) {
+                temp = ''
+                for (i = 0; i < plength; i++)
+                    temp += keylist.charAt(Math.floor(Math.random() * keylist.length))
+                return temp
+            }
+
+            function populateform(enterlength) {
+                document.pgenerate.password.value = generatepass(enterlength)
+            }
+
+
+            // Skill Addition
+
+            // now, add a new to the TABLE.
+            function addSkillRow() {
+                var empTab = document.getElementById('SkillsTable');
+
+                var rowCnt = empTab.rows.length;   // table row count.
+                var tr = empTab.insertRow(rowCnt); // the table row.
+                // tr = empTab.insertRow(rowCnt);
+
+                for (var c = 0; c < 1; c++) {
+                    var td = document.createElement('td'); // table definition.
+                    td = tr.insertCell(c);
+                    var ele = document.createElement('input');
+                    ele.setAttribute('type', 'text');
+                    ele.setAttribute('placeholder', 'Add Course Tag');
+                    td.appendChild(ele);
+
+                }
+            }
+
+
+            //To delete skills in the table
+            function delSkillRow() {
+                var empTab = document.getElementById('SkillsTable');
+
+                var rowCnt = empTab.rows.length;   // table row count.
+                var tr; // the table row.
+                tr = empTab.deleteRow(rowCnt - 1);
+                // rowCnt = empTab.rows.length;
+                // tr = empTab.deleteRow(rowCnt-1);
+
+
+            }
+
+
+            // function to extract and submit table data.
+            function Skillsubmit() {
+                var myTab = document.getElementById('SkillsTable');
+                var arrValues = new Array()
+
+                // loop through each row of the table.
+                for (row = 0; row < myTab.rows.length; row++) {
+                    // loop through each cell in a row.
+                    for (c = 0; c < myTab.rows[row].cells.length; c++) {
+                        var element = myTab.rows.item(row).cells[c];
+                        if (element.childNodes[0].getAttribute('type') == 'text') {
+                            arrValues.push(element.childNodes[0].value);
+                        }
+                    }
+                }
+
+                var str = "";
+                for (i = 0; i < arrValues.length; i++) {
+                    len = arrValues[i].trim().length
+                    if (len == 0) {
+                        continue;
+                    } else {
+                        str = str.concat(arrValues[i]);
+                        str = str + '_';
+
+                    }
+
+                }
+
+                req_str = str.substring(0, str.length - 1)
+
+                // The final output.
+                // document.getElementById('Reqoutput').innerHTML = req_str;
+
+                var ele1 = document.getElementById('sout');
+                ele1.setAttribute('value', req_str);
+            }
+        </script>
+    </div>
+{% endblock %}

@@ -1,0 +1,117 @@
+
+{% load static %}
+{#   Header starts  #}
+
+    <header class="header uk-light" uk-sticky style="background:rgb(10, 34, 59)">
+
+            <div class="container">
+
+                <nav uk-navbar>
+
+
+                    <!-- left Side Content -->
+                    <div class="uk-navbar-left">
+ <div class="searchbox uk-visible@s">
+
+                            <input class="uk-search-input" type="search" placeholder="Search...">
+                            <button class="btn-searchbox"> </button>
+
+                        </div>
+                        <!-- logo -->
+                        <a href="{% url 'userdashboard' %}" class="logo">
+                            <img src="{% static 'images/VES.png' %}" alt="">
+                            <span> Virtual Empleado</span>
+                        </a>
+
+                        <!-- breadcrumbs -->
+                        <nav id="breadcrumbs">
+                            <ul>
+                                <!-- <li><a href="/userdashboard/" style="color: black;font-weight: bold;font-size: 20px;"> My Dashboard </a></li> -->
+
+                            </ul>
+                        </nav>
+
+
+                    </div>
+
+
+                    <!--  Right Side Content   -->
+
+                    <div class="uk-navbar-right">
+
+                        <div class="header-widget" >
+                            <!-- User icons close mobile-->
+                            <span class="icon-feather-x icon-small uk-hidden@s"
+                                uk-toggle="target: .header-widget ; cls: is-active"> </span>
+
+
+                            <!-- profile-icon-->
+                        <!-- profile-icon-->
+
+                            {% if user.is_authenticated %}
+
+                            <a href="#" class="header-widget-icon profile-icon" >
+{#                                <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="" class="header-profile-icon">#}
+
+                            <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 5px;"><a class="uil uil-user mx-2"></a>{{ user.first_name }} {{ user.last_name }}</p>
+                            </a>
+                        {% endif %}
+
+                            <div uk-dropdown="pos: top-right ;mode:click" class="dropdown-notifications small">
+
+                                <!-- User Name / Avatar -->
+                                <a href="profile-1.html">
+
+                                    <div class="dropdown-user-details">
+{#                                        <div class="dropdown-user-avatar">#}
+{#                                            <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="">#}
+{#                                        </div>#}
+                                        {% if user.is_authenticated %}
+                                        <div class="dropdown-user-name" style="font-weight: bold;">
+                                            {{ user.first_name }} {{ user.last_name }}<span>Student <p class="m-0"> Member since : {{ user_data.user_date |date   }} </p> <p class="m-0">Reference ID : {{ reference }} </p></span>
+                                        </div>
+
+                                        {% endif %}
+                                    </div>
+
+                                </a>
+
+                                <!-- User menu -->
+
+                                <ul class="dropdown-user-menu">
+                                    <li>
+                                        <a href="{% url 'userdashboard' %}">
+                                            <i class="icon-material-outline-dashboard"></i> Dashboard</a>
+                                    </li>
+
+                                    <li><a href="#">
+                                            <i class="icon-feather-settings"></i> Edit Profile</a>
+                                    </li>
+                                    <li><a href="#">
+                                            <i class="icon-feather-slack"></i> Choose CFP</a>
+                                    </li>
+                                    <li class="menu-divider">
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'logout' %}">
+                                            <i class="icon-feather-log-out"></i> Sign Out</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- icon search-->
+                        <a class="uk-navbar-toggle uk-hidden@s"
+                            uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#">
+                            <i class="uil-search icon-small"></i>
+                        </a>
+
+                        <!-- User icons -->
+                            <a href="#" class="uil-user icon-small uk-hidden@s"
+                            uk-toggle="target: .header-widget ; cls: is-active">
+                            </a>
+                    </div>
+                    <!-- End Right Side Content / End -->
+                </nav>
+            </div>
+            <!-- container  / End -->
+        </header>
