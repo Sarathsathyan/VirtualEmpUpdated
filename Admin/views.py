@@ -29,7 +29,6 @@ def userLogin(request):
         user = authenticate(username=email, password=password)
         # Roles
         if user is not None:
-            print("helo")
             login(request, user)
             if request.user.is_staff and request.user.is_superuser:
                 print('Welcome admin')
