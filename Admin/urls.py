@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from User.views import userDashboard,userCfp
+from User.views import userDashboard,userCfp,userprofile,userProfileEdit
 from User.views import csmDashboard
 urlpatterns = [
     path('', views.landing, name='landing'),
@@ -9,6 +9,8 @@ urlpatterns = [
     path('user-register/', views.userRegister, name='register'),
 
     path('userDashboard/',userDashboard,name='userdashboard'),
+    path('userProfile/',userprofile,name='userprofile'),
+    path('userProfileEdit/',userProfileEdit,name='userprofileedit'),
     path('userCFP/',userCfp,name="usercfp"),
     path('csmDashboard/',csmDashboard,name='csmdashboard'),
 
