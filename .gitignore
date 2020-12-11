@@ -2,5 +2,7 @@
 db.sqlite3
 Admin/migrations/*
 Admin/__pycache__/
+User/__pycache__/
 User/migrations/*
 media/*
+venv/*
