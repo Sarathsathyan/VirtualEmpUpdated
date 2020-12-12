@@ -96,8 +96,8 @@ def userprofile(request):
                 'tech_skills':tech_skills,
                 'man_skills':man_skills,
                 'lan_skills':lan_skills,
-                'com_courses':com_courses,
-                'tot_achiev':tot_achiev,
+                
+
 
             }
             if UserContact.objects.filter(user_id_id=user_details.pk).exists():
@@ -125,8 +125,6 @@ def userprofile(request):
 
                 # Certificate Retrieval
 
-                certificate=Certificate.objects.filter(user_id_id=user_contact.pk)
-
 
                 context={
                     'user_contact':user_contact,
@@ -136,53 +134,53 @@ def userprofile(request):
                     'tech_skills':tech_skills,
                     'man_skills':man_skills,
                     'lan_skills':lan_skills,
-                    'tot_achiev': tot_achiev,
+
 
 
                 }
                 # CFP
-                if StudentCFP.objects.filter(user_id_id=user_details.pk).exists():
-                    cfp_details = StudentCFP.objects.get(user_id_id=user_details.pk)
-                    # CFP  COURSES
-                    lists = Course.objects.filter(category=cfp_details.category_one, role=cfp_details.role_one)
-                    lists2 = Course.objects.filter(category=cfp_details.category_two, role=cfp_details.role_two)
-                    try:
-                        work = UserWorkExperience.objects.filter(user_id_id=user_details.pk).order_by("-start_year")
-                    except:
-                        work=[]
-
-                    try:
-                        tech_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Technical')
-                    except:
-                        tech_skills=[]
-
-                    try:
-                        man_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Management')
-                    except:
-                        man_skills=[]
-
-                    try:
-                        lan_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Languages')
-                    except:
-                        lan_skills=[]
-
-
-
-
-                    context = {
-                        'cfp_details': cfp_details,
-                        'user_data': user_details,
-                        'user_contact': user_contact,
-                        'user_education': user_education,
-                        'work':work,
-                        'tech_skills':tech_skills,
-                        'man_skills':man_skills,
-                        'lan_skills':lan_skills,
-
-                    }
-
-
-                    return render(request, "userProfile.html", context)
+                # if StudentCFP.objects.filter(user_id_id=user_details.pk).exists():
+                #     cfp_details = StudentCFP.objects.get(user_id_id=user_details.pk)
+                #     # CFP  COURSES
+                #     lists = Course.objects.filter(category=cfp_details.category_one, role=cfp_details.role_one)
+                #     lists2 = Course.objects.filter(category=cfp_details.category_two, role=cfp_details.role_two)
+                #     try:
+                #         work = UserWorkExperience.objects.filter(user_id_id=user_details.pk).order_by("-start_year")
+                #     except:
+                #         work=[]
+                #
+                #     try:
+                #         tech_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Technical')
+                #     except:
+                #         tech_skills=[]
+                #
+                #     try:
+                #         man_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Management')
+                #     except:
+                #         man_skills=[]
+                #
+                #     try:
+                #         lan_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Languages')
+                #     except:
+                #         lan_skills=[]
+                #
+                #
+                #
+                #
+                #     context = {
+                #         'cfp_details': cfp_details,
+                #         'user_data': user_details,
+                #         'user_contact': user_contact,
+                #         'user_education': user_education,
+                #         'work':work,
+                #         'tech_skills':tech_skills,
+                #         'man_skills':man_skills,
+                #         'lan_skills':lan_skills,
+                #
+                #     }
+                #
+                #
+                #     return render(request, "userProfile.html", context)
 
                 return render(request, "userProfile.html", context)
 
@@ -238,7 +236,7 @@ def userProfileEdit(request):
                     data = UserContact.objects.get(user_id_id=user_detail.pk)
                     if data.user_pic:
                         pic = request.FILES.get('user-profile-photo')
-                    
+
 
                         print(pic)
                         print("hai")
@@ -441,7 +439,7 @@ def userProfileEdit(request):
                 durr=str(num_years)+ "y " + str(num_months) + "m"
 
 
-                work=UserWorkExperience(user_id_id=user_detail.pk,job_role=role,start_month=start_month,start_year=start_year,end_month=end_month,end_year=end_year,duration=durr,state=state,company=company)
+                work=UserWorkExperience(user_id_id=user_detail.pk,job_role=role,start_month=start_month,start_year=start_year,end_month=end_month,end_year=end_year,state=state,company=company)
                 work.save()
 
                 messages.success(request, "Work Experience Added")
