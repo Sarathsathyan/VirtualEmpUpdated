@@ -40,7 +40,7 @@ def userLogin(request):
                         print("user role")
                         role = RoleDetail.objects.get(role_user_email=email)
                         if role.user_role == "CSM":
-                            return redirect('csmdashboard')
+                            return redirect('csmDashboard/')
                         elif role.user_role == "TL":
                             return redirect('tlDashboard')
                         elif role.user_role == "PCM":
@@ -76,11 +76,11 @@ def userLogin(request):
                             messages.success(request, "Choose your career focus path ! Enjoy")
                             return redirect('usercfp')
                         else:
-                            return redirect('userdashboard')
+                            return redirect('userdashboard/')
                     except:
                         user_cfp = UserDetails.objects.get(user_id_id=user.pk)
                         user_cfp.user_cfp = True
-                    return redirect('userdashboard')
+                    return redirect('userdashboard/')
         messages.error(request, "Login failed")
         return redirect('login')
     return render(request,'login.html')

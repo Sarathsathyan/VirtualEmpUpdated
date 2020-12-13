@@ -55,6 +55,7 @@ def userDashboard(request):
         user_details = UserDetails.objects.get(user_id_id=user.pk)
 
 
+
     return render(request,'userDashboard.html')
 
 
@@ -566,5 +567,3 @@ def userProfileEdit(request):
 
 
 
-def csmDashboard(request):
-    return render(request,'CSM/csmDashboard.html')

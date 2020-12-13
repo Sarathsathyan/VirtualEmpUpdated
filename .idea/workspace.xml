@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87ddb306-b5d8-49b8-929b-cdc19587f0a0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CSM/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User/templates/CSM/choseType.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/CSM/csmDashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/CSM/csmDashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/CSM/partials/_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/csm-tl-project_partials/_csm_header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/userPartials/_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userPartials/_header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VirtualEmpleado/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/VirtualEmpleado/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VirtualEmpleado/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/VirtualEmpleado/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +50,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/User/templates/csm-tl-project_partials" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -48,6 +60,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/User/templates/csm-tl-project_partials" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/User/templates" />
     </key>
@@ -95,7 +110,7 @@
       <workItem from="1607443715125" duration="12127000" />
       <workItem from="1607703225632" duration="2739000" />
       <workItem from="1607754722665" duration="275000" />
-      <workItem from="1607757019463" duration="670000" />
+      <workItem from="1607757019463" duration="8246000" />
     </task>
     <servers />
   </component>

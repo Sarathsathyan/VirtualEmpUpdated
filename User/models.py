@@ -62,3 +62,8 @@ class UserSkill(models.Model):
 
     def __str__(self):
         return self.skill
+
+# CSM  MODELS
+
+
+
