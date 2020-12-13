@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Admin',
     'User',
     'CSM',
+    'Blog',
     'crispy_forms'
 ]
 

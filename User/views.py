@@ -97,7 +97,7 @@ def userprofile(request):
                 'tech_skills':tech_skills,
                 'man_skills':man_skills,
                 'lan_skills':lan_skills,
-                
+
 
 
             }
@@ -564,6 +564,3 @@ def userProfileEdit(request):
     else:
         messages.error(request,"Wrong URL")
         return redirect('logout')
-
-
-
