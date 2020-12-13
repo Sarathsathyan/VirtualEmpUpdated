@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87ddb306-b5d8-49b8-929b-cdc19587f0a0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CSM/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/templates/CSM/choseType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CSM/templates/csm_add_course.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/CSM/csmDashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/CSM/csmDashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/CSM/partials/_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/csm-tl-project_partials/_csm_header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/userPartials/_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userPartials/_header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VirtualEmpleado/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/VirtualEmpleado/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VirtualEmpleado/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/VirtualEmpleado/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSM/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSM/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSM/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/CSM/choseType.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/CSM/csmDashboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/csm-tl-project_partials/_csm_header.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -110,11 +105,17 @@
       <workItem from="1607443715125" duration="12127000" />
       <workItem from="1607703225632" duration="2739000" />
       <workItem from="1607754722665" duration="275000" />
-      <workItem from="1607757019463" duration="8246000" />
+      <workItem from="1607757019463" duration="17546000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1607865239835">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1607865239835" />
   </component>
 </project>
