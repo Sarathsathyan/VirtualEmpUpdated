@@ -21,5 +21,6 @@ urlpatterns = [
     path('',include('Admin.urls')),
     path('userlogin/userdashboard/',include('User.urls')),
     path('userlogin/csmDashboard/',include('CSM.urls')),
+    path('userlogin/blogManager/',include('Blog.urls')),
     path('admin/', admin.site.urls),
 ]

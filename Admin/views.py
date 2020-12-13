@@ -48,7 +48,8 @@ def userLogin(request):
                         elif role.user_role == "Instructor":
                             return redirect('insDashboard')
                         elif role.user_role == "Blogger":
-                            return redirect('blogManager')
+                            print("hello")
+                            return redirect('blogManager/')
                         else:
                             messages.error(request, "Error occured in Role")
                 except:
