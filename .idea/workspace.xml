@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87ddb306-b5d8-49b8-929b-cdc19587f0a0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CSM/templates/csm_add_course.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/CSM/choseType.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/CSM/csmDashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/csm-tl-project_partials/_csm_header.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +98,7 @@
       <workItem from="1607443715125" duration="12127000" />
       <workItem from="1607703225632" duration="2739000" />
       <workItem from="1607754722665" duration="275000" />
-      <workItem from="1607757019463" duration="17546000" />
+      <workItem from="1607757019463" duration="19427000" />
     </task>
     <servers />
   </component>
