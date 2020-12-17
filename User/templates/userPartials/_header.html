@@ -47,6 +47,30 @@
 
                             <!-- profile-icon-->
                         <!-- profile-icon-->
+                        
+                        <div class="uk-flex-inline mt-1 mx-4">
+                          <div class="mx-2">
+                            <!-- <h6>MC Creadits</h6> -->
+                            <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 3px;">Work Tokens</p>
+                          </div>
+                          <div class="">
+                              <img src="{% static 'images/money.png' %}" style="height:30px;" alt="">
+                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">10</span>
+                          </div>
+                        </div>
+
+                        <div class="uk-flex-inline mt-1">
+                          <div class="mx-2">
+                            <!-- <h6>MC Creadits</h6> -->
+                            <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 3px;">MC Credits</p>
+                          </div>
+                          <div class="">
+
+                              <img src="{% static 'images/token.png' %}" style="height:30px;" alt="">
+                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">10</span>
+                          </div>
+                        </div>
+
 
                             {% if user.is_authenticated %}
 
@@ -82,6 +106,7 @@
                                     <li>
                                         <a href="{% url 'userdashboard' %}">
                                             <i class="icon-material-outline-dashboard"></i> Dashboard</a>
+
                                     </li>
 
                                     <li><a href="{% url 'userprofileedit' %}">
