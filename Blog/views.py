@@ -28,11 +28,11 @@ def blogManager(request):
                     blog_body=blog_body,
                     blog_thumbnail=blog_thumbnail,
                     blog_category=blog_category,
-                    featured=feature
+                    # featured=feature
                 )
                 # proj.project_cfp.set(cfp_list)
                 blog.save()
-                return redirect("/blogdashboard/")
+                return redirect("blogDashboard")
         cag_data=BlogCategory.objects.all()
         context={
             'cag_data':cag_data,

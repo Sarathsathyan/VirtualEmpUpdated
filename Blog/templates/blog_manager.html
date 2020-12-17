@@ -23,9 +23,9 @@ Blog Manager
             </div>
             <div class="page-menu-inner" data-simplebar>
                 <ul class="mt-0">
-                    <li><a href="#"><i class="uil-home-alt"></i> <span> Dashboard</span></a> </li>
-                    <li><a href="#"><i class="uil-youtube-alt"></i> <span> Blog Manager</span></a> </li>
-                    <li><a href="#"><i class="uil-youtube-alt"></i> <span> Blog Category</span></a> </li>
+                    <li><a href="{% url 'blogDashboard' %}"><i class="uil-home-alt"></i> <span> Dashboard</span></a> </li>
+                    <li><a href="{% url 'blogManager' %}"><i class="uil-youtube-alt"></i> <span> Blog Manager</span></a> </li>
+                    <li><a href="{% url 'blogcategorycreate' %}"><i class="uil-youtube-alt"></i> <span> Blog Category</span></a> </li>
                 </ul>
 
             </div>
@@ -33,7 +33,7 @@ Blog Manager
 
         <!-- Header Container
         ================================================== -->
-{#        {% include 'partials/pcm_partials/_pcm_header.html' %}#}
+ {% include 'csm-tl-project_partials/_csm_header.html' %}
 
         <!-- content -->
         <div class="page-content">
