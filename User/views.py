@@ -564,3 +564,7 @@ def userProfileEdit(request):
     else:
         messages.error(request,"Wrong URL")
         return redirect('logout')
+
+
+def userResult(request):
+    return render(request,'user_result.html')
