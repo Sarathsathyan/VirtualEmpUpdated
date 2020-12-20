@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
-from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice
+from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
+from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
 # Create your views here.
 
 # CSM
@@ -53,19 +54,62 @@ def userDashboard(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         user = request.user
         user_details = UserDetails.objects.get(user_id_id=user.pk)
+        createCourse = CreateCourse.objects.get(id = 3)
+        careerChoice = CareerChoice.objects.get(user_id_id=request.user.pk)
+        print(careerChoice.cat_id_id)
+        course = Course.objects.get(category_id=createCourse.pk)
+        print(course.title)
+        context={
+            'careerChoice' :careerChoice,
+            'course':course,
+        }
+        return render(request,'userDashboard.html',context)
+    else:
+        print("Wrong url")
+
+# user course
+def userCourseIntro(request):
+    return render(request,'userCourseIntro.html');
+
+def userCourseLesson(request):
+    createCourse = CreateCourse.objects.get(id=3)
+    course = Course.objects.get(category_id=createCourse.pk)
+    data = userProgress.objects.filter(userId_id=request.user.pk)
+    video =None;
+    week = Week.objects.filter(week_id_id=course.pk)
+    weekUnit =Week_Unit.objects.all();
+    if request.method == 'POST':
+        if 'start' in request.POST:
+            week = request.POST['weekId']
+            data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True)
+            data.save()
+            return redirect('courseLesson')
+        if 'videoOne' in request.POST:
+            key = request.POST['uniq']
+            video = Week_Unit.objects.get(id =key)
+            video = video.unit_video1
+        if 'videoTwo' in request.POST:
+            twoKey = request.POST['uniq']
+            video = Week_Unit.objects.get(id=twoKey)
+            video = video.unit_video2
+        if 'videoThree' in request.POST:
+            threeKey = request.POST['uniq']
+            video = Week_Unit.objects.get(id=threeKey)
+            video = video.unit_video3
 
 
-
-    return render(request,'userDashboard.html')
-
-
+    context ={
+        'week':week,
+        'weekUnits':weekUnit,
+        'video':video,
+        'data':data,
+    }
+    return render(request,'userCourseLesson.html',context)
 
 def userprofile(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         user = request.user
         user_details = UserDetails.objects.get(user_id_id=user.pk)
-
-
         if UserEducation.objects.filter(user_id_id=user_details.pk).exists():
             user_education = UserEducation.objects.filter(user_id_id=user_details.pk)
             try:
@@ -564,3 +608,13 @@ def userProfileEdit(request):
     else:
         messages.error(request,"Wrong URL")
         return redirect('logout')
+
+def userQuizz(request,w_id):
+    week = Week.objects.get(id = w_id);
+    course = Course.objects.get(id = week.week_id_id)
+    data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
+    print(data)
+    context={
+        'data' : data
+    }
+    return render(request,'userQuizz.html',context)

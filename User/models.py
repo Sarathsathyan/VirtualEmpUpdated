@@ -2,6 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse)
+from CSM.models import Week_Unit,Week
 # Create your models here.
 
 # Career choice
@@ -65,5 +66,14 @@ class UserSkill(models.Model):
 
 # CSM  MODELS
 
+
+class userProgress(models.Model):
+    userId = models.ForeignKey(User,on_delete=models.CASCADE)
+    course_id = models.ForeignKey(CategoryCourse,on_delete=models.CASCADE)
+    weekId = models.ForeignKey(Week,on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.status
 
 

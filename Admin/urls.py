@@ -12,4 +12,5 @@ urlpatterns = [
     path('roleCreation/',views.roleCreation,name='rolecreation'),
     path('cfpCreation/',views.cfpCreation,name='cfpcreation'),
     path('cfpList/',views.cfpList,name='cfplist'),
+    path('licenseKey/',views.adminLicenseKey,name="licenseKey"),
 ]

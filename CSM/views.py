@@ -1,6 +1,8 @@
+import random
+
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .models import Course,CreateCourse
+from .models import Course,CreateCourse,Week_Unit,Week,Quizz
 from Admin.models import CategoryCourse,CareerCategory,SubCategory,RoleDetail
 # Create your views here.
 
@@ -119,3 +121,105 @@ def csmAddCourse(request,cat_id):
             'inst':inst
         }
         return render(request,'csm_add_course.html',context)
+
+
+def csmAddCurriculam(request,curr_id):
+    if request.user.is_active:
+
+        Course_name = Course.objects.get(id=curr_id)
+        course_title = Course_name.title
+        if request.method == 'POST':
+            if 'create' in request.POST:
+                week_name = request.POST['week']
+                if Week.objects.filter(week_id_id=curr_id, week_name=week_name).exists():
+                    messages.error(request, "Week name already exists")
+                    return redirect('csmAddCurriculam', id)
+                week_private = random.randint(112, 1000) * 100
+                data = Week(week_name=week_name, week_private=week_private, week_id_id=curr_id)
+                data.save()
+                messages.success(request, "Week Added")
+                print("success")
+
+            if 'addWeekUnit' in request.POST:
+                unit_caption = request.POST['unit_caption']
+                unit_captionOne = request.POST['unit_captionOne']
+                unit_captionTwo = request.POST['unit_captionTwo']
+                unit_captionThree = request.POST['unit_captionThree']
+                unit_video1 = request.FILES.get('unit_video1')
+                unit_video2 = request.FILES.get('unit_video2')
+                unit_video3 = request.FILES.get('unit_video3')
+                week = request.POST['wek_id']
+
+                try:
+                    week_private = Week.objects.get(week_private=week)
+                    if week_private:
+                        print("enter")
+                        if Week_Unit.objects.filter(unit_id_id=week_private.pk,unit_caption=unit_caption).exists():
+                            messages.error(request, "Unit name already exists")
+                            return redirect('csmAddCurriculam', id)
+                        print("hellooo")
+                        unit = Week_Unit(unit_id_id=week_private.pk,unit_video1=unit_video1, unit_video2=unit_video2, unit_video3=unit_video3,
+                                       uCapOne=unit_captionOne,u_capThree=unit_captionThree,uCap2=unit_captionTwo)
+                        unit.save()
+                        messages.success(request, "Unit added to week")
+                    else:
+                        messages.error(request, "Wrong Lesson Id")
+                except:
+                    print("error")
+                    messages.error(request, "Some error occured")
+
+            if 'del' in request.POST:
+                print("delete")
+                del_id = request.POST['l_id']
+                try:
+                    lesson_del = Lesson.objects.get(id=del_id).delete()
+                    topic_del = Lesson_Topic.objects.filter(topic_id_id=del_id)
+                    messages.success(request, "Deleted successfully")
+                except:
+                    messages.error(request, "Some error occured")
+
+        weeks = Week.objects.order_by("week_name")
+        context = {
+            'weeks': weeks,
+            'course_title': course_title,
+            'c_id': curr_id,
+        }
+        print(course_title)
+        return render(request, 'csm_add_curriculam.html', context)
+
+
+    else:
+        messages.error(request,"Wrong url")
+        return redirect('/login')
+
+def csmAddQuizz(request,w_id):
+    user = request.user
+    datas = Quizz.objects.filter(week_id_id=w_id)
+    week = Week.objects.get(id = w_id)
+    course = Course.objects.get(id = week.week_id_id)
+    print(course.title)
+    if request.method == 'POST':
+        if 'save' in request.POST:
+            question = request.POST['question']
+            que1 = request.POST['answer1']
+            que2 = request.POST['answer2']
+            que3 = request.POST['answer3']
+            que4 = request.POST['answer4']
+            ans = request.POST['ans']
+
+            data = Quizz(week_id_id=w_id, question=question, answer=ans, option1=que1, option2=que2, option3=que3,
+                         option4=que4, ques_no=datas.count() + 1,course_id_id=course.pk)
+
+            data.save()
+            messages.success(request, "Question added")
+            return redirect('csmAddQuizz', w_id)
+
+    print(datas.count())
+
+    context = {
+        'data': datas,
+        'quiz_id': id,
+        'count': range(datas.count()),
+    }
+
+    return render(request, 'csm_add_quizz.html', context)

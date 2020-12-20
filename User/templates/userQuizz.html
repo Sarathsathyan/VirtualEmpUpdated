@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    CSM Add courses
+{% endblock %}
+{% block content %}
+
+    <div id="wrapper" class="admin-panel">
+
+        <!-- menu -->
+
+
+        <!-- Header Container
+        ================================================== -->
+        {% include 'userPartials/_header.html' %}
+
+        <!-- content -->
+        <div class="page-content">
+            <div class="page-content-inner">
+
+                <div class="d-flex">
+                    <nav id="breadcrumbs" class="mb-3">
+                        <ul>
+                            <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
+                            <li><a href="#"> User : {{ request.user.first_name }} </a></li>
+                            <li>Quizz</li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="card">
+
+                    <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" name="myForm">
+                        <div class="add_quiz_block_list">
+                            <div class="add_quiz_block">
+                                {% if data %}
+                                {% for i in data %}
+                                <div class="card-body">
+                                    <div class="card question_block">
+                                        <div class="card-header">
+                                            <span class="question_text">Question {{ i.ques_no }}</span>
+                                        </div>
+                                        <div class="card-header">
+                                            <span style="color: #0c002b">{{ i.question }}</span>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="list-group">
+                                                <li class="list-group-item ">
+                                                    <div class="answer_block">
+                                                        <input type="radio" name="question_answer_1"
+                                                               class="answer_radio" value="1"/>
+                                                        <input type="text"  class="answer_text" value="{{ i.option1 }}"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item ">
+                                                    <div class="answer_block">
+                                                        <input type="radio" name="question_answer_1"
+                                                               class="answer_radio" value="2"/>
+                                                        <input type="text"  class="answer_text" value="{{ i.option2 }}"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item ">
+                                                    <div class="answer_block">
+                                                        <input type="radio" name="question_answer_1"
+                                                               class="answer_radio" value="3"/>
+                                                        <input type="text"  class="answer_text" value="{{ i.option3 }}"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item ">
+                                                    <div class="answer_block">
+                                                        <input type="radio" name="question_answer_1"
+                                                               class="answer_radio" value="4"/>
+                                                        <input type="text"  class="answer_text" value="{{ i.option4 }}"/>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                        </div>
+                </div>         <!--End Of card -->
+
+
+                <!-- ADD QUESTION CLONE HARI START-->
+                <div class="add_quiz_block_clone display_none">
+                    <div class="add_quiz_block">
+                        <div class="card-body">
+                            <div class="card question_block">
+                                <div class="card-header">
+                                    <span class="question_text">Question</span>
+                                    <a href="#" class="btn uk-button-danger btn-sm question_delete_btn">Delete</a>
+                                    <input type="text"/>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item ">
+                                            <div class="answer_block">
+                                                <input type="radio" name="question_answer_1" class="answer_radio"
+                                                       value="1"/>
+                                                <input type="text" placeholder="Answer 1" class="answer_text"/>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item ">
+                                            <div class="answer_block">
+                                                <input type="radio" name="question_answer_1" class="answer_radio"
+                                                       value="2"/>
+                                                <input type="text" placeholder="Answer 2" class="answer_text"/>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item ">
+                                            <div class="answer_block">
+                                                <input type="radio" name="question_answer_1" class="answer_radio"
+                                                       value="3"/>
+                                                <input type="text" placeholder="Answer 3" class="answer_text"/>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item ">
+                                            <div class="answer_block">
+                                                <input type="radio" name="question_answer_1" class="answer_radio"
+                                                       value="4"/>
+                                                <input type="text" placeholder="Answer 4" class="answer_text"/>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div> <!--End Of card body -->
+                    </div>
+                </div>
+            </div>
+            <!-- ADD QUESTION CLONE HARI END-->
+            <!-- footer
+            ================================================== -->
+            {#                {% include 'partials/_footer.html' %}#}
+
+
+            <!-- For Night mode -->
+            <script>
+
+                (function (window, document, undefined) {
+                    'use strict';
+                    if (!('localStorage' in window)) return;
+                    var nightMode = localStorage.getItem('gmtNightMode');
+                    if (nightMode) {
+                        document.documentElement.className += ' night-mode';
+                    }
+                })(window, document);
+
+
+                (function (window, document, undefined) {
+
+                    'use strict';
+
+                    // Feature test
+                    if (!('localStorage' in window)) return;
+
+                    // Get our newly insert toggle
+                    var nightMode = document.querySelector('#night-mode');
+                    if (!nightMode) return;
+
+                    // When clicked, toggle night mode on or off
+                    nightMode.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        document.documentElement.classList.toggle('night-mode');
+                        if (document.documentElement.classList.contains('night-mode')) {
+                            localStorage.setItem('gmtNightMode', true);
+                            return;
+                        }
+                        localStorage.removeItem('gmtNightMode');
+                    }, false);
+
+
+                })(window, document);
+
+
+            </script>
+
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}

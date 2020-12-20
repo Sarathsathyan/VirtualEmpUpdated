@@ -53,3 +53,37 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+class Week(models.Model):
+    week_id = models.ForeignKey(Course,on_delete=models.CASCADE)
+    week_private = models.CharField(max_length=100,null=True)
+    week_name = models.CharField(max_length=100)
+    week_date = models.DateTimeField(default=datetime.now,blank=True)
+
+    def __str__(self):
+        return  self.week_name
+class Week_Unit(models.Model):
+    unit_id = models.ForeignKey(Week,on_delete=models.CASCADE)
+    unit_caption = models.CharField(max_length=500,null=True)
+    unit_video1 = models.FileField(upload_to="Week_Videos/",null=True)
+    unit_video2 = models.FileField(upload_to="Week_Videos/",null=True)
+    unit_video3 = models.FileField(upload_to="Week_Videos/",null=True)
+    u_capThree = models.CharField(max_length=100,null=True)
+    uCapOne = models.CharField(max_length=150,null=True)
+    uCap2 = models.CharField(max_length=150,null=True)
+    def __str__(self):
+        return self.unit_caption
+
+class Quizz(models.Model):
+    course_id = models.ForeignKey(Course,on_delete=models.CASCADE,null=True)
+    week_id = models.ForeignKey(Week,on_delete=models.CASCADE)
+    ques_no = models.IntegerField(null=True)
+    question = models.CharField(max_length=250)
+    option1 = models.CharField(max_length=100)
+    option2 = models.CharField(max_length=100)
+    option3 = models.CharField(max_length=100)
+    option4 = models.CharField(max_length=100)
+    answer = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.question

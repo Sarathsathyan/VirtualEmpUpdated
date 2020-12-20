@@ -151,7 +151,7 @@ EMAIL_HOST_USER='ravencorporations@gmail.com'
 EMAIL_HOST_PASSWORD='RavenInnov@2015'
 EMAIL_USE_TLS=True
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 # EMAIL_USE_TLS = True
 
 if DEBUG:

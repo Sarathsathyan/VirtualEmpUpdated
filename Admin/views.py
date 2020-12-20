@@ -1,5 +1,6 @@
 import re
 import random
+import uuid
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from email_validator import validate_email, EmailNotValidError
@@ -12,7 +13,7 @@ from django.template.loader import render_to_string
 from VirtualEmpleado.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail, EmailMessage
 from .forms import (AddUserForm)
-from .models import UserDetails,Reference,RoleDetail,CareerCategory,SubCategory,CategoryCourse
+from .models import UserDetails,Reference,RoleDetail,CareerCategory,SubCategory,CategoryCourse, AdminLicense
 # Create your views here.
 
 def landing(request):
@@ -85,6 +86,9 @@ def userLogin(request):
         messages.error(request, "Login failed")
         return redirect('login')
     return render(request,'login.html')
+
+
+
 
 def userRegister(request):
     form = AddUserForm
@@ -363,3 +367,27 @@ def cfpCreation(request):
 
 def cfpList(request):
     return render(request,'cfplist.html')
+
+def adminLicenseKey(request):
+    if request.method == 'POST':
+
+        if 'category_submit' in request.POST:
+            l_id = uuid.uuid4()
+            key = l_id
+            numCfp = request.POST['cfp']
+            numToken = request.POST['tokens']
+            mcCredits = request.POST['mc']
+            data = AdminLicense(key=key, numberCfp=numCfp,workTokens=numToken,mcCredits=mcCredits)
+            data.save()
+            messages.success(request, "Key is generated")
+            return redirect("licenseKey")
+    keys = AdminLicense.objects.order_by('-date')
+    u_keys = None
+    context = {
+        'keys': keys,
+        'u_keys': u_keys
+    }
+
+
+
+    return render(request,'admin_license.html')

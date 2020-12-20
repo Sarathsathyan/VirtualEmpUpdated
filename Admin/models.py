@@ -58,3 +58,14 @@ class CategoryCourse(models.Model):
 
     def __str__(self):
         return self.cfp
+
+
+class AdminLicense(models.Model):
+    key = models.CharField(max_length=100)
+    numberCfp = models.IntegerField()
+    workTokens = models.IntegerField()
+    mcCredits = models.IntegerField()
+    date = models.DateTimeField(default=datetime.now, null=True)
+
+    def __str__(self):
+        return self.key
