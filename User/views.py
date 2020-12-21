@@ -82,6 +82,8 @@ def userCourseIntro(request):
     return render(request,'userCourseIntro.html');
 
 def userCourseLesson(request):
+    dd = CreateCourse.objects.get(id = 2)
+    dd.delete()
     createCourse = CreateCourse.objects.get(id=3)
     course = Course.objects.get(category_id=createCourse.pk)
     data = userProgress.objects.filter(userId_id=request.user.pk)
