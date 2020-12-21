@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'User',
     'CSM',
     'Blog',
+    'MicroCourse',
     'crispy_forms'
 ]
 

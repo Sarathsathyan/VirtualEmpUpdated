@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 from VirtualEmpleado.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail, EmailMessage
 from .forms import (AddUserForm)
-from .models import UserDetails,Reference,RoleDetail,CareerCategory,SubCategory,CategoryCourse, AdminLicense
+from .models import UserDetails,Reference,RoleDetail,CareerCategory,SubCategory,CategoryCourse, AdminLicense, UsedLicense
 # Create your views here.
 
 def landing(request):
@@ -51,6 +51,10 @@ def userLogin(request):
                         elif role.user_role == "Blogger":
                             print("hello")
                             return redirect('blogManager/')
+                        elif role.user_role == "Micro Course":
+                            print("hai")
+                            return redirect('microDashboard/')
+
                         else:
                             messages.error(request, "Error occured in Role")
                 except:
@@ -63,8 +67,8 @@ def userLogin(request):
                             print("license key added")
                         else:
                             print("No license key")
-                            # messages.success(request, "Apply License Key")
-                            # return redirect('activatecode')
+                            messages.success(request, "Apply License Key")
+                            return redirect('activatecode')
                     except:
                         messages.error(request, "Dont have permission to login")
                         return redirect('login')
@@ -88,6 +92,38 @@ def userLogin(request):
     return render(request,'login.html')
 
 
+def activatecode(request):
+    user_id = request.user.pk
+    license = AdminLicense.objects.all()
+    try:
+        user = UserDetails.objects.get(user_id=user_id)
+        print(user.user_license)
+    except:
+        print("Error")
+        messages.success(request, "Some error occured")
+    if request.method == "POST":
+        license_key = request.POST['license']
+        if license_key:
+            if AdminLicense.objects.filter(key=license_key).exists():
+                key = AdminLicense.objects.get(key=license_key)
+                if UsedLicense.objects.filter(u_key=key).exists():
+                    print("Key is Used")
+                    messages.error(request, "Key is already applied")
+                    return redirect('register')
+                else:
+                    used_key = UsedLicense(u_key=key.key)
+                    used_key.save()
+                    user.user_license = license_key
+                    user.save()
+                    key.delete()
+                    messages.success(request, "License Key applied !")
+                    return redirect('usercfp')
+            else:
+                messages.error(request, 'License Key Not Valid')
+                return redirect('activatecode')
+        else:
+            license_key = None
+    return render(request, 'activationcode.html')
 
 
 def userRegister(request):

@@ -69,3 +69,12 @@ class AdminLicense(models.Model):
 
     def __str__(self):
         return self.key
+
+
+class UsedLicense(models.Model):
+    u_key = models.CharField(max_length=100)
+
+    u_date = models.DateTimeField(default=datetime.now,null=True)
+
+    def __str__(self):
+        return self.u_key

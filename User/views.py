@@ -3,6 +3,7 @@ from django.contrib import messages
 
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
+from Blog.models import (BlogManager,BlogHeight,BlogCategory)
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
 # Create your views here.
 
@@ -38,6 +39,7 @@ def userCfp(request):
             data = CareerChoice(cat_id_id=data1.pk, sub_id_id=data2.pk, cfp_id_id=data3.pk, user_id_id=user.pk)
             data.save()
             messages.success(request, "CFP choosed")
+            return redirect('userdashboard');
     career_list = CareerCategory.objects.all()
 
     context = {
@@ -57,11 +59,19 @@ def userDashboard(request):
         createCourse = CreateCourse.objects.get(id = 3)
         careerChoice = CareerChoice.objects.get(user_id_id=request.user.pk)
         print(careerChoice.cat_id_id)
+
+        # Blogs
+        blog_cag = BlogCategory.objects.all()
+        blogs = BlogManager.objects.all()
+        if not blogs:
+            blogs = BlogHeight.objects.all()
         course = Course.objects.get(category_id=createCourse.pk)
         print(course.title)
         context={
             'careerChoice' :careerChoice,
             'course':course,
+            'blog_cag': blog_cag,
+            'blogs': blogs,
         }
         return render(request,'userDashboard.html',context)
     else:
@@ -609,12 +619,21 @@ def userProfileEdit(request):
         messages.error(request,"Wrong URL")
         return redirect('logout')
 
+
 def userQuizz(request,w_id):
     week = Week.objects.get(id = w_id);
     course = Course.objects.get(id = week.week_id_id)
     data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
     print(data)
+    if request.method == 'POST':
+        if 'testSub' in request.POST:
+            return redirect('userResult')
+
     context={
         'data' : data
     }
     return render(request,'userQuizz.html',context)
+
+
+def userResult(request):
+    return render(request,'user_result.html')

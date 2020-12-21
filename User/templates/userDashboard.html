@@ -275,124 +275,85 @@
                             learning</h4>
                     </div>
 
+
                 </div>
 
+
                 <div class="container mb-5">
-                    {% if micro %}
-
-                        <div class="uk-child-width-1-4@s uk-grid">
-                            {% for i in micro %}
-                                <div>
-                                    <div class="uk-card uk-card-default uk-card-body rounded">
-                                        <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
-                                        <h4> {{ i.category }}</h4>
-                                        <p> Communications, interviews, personality development</p>
-                                        <h2 class=" mt-0 text-right"><span class=""><a
-                                                href="{% url 'usermicrocourselist' i.pk %}"><i
-                                                class="i1-down icon-material-outline-arrow-forward "></i></a></span>
-                                        </h2>
-                                    </div>
-                                </div>
 
 
-                            {% endfor %}
+                    <div class="uk-child-width-1-4@s uk-grid">
 
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body rounded">
+                                <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
+                                <h4> {{ i.category }}</h4>
+                                <p> Communications, interviews, personality development</p>
+                                <h2 class=" mt-0 text-right"><span class=""><a
+                                        href="#"><i
+                                        class="i1-down icon-material-outline-arrow-forward "></i></a></span>
+                                </h2>
+                            </div>
                         </div>
-                    {% endif %}
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body rounded">
+                                <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
+                                <h4> {{ i.category }}</h4>
+                                <p> Communications, interviews, personality development</p>
+                                <h2 class=" mt-0 text-right"><span class=""><a
+                                        href="#"><i
+                                        class="i1-down icon-material-outline-arrow-forward "></i></a></span>
+                                </h2>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body rounded">
+                                <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
+                                <h4> {{ i.category }}</h4>
+                                <p> Communications, interviews, personality development</p>
+                                <h2 class=" mt-0 text-right"><span class=""><a
+                                        href="#"><i
+                                        class="i1-down icon-material-outline-arrow-forward "></i></a></span>
+                                </h2>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body rounded">
+                                <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
+                                <h4> {{ i.category }}</h4>
+                                <p> Communications, interviews, personality development</p>
+                                <h2 class=" mt-0 text-right"><span class=""><a
+                                        href="#"><i
+                                        class="i1-down icon-material-outline-arrow-forward "></i></a></span>
+                                </h2>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
 
 
                 <div class="container">
 
 
-                    <!-- course card resume sliders  -->
-                    <div class="section-small">
-
-                        <div uk-slider="finite: true" class="course-grid-slider">
-
-                            <div class="grid-slider-header">
-                                <div>
-                                    <h4 class="uk-text-truncate"> Progress Courses
-                                    </h4>
-                                </div>
-                                <div class="grid-slider-header-link">
-
-
-                                    <a href="#" class="slide-nav-prev" uk-slider-item="previous"></a>
-                                    <a href="#" class="slide-nav-next" uk-slider-item="next"></a>
-
-                                </div>
-                            </div>
-
-                            <ul
-                                    class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-5@m uk-grid">
-                                {% if progress_course %}
-                                    {% for i in progress_course %}
-
-                                        <li>
-                                            <a href="{% url 'userlesson' i.course_id %}">
-                                                <div class="course-card-resume">
-                                                    <div class="course-card-resume-thumbnail">
-                                                        {% if i.course_image %}
-                                                            <img src="{{ i.course_image.url }}">
-                                                        {% else %}
-                                                            <img src="">
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="course-card-resume-body">
-                                                        <h5>{{ i.title }}</h5>
-                                                        <span class="number"> 1/{{ i.topics_count }} </span>
-                                                        <div class="course-progressbar">
-                                                            <div class="course-progressbar-filler"
-                                                                 style="width:65%"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-
                     <div class="row">
                         <div class="col-md-6">
-
-
-
-                                <div>
-                                    <h4 class="uk-text-truncate"> Courses by : {{ course.title}}</h4>
-                                    <a href="{% url 'courseIntro' %}">
-                                        <img src="{{ course.course_image.url }}">
-                                    </a>
-
-
-                                </div>
-
-
-
-                        </div>
-                        <div class="col-md-6">
-
-
                             <div>
-
-                                    <h4 class="uk-text-truncate"> My Training</h4>
-                               <a href="#">
-                                   <img src="{% static 'images/training.jpg' %}">
-                               </a>
-
-
-
-
+                                <h4 class="uk-text-truncate"> My Training</h4>
+                                <a href="{% url 'courseIntro' %}">
+                                    <img src="{{ course.course_image.url }}">
+                                </a>
                             </div>
                         </div>
-
-
+                        <div class="col-md-6">
+                            <div>
+                                <h4 class="uk-text-truncate"> My Work Space</h4>
+                                <a href="#">
+                                    <img src="{% static 'images/training.jpg' %}">
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
 

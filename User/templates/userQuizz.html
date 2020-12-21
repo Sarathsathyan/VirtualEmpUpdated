@@ -25,11 +25,12 @@
                             <li><a href="#"> User : {{ request.user.first_name }} </a></li>
                             <li>Quizz</li>
                         </ul>
+
                     </nav>
                 </div>
                 <div class="card">
 
-                    <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" name="myForm">
+                    <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" name="myForm">{% csrf_token %}
                         <div class="add_quiz_block_list">
                             <div class="add_quiz_block">
                                 {% if data %}
@@ -81,8 +82,18 @@
                                 {% endfor %}
                             {% endif %}
                             </div>
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-success" value="Finish" name="testSub">
+                            </div>
+
                         </div>
-                </div>         <!--End Of card -->
+
+                        </div>
+                    </form>
+                </div>
+            <!--End Of card -->
 
 
                 <!-- ADD QUESTION CLONE HARI START-->

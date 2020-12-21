@@ -5,6 +5,7 @@ urlpatterns = [
     path('userlogin/', views.userLogin, name='login'),
     path('userlogout/', views.user_logout, name='logout'),
     path('user-register/', views.userRegister, name='register'),
+    path('activatecode/',views.activatecode,name='activatecode'),
 
     # path('csmDashboard/',csmDashboard,name='csmdashboard'),
 

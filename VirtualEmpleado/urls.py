@@ -24,6 +24,7 @@ urlpatterns = [
     path('userlogin/userdashboard/', include('User.urls')),
     path('userlogin/csmDashboard/', include('CSM.urls')),
     path('userlogin/blogManager/', include('Blog.urls')),
+    path('userlogin/microDashboard/', include('MicroCourse.urls')),
 
 ]
 # urlpatterns += staticfiles_urlpatterns()
