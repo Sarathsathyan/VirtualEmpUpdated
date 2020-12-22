@@ -2790,7 +2790,7 @@ button.mark-as-read:hover {
   background: rgb(243, 243, 243) !important;
   background: transparent !important;
   font-weight: 600;
-  height: auto;
+  height: 30px;
 }
 
 .searchbox .btn-searchbox {
