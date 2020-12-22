@@ -341,7 +341,7 @@
                         <div class="col-md-6">
                             <div>
                                 <h4 class="uk-text-truncate"> My Training</h4>
-                                <a href="{% url 'courseIntro' %}">
+                                <a href="{% url 'courseIntro' course.pk %}">
                                     <img src="{{ course.course_image.url }}">
                                 </a>
                             </div>

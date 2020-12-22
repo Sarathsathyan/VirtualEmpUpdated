@@ -90,12 +90,16 @@ def userDashboard(request):
         print("Wrong url")
 
 # user course
-def userCourseIntro(request):
-    return render(request,'userCourseIntro.html');
+def userCourseIntro(request,course_id):
+    print(course_id)
+    context ={
+        'course_id':course_id
+    }
+    return render(request,'userCourseIntro.html',context);
 
-def userCourseLesson(request):
-    createCourse = CreateCourse.objects.get(id=3)
-    course = Course.objects.get(category_id=createCourse.pk)
+def userCourseLesson(request,c_id):
+    print(c_id)
+    course = Course.objects.get(id=c_id)
     data = userProgress.objects.filter(userId_id=request.user.pk)
     video =None;
     week = Week.objects.filter(week_id_id=course.pk)
