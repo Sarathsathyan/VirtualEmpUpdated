@@ -4,6 +4,7 @@ from django.contrib import messages
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
+from Admin.models import CareerCategory,SubCategory,CategoryCourse
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
 # Create your views here.
 
@@ -56,7 +57,18 @@ def userDashboard(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         user = request.user
         user_details = UserDetails.objects.get(user_id_id=user.pk)
-        createCourse = CreateCourse.objects.get(id = 3)
+
+        allData = CareerChoice.objects.get(user_id_id=user.pk)
+
+        category = allData.cat_id
+        sub = allData.sub_id
+        course = allData.cfp_id
+        if CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=course):
+            createCourse = CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=course)
+        else:
+            createCourse = None
+            messages.error(request,"Please choose CFP")
+            return redirect('usercfp')
         careerChoice = CareerChoice.objects.get(user_id_id=request.user.pk)
         print(careerChoice.cat_id_id)
 
@@ -82,8 +94,6 @@ def userCourseIntro(request):
     return render(request,'userCourseIntro.html');
 
 def userCourseLesson(request):
-    dd = CreateCourse.objects.get(id = 2)
-    dd.delete()
     createCourse = CreateCourse.objects.get(id=3)
     course = Course.objects.get(category_id=createCourse.pk)
     data = userProgress.objects.filter(userId_id=request.user.pk)
