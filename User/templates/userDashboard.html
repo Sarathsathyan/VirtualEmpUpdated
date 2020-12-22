@@ -342,7 +342,11 @@
                             <div>
                                 <h4 class="uk-text-truncate"> My Training</h4>
                                 <a href="{% url 'courseIntro' course.pk %}">
+                                  {% if course_image.url %}
                                     <img src="{{ course.course_image.url }}">
+                                  {% else %}
+                                    <img src="">
+                                  {% endif %}
                                 </a>
                             </div>
                         </div>
