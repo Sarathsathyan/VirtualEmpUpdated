@@ -6,6 +6,7 @@ from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
 from Admin.models import CareerCategory,SubCategory,CategoryCourse
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
+from CSM.models import Quizz
 # Create your views here.
 
 # CSM
@@ -103,7 +104,7 @@ def userCourseLesson(request,c_id):
     data = userProgress.objects.filter(userId_id=request.user.pk)
     video =None;
     week = Week.objects.filter(week_id_id=course.pk)
-    weekUnit =Week_Unit.objects.all();
+    weekUnit =Week_Unit.objects.all()
     if request.method == 'POST':
         if 'start' in request.POST:
             week = request.POST['weekId']
@@ -643,6 +644,7 @@ def userQuizz(request,w_id):
     print(data)
     if request.method == 'POST':
         if 'testSub' in request.POST:
+            qOne
             return redirect('userResult')
 
     context={
