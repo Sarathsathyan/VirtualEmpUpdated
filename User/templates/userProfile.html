@@ -417,7 +417,7 @@
 
                 <div class="uk-grid uk-child-width-1-2@m">
                   <div class="">
-                    {% if cfp_details %}
+
 
 
                          <div class="uk-card-default  my-4" style="border-radius:10px; ">
@@ -557,13 +557,13 @@
 
                             </div>
                         </div>
-                {% endif %}
+
                   </div>
 
 
                   <div class="" >
 
-                    {% if cfp_details %}
+
 
 
                         <div class="uk-card-default  my-4"  style="border-radius:10px;" >
@@ -631,15 +631,13 @@
 
                             <hr class="mt-0">
                             <div class=" pt-0 px-5 py-4">
-                                {% if lists2 %}
+
 
                                 <div class="" >
 
 
                                      <div class="uk-width-expand my-2 uk-grid-small uk-flex-middle">
-                                        {% for tag in tag %}
 
-                                            {% if tag.course_role == cfp_details.role_two %}
                                             <div class="uk-grid-small uk-flex-middle " uk-grid>
                                               <div class="uk-width-auto">
                                                   <button type="button" class="btn btn-danger btn-icon-only">
@@ -648,58 +646,64 @@
                                                       </span>
                                                     </button>
                                               </div>
-                                              <div class="uk-width-expand">
-                                                <h5 class="mb-2"> {{ tag.course_tag }}</h5>
-                                                    <progress class="uk-progress mt-0" value="{{ tag.points }}" max="1000" style="width: 87%"></progress>
+                                              <div class="uk-width-expand text-left">
+
+
+                                                      <h5 class="mb-2" style="color: darkblue"> Course XP</h5>
+
+                                                      <progress class="uk-progress mt-0" id="live2" value="0" max="1000" style="width: 84%"></progress>
+
+
                                               </div>
-                                            </div>
-
-
-                                            {% endif %}
-                                        {% endfor %}
                                     </div>
+                                    <div class="uk-grid-small uk-flex-middle " uk-grid>
+                                      <div class="uk-width-auto">
+                                          <button type="button" class="btn btn-danger btn-icon-only">
+                                              <span class="d-flex justify-content-center">
+                                         <i class="icon-brand-angular icon-small"></i>
+                                              </span>
+                                            </button>
+                                      </div>
+                                      <div class="uk-width-expand text-left">
+
+
+                                              <h5 class="mb-2" style="color: darkblue">Major Projects XP</h5>
+
+                                              <progress class="uk-progress mt-0" id="live2" value="0" max="1000" style="width: 84%"></progress>
+
+
+                                      </div>
+                            </div>
+                            <div class="uk-grid-small uk-flex-middle " uk-grid>
+                              <div class="uk-width-auto">
+                                  <button type="button" class="btn btn-danger btn-icon-only">
+                                      <span class="d-flex justify-content-center">
+                                 <i class="icon-brand-angular icon-small"></i>
+                                      </span>
+                                    </button>
+                              </div>
+                              <div class="uk-width-expand text-left">
+
+
+                                      <h5 class="mb-2" style="color: darkblue"> Real Time Projects</h5>
+
+                                      <progress class="uk-progress mt-0" id="live2" value="0" max="1000" style="width: 84%"></progress>
+
+
+                              </div>
+                    </div>
+
 
                                 </div>
 
 
-                                <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                    <div class="uk-width-auto">
-                                        <button type="button" class="btn btn-danger btn-icon-only">
-                                            <span class="d-flex justify-content-center">
-                                       <i class="icon-brand-angular icon-small"></i>
-                                            </span>
-                                          </button>
-                                    </div>
-                                     <div class="uk-width-expand">
-                                         {% if proj %}
 
 
-                                                {% for pro in proj %}
-
-                                                {% if pro.proj_role == cfp_details.role_two %}
-
-                                             <h5 class="mb-2" style="color: darkblue"> Live Projects</h5>
-
-                                             <progress class="uk-progress mt-0" id="live2" value="{{ pro.proj_points }}" max="1000" style="width: 84%"></progress>
-                                                {% endif %}
-                                                {% endfor %}
-                                            {% else %}
-
-                                             <h5 class="mb-2" style="color: darkblue"> Live Projects</h5>
-
-                                             <progress class="uk-progress mt-0" id="live2" value="0" max="1000" style="width: 84%"></progress>
-                                        {% endif %}
-
-                                    </div>
-                                    </div>
-                                {% else %}
-                                    <p>Currently no courses available under this category</p>
-                                 {% endif %}
 
 
                             </div>
                         </div>
-                    {% endif %}
+
                   </div>
 
 
@@ -1251,198 +1255,198 @@
 
 
 
-        // var total=0;
-        // var tota2=0;
-        // var proj2 =0;
-        // var proj = 0;
-        //
-        // {% if proj %}
-        //  {% for pro in proj %}
-        //   {% if pro.proj_role == cfp_details.role_one %}
-        //      proj = document.getElementById('live1').value ;
-        // {% endif %}
-        // {% endfor %}
-        // {% endif %}
-        //
-        //
-        //  {% if proj %}
-        //  {% for pro in proj %}
-        //   {% if pro.proj_role == cfp_details.role_two %}
-        //      proj2 = document.getElementById('live2').value ;
-        // {% endif %}
-        // {% endfor %}
-        // {% endif %}
-        //
-        //
-        //
-        //
-        //
-        // {% for claim in claims %}
-        //     {% if claim.user_id == user_data.pk %}
-        //         {% for list in lists %}
-        //             {% if claim.claim_id_id == list.pk %}
-        //                 total += {{ claim.points }};
-        //
-        //
-        //             {% endif %}
-        //         {% endfor %}
-        //     {% endif %}
-        // {% endfor %}
-        //
-        // document.getElementById("pro1").value = total + proj;
-        // var cfp1 = total + proj;
-        // var milestone1=cfp1;
-        //
-        // // cfp1=999;
-        // s1=Math.floor(cfp1/10)
-        // if(s1<50)
-        // {
-        //     document.getElementById("progress1").className = "mx-auto progress-circle  p"+s1;
-        // }
-        // else{
-        //   document.getElementById("progress1").className = " mx-auto progress-circle over50 p"+s1;
-        // }
-        //
-        //
-        // document.getElementById("value1").innerHTML=cfp1;
-        //
-        //
-        // {% for claim in claims %}
-        //     {% if claim.user_id == user_data.pk %}
-        //         {% for list2 in lists2 %}
-        //             {% if claim.claim_id_id == list2.pk %}
-        //                 tota2 += {{ claim.points }};
-        //
-        //             {% endif %}
-        //         {% endfor %}
-        //     {% endif %}
-        // {% endfor %}
-        //
-        // document.getElementById("pro2").value = tota2 +proj2;
-        // var cfp2 = tota2 + proj2;
-        // var milestone2=cfp2;
-        //
-        //
-        // // cfp2=155;
-        // // var s2=cfp2/10;
-        // s2=Math.floor(cfp2/10)
-        // if(s2<50)
-        // {
-        //     document.getElementById("progress2").className = "mx-auto progress-circle  p"+s2;
-        // }
-        // else{
-        //   document.getElementById("progress2").className = "mx-auto progress-circle over50 p"+s2;
-        // }
-        //
-        // document.getElementById("value2").innerHTML=cfp2;
-        //
-        //
-        // // Testing whether the milestone is displaying or not
-        //  // milestone1=500;
-        //  // milestone2=500;
-        //
-        //
-        //
-        // if(milestone1>=300)
-        // {
-        //   document.getElementById("cfp1points300").style.display = "block";
-        // }
-        // else{
-        //   document.getElementById("cfp1points300").style.display = "none";
-        // }
-        //
-        // // Badge Immplementation in CFP1
-        // if(cfp1>=100 && cfp1<200)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class1.png' %}";
-        // }
-        // else if(cfp1>=200 && cfp1<300)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class2.png' %}";
-        // }
-        // else if(cfp1>=300 && cfp1<400)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class3.png' %}";
-        // }
-        // else if(cfp1>=400 && cfp1<500)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class4.png' %}";
-        // }
-        // else if(cfp1>=500 && cfp1<600)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class5.png' %}";
-        // }
-        // else if(cfp1>=600 && cfp1<700)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class6.png' %}";
-        // }
-        // else if(cfp1>=700 && cfp1<800)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class7.png' %}";
-        // }
-        // else if(cfp1>=800 && cfp1<900)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class8.png' %}";
-        // }
-        // else if(cfp1>=900 && cfp1<1000)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class9.png' %}";
-        // }
-        // else if(cfp1>=1000)
-        // {
-        //   document.getElementById("b1").src = "{% static 'images/badges/class10.png' %}";
-        // }
-        //
-        // if(milestone2>=300)
-        // {
-        //   document.getElementById("cfp2points300").style.display = "block";
-        // }
-        // else{
-        //   document.getElementById("cfp2points300").style.display = "none";
-        // }
-        //
-        //
-        // // Badge Immplementation in CFP2
-        // if(cfp2>=100 && cfp2<200)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class1.png' %}";
-        // }
-        // else if(cfp2>=200 && cfp2<300)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class2.png' %}";
-        // }
-        // else if(cfp2>=300 && cfp2<400)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class3.png' %}";
-        // }
-        // else if(cfp2>=400 && cfp2<500)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class4.png' %}";
-        // }
-        // else if(cfp2>=500 && cfp2<600)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class5.png' %}";
-        // }
-        // else if(cfp2>=600 && cfp2<700)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class6.png' %}";
-        // }
-        // else if(cfp2>=700 && cfp2<800)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class7.png' %}";
-        // }
-        // else if(cfp2>=800 && cfp2<900)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class8.png' %}";
-        // }
-        // else if(cfp2>=900 && cfp2<1000)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class9.png' %}";
-        // }
-        // else if(cfp2>=1000)
-        // {
-        //   document.getElementById("b2").src = "{% static 'images/badges/class10.png' %}";
-        // }
+        var total=0;
+        var tota2=0;
+        var proj2 =0;
+        var proj = 0;
+
+        {% if proj %}
+         {% for pro in proj %}
+          {% if pro.proj_role == cfp_details.role_one %}
+             proj = document.getElementById('live1').value ;
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+
+         {% if proj %}
+         {% for pro in proj %}
+          {% if pro.proj_role == cfp_details.role_two %}
+             proj2 = document.getElementById('live2').value ;
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+
+
+
+
+        {% for claim in claims %}
+            {% if claim.user_id == user_data.pk %}
+                {% for list in lists %}
+                    {% if claim.claim_id_id == list.pk %}
+                        total += {{ claim.points }};
+
+
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        document.getElementById("pro1").value = total + proj;
+        var cfp1 = total + proj;
+        var milestone1=cfp1;
+
+        // cfp1=999;
+        s1=Math.floor(cfp1/10)
+        if(s1<50)
+        {
+            document.getElementById("progress1").className = "mx-auto progress-circle  p"+s1;
+        }
+        else{
+          document.getElementById("progress1").className = " mx-auto progress-circle over50 p"+s1;
+        }
+
+
+        document.getElementById("value1").innerHTML=cfp1;
+
+
+        {% for claim in claims %}
+            {% if claim.user_id == user_data.pk %}
+                {% for list2 in lists2 %}
+                    {% if claim.claim_id_id == list2.pk %}
+                        tota2 += {{ claim.points }};
+
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        document.getElementById("pro2").value = tota2 +proj2;
+        var cfp2 = tota2 + proj2;
+        var milestone2=cfp2;
+
+
+        // cfp2=155;
+        // var s2=cfp2/10;
+        s2=Math.floor(cfp2/10)
+        if(s2<50)
+        {
+            document.getElementById("progress2").className = "mx-auto progress-circle  p"+s2;
+        }
+        else{
+          document.getElementById("progress2").className = "mx-auto progress-circle over50 p"+s2;
+        }
+
+        document.getElementById("value2").innerHTML=cfp2;
+
+
+        // Testing whether the milestone is displaying or not
+         // milestone1=500;
+         // milestone2=500;
+
+
+
+        if(milestone1>=300)
+        {
+          document.getElementById("cfp1points300").style.display = "block";
+        }
+        else{
+          document.getElementById("cfp1points300").style.display = "none";
+        }
+
+        // Badge Immplementation in CFP1
+        if(cfp1>=100 && cfp1<200)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class1.png' %}";
+        }
+        else if(cfp1>=200 && cfp1<300)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class2.png' %}";
+        }
+        else if(cfp1>=300 && cfp1<400)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class3.png' %}";
+        }
+        else if(cfp1>=400 && cfp1<500)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class4.png' %}";
+        }
+        else if(cfp1>=500 && cfp1<600)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class5.png' %}";
+        }
+        else if(cfp1>=600 && cfp1<700)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class6.png' %}";
+        }
+        else if(cfp1>=700 && cfp1<800)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class7.png' %}";
+        }
+        else if(cfp1>=800 && cfp1<900)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class8.png' %}";
+        }
+        else if(cfp1>=900 && cfp1<1000)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class9.png' %}";
+        }
+        else if(cfp1>=1000)
+        {
+          document.getElementById("b1").src = "{% static 'images/badges/class10.png' %}";
+        }
+
+        if(milestone2>=300)
+        {
+          document.getElementById("cfp2points300").style.display = "block";
+        }
+        else{
+          document.getElementById("cfp2points300").style.display = "none";
+        }
+
+
+        // Badge Immplementation in CFP2
+        if(cfp2>=100 && cfp2<200)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class1.png' %}";
+        }
+        else if(cfp2>=200 && cfp2<300)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class2.png' %}";
+        }
+        else if(cfp2>=300 && cfp2<400)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class3.png' %}";
+        }
+        else if(cfp2>=400 && cfp2<500)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class4.png' %}";
+        }
+        else if(cfp2>=500 && cfp2<600)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class5.png' %}";
+        }
+        else if(cfp2>=600 && cfp2<700)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class6.png' %}";
+        }
+        else if(cfp2>=700 && cfp2<800)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class7.png' %}";
+        }
+        else if(cfp2>=800 && cfp2<900)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class8.png' %}";
+        }
+        else if(cfp2>=900 && cfp2<1000)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class9.png' %}";
+        }
+        else if(cfp2>=1000)
+        {
+          document.getElementById("b2").src = "{% static 'images/badges/class10.png' %}";
+        }
 
 
     </script>
