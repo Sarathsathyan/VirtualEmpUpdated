@@ -426,4 +426,4 @@ def adminLicenseKey(request):
 
 
 
-    return render(request,'admin_license.html')
+    return render(request,'admin_license.html',context)

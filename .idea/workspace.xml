@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="87ddb306-b5d8-49b8-929b-cdc19587f0a0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/userQuizz.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userQuizz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/templates/admin_license.html" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/templates/admin_license.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/userCourseLesson.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userCourseLesson.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/userDashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userDashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,7 +111,7 @@
       <workItem from="1608089055893" duration="592000" />
       <workItem from="1608109359372" duration="16446000" />
       <workItem from="1608305111967" duration="13899000" />
-      <workItem from="1608356310486" duration="50583000" />
+      <workItem from="1608356310486" duration="55362000" />
     </task>
     <servers />
   </component>

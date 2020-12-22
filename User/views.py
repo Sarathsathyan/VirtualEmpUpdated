@@ -63,9 +63,9 @@ def userDashboard(request):
 
         category = allData.cat_id
         sub = allData.sub_id
-        course = allData.cfp_id
-        if CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=course):
-            createCourse = CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=course)
+        cour = allData.cfp_id
+        if CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=cour):
+            createCourse = CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=cour)
         else:
             createCourse = None
             messages.error(request,"Please choose CFP")
@@ -85,6 +85,7 @@ def userDashboard(request):
             'course':course,
             'blog_cag': blog_cag,
             'blogs': blogs,
+            'cour':cour,
         }
         return render(request,'userDashboard.html',context)
     else:
@@ -644,7 +645,7 @@ def userQuizz(request,w_id):
     print(data)
     if request.method == 'POST':
         if 'testSub' in request.POST:
-            qOne
+
             return redirect('userResult')
 
     context={

@@ -106,6 +106,24 @@
             /* width:55px; */
             color: #0D478C;
         }
+
+        .con {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 35px;
+            font-weight: bold;
+            color: #0c002b;
+
+
+        }
     </style>
 
     <div id="wrapper">
@@ -287,7 +305,7 @@
                         <div>
                             <div class="uk-card uk-card-default uk-card-body rounded">
                                 <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
-                                <h4> {{ i.category }}</h4>
+                                <h5>Self development</h5>
                                 <p> Communications, interviews, personality development</p>
                                 <h2 class=" mt-0 text-right"><span class=""><a
                                         href="#"><i
@@ -298,8 +316,8 @@
                         <div>
                             <div class="uk-card uk-card-default uk-card-body rounded">
                                 <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
-                                <h4> {{ i.category }}</h4>
-                                <p> Communications, interviews, personality development</p>
+                                <h5>Product Enhancers</h5>
+                                <p>Excell, Photoshop, Wordpress,Coreldraw</p>
                                 <h2 class=" mt-0 text-right"><span class=""><a
                                         href="#"><i
                                         class="i1-down icon-material-outline-arrow-forward "></i></a></span>
@@ -308,9 +326,9 @@
                         </div>
                         <div>
                             <div class="uk-card uk-card-default uk-card-body rounded">
-                                <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
-                                <h4> IT related</h4>
-                                <p> Communications, interviews, personality development</p>
+                                <h1 class=" mt-0"><i class=" i1 icon-material-outline-business "></i></h1>
+                                <h5>Business Intelligence</h5>
+                                <p>Sales skills, Negotiations, Project management</p>
                                 <h2 class=" mt-0 text-right"><span class=""><a
                                         href="#"><i
                                         class="i1-down icon-material-outline-arrow-forward "></i></a></span>
@@ -319,9 +337,9 @@
                         </div>
                         <div>
                             <div class="uk-card uk-card-default uk-card-body rounded">
-                                <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
-                                <h4> HR related</h4>
-                                <p> Communications, interviews, personality development</p>
+                                <h1 class=" mt-0"><i class=" i1 icon-material-outline-school "></i></h1>
+                                <h5> Knowledge Supplement</h5>
+                                <p> Personal Finance, reasoning, Quantitative aptitude</p>
                                 <h2 class=" mt-0 text-right"><span class=""><a
                                         href="#"><i
                                         class="i1-down icon-material-outline-arrow-forward "></i></a></span>
@@ -335,22 +353,26 @@
 
 
                 <div class="container">
+                <div class="row">
+                    <p style="font-weight: bold;color: #0c002b;font-size: 30px">{{ cour.cfp }}</p>
+                </div>
 
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div>
-                                <h4 class="uk-text-truncate"> My Training</h4>
+                            <div class="con">
+
                                 <a href="{% url 'courseIntro' course.pk %}">
-                                    <img src="{{ course.course_image.url }}">
+                                    <img src="{{ course.course_image.url }}"  style="height: 400px">
+                                    <div class="centered">MY TRAINING</div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div>
-                                <h4 class="uk-text-truncate"> My Work Space</h4>
+                            <div class="con">
                                 <a href="#">
-                                    <img src="{% static 'images/training.jpg' %}">
+                                    <img src="{% static 'images/training.jpg' %}" style="height: 400px">
+                                    <div class="centered">MY WORK SPACE</div>
                                 </a>
                             </div>
                         </div>
