@@ -483,16 +483,12 @@
 
                             <hr class="mt-0">
                             <div class=" pt-0 px-5 py-4 ">
-                                {% if lists %}
 
 
                                 <div class="" >
 
 
                                     <div class="uk-width-expand my-2 uk-grid-small uk-flex-middle  ">
-                                        {% for tag in tag %}
-
-                                            {% if tag.course_role == cfp_details.role_one %}
 
                                           <div class="uk-grid-small uk-flex-middle " uk-grid>
                                             <div class="uk-width-auto">
@@ -506,14 +502,10 @@
                                               <h5 class="mb-1"> {{ tag.course_tag }}</h5>
 
 
-
-
                                                   <progress class="uk-progress mt-0"  value="{{ tag.points }}" max="1000" style="width: 87%"></progress>
                                             </div>
                                           </div>
 
-                                            {% endif %}
-                                            {% endfor %}
 
 
 
@@ -521,38 +513,9 @@
 
                                 </div>
 
-                                    <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                    <div class="uk-width-auto">
-                                        <button type="button" class="btn btn-danger btn-icon-only">
-                                            <span class="d-flex justify-content-center">
-                                       <i class="icon-brand-angular icon-small"></i>
-                                            </span>
-                                          </button>
-                                    </div>
-                                     <div class="uk-width-expand">
-                                            {% if proj %}
 
-                                                {% for pro in proj %}
-                                                {% if pro.proj_role == cfp_details.role_one %}
-                                             <h5 class="mb-2" style="color: darkblue"> Live Projects</h5>
 
-                                             <progress class="uk-progress mt-0" id="live1" value="{{ pro.proj_points }}" max="1000" style="width: 84%"></progress>
-                                                {% endif %}
-                                                {% endfor %}
-                                            {% else %}
-                                             <h5 class="mb-2" style="color: darkblue"> Live Projects</h5>
-
-                                             <progress class="uk-progress mt-0" id="live1" value="0" max="1000" style="width: 84%"></progress>
-                                            {% endif %}
-
-                                    </div>
-                                    </div>
-
-                            {% else %}
                                     <p>Currently no courses under this category</p>
-                            {% endif %}
-
-
 
 
                             </div>
@@ -574,7 +537,7 @@
 
                           <div class="uk-card-default  my-4" style="border-radius:10px;" >
                            <div class=" py-2  px-4 "   style=" border-top-left-radius: 10px; border-top-right-radius: 10px; background: #f9c74f;">
-                               <h4 class="mb-0 text-center" style="color:#07192b;"> <strong>{{ cfp_details.role_two }}</strong> </h4>
+                               <h4 class="mb-0 text-center" style="color:#07192b;"> <strong>Data science</strong> </h4>
 
                            </div>
                            <hr class="m-0">
@@ -585,17 +548,12 @@
 
                                 <div class="uk-width-expand">
 
-
-
-
-
-
                                   <div class="uk-container mb-3 px-0">
 
                                     <!-- Newly Added -->
                                     <div class="mx-auto px-auto">
                                       <div id="progress2" class="">
-                                         <span id="value2">{{pro2}}</span>
+                                         <span id="value2">50</span>
                                          <div class="left-half-clipper">
                                             <div class="first50-bar"></div>
                                             <div class="value-bar"></div>
@@ -651,7 +609,7 @@
 
                                                       <h5 class="mb-2" style="color: darkblue"> Course XP</h5>
 
-                                                      <progress class="uk-progress mt-0" id="live2" value="0" max="1000" style="width: 84%"></progress>
+                                                      <progress class="uk-progress mt-0" id="live2" value="50" max="1000" style="width: 84%"></progress>
 
 
                                               </div>
