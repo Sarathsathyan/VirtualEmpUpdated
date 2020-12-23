@@ -41,6 +41,8 @@ def userCfp(request):
             data = CareerChoice(cat_id_id=data1.pk, sub_id_id=data2.pk, cfp_id_id=data3.pk, user_id_id=user.pk)
             data.save()
             messages.success(request, "CFP choosed")
+            details.user_cfp = True;
+            details.save()
             return redirect('userdashboard');
     career_list = CareerCategory.objects.all()
 

@@ -114,6 +114,7 @@ def activatecode(request):
                     used_key = UsedLicense(u_key=key.key)
                     used_key.save()
                     user.user_license = license_key
+
                     user.save()
                     key.delete()
                     messages.success(request, "License Key applied !")
