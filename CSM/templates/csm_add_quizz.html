@@ -74,8 +74,7 @@
                                     <div class="card question_block">
                                         <div class="card-headegoodr">
                                             <span class="question_text">Question </span>
-                                            <a href="#"
-                                               class="btn uk-button-danger btn-sm question_delete_btn">Delete</a>
+
                                             <input type="text" name="question"/>
                                             <span class="question_text">Answer </span>
                                             <input type="text" name="ans"/>
@@ -132,7 +131,7 @@
                             <div class="card question_block">
                                 <div class="card-header">
                                     <span class="question_text">Question {{ i.ques_no }}</span>
-                                    <a href="#" class="btn uk-button-danger btn-sm question_delete_btn">Delete</a>
+                                    <a href="{% url 'deleteQues' i.pk w_id %}" class="btn uk-button-danger ">Delete</a>
                                     <input type="text" value="{{ i.question }}"/>
                                 </div>
                                 <div class="card-body">

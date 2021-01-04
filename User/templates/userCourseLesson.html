@@ -198,9 +198,11 @@
                                         {{ i.week_name }}
                                         <span class="course_tab_text">5 Days 20 Hrs</span>
                                     </a>
-                                <form method="post">{% csrf_token %}
-                                    <input type="text" value="{{ i.pk }}" name="weekId" hidden>
-                                    <span style="color: black"><button type="submit" style="color: #0c002b;background-color: #0b7ec4" name="start">Start</button> </span></form>
+                                    <form method="post">{% csrf_token %}
+                                        <input type="text" value="{{ i.pk }}" name="weekId" hidden>
+                                        <span style="color: black"><button type="submit"
+                                                                           style="color: #0c002b;background-color: #0b7ec4"
+                                                                           name="start">Start</button> </span></form>
 
                                     <div class="uk-accordion-content">
                                         <!-- course-video-list -->
@@ -213,30 +215,31 @@
 
                                                         {% for d in data %}
                                                             {% if d.weekId_id == i.pk and d.status == True %}
-                                                        <li>
+                                                                <li>
 
 
-                                                            <input type="text" value="{{ j.pk }}" name="uniq" hidden>
-                                                            <input type="submit" name="videoOne"
-                                                                   class="vid my-0 py-0 text-left lesson_video_submit"
-                                                                   value="{{ j.uCapOne }}"
-                                                                   style="border:0px solid #c7d3eb;width: 90%">
-                                                            <input class="lesson_checkbox" type="checkbox"
-                                                                   checked="checked">
+                                                                    <input type="text" value="{{ j.pk }}" name="uniq"
+                                                                           hidden>
+                                                                    <input type="submit" name="videoOne"
+                                                                           class="vid my-0 py-0 text-left lesson_video_submit"
+                                                                           value="{{ j.uCapOne }}"
+                                                                           style="border:0px solid #c7d3eb;width: 90%">
+                                                                    <input class="lesson_checkbox" type="checkbox"
+                                                                           checked="checked">
 
-                                                            <input type="submit" name="videoTwo"
-                                                                   class="vid my-0 py-0 text-left lesson_video_submit"
-                                                                   value="{{ j.uCap2 }}"
-                                                                   style="border:0px solid #c7d3eb;width: 90%">
-                                                            <input class="lesson_checkbox" type="checkbox"
-                                                                   checked="checked">
-                                                            <input type="submit" name="videoThree"
-                                                                   class="vid my-0 py-0 text-left lesson_video_submit"
-                                                                   value="{{ j.u_capThree }}"
-                                                                   style="border:0px solid #c7d3eb;width: 90%">
-                                                            <input class="lesson_checkbox" type="checkbox"
-                                                                   checked="checked">
-                                                        </li>
+                                                                    <input type="submit" name="videoTwo"
+                                                                           class="vid my-0 py-0 text-left lesson_video_submit"
+                                                                           value="{{ j.uCap2 }}"
+                                                                           style="border:0px solid #c7d3eb;width: 90%">
+                                                                    <input class="lesson_checkbox" type="checkbox"
+                                                                           checked="checked">
+                                                                    <input type="submit" name="videoThree"
+                                                                           class="vid my-0 py-0 text-left lesson_video_submit"
+                                                                           value="{{ j.u_capThree }}"
+                                                                           style="border:0px solid #c7d3eb;width: 90%">
+                                                                    <input class="lesson_checkbox" type="checkbox"
+                                                                           checked="checked">
+                                                                </li>
                                                             {% endif %}
                                                         {% endfor %}
                                                     {% endif %}
@@ -244,13 +247,18 @@
                                             </form>
 
 
-{#                                            <li>#}
-{#                                                <b><a href="#">ProgressiveTest </a>  </b> <input class="lesson_checkbox"#}
-{#                                                                                            type="checkbox">#}
-{#                                            </li>#}
+                                            {#                                            <li>#}
+                                            {#                                                <b><a href="#">ProgressiveTest </a>  </b> <input class="lesson_checkbox"#}
+                                            {#                                                                                            type="checkbox">#}
+                                            {#                                            </li>#}
                                         </ul>
-                                    <b><a href="{% url 'userquizz' i.pk %}">ProgressiveTest </a>  </b> <input class="lesson_checkbox"
-                                                                                            type="checkbox">
+                                        <input type="text" value="{{ i.pk }}" id="qId" hidden>
+                                        <b>
+                                              <input type="button" class="btn btn-primary" id="startTest" value="Start Test"/>
+                                            <a id="startTest" href="{% url 'userquizz' i.pk %}">ProgressiveTest </a>
+                                        </b>
+                                        <input class="lesson_checkbox"
+                                               type="checkbox">
 
                                     </div>
                                 </li>

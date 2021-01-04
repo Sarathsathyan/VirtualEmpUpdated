@@ -1,200 +1,169 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}
-    CSM Add courses
-{% endblock %}
+{% extends "quizz.html" %}
+
 {% block content %}
-
-    <div id="wrapper" class="admin-panel">
-
-        <!-- menu -->
-
-
-        <!-- Header Container
-        ================================================== -->
-        {% include 'userPartials/_header.html' %}
-
-        <!-- content -->
-        <div class="page-content">
-            <div class="page-content-inner">
-
-                <div class="d-flex">
-                    <nav id="breadcrumbs" class="mb-3">
-                        <ul>
-                            <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
-                            <li><a href="#"> User : {{ request.user.first_name }} </a></li>
-                            <li>Quizz</li>
-                        </ul>
-
-                    </nav>
-                </div>
-                <div class="card">
-
-                    <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" name="myForm">{% csrf_token %}
-                        <div class="add_quiz_block_list">
-                            <div class="add_quiz_block">
-                                {% if data %}
-                                {% for i in data %}
-                                <div class="card-body">
-                                    <div class="card question_block">
-                                        <div class="card-header">
-                                            <span class="question_text">Question {{ i.ques_no }}</span>
-                                        </div>
-                                        <div class="card-header">
-                                            <span style="color: #0c002b">{{ i.question }}</span>
-                                        </div>
-                                        <div class="card-body">
-                                            <ul class="list-group">
-                                                <li class="list-group-item ">
-                                                    <div class="answer_block">
-                                                        <input type="radio" name="question_answer_1"
-                                                               class="answer_radio" value="1"/>
-                                                        <input type="text"  class="answer_text" value="{{ i.option1 }}"/>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item ">
-                                                    <div class="answer_block">
-                                                        <input type="radio" name="question_answer_2"
-                                                               class="answer_radio" value="2"/>
-                                                        <input type="text"  class="answer_text" value="{{ i.option2 }}"/>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item ">
-                                                    <div class="answer_block">
-                                                        <input type="radio" name="question_answer_1"
-                                                               class="answer_radio" value="3"/>
-                                                        <input type="text"  class="answer_text" value="{{ i.option3 }}"/>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item ">
-                                                    <div class="answer_block">
-                                                        <input type="radio" name="question_answer_1"
-                                                               class="answer_radio" value="4"/>
-                                                        <input type="text"  class="answer_text" value="{{ i.option4 }}"/>
-                                                    </div>
-                                                </li>
-
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            {% endif %}
+    <!--Side Menu. Begins-->
+    <ul class="sidenav sidenav-fixed nd-light-bg " style="width: 305px;">
+        <li>
+            <a class="subheader center-align"><u>Question Panel</u></a>
+        </li>
+        {% for question_id in questions %}
+            {% with id=forloop.counter %}
+                <li class="cursor">
+                    <a class="tablinks {% if id == 1 %} active {% endif %} " onclick="question(event,{{ id }},'tab')" id="defaultOpen{{ id }}">
+                        <div class="row mb-0">
+                            <div class="col s6 left-align">Question {{ id }}</div>
+                            <div class="col s6 ">
+                                <span class="hide" id="isOptionChecked{{ question_id.id }}">
+                                    <div class="indicator-spacing green-indicator"></div>
+                                </span>
+                                <span id="isOptionUnChecked{{ question_id.id }}">
+                                    <div class="indicator-spacing gray-indicator"></div>
+                                </span>
                             </div>
-                        <div class="row">
-                            <div class="col-md-6"></div>
-                            <div class="col-md-6">
-                                <input type="submit" class="btn btn-success" value="Finish" name="testSub">
-                            </div>
-
                         </div>
+                    </a>
+                </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+    <!--Side Menu. Ends-->
 
-                        </div>
-                    </form>
+    <!--Body Contents of the page. Begins-->
+    <!--id="quiz-time-left"-->
+    <div class="nd-85 pl-300">
+        <div class="row p-2">
+            <div class="p-1 mb-2">
+
+                <div class="col s4 fs-1-3 ft-300 mb-1">
+                    Indicators
                 </div>
-            <!--End Of card -->
-
-
-                <!-- ADD QUESTION CLONE HARI START-->
-                <div class="add_quiz_block_clone display_none">
-                    <div class="add_quiz_block">
-                        <div class="card-body">
-                            <div class="card question_block">
-                                <div class="card-header">
-                                    <span class="question_text">Question</span>
-                                    <a href="#" class="btn uk-button-danger btn-sm question_delete_btn">Delete</a>
-                                    <input type="text"/>
-                                </div>
-                                <div class="card-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item ">
-                                            <div class="answer_block">
-                                                <input type="radio" name="question_answer_1" class="answer_radio"
-                                                       value="1"/>
-                                                <input type="text" placeholder="Answer 1" class="answer_text"/>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item ">
-                                            <div class="answer_block">
-                                                <input type="radio" name="question_answer_1" class="answer_radio"
-                                                       value="2"/>
-                                                <input type="text" placeholder="Answer 2" class="answer_text"/>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item ">
-                                            <div class="answer_block">
-                                                <input type="radio" name="question_answer_1" class="answer_radio"
-                                                       value="3"/>
-                                                <input type="text" placeholder="Answer 3" class="answer_text"/>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item ">
-                                            <div class="answer_block">
-                                                <input type="radio" name="question_answer_1" class="answer_radio"
-                                                       value="4"/>
-                                                <input type="text" placeholder="Answer 4" class="answer_text"/>
-                                            </div>
-                                        </li>
-
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div> <!--End Of card body -->
+                <div class="col s4">
+                    <div class="row mb-0">
+                        <div class="col s11 right-align fs-1-3 ft-300">Answered</div>
+                        <div class="col s1">
+                            <div class="mt-06 green-indicator"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="row mb-0">
+                        <div class="col s11 right-align fs-1-3 ft-300">Yet to Answer</div>
+                        <div class="col s1">
+                            <div class="mt-06 gray-indicator"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- ADD QUESTION CLONE HARI END-->
-            <!-- footer
-            ================================================== -->
-            {#                {% include 'partials/_footer.html' %}#}
 
+            <div class="col s12 m12">
+                <div class="nd-breadcrumb fs-1-3 ft-300 mb-2">
+                    <div class="row mb-0">
+                        <div class="col s6">
+                            <span id="quiz-time-left"></span>
+                        </div>
+                        <div class="col s6 right-align">
+                            <a class="btn-flat modal-trigger light-orange" href="#finishModal" id="finish" onclick="Myfunc()">Finish Test</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <!-- For Night mode -->
-            <script>
+            <div class="col s12 m12">
+                <form action="/userlogin/userdashboard/userResult/" name="quiz" id="quiz" method="post">
+                    <input type="text" id="time" name="rough" readonly hidden>
+                    {% csrf_token %}
 
-                (function (window, document, undefined) {
-                    'use strict';
-                    if (!('localStorage' in window)) return;
-                    var nightMode = localStorage.getItem('gmtNightMode');
-                    if (nightMode) {
-                        document.documentElement.className += ' night-mode';
-                    }
-                })(window, document);
+                    {% for question in questions %}
+                        {% with counter=forloop.counter %}
+                            <div class="card tabcontent" id="{{ counter }}">
+                                <div class="card-content pb-0">
+                                    <span class="card-title">Q{{ counter }}. {{ question.question }}</span>
+                                    {% if question.title_img %}
 
+                                        <p><img src="{{ question.title_img.url }}" width="90%" height="10%"
+                                                style="position: center"></p>
 
-                (function (window, document, undefined) {
+                                    {% endif %}
+                                    <input type="hidden" name="inquiry" value="{{ question.id }}">
+                                    <div class="row mt-2">
+                                        {% if question.option_available %}
+                                            {#                            <img src="{{ question.img_option1.url }}" width="200px" height="200px" alt="caption"/>#}
+                                            {% for key,value in question.option.items %}
 
-                    'use strict';
+                                                <div class="col s6  mb-1">
+                                                    <div class="nd-breadcrumb">
+                                                        <label>
+                                                            {% if value == None %}
+                                                            {% else %}
+                                                                <h2>{{ value.url }}</h2>
+                                                                <img src="/media/{{ value }}" onchange="isChecked({{ question.id }})" width="200px" height="200px"/>
 
-                    // Feature test
-                    if (!('localStorage' in window)) return;
+                                                                <input name="{{ question.id }}" type="radio" value="{{ value }}" onchange="isChecked({{ question.id }})"/>
+                                                                <span class="fs-1-3 ft-300"></span>
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for key,value in question.option.items %}
+                                                <div class="col s12  mb-1">
+                                                    <div class="nd-breadcrumb">
+                                                        <label>
+                                                            {% if key == "E" %}
+                                                                <img src="{{ value }}" width="200px" height="200px" alt="caption">
+                                                            {% endif %}
+                                                            {% if value == None %}
+                                                            {% else %}
 
-                    // Get our newly insert toggle
-                    var nightMode = document.querySelector('#night-mode');
-                    if (!nightMode) return;
+                                                                <input name="{{ question.id }}" type="radio" value="{{ value }}" onchange="isChecked({{ question.id }})"/>
+                                                                <span class="fs-1-3 ft-300">{{ value }}</span>
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
 
-                    // When clicked, toggle night mode on or off
-                    nightMode.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        document.documentElement.classList.toggle('night-mode');
-                        if (document.documentElement.classList.contains('night-mode')) {
-                            localStorage.setItem('gmtNightMode', true);
-                            return;
-                        }
-                        localStorage.removeItem('gmtNightMode');
-                    }, false);
-
-
-                })(window, document);
-
-
-            </script>
-
+                                <div class="card-action">
+                                    <div class="row mb-0">
+                                        <div class="col s6">
+                                            {% if counter == 1 %}
+                                                <a class="btn-flat disabled" onclick="question(event,{{ counter }},'pre')">Previous</a>
+                                            {% else %}
+                                                <a class="btn-flat" onclick="question(event,{{ counter }},'pre')">Previous</a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col s6 right-align">
+                                            {% if counter == 20 %}
+                                                <a class="btn-flat disabled" onclick="question(event,{{ counter }},'next')">Next</a>
+                                            {% else %}
+                                                <a class="btn-flat" onclick="question(event,{{ counter }},'next')">Next</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+                </form>
+            </div>
         </div>
     </div>
+    <!--Modal comes in when finish test is clicked. Begins-->
+    <div class="modal" id="finishModal">
+        <div class="modal-content">
+            <h4 style="text-transform: uppercase;">Hey <span style="color: #6d801b;font-weight: bold">{{ user.username }}</span></h4>
+            <p>You have time left,would you want to revise your answers again?</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Revise</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="complete_test">Submit</a>
+        </div>
     </div>
-
+    <!--Modal comes in when finish test is clicked. Ends-->
+    <!--Body Contents of the page. Ends-->
 
 {% endblock %}

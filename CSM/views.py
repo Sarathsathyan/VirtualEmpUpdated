@@ -197,7 +197,7 @@ def csmAddQuizz(request,w_id):
     datas = Quizz.objects.filter(week_id_id=w_id)
     week = Week.objects.get(id = w_id)
     course = Course.objects.get(id = week.week_id_id)
-    print(course.title)
+
     if request.method == 'POST':
         if 'save' in request.POST:
             question = request.POST['question']
@@ -206,20 +206,33 @@ def csmAddQuizz(request,w_id):
             que3 = request.POST['answer3']
             que4 = request.POST['answer4']
             ans = request.POST['ans']
+            my_json = {"A": que1, "B": que2, "C": que3, "D": que4}
 
             data = Quizz(week_id_id=w_id, question=question, answer=ans, option1=que1, option2=que2, option3=que3,
-                         option4=que4, ques_no=datas.count() + 1,course_id_id=course.pk)
+                         option4=que4, ques_no=datas.count() + 1,course_id_id=course.pk,option=my_json)
 
             data.save()
             messages.success(request, "Question added")
             return redirect('csmAddQuizz', w_id)
 
-    print(datas.count())
+
+
 
     context = {
+        'w_id':w_id,
         'data': datas,
         'quiz_id': id,
         'count': range(datas.count()),
     }
 
     return render(request, 'csm_add_quizz.html', context)
+
+def csmDeleteQues(request,delId,w_id):
+    print(w_id)
+    print(delId)
+    data = Quizz.objects.get(id = delId)
+    data.delete()
+
+    messages.success(request,
+                     "Question deleted")
+    return redirect('csmAddQuizz',w_id)

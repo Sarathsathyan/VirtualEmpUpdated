@@ -14,6 +14,8 @@ from VirtualEmpleado.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail, EmailMessage
 from .forms import (AddUserForm)
 from .models import UserDetails,Reference,RoleDetail,CareerCategory,SubCategory,CategoryCourse, AdminLicense, UsedLicense
+from User.models import UserContact,UserEducation
+from CSM.models import Course,CreateCourse
 # Create your views here.
 
 def landing(request):
@@ -192,7 +194,12 @@ def userRegister(request):
     return render(request,'register.html',context)
 
 def adminDashboard(request):
-    return render(request,'dashboard.html')
+    students = UserDetails.objects.all()
+    print(students.count())
+    context ={
+        'students':students.count()
+    }
+    return render(request,'dashboard.html',context)
 
 def roleCreation(request):
     if request.user.is_staff and request.user.is_superuser:
@@ -403,8 +410,47 @@ def cfpCreation(request):
     return render(request, 'cfpcreation.html', context)
 
 def cfpList(request):
-    return render(request,'cfplist.html')
+    category = CareerCategory.objects.all()
+    subDatas = SubCategory.objects.all()
+    cfpData = CategoryCourse.objects.all()
+    context ={
+        'category':category,
+        'subData' : subDatas,
+        'cfpData' :cfpData,
+    }
+    return render(request,'cfplist.html',context)
 
+def cateEdit(request,c_id):
+    catId = c_id
+    try:
+        datas = CareerCategory.objects.get(id=catId)
+        if request.method == "POST":
+            if 'category_submit' in request.POST:
+                category = request.POST['category_name']
+                datas.category = category
+                datas.save()
+                return redirect('cfp_create')
+
+        context = {
+            'datas': datas,
+        }
+        return render(request, 'categoryEdit.html', context)
+
+    except:
+        messages.error(request,
+                       "Wrong URL")
+
+
+def subEdit(request,s_id):
+    try:
+        sData = SubCategory.objects.get(id = s_id)
+
+        context={
+            'sData' : sData
+        }
+        return render(request,'subCategoryEdit.html',context)
+    except:
+        messages.error(request,"Wrong")
 def adminLicenseKey(request):
     if request.method == 'POST':
 
@@ -428,3 +474,79 @@ def adminLicenseKey(request):
 
 
     return render(request,'admin_license.html',context)
+
+def adminStudents(request):
+    students = UserDetails.objects.order_by('-user_date')
+
+
+    if request.method == 'POST':
+        if 'id_search' in request.POST:
+            emp_id = request.POST['id_search']
+            if UserDetails.objects.filter(user_unique=emp_id).exists():
+                print("Exists")
+                students = UserDetails.objects.filter(user_unique=emp_id)
+
+    context = {
+        'students': students,
+        'students_contact': None,
+        # 'my_words':my_words,
+    }
+    return render(request, 'admin_students.html', context)
+
+def deleteStu(request,delId):
+    print("hai")
+    print(delId)
+    data = User.objects.get(id = delId)
+    data.delete()
+    data.save()
+    messages.success(request,'Student Info Deleted')
+    return redirect('adminStudents')
+
+def adminViewStudent(request,userId):
+    print(userId)
+    student = User.objects.get(id = userId)
+    studentUserDetail = UserDetails.objects.get(user_id_id=userId)
+    print(studentUserDetail.pk)
+    studentContact = UserContact.objects.get(user_id_id=studentUserDetail.pk)
+    studentEducation = UserEducation.objects.filter(user_id_id=studentUserDetail.pk)
+    context ={
+        'student':student,
+        'studentUserDetail':studentUserDetail,
+        'studentContact' :studentContact,
+        'studentEducation':studentEducation,
+    }
+    return render(request,'adminViewStudent.html',context)
+def adminCourses(request):
+    if request.user.is_staff and request.user.is_superuser:
+
+        if request.user.is_authenticated:
+            allCourses = Course.objects.all()
+
+            context = {
+                'courses': allCourses,
+            }
+        return render(request, 'adminCourses.html', context)
+    else:
+        messages.error(request, "Wrong URL")
+        return redirect('logout')
+
+
+# instructors
+def viewInstructor(request):
+    if request.user.is_staff and request.user.is_superuser:
+        data = RoleDetail.objects.filter(user_role="Blogger")
+        context ={
+            'data':data
+        }
+        return render(request,'adminInstructors.html',context)
+
+    else:
+        messages.error(request, "Wrong URL")
+        return redirect('logout')
+
+def deleteInstructor(request,dId):
+    data = User.objects.get(id = dId)
+    data.delete()
+    data.save()
+    messages.success(request,"Instructor information deleted")
+    return redirect('instructors')

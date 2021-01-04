@@ -92,7 +92,7 @@
 {#                                        </div>#}
                                         {% if user.is_authenticated %}
                                         <div class="dropdown-user-name" style="font-weight: bold;">
-                                            {{ user.first_name }} {{ user.last_name }}<span>Student <p class="m-0"> Member since : {{ user_data.user_date |date   }} </p> <p class="m-0">Reference ID : {{ reference }} </p></span>
+                                            {{ user.first_name }} {{ user.last_name }}<span>Trainee <p class="m-0"> Member since : {{ user.date_joined   }} </p> <p class="m-0">Reference ID : {{ reference }} </p></span>
                                         </div>
 
                                         {% endif %}

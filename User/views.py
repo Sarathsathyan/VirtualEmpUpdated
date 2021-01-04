@@ -6,7 +6,8 @@ from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
 from Admin.models import CareerCategory,SubCategory,CategoryCourse
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
-from CSM.models import Quizz
+from CSM.models import Quizz,Result
+from CSM.models import Quizz,Result
 # Create your views here.
 
 # CSM
@@ -43,7 +44,7 @@ def userCfp(request):
             messages.success(request, "CFP choosed")
             details.user_cfp = True;
             details.save()
-            return redirect('userdashboard');
+            return redirect('userdashboard')
     career_list = CareerCategory.objects.all()
 
     context = {
@@ -644,17 +645,51 @@ def userQuizz(request,w_id):
     week = Week.objects.get(id = w_id);
     course = Course.objects.get(id = week.week_id_id)
     data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
-    print(data)
-    if request.method == 'POST':
-        if 'testSub' in request.POST:
-
-            return redirect('userResult')
 
     context={
-        'data' : data
+        'questions' : data
     }
     return render(request,'userQuizz.html',context)
 
 
 def userResult(request):
+    try:
+        time = request.POST['rough']
+        form=request.POST.getlist('inquiry')
+        correct=0
+        wrong=0
+        tempQues=[]
+        tempRes=[]
+
+        for i in form:
+            if i in request.POST:
+                ques=request.POST[i]
+                tempQues.append(ques)
+                Ques=Quizz.objects.filter(id=i)
+                res=Ques[0].answer
+                tempRes.append(res)
+                if(res==ques):
+                    correct+=1
+                else:
+                    wrong+=1
+
+        val=Result()
+        # obj = Question.objects.first()
+        # field_value = getattr(obj,'title')
+        # print ("************************************")
+        # print(field_value)
+        # print ("************************************")
+        val.result=[{'questions': form ,'user_answers':tempQues}]
+        val.score= str(correct) + '/' + str(20)
+        val.timetaken = str(time)
+        val.user_answer=[{'user_answers':tempQues, 'correct_answer':tempRes}]
+        val.auth_id=(request.user.id)
+        val.save()
+    except Exception as e:
+        messages.add_message(
+                request,
+                messages.INFO,
+                e
+            )
+        return redirect('/')
     return render(request,'user_result.html')

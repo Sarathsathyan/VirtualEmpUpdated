@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+{% block title %}
+Student Info
+{% endblock %}
+{% block content %}{% load static%}
+
+    <style>
+    .fil{
+        background: transparent;
+    /* background: white; */
+    border: aliceblue;
+    }
+    </style>
+
+    <div id="wrapper" class="admin-panel">
+
+    {% include 'partials/_header.html' %}
+
+     <!-- content -->
+        <div class="page-content">
+            <div class="page-content-inner">
+
+                <div class="d-flex">
+                    <nav id="breadcrumbs" class="mb-3">
+                        <ul>
+                            <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
+                            <li><a href="{% url 'admindashboard' %}"> Dashboard </a></li>
+                            <li>Students list</li>
+                        </ul>
+                    </nav>
+                </div>
+            {% include 'partials/_alert.html' %}
+
+
+
+
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header actions-toolbar border-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="d-inline-block mb-0">Students/Trainees</h4>
+                            <div class="d-flex">
+
+                                <a href="#" class="btn btn-icon btn-hover  btn-circle" uk-tooltip="Search students  ">
+                                    <i class="uil-search"></i>
+                                </a>
+                                <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+                                    <form class="uk-search uk-search-navbar uk-width-1-1" method="post">
+                                        {% csrf_token %}
+                                        <input class="uk-search-input shadow-0 uk-form-small" type="search"
+                                            placeholder="Employee ID" autofocus name="id_search">
+                                    </form>
+                                </div>
+
+                                <!-- <form method="post"> -->
+                                    <!-- {% csrf_token %} -->
+                                <a href="#" class="btn btn-icon btn-hover  btn-circle" uk-tooltip="filter">
+                                    <i class="uil-filter"></i>
+                                </a>
+                                <div uk-dropdown="pos: bottom-right ; mode: click ;animation: uk-animation-scale-up">
+                                    <ul class="uk-nav uk-dropdown-nav">
+
+                                        <li class="uk-active"><a href="/admindashboard/student_info/" style="font-size: 15px; margin-left: 7px;color: black;" class="fil"> Latest</a></li>
+
+                                        <li><button onclick="sortTable()" class="fil"> FROM A-Z</button></li>
+                                        <li><button  value="From Z-A" onclick="reverseSortTable()" class="fil"> FROM Z-A</button></li>
+                                    </ul>
+                                </div>
+                                <!-- </form> -->
+
+
+                                <a href="#" class="btn btn-icon btn-hover  btn-circle" uk-tooltip="More">
+                                    <i class="uil-ellipsis-h"></i>
+                                </a>
+                                <div uk-dropdown="pos: bottom-right ; mode: click ;animation: uk-animation-scale-up">
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li><a href="{% url 'adminStudents' %}"> Refresh </a></li>
+                                        <li><a href="#">Manage</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <table class="table align-items-center" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Joined Date</th>
+                                    <th scope="col">Trainee Id</th>
+                                    <th scope="col">Total payments</th>
+                                    <th scope="col">Activity</th>
+                                    <th scope="col"> </th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+                              {% for student in students %}
+
+                                <tr>
+                                    <td scope="row">
+                                        <div class="media align-items-center">
+                                        {%  for info in students_contact %}
+                                            {% if info.user_id_id == student.pk %}
+                                            <div>
+
+                                                <div class="avatar-parent-child" style="width: max-content">
+
+
+                                                      {% if info.user_pic %}
+                                                    <img alt="Image placeholder"
+                                                        src="{{info.user_pic.url}}"
+                                                        class="avatar rounded-circle">
+                                                  {% else %}
+                                                  <img alt="Image placeholder"
+                                                      src=""
+                                                      class="avatar  rounded-circle">
+                                                  {% endif %}
+
+                                                    <!-- <span class="avatar-child avatar-badge bg-success"></span> -->
+
+                                                </div>
+
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            <div class="media-body ml-4">
+                                                <p class="name h6 mb-0 text-sm" >{{student.user_id.first_name}} {{student.user_id.last_name}}</p>
+                                                <small class="d-block font-weight-bold">{{student.user_unique}}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{student.user_id.date_joined | date}}</td>
+                                    <td> {{ student.user_unique }} </td>
+                                    <td> &#x20B9; 5000 </td>
+                                    <td>
+                                        <div class="progress" style="height: 7px;">
+                                            <div class="progress-bar" role="progressbar" style="width: 45%;"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">
+                                        <!-- Actions -->
+                                        <div class="actions ml-3">
+                                            <a href="{% url 'viewStudent' student.user_id.pk %}" class="btn btn-icon btn-hover btn-sm btn-circle"
+                                                uk-tooltip="Quick view">
+                                                <i class="uil-external-link-alt "></i> </a>
+                                            <a href="#" class="btn btn-icon btn-hover btn-sm btn-circle"
+                                                uk-tooltip="Edit">
+                                                <i class="uil-pen "></i> </a>
+
+                                                <a href="{% url 'deleteStudent' student.user_id.pk %}" class="btn btn-icon btn-hover btn-sm btn-circle"
+                                                uk-tooltip="Delete user">
+                                                <i class="uil-trash-alt text-danger"></i> </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                      {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <!-- footer
+                ================================================== -->
+                <div class="footer">
+                    <div class="uk-grid-collapse" uk-grid>
+                        <div class="uk-width-expand@s uk-first-column">
+                            <p>© 2019 <strong>Courseplus</strong>. All Rights Reserved. </p>
+                        </div>
+                        <div class="uk-width-auto@s">
+                            <nav class="footer-nav-icon">
+                                <ul>
+                                    <li><a href="#"><i class="icon-brand-facebook"></i></a></li>
+                                    <li><a href="#"><i class="icon-brand-dribbble"></i></a></li>
+                                    <li><a href="#"><i class="icon-brand-youtube"></i></a></li>
+                                    <li><a href="#"><i class="icon-brand-twitter"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+<script>
+    function sortTable() {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("myTable");
+      switching = true;
+      /*Make a loop that will continue until
+      no switching has been done:*/
+      while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+          //start by saying there should be no switching:
+          shouldSwitch = false;
+          /*Get the two elements you want to compare,
+          one from current row and one from the next:*/
+          x = rows[i].getElementsByTagName("TD")[0];
+          y = rows[i + 1].getElementsByTagName("TD")[0];
+          //check if the two rows should switch place:
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          /*If a switch has been marked, make the switch
+          and mark that a switch has been done:*/
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }
+
+    //reverse sort
+
+    function reverseSortTable() {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("myTable");
+      switching = true;
+      /*Make a loop that will continue until
+      no switching has been done:*/
+      while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+          //start by saying there should be no switching:
+          shouldSwitch = false;
+          /*Get the two elements you want to compare,
+          one from current row and one from the next:*/
+          x = rows[i].getElementsByTagName("TD")[0];
+          y = rows[i + 1].getElementsByTagName("TD")[0];
+          //check if the two rows should switch place:
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          /*If a switch has been marked, make the switch
+          and mark that a switch has been done:*/
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }
+    </script>
+        <!-- For Night mode -->
+        <script>
+            (function (window, document, undefined) {
+                'use strict';
+                if (!('localStorage' in window)) return;
+                var nightMode = localStorage.getItem('gmtNightMode');
+                if (nightMode) {
+                    document.documentElement.className += ' night-mode';
+                }
+            })(window, document);
+
+
+            (function (window, document, undefined) {
+
+                'use strict';
+
+                // Feature test
+                if (!('localStorage' in window)) return;
+
+                // Get our newly insert toggle
+                var nightMode = document.querySelector('#night-mode');
+                if (!nightMode) return;
+
+                // When clicked, toggle night mode on or off
+                nightMode.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    document.documentElement.classList.toggle('night-mode');
+                    if (document.documentElement.classList.contains('night-mode')) {
+                        localStorage.setItem('gmtNightMode', true);
+                        return;
+                    }
+                    localStorage.removeItem('gmtNightMode');
+                }, false);
+
+            })(window, document);
+        </script>
+
+    </div>
+{% endblock %}

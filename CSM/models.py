@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from jsonfield import JSONField
 from django.contrib.auth.models import User
 # Create your models here.
 
@@ -83,7 +84,21 @@ class Quizz(models.Model):
     option2 = models.CharField(max_length=100)
     option3 = models.CharField(max_length=100)
     option4 = models.CharField(max_length=100)
+    option = JSONField(null=True,)
     answer = models.CharField(max_length=100)
+    option_available = models.BooleanField(default=False,null=True)
 
     def __str__(self):
         return self.question
+
+class Result(models.Model):
+    result = JSONField()
+    score = models.CharField(max_length=100)
+    timetaken = models.CharField(max_length=100,null=True)
+    user_answer = JSONField()
+    auth = models.ForeignKey('auth.User', on_delete=models.CASCADE, )
+
+
+    class Meta:
+        db_table = 'results'
+

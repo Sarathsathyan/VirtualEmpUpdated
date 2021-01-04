@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>VE - Talent Acquisition</title>
+    <head>
+
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <!--Favourite icon-->
+        <link rel="icon" href="{% static 'images/favicon.png' %}">
+        <link rel="apple-touch-icon" href="{% static 'images/favicon.png' %}">
+        <!--Favourite icon-->
+        <!--Application related styles. Begins-->
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/theme.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <!--Application related styles. Ends-->
+
+    </head>
+    <body
+            class="{% if request.path == '/userlogin/userdashboard/userQuizz/' %} pl-300{% endif %}"
+    >
+    <!--    Navigation Menu. Begins-->
+    {% if request.path != '/' %}
+    <div class="nd-z-index">
+        <nav class="nd-nav-height nd-nav-shadow">
+            <div class="nav-wrapper nd-nav-margin">
+                <img src="../static/images/logo-small.svg" class="brand-logo">
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class="nd-black">
+                        <img src="{% static 'images/account.svg' %}" alt="" width="40" class="pt-09 mr-1">
+                    </li>
+                    <li class="nd-black fs-1-3">
+                        {% if user.username == null %}
+                        <span>Guest User</span>
+                        {% else %}
+                        <span>{{user.username}}</span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {% endif %}
+    <!--    Navigation Menu. Ends-->
+
+    {% block content %}
+    {% endblock %}
+
+    {% if request.path != '/' %}
+    <footer class="page-footer pl-300">
+        <div class="footer-copyright">
+            <div class="ml-3">
+                © Copyright <b>VE</b>. All Rights Reserved
+            </div>
+            <span class="right-align mr-3">Credits</span>
+        </div>
+    </footer>
+    {% endif %}
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/customQuizz.js' %}"></script>
+
+    </body>
+</html>

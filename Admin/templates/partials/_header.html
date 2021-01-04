@@ -22,7 +22,7 @@
             <li><a href="{% url 'cfpcreation' %}"><i class="uil-user-check"></i> <span>CFP Creations</span></a></li>
             <li><a href="{% url 'cfplist' %}"><i class="uil-user-check"></i> <span>CFP List</span></a></li>
             <li><a href="#"><i class="uil-user-check"></i> <span>MC categories</span></a></li>
-            <li><a href="#"><i class="uil-youtube-alt"></i> <span> Courses</span></a></li>
+            <li><a href="{% url 'admincourse' %}"><i class="uil-youtube-alt"></i> <span> Courses</span></a></li>
             <li><a href="#"><i class="uil-robot"></i> <span>ProjectsmicroDash/</span></a></li>
             <li>
                 <div id="modal-example" class="uk-flex-top" uk-modal>
@@ -57,12 +57,12 @@
 
             </li>
 
-            <li><a href=""><i class="uil-users-alt"></i> <span> Students</span></a></li>
-            <li><a href="instructors.html"><i class="uil-graduation-hat"></i> <span> Instructors</span></a>
+            <li><a href="{% url 'adminStudents' %}"><i class="uil-users-alt"></i> <span> Students</span></a></li>
+            <li><a href="{% url 'instructors' %}"><i class="uil-graduation-hat"></i> <span> Instructors</span></a>
             </li>
 
 
-            <li><a href="#"><i class="uil-file-alt"></i> <span> News</span></a></li>
+            <li><a href="#"><i class="uil-file-alt"></i> <span> Blog</span></a></li>
             <li><a href="messages.html"><i class="uil-envelope-alt"></i> <span> Messages</span></a></li>
         </ul>
 
@@ -195,7 +195,7 @@
                             <li>
                                 <a href="{% url 'admindashboard' %}">
                                     <i class="icon-material-outline-dashboard"></i> Dashboard</a>
-                            </li>pyth
+                            </li>
                             <li>
                                 <a href="#" id="night-mode" class="btn-night-mode">
                                     <i class="icon-feather-moon"></i> Night mode

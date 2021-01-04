@@ -13,5 +13,16 @@ urlpatterns = [
     path('roleCreation/',views.roleCreation,name='rolecreation'),
     path('cfpCreation/',views.cfpCreation,name='cfpcreation'),
     path('cfpList/',views.cfpList,name='cfplist'),
+    path('categoryEdit/<int:c_id>',views.cateEdit,name='categoryEdit'),
+    path('SubcategoryEdit/<int:s_id>',views.subEdit,name='subEdit'),
+
+    path('admindashboard/student_info/', views.adminStudents, name='adminStudents'),
+    path('admindashboard/courses/',views.adminCourses,name='admincourse'),
     path('licenseKey/',views.adminLicenseKey,name="licenseKey"),
+
+    path('instructors/',views.viewInstructor,name='instructors'),
+    path('delInstructor/<int:dId>/',views.deleteInstructor,name='delInstructor'),
+
+    path('deleteStudent/<int:delId>/',views.deleteStu,name='deleteStudent'),
+    path('viewTrainee/<int:userId>/',views.adminViewStudent,name='viewStudent')
 ]
