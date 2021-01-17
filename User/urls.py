@@ -10,4 +10,5 @@ urlpatterns = [
     path('userCFP/', views.userCfp, name="usercfp"),
     path('userQuizz/<int:w_id>/', views.userQuizz, name="userquizz"),
     path('userResult/', views.userResult, name="userResult"),
+    path('pricing/', views.pricing, name="pricing"),
 ]

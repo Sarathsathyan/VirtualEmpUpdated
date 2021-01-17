@@ -721,3 +721,8 @@ def userResult(request):
     #         )
     #     return redirect('/')
 
+
+
+def pricing(request):
+    if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
+        return render(request,'pricing.html')
