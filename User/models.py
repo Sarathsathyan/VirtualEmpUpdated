@@ -66,12 +66,14 @@ class UserSkill(models.Model):
 
 # CSM  MODELS
 
-
+# start button
 class userProgress(models.Model):
     userId = models.ForeignKey(User,on_delete=models.CASCADE)
     course_id = models.ForeignKey(CategoryCourse,on_delete=models.CASCADE)
     weekId = models.ForeignKey(Week,on_delete=models.CASCADE)
     status = models.BooleanField(default=False)
+    currentTime = models.DateTimeField(null=True)
+    endTime = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.status

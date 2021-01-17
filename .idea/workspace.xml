@@ -2,42 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87ddb306-b5d8-49b8-929b-cdc19587f0a0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Admin/templates/adminCourses.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Admin/templates/adminInstructors.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Admin/templates/adminViewStudent.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Admin/templates/admin_students.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Admin/templates/categoryEdit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Admin/templates/subCategoryEdit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/data.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/customQuizz.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/passwordReset/password_reset.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/passwordReset/password_reset_confirm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/passwordReset/password_reset_done.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/passwordReset/password_reset_sent.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/quizz.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/templates/cfplist.html" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/templates/cfplist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/templates/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/templates/partials/_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/templates/partials/_header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/templates/csm_add_quizz.html" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/templates/csm_add_quizz.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/templates/userCourseLesson.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userCourseLesson.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/userPartials/_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userPartials/_header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/userPartials/_menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userPartials/_menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/userProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userProfile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/templates/userQuizz.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userQuizz.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VirtualEmpleado/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/VirtualEmpleado/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VirtualEmpleado/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/VirtualEmpleado/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +116,13 @@
       <workItem from="1608305111967" duration="13899000" />
       <workItem from="1608356310486" duration="67578000" />
       <workItem from="1609076426655" duration="20126000" />
-      <workItem from="1609594249984" duration="13715000" />
+      <workItem from="1609594249984" duration="18418000" />
+      <workItem from="1609942000862" duration="5467000" />
+      <workItem from="1610010928765" duration="1557000" />
+      <workItem from="1610336062664" duration="572000" />
+      <workItem from="1610362405252" duration="618000" />
+      <workItem from="1610445691175" duration="1189000" />
+      <workItem from="1610679415548" duration="544000" />
     </task>
     <servers />
   </component>

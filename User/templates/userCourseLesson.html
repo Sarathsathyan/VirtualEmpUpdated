@@ -196,13 +196,25 @@
                                     <a class="uk-accordion-title text-white" href="#">
 
                                         {{ i.week_name }}
-                                        <span class="course_tab_text">5 Days 20 Hrs</span>
+                                        {% for d in data %}
+                                            {% if d.weekId_id == i.pk %}
+                                                {% if d.endTime %}
+                                                    <span class="course_tab_text">{{ remain }}</span>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
                                     </a>
                                     <form method="post">{% csrf_token %}
                                         <input type="text" value="{{ i.pk }}" name="weekId" hidden>
-                                        <span style="color: black"><button type="submit"
-                                                                           style="color: #0c002b;background-color: #0b7ec4"
-                                                                           name="start">Start</button> </span></form>
+                                        {% if status %}
+                                        {% else %}
+
+                                            <span style="color: black">
+                                            <button type="submit" style="color: #0c002b;background-color: #0b7ec4"
+                                                    name="start">Start</button>
+                                        </span>
+                                        {% endif %}
+                                    </form>
 
                                     <div class="uk-accordion-content">
                                         <!-- course-video-list -->
@@ -254,7 +266,8 @@
                                         </ul>
                                         <input type="text" value="{{ i.pk }}" id="qId" hidden>
                                         <b>
-                                              <input type="button" class="btn btn-primary" id="startTest" value="Start Test"/>
+                                            <input type="button" class="btn btn-primary" id="startTest"
+                                                   value="Start Test"/>
                                             <a id="startTest" href="{% url 'userquizz' i.pk %}">ProgressiveTest </a>
                                         </b>
                                         <input class="lesson_checkbox"

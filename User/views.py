@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-
+import datetime
+from datetime import timezone
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
@@ -102,19 +103,30 @@ def userCourseIntro(request,course_id):
     }
     return render(request,'userCourseIntro.html',context);
 
-def userCourseLesson(request,c_id):
-    print(c_id)
+def userCourseLesson(request, c_id):
+    current_time = datetime.datetime.now(timezone.utc)
     course = Course.objects.get(id=c_id)
     data = userProgress.objects.filter(userId_id=request.user.pk)
+    # data.delete()
     video =None;
     week = Week.objects.filter(week_id_id=course.pk)
     weekUnit =Week_Unit.objects.all()
+    status=None
     if request.method == 'POST':
         if 'start' in request.POST:
             week = request.POST['weekId']
-            data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True)
-            data.save()
-            return redirect('courseLesson')
+            if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=week).exists():
+                status = 1
+                print(status)
+            else:
+                current_time = datetime.datetime.now()
+                print(current_time)
+                end_date = current_time + datetime.timedelta(days=7)
+                print(end_date)
+
+                data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date)
+                data.save()
+            return redirect('courseLesson',c_id)
         if 'videoOne' in request.POST:
             key = request.POST['uniq']
             video = Week_Unit.objects.get(id =key)
@@ -127,13 +139,22 @@ def userCourseLesson(request,c_id):
             threeKey = request.POST['uniq']
             video = Week_Unit.objects.get(id=threeKey)
             video = video.unit_video3
+    remainingTime = 7
+    for i in week:
+        for d in data:
+            if(d.weekId_id == i.pk):
+                if(d.endTime):
+                    remainingTime = d.endTime - current_time
 
 
+    print(status)
     context ={
         'week':week,
         'weekUnits':weekUnit,
         'video':video,
         'data':data,
+        'status':status,
+        'remain':remainingTime
     }
     return render(request,'userCourseLesson.html',context)
 
@@ -653,43 +674,50 @@ def userQuizz(request,w_id):
 
 
 def userResult(request):
-    try:
-        time = request.POST['rough']
-        form=request.POST.getlist('inquiry')
-        correct=0
-        wrong=0
-        tempQues=[]
-        tempRes=[]
+    time =0
+    form = request.POST.getlist('inquiry')
 
-        for i in form:
-            if i in request.POST:
-                ques=request.POST[i]
-                tempQues.append(ques)
-                Ques=Quizz.objects.filter(id=i)
-                res=Ques[0].answer
-                tempRes.append(res)
-                if(res==ques):
-                    correct+=1
-                else:
-                    wrong+=1
+    correct = 0
+    wrong = 0
+    tempQues = []
+    tempRes = []
 
-        val=Result()
-        # obj = Question.objects.first()
-        # field_value = getattr(obj,'title')
-        # print ("************************************")
-        # print(field_value)
-        # print ("************************************")
-        val.result=[{'questions': form ,'user_answers':tempQues}]
-        val.score= str(correct) + '/' + str(20)
-        val.timetaken = str(time)
-        val.user_answer=[{'user_answers':tempQues, 'correct_answer':tempRes}]
-        val.auth_id=(request.user.id)
-        val.save()
-    except Exception as e:
-        messages.add_message(
-                request,
-                messages.INFO,
-                e
-            )
-        return redirect('/')
-    return render(request,'user_result.html')
+    for i in form:
+        if i in request.POST:
+            ques = request.POST[i]
+            tempQues.append(ques)
+            Ques = Quizz.objects.filter(id=i)
+            res = Ques[0].answer
+            tempRes.append(res)
+            if (res == ques):
+                correct += 1
+            else:
+                wrong += 1
+
+    val = Result()
+
+
+    # obj = Question.objects.first()
+    # field_value = getattr(obj,'title')
+    # print ("************************************")
+    # print(field_value)
+    # print ("************************************")
+    val.result = [{'questions': form, 'user_answers': tempQues}]
+
+    val.score = str(correct) + '/' + str(20)
+
+    # val.timetaken = str(time)
+    val.user_answer = [{'user_answers': tempQues, 'correct_answer': tempRes}]
+    val.auth_id = (request.user.id)
+    val.save()
+    print(val)
+    return redirect('userdashboard')
+
+    # except Exception as e:
+    #     messages.add_message(
+    #             request,
+    #             messages.INFO,
+    #             e
+    #         )
+    #     return redirect('/')
+
