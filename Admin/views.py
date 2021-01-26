@@ -32,7 +32,9 @@ def userLogin(request):
         user = authenticate(username=email, password=password)
         # Roles
         if user is not None:
+            print("hai")
             login(request, user)
+            print(user.is_superuser)
             if request.user.is_staff and request.user.is_superuser:
                 print('Welcome admin')
                 return redirect('admindashboard')
