@@ -725,4 +725,11 @@ def userResult(request):
 
 def pricing(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
+        cefPrice =12000
+        cfpPath = 1
+        if 'cSubmit' in request.POST:
+            workToken = request.POST['workToken']
+            print("hai")
+
+
         return render(request,'pricing.html')

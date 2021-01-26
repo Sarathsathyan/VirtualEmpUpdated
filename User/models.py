@@ -5,6 +5,7 @@ from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse)
 from CSM.models import Week_Unit,Week
 # Create your models here.
 
+
 # Career choice
 class CareerChoice(models.Model):
     user_id = models.ForeignKey(User,models.CASCADE,null=True)
@@ -80,3 +81,19 @@ class userProgress(models.Model):
 
 
 
+# Pricing section
+class userPricing(models.Model):
+    userId = models.ForeignKey(User,on_delete=models.CASCADE)
+    cfpCount = models.IntegerField()
+    workTokens = models.IntegerField()
+    mcCredits = models.IntegerField()
+
+
+class pricingSec(models.Model):
+    cef = models.IntegerField()
+    cfpPrice = models.IntegerField()
+    wToken = models.IntegerField()
+    mcCredits = models.IntegerField()
+
+    def __str__(self):
+        return self.cef

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}{% block title %}User-Profile{% endblock %}
 {% block content %}
- <div id="wrapper">
-   {% include 'userPartials/_header.html' %}
+    <div id="wrapper">
+        {% include 'userPartials/_header.html' %}
 
         <div id="searchbox">
 
@@ -12,7 +12,7 @@
                 <div class="search-input-container">
                     <div class="search-input-control">
                         <span class="icon-feather-x btn-close uk-animation-scale-up"
-                            uk-toggle="target: #searchbox; cls: is-active"></span>
+                              uk-toggle="target: #searchbox; cls: is-active"></span>
                         <div class=" uk-animation-slide-bottom">
                             <input type="text" name="search" autofocus required>
                             <p class="search-help">Type the name of the Course and book you are looking for</p>
@@ -24,509 +24,552 @@
 
         <!-- overlay seach on mobile-->
         <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
-            style="z-index: 10000;">
+             style="z-index: 10000;">
             <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
                 <form class="uk-search uk-search-navbar uk-width-1-1">
                     <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
                 </form>
             </div>
             <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
-                href="#"></a>
+               href="#"></a>
         </div>
-
 
 
         <div class="page-content">
 
-<style media="screen">
-  .page-content-inner1{
-    max-width: 1350px;
-      margin: auto;
-      padding: 30px;
-      padding-bottom: 0;
-      position: relative;
-  }
-</style>
-            <div class="page-content-inner" >
+            <style media="screen">
+                .page-content-inner1 {
+                    max-width: 1350px;
+                    margin: auto;
+                    padding: 30px;
+                    padding-bottom: 0;
+                    position: relative;
+                }
+            </style>
+            <div class="page-content-inner">
 
 
-                    <ul class="uk-subnav pricing-swicher  mb-3"
-                        uk-switcher="connect: #change-plan ;animation: uk-animation-slide-top-medium, uk-animation-scale-up">
-                        <li><a href="#">Bundles</a></li>
-                        <li><a href="#">Custom </a></li>
-                    </ul>
+                <ul class="uk-subnav pricing-swicher  mb-3"
+                    uk-switcher="connect: #change-plan ;animation: uk-animation-slide-top-medium, uk-animation-scale-up">
+                    <li><a href="#">Bundles</a></li>
+                    <li><a href="#">Custom </a></li>
+                </ul>
 
 
-                    <ul class="uk-switcher" id="change-plan">
+                <ul class="uk-switcher" id="change-plan">
 
-                      <!-- Plan -->
+                    <!-- Plan -->
                     <li>
 
-                    <!-- Pricing Plans Container -->
-                    <div class="">
-                      <div class="uk-grid uk-child-width-1-3@s">
+                        <!-- Pricing Plans Container -->
+                        <div class="">
+                            <div class="uk-grid uk-child-width-1-3@s">
 
 
-                            <div class="uk-card rounded  mt-1">
-                              <div class="pricing-plan text-center rounded bg-white ">
+                                <div class="uk-card rounded  mt-1">
+                                    <div class="pricing-plan text-center rounded bg-white ">
 
-                                  <h2 class="text-center">Personal</h2>
+                                        <h2 class="text-center">Personal</h2>
 
 
                                         <div class="pricing-plan-label billed-monthly-label">
-                                          <!-- <div class=" my-1">
-                                            <p class="text-muted" ><s>Rs. 30,000</s></p>
-                                          </div> -->
-                                          <div class="my-1">
-                                            <strong>Rs. 12,000</strong>
-                                          </div>
-                                          <!-- <div class="my-1">
-                                            <p class="text-success">Save Rs. 18,000</p>
-                                          </div> -->
+                                            <!-- <div class=" my-1">
+                                              <p class="text-muted" ><s>Rs. 30,000</s></p>
+                                            </div> -->
+                                            <div class="my-1">
+                                                <strong>Rs. 12,000</strong>
+                                            </div>
+                                            <!-- <div class="my-1">
+                                              <p class="text-success">Save Rs. 18,000</p>
+                                            </div> -->
                                         </div>
 
-                                  <div class="pricing-plan-features ">
+                                        <div class="pricing-plan-features ">
 
 
-                                      <ul class="text-center my-2">
-                                            <li><h6>Training Courses</h6></li>
-                                            <li><h6>Quizes</h6></li>
-                                            <li><h6>Live/Paid Project</h6></li>
-                                            <li><h6>Career Support</h6></li>
-                                            <li><h6>Experience Certificates</h6></li>
+                                            <ul class="text-center my-2">
+                                                <li><h6>Training Courses</h6></li>
+                                                <li><h6>Quizes</h6></li>
+                                                <li><h6>Live/Paid Project</h6></li>
+                                                <li><h6>Career Support</h6></li>
+                                                <li><h6>Experience Certificates</h6></li>
 
-                                      </ul>
-                                  </div>
-                                  <!-- <a href="pages-checkout-page.html" class="btns">Buy Now</a> -->
-                                  <div class="ml-4">
-                                    <button class="btn btn-default uk-width-expand" id="bb" name="button">Get Started</button>
-                                  </div>
+                                            </ul>
+                                        </div>
+                                        <!-- <a href="pages-checkout-page.html" class="btns">Buy Now</a> -->
+                                        <div class="ml-4">
+                                            <button class="btn btn-default uk-width-expand" id="bb" name="button">Get
+                                                Started
+                                            </button>
+                                        </div>
 
-                              </div>
-                            </div>
-
-
-
-
-                              <!-- Plan -->
-                              <div class="uk-card  rounded mt-1 ">
-                                <div class="pricing-plan rounded bg-white  ">
-
-                                    <h2 class="text-center">Professional</h2>
+                                    </div>
+                                </div>
 
 
+                                <!-- Plan -->
+                                <div class="uk-card  rounded mt-1 ">
+                                    <div class="pricing-plan rounded bg-white  ">
 
-                                          <div class="pricing-plan-label billed-monthly-label">
+                                        <h2 class="text-center">Professional</h2>
+
+
+                                        <div class="pricing-plan-label billed-monthly-label">
                                             <!-- <div class=" my-1">
                                               <p class="text-muted" ><s>Rs. 44,000</s></p>
                                             </div> -->
                                             <div class="my-1">
-                                              <strong>Rs. 18,000</strong>
+                                                <strong>Rs. 18,000</strong>
                                             </div>
                                             <!-- <div class="my-1">
                                               <p class="text-success">Save Rs. 26,000</p>
                                             </div> -->
-                                          </div>
-
-                                    <div class="pricing-plan-features uk-text-center ">
-
-                                        <ul class="text-center my-2">
-                                              <li><h6>Training Courses</h6></li>
-                                              <li><h6>Quizes</h6></li>
-                                              <li><h6>Live/Paid Project</h6></li>
-                                              <li><h6>Career Support</h6></li>
-                                              <li><h6>Experience Certificates</h6></li>
-
-                                        </ul>
-                                    </div>
-                                    <div class="ml-4">
-                                      <button class="btn btn-default uk-width-expand" id="bb" name="button">Get Started</button>
-                                    </div>
-
-                                </div>
-                              </div>
-
-
-
-
-                          <!-- Plan -->
-                          <div class="uk-card  rounded mt-1  ">
-                            <div class="pricing-plan rounded bg-white  ">
-                                <h2 class="text-center">Team & Startup</h2>
-
-
-
-                                      <div class="pricing-plan-label billed-monthly-label">
-                                        <!-- <div class=" my-1">
-                                          <p class="text-muted" ><s>Rs. 64,000</s></p>
-                                        </div> -->
-                                        <div class="my-1">
-                                          <strong>Rs. 24,600</strong>
                                         </div>
-                                        <!-- <div class="my-1">
-                                          <p class="text-success">Save Rs. 36,400</p>
-                                        </div> -->
-                                      </div>
 
-                                <div class="pricing-plan-features uk-text-center ">
+                                        <div class="pricing-plan-features uk-text-center ">
 
-                                    <ul class="text-center my-2">
-                                          <li><h6>Training Courses</h6></li>
-                                          <li><h6>Quizes</h6></li>
-                                          <li><h6>Live/Paid Project</h6></li>
-                                          <li><h6>Career Support</h6></li>
-                                          <li><h6>Experience Certificates</h6></li>
+                                            <ul class="text-center my-2">
+                                                <li><h6>Training Courses</h6></li>
+                                                <li><h6>Quizes</h6></li>
+                                                <li><h6>Live/Paid Project</h6></li>
+                                                <li><h6>Career Support</h6></li>
+                                                <li><h6>Experience Certificates</h6></li>
 
-                                    </ul>
+                                            </ul>
+                                        </div>
+                                        <div class="ml-4">
+                                            <button class="btn btn-default uk-width-expand" id="bb" name="button">Get
+                                                Started
+                                            </button>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="ml-4">
-                                  <button class="btn btn-default uk-width-expand" id="bb" name="button">Get Started</button>
-                                </div>
-
-                            </div>
-                          </div>
-                      </div>
-
-                  </li>
 
 
+                                <!-- Plan -->
+                                <div class="uk-card  rounded mt-1  ">
+                                    <div class="pricing-plan rounded bg-white  ">
+                                        <h2 class="text-center">Team & Startup</h2>
 
-                <li>
 
-                    <div class="">
-                      <div class="uk-grid">
-                        <div class="uk-width-2-3@s">
+                                        <div class="pricing-plan-label billed-monthly-label">
+                                            <!-- <div class=" my-1">
+                                              <p class="text-muted" ><s>Rs. 64,000</s></p>
+                                            </div> -->
+                                            <div class="my-1">
+                                                <strong>Rs. 24,600</strong>
+                                            </div>
+                                            <!-- <div class="my-1">
+                                              <p class="text-success">Save Rs. 36,400</p>
+                                            </div> -->
+                                        </div>
 
-                          <div class="uk-card uk-card-default uk-width-expand">
-                            <div class="uk-card-header rounded" style="background: #0e2a47;" >
-                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                        <div class="pricing-plan-features uk-text-center ">
 
-                                    <div class="uk-width-expand" >
-                                        <h4 class="uk-margin-remove-bottom text-white">Custom Pricing</h4>
+                                            <ul class="text-center my-2">
+                                                <li><h6>Training Courses</h6></li>
+                                                <li><h6>Quizes</h6></li>
+                                                <li><h6>Live/Paid Project</h6></li>
+                                                <li><h6>Career Support</h6></li>
+                                                <li><h6>Experience Certificates</h6></li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="ml-4">
+                                            <button class="btn btn-default uk-width-expand" id="bb" name="button">Get
+                                                Started
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="uk-card-body p-2 rounded">
+                    </li>
 
-                                <div class="p-2 m-2 rounded" style="background: #e3f8fd;">
-                                  <div class="uk-flex">
-                                    <div class="uk-width-1-4 mx-2">
 
-                                      <img src="{% static 'images/pricing/group.png' %}" alt="">
+                    <li>
 
-                                    </div>
+                        <div class="">
+                            <div class="uk-grid">
+                                <div class="uk-width-2-3@s">
+                                    <form method="post">{% csrf_token %}
+                                        <div class="uk-card uk-card-default uk-width-expand">
+                                            <div class="uk-card-header rounded" style="background: #0e2a47;">
+                                                <div class="uk-grid-small uk-flex-middle" uk-grid>
 
-                                    <div class="uk-width-expand mx-2">
-                                      <h2 class="py-0 mx-4 my-2"><b>VE Campus Enrollment Fees</b></h2>
-                                      <h6 class="mx-4"><b>We charge less and give more</b></h6>
+                                                    <div class="uk-width-expand">
+                                                        <h4 class="uk-margin-remove-bottom text-white">Custom
+                                                            Pricing</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                      <div class="uk-flex">
-                                        <div class="uk-width-3-4">
+                                            <div class="uk-card-body p-2 rounded">
+
+                                                <div class="p-2 m-2 rounded" style="background: #e3f8fd;">
+                                                    <div class="uk-flex">
+                                                        <div class="uk-width-1-4 mx-2">
+
+                                                            <img src="{% static 'images/pricing/group.png' %}" alt="">
+
+                                                        </div>
+
+                                                        <div class="uk-width-expand mx-2">
+                                                            <h2 class="py-0 mx-4 my-2"><b>VE Campus Enrollment Fees</b>
+                                                            </h2>
+                                                            <h6 class="mx-4"><b>We charge less and give more</b></h6>
+
+                                                            <div class="uk-flex">
+                                                                <div class="uk-width-3-4">
+
+                                                                </div>
+                                                                <div class="bg-white uk-width-expand text-center rounded p-0">
+                                                                    <h4 class="mt-2">Rs. 12,000</h4>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="p-2 m-2  rounded" style="background: #fdf2e3;">
+                                                    <div class="uk-flex">
+                                                        <div class="uk-width-1-4 mx-2">
+                                                            <img src="{% static 'images/pricing/media.png' %}" alt="">
+                                                        </div>
+
+                                                        <div class="uk-width-expand mx-2">
+                                                            <h2 class="py-0 my-2  mx-4"><b>Career Focus Path (CFP)</b>
+                                                            </h2>
+                                                            <h6 class=" mx-4"><b>Select your CFP Slots</b></h6>
+                                                            <div class=" uk-width-expand text-center rounded p-0">
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <button onclick="decrement();return false;" style="float: right">-
+                                                                        </button>
+
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <input id=demoInput type=number min=1 max=5 name="cfpCount"
+                                                                               readonly>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                         <button onclick="increment();return false;" style="float: left">+
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="p-2 m-2 rounded" style="background: #e3f8fd;">
+                                                    <div class="uk-flex">
+                                                        <div class="uk-width-1-4 mx-2">
+                                                            <img src="{% static 'images/pricing/work.png' %}" alt="">
+                                                        </div>
+
+                                                        <div class="uk-width-expand mx-2">
+                                                            <h2 class="py-0 my-2  mx-4"><b>Work Tokens</b></h2>
+                                                            <h6 class=" mx-4"><b>Work Tokens are used to enroll into VE
+                                                                real-time projects</b></h6>
+                                                            <div class="">
+
+
+                                                                <style media="screen">
+                                                                    .radiostyle {
+                                                                        background-color: #CCC;
+
+                                                                    }
+
+                                                                    .radiostyle:hover {
+                                                                        background-color: #6df7b5;
+                                                                        cursor: pointer;
+                                                                    }
+
+                                                                    input[type=radio] {
+                                                                        /* Or `#a1:checked+label` if you only want it for that input */
+                                                                        border-color: red;
+                                                                    }
+
+
+                                                                    input[type=radio]:checked + label {
+                                                                        /* Or `#a1:checked+label` if you only want it for that input */
+                                                                        background-color: #0F6;
+                                                                    }
+
+
+                                                                </style>
+
+
+
+
+
+                                                                    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match"
+                                                                         uk-grid>
+                                                                        <div>
+                                                                            <div class="uk-card  uk-card-body text-center rounded radiostyle">
+                                                                                <h1 class="display-4">5</h1>
+
+                                                                                <label><input class="uk-radio "
+                                                                                              type="radio"
+                                                                                              name="radio1" checked>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="uk-card  uk-card-body text-center  rounded radiostyle">
+                                                                                <h1 class="display-4">8</h1>
+
+                                                                                <label><input
+                                                                                        class="uk-radio radiostyle"
+                                                                                        type="radio" name="radio2">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="uk-card  uk-card-body text-center  rounded radiostyle">
+                                                                                <h1 class="display-4">15</h1>
+
+                                                                                <label><input
+                                                                                        class="uk-radio radiostyle"
+                                                                                        type="radio" name="radio3">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="p-2 m-2 rounded" style="background:#fdf2e3;">
+                                                    <div class="uk-flex">
+                                                        <div class="uk-width-1-4 mx-2">
+                                                            <img src="{% static 'images/pricing/learning.png' %}"
+                                                                 alt="">
+                                                        </div>
+
+                                                        <div class="uk-width-expand mx-2">
+                                                            <h2 class="py-0 my-2 mx-4"><b>Micro Course Credits</b></h2>
+                                                            <h6 class=" mx-4"><b>Micro Credits are used to purchase
+                                                                Micro
+                                                                Courses</b></h6>
+                                                            <div class="">
+                                                                <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match"
+                                                                     uk-grid>
+                                                                    <div>
+                                                                        <div class="uk-card uk-card-default  uk-card-body text-center rounded radiostyle">
+                                                                            <h1 class="display-4">5</h1>
+
+                                                                            <label><input class="uk-radio" type="radio"
+                                                                                          name="mcRadio1" checked>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="uk-card uk-card-default uk-card-body text-center radiostyle rounded">
+                                                                            <h1 class="display-4">8</h1>
+
+                                                                            <label><input class="uk-radio" type="radio"
+                                                                                          name="mcRadio2" checked>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="uk-card uk-card-default uk-card-body text-center radiostyle rounded">
+                                                                            <h1 class="display-4">15</h1>
+
+                                                                            <label><input class="uk-radio" type="radio"
+                                                                                          name="mcRadio3" checked>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <input type="submit" class=" ml-4 btn btn-default uk-width-expand"
+                                                       id="bb" name="cSubmit" value="Final submit">
+                                            </div>
+
 
                                         </div>
-                                        <div class="bg-white uk-width-expand text-center rounded p-0">
-                                          <h4 class="mt-2">Rs. 12,000</h4>
+                                    </form>
+                                </div>
+
+                                <div class="uk-width-expand">
+
+                                    <div class="bg-dark p-2 rounded">
+
+                                        <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
+                                            <div class="text-center">
+                                                <h2>Final Bill</h2>
+                                            </div>
+
                                         </div>
-                                      </div>
 
 
+                                        <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
+                                            <div class="uk-flex uk-flex-between">
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Enrollment Fees</b></h6>
+                                                </div>
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
+                                            <div class="uk-flex uk-flex-between">
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>CFP</b></h6>
+                                                </div>
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
+                                            <div class="uk-flex uk-flex-between">
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Work Tokens</b></h6>
+                                                </div>
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
+                                            <div class="uk-flex uk-flex-between">
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>MicroCourses</b></h6>
+                                                </div>
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
+                                            <div class="uk-flex uk-flex-between">
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Total</b></h6>
+                                                </div>
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="uk-width-expand my-1 p-2 rounded" style="background:#6df7b5;">
+
+                                            <div class="uk-flex uk-flex-between">
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>30% OFF</b></h6>
+                                                </div>
+                                                <div class="">
+                                                    <h6 class="py-0 my-0"><b>Rs 2000</b></h6>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                  </div>
+
+                                    <div class="uk-width-expand text-center my-2">
+                                        <div class="">
+                                            <button class=" ml-3 btn btn-default uk-width-expand" id="bb" type=""
+                                                    name="button">Checkout
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div class="p-2 m-2  rounded" style="background: #fdf2e3;">
-                                  <div class="uk-flex">
-                                    <div class="uk-width-1-4 mx-2">
-                                      <img src="{% static 'images/pricing/media.png' %}" alt="">
-                                    </div>
-
-                                    <div class="uk-width-expand mx-2">
-                                      <h2 class="py-0 my-2  mx-4"><b>Career Focus Path (CFP)</b></h2>
-                                      <h6 class=" mx-4"><b>Selcet your CFP Slots</b></h6>
-
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="p-2 m-2 rounded" style="background: #e3f8fd;">
-                                  <div class="uk-flex">
-                                    <div class="uk-width-1-4 mx-2">
-                                      <img src="{% static 'images/pricing/work.png' %}" alt="">
-                                    </div>
-
-                                    <div class="uk-width-expand mx-2">
-                                      <h2 class="py-0 my-2  mx-4" ><b>Work Tokens</b></h2>
-                                      <h6 class=" mx-4"><b>Work Tokens are used to enroll into VE real-time projects</b></h6>
-                                      <div class="">
-
-
-<style media="screen">
-  .radiostyle{
-    background-color: #CCC;
-
-}
-
-.radiostyle:hover{
-    background-color:  #6df7b5;
-    cursor:pointer;
-}
-
-input[type=radio] {
-    /* Or `#a1:checked+label` if you only want it for that input */
-    border-color: red;
-}
-
-
-input[type=radio]:checked+label {
-    /* Or `#a1:checked+label` if you only want it for that input */
-    background-color: #0F6;
-}
-
-
-</style>
-
-
-                                <form>
-
-
-                                        <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
-                                              <div>
-                                                  <div class="uk-card  uk-card-body text-center rounded radiostyle">
-                                                      <h1 class="display-4">5</h1>
-
-                                                      <label><input class="uk-radio " type="radio" name="radio2" checked> </label>
-                                                  </div>
-                                              </div>
-                                              <div>
-                                                  <div class="uk-card  uk-card-body text-center  rounded radiostyle">
-                                                    <h1 class="display-4">8</h1>
-                                                    
-                                                    <label><input class="uk-radio radiostyle" type="radio" name="radio2"> </label>
-                                                  </div>
-                                              </div>
-                                              <div>
-                                                  <div class="uk-card  uk-card-body text-center  rounded radiostyle">
-                                                      <h1 class="display-4">15</h1>
-                                                      
-                                                      <label><input class="uk-radio radiostyle" type="radio" name="radio2"> </label>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                        </form>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="p-2 m-2 rounded" style="background:#fdf2e3;">
-                                  <div class="uk-flex">
-                                    <div class="uk-width-1-4 mx-2">
-                                      <img src="{% static 'images/pricing/learning.png' %}" alt="">
-                                    </div>
-
-                                    <div class="uk-width-expand mx-2">
-                                      <h2 class="py-0 my-2 mx-4"><b>Micro Course Credits</b></h2>
-                                      <h6 class=" mx-4"><b>Micro Credits are used to purchase Micro Courses</b></h6>
-                                      <div class="">
-                                        <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
-                                              <div>
-                                                  <div class="uk-card uk-card-default  uk-card-body text-center rounded radiostyle" >
-                                                      <h1 class="display-4">5</h1>
-
-                                                      <label><input class="uk-radio" type="radio" name="radio1" checked> </label>
-                                                  </div>
-                                              </div>
-                                              <div>
-                                                  <div class="uk-card uk-card-default uk-card-body text-center radiostyle rounded">
-                                                    <h1 class="display-4">8</h1>
-                                                    
-                                                    <label><input class="uk-radio" type="radio" name="radio1" checked> </label>
-                                                  </div>
-                                              </div>
-                                              <div>
-                                                  <div class="uk-card uk-card-default uk-card-body text-center radiostyle rounded">
-                                                      <h1 class="display-4">15</h1>
-                                                      
-                                                      <label><input class="uk-radio" type="radio" name="radio1" checked> </label>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                    </div>
-                                  </div>
-                                </div>
                             </div>
 
+                    </li>
+
+                </ul>
 
 
-                          </div>
-
-                        </div>
-
-                        <div class="uk-width-expand">
-
-                            <div class="bg-dark p-2 rounded" >
-
-                              <div class="uk-width-expand my-1 p-2 rounded" style="background:white;" >
-                                <div class="text-center">
-                                  <h2>Final Bill</h2>
-                                </div>
-
-                              </div>
-
-
-                              <div class="uk-width-expand my-1 p-2 rounded" style="background:white;" >
-                                <div class="uk-flex uk-flex-between">
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>Enrollment Fees</b></h6>
-                                  </div>
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
-                                  </div>
-                                </div>
-
-                              </div>
-                              <div class="uk-width-expand my-1 p-2 rounded" style="background:white;" >
-                                <div class="uk-flex uk-flex-between">
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>CFP</b></h6>
-                                  </div>
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
-                                  </div>
-                                </div>
-
-                              </div>
-                              <div class="uk-width-expand my-1 p-2 rounded" style="background:white;" >
-                                <div class="uk-flex uk-flex-between">
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>Work Tokens</b></h6>
-                                  </div>
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
-                                  </div>
-                                </div>
-
-                              </div>
-                              <div class="uk-width-expand my-1 p-2 rounded" style="background:white;" >
-                                <div class="uk-flex uk-flex-between">
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>MicroCourses</b></h6>
-                                  </div>
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
-                                  </div>
-                                </div>
-
-                              </div>
-
-                              <div class="uk-width-expand my-1 p-2 rounded" style="background:white;" >
-                                <div class="uk-flex uk-flex-between">
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>Total</b></h6>
-                                  </div>
-                                  <div class="">
-                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
-                                  </div>
-                                </div>
-
-                              </div>
-
-                              <div class="uk-width-expand my-1 p-2 rounded" style="background:#6df7b5;" >
-
-                                  <div class="uk-flex uk-flex-between">
-                                    <div class="">
-                                        <h6 class="py-0 my-0"><b>30% OFF</b></h6>
-                                    </div>
-                                    <div class="">
-                                        <h6 class="py-0 my-0"><b>Rs 2000</b></h6>
-                                    </div>
-
-                                  </div>
-                              </div>
-                        </div>
-
-                        <div  class="uk-width-expand text-center my-2">
-                          <div class="">
-                            <button class=" ml-3 btn btn-default uk-width-expand"id="bb" type="" name="button">Checkout</button>
-                          </div>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-              </li>
-
-          </ul>
-
+            </div>
 
         </div>
 
-      </div>
+
+        <div class="container">
 
 
+            <div class="section">
+                <div class="text-center mb-lg-5 pb-2 delimiter-bottom">
 
-
-                <div class="container">
-
-
-                    <div class="section">
-                        <div class="text-center mb-lg-5 pb-2 delimiter-bottom">
-
-                            <h2 class="mt-3">Frequently asked question :</h2>
-                        </div>
-
-                        <div class="uk-child-width-1-2@s" uk-grid>
-
-                            <div>
-                                <h4>How to get started with Courseplus?</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                            </div>
-
-                            <div>
-                                <h4>Can I cancel my subscription?</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam ut laoreet dolore
-                                    magna
-                                    aliquam erat volutpat.</p>
-                            </div>
-
-                            <div>
-                                <h4>How can I create new course?</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                            </div>
-
-                            <div>
-                                <h4>Can I cancel at anytime?</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                            </div>
-
-                            <div>
-                                <h4>How to Choose a plan first?</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetue aoreet dolore magna aliquam erat volutpat.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
+                    <h2 class="mt-3">Frequently asked question :</h2>
                 </div>
 
+                <div class="uk-child-width-1-2@s" uk-grid>
 
+                    <div>
+                        <h4>How to get started with Courseplus?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                            euismod
+                            tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    </div>
 
-                {% include 'partials/_footer.html' %}
+                    <div>
+                        <h4>Can I cancel my subscription?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam ut laoreet dolore
+                            magna
+                            aliquam erat volutpat.</p>
+                    </div>
+
+                    <div>
+                        <h4>How can I create new course?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                            euismod
+                            tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    </div>
+
+                    <div>
+                        <h4>Can I cancel at anytime?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                            euismod
+                            tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    </div>
+
+                    <div>
+                        <h4>How to Choose a plan first?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetue aoreet dolore magna aliquam erat volutpat.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
 
- </div>
+
+        {% include 'partials/_footer.html' %}
+
+    </div>
+
+    </div>
     <!-- For Night mode -->
     <script>
         (function (window, document, undefined) {
@@ -562,6 +605,15 @@ input[type=radio]:checked+label {
             }, false);
 
         })(window, document);
+    </script>
+    <script>
+        function increment() {
+            document.getElementById('demoInput').stepUp();
+        }
+
+        function decrement() {
+            document.getElementById('demoInput').stepDown();
+        }
     </script>
 
 {% endblock %}
