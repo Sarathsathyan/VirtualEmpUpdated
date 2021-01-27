@@ -14,49 +14,52 @@ from CSM.models import Quizz,Result
 # CSM
 
 def userCfp(request):
-    user = request.user
-    details = UserDetails.objects.get(user_id_id=user.pk)
-    sub_cats = None
-    s_courses = None
-    data = None
-    s_data = None
-    c_data = None
-    if request.method == 'POST':
-        if 'first-category' in request.POST:
-            category_id = request.POST['first-category']
-            data = CareerCategory.objects.get(id=category_id)
-            sub_cats = SubCategory.objects.filter(cat_id_id=data.pk)
-        if 'first-sub' in request.POST:
-            sub = request.POST['first-sub']
-            s_data = SubCategory.objects.get(sub_category=sub)
-            s_courses = CategoryCourse.objects.filter(sub_id_id=s_data.pk)
-        if 'course' in request.POST:
-            c_course = request.POST['course']
-            c_data = CategoryCourse.objects.get(cfp=c_course)
-        if 'confirm_submit' in request.POST:
-            m_cat = request.POST['confirm_first_category']
-            m_sub = request.POST['confirm_first_role']
-            m_cfp = request.POST['confirm_first_cfp']
-            data1 = CareerCategory.objects.get(category=m_cat)
-            data2 = SubCategory.objects.get(sub_category=m_sub)
-            data3 = CategoryCourse.objects.get(cfp=m_cfp)
-            data = CareerChoice(cat_id_id=data1.pk, sub_id_id=data2.pk, cfp_id_id=data3.pk, user_id_id=user.pk)
-            data.save()
-            messages.success(request, "CFP choosed")
-            details.user_cfp = True;
-            details.save()
-            return redirect('userdashboard')
-    career_list = CareerCategory.objects.all()
+    if request.user.is_active:
+        user = request.user
+        details = UserDetails.objects.get(user_id_id=user.pk)
+        sub_cats = None
+        s_courses = None
+        data = None
+        s_data = None
+        c_data = None
+        if request.method == 'POST':
+            if 'first-category' in request.POST:
+                category_id = request.POST['first-category']
+                data = CareerCategory.objects.get(id=category_id)
+                sub_cats = SubCategory.objects.filter(cat_id_id=data.pk)
+            if 'first-sub' in request.POST:
+                sub = request.POST['first-sub']
+                s_data = SubCategory.objects.get(sub_category=sub)
+                s_courses = CategoryCourse.objects.filter(sub_id_id=s_data.pk)
+            if 'course' in request.POST:
+                c_course = request.POST['course']
+                c_data = CategoryCourse.objects.get(cfp=c_course)
+            if 'confirm_submit' in request.POST:
+                m_cat = request.POST['confirm_first_category']
+                m_sub = request.POST['confirm_first_role']
+                m_cfp = request.POST['confirm_first_cfp']
+                data1 = CareerCategory.objects.get(category=m_cat)
+                data2 = SubCategory.objects.get(sub_category=m_sub)
+                data3 = CategoryCourse.objects.get(cfp=m_cfp)
+                data = CareerChoice(cat_id_id=data1.pk, sub_id_id=data2.pk, cfp_id_id=data3.pk, user_id_id=user.pk)
+                data.save()
+                messages.success(request, "CFP choosed")
+                details.user_cfp = True;
+                details.save()
+                return redirect('userdashboard')
+        career_list = CareerCategory.objects.all()
 
-    context = {
-        'career_list': career_list,
-        'sub_cats': sub_cats,
-        's_courses': s_courses,
-        'data': data,
-        's_data': s_data,
-        'c_data': c_data
-    }
-    return render(request, 'userCFP.html', context)
+        context = {
+            'career_list': career_list,
+            'sub_cats': sub_cats,
+            's_courses': s_courses,
+            'data': data,
+            's_data': s_data,
+            'c_data': c_data
+        }
+        return render(request, 'userCFP.html', context)
+    else:
+        return redirect('login')
 
 def userDashboard(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
@@ -94,69 +97,76 @@ def userDashboard(request):
         return render(request,'userDashboard.html',context)
     else:
         print("Wrong url")
+        return redirect('login')
 
 # user course
 def userCourseIntro(request,course_id):
-    print(course_id)
-    context ={
-        'course_id':course_id
-    }
-    return render(request,'userCourseIntro.html',context);
+    if request.user.is_active:
+        print(course_id)
+        context ={
+            'course_id':course_id
+        }
+        return render(request,'userCourseIntro.html',context);
+    else:
+        return redirect('login')
 
 def userCourseLesson(request, c_id):
-    current_time = datetime.datetime.now(timezone.utc)
-    course = Course.objects.get(id=c_id)
-    data = userProgress.objects.filter(userId_id=request.user.pk)
-    # data.delete()
-    video =None;
-    week = Week.objects.filter(week_id_id=course.pk)
-    weekUnit =Week_Unit.objects.all()
-    status=None
-    if request.method == 'POST':
-        if 'start' in request.POST:
-            week = request.POST['weekId']
-            if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=week).exists():
-                status = 1
-                print(status)
-            else:
-                current_time = datetime.datetime.now()
-                print(current_time)
-                end_date = current_time + datetime.timedelta(days=7)
-                print(end_date)
+    if request.user.is_active:
+        current_time = datetime.datetime.now(timezone.utc)
+        course = Course.objects.get(id=c_id)
+        data = userProgress.objects.filter(userId_id=request.user.pk)
+        # data.delete()
+        video =None;
+        week = Week.objects.filter(week_id_id=course.pk)
+        weekUnit =Week_Unit.objects.all()
+        status=None
+        if request.method == 'POST':
+            if 'start' in request.POST:
+                week = request.POST['weekId']
+                if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=week).exists():
+                    status = 1
+                    print(status)
+                else:
+                    current_time = datetime.datetime.now()
+                    print(current_time)
+                    end_date = current_time + datetime.timedelta(days=7)
+                    print(end_date)
 
-                data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date)
-                data.save()
-            return redirect('courseLesson',c_id)
-        if 'videoOne' in request.POST:
-            key = request.POST['uniq']
-            video = Week_Unit.objects.get(id =key)
-            video = video.unit_video1
-        if 'videoTwo' in request.POST:
-            twoKey = request.POST['uniq']
-            video = Week_Unit.objects.get(id=twoKey)
-            video = video.unit_video2
-        if 'videoThree' in request.POST:
-            threeKey = request.POST['uniq']
-            video = Week_Unit.objects.get(id=threeKey)
-            video = video.unit_video3
-    remainingTime = 7
-    for i in week:
-        for d in data:
-            if(d.weekId_id == i.pk):
-                if(d.endTime):
-                    remainingTime = d.endTime - current_time
+                    data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date)
+                    data.save()
+                return redirect('courseLesson',c_id)
+            if 'videoOne' in request.POST:
+                key = request.POST['uniq']
+                video = Week_Unit.objects.get(id =key)
+                video = video.unit_video1
+            if 'videoTwo' in request.POST:
+                twoKey = request.POST['uniq']
+                video = Week_Unit.objects.get(id=twoKey)
+                video = video.unit_video2
+            if 'videoThree' in request.POST:
+                threeKey = request.POST['uniq']
+                video = Week_Unit.objects.get(id=threeKey)
+                video = video.unit_video3
+        remainingTime = 7
+        for i in week:
+            for d in data:
+                if(d.weekId_id == i.pk):
+                    if(d.endTime):
+                        remainingTime = d.endTime - current_time
 
 
-    print(status)
-    context ={
-        'week':week,
-        'weekUnits':weekUnit,
-        'video':video,
-        'data':data,
-        'status':status,
-        'remain':remainingTime
-    }
-    return render(request,'userCourseLesson.html',context)
+        print(status)
+        context ={
+            'week':week,
+            'weekUnits':weekUnit,
+            'video':video,
+            'data':data,
+            'status':status,
+            'remain':remainingTime
+        }
+        return render(request,'userCourseLesson.html',context)
+    else:
+        return redirect('login')
 
 def userprofile(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
@@ -663,63 +673,69 @@ def userProfileEdit(request):
 
 
 def userQuizz(request,w_id):
-    week = Week.objects.get(id = w_id);
-    course = Course.objects.get(id = week.week_id_id)
-    data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
+    if request.user.is_active:
+        week = Week.objects.get(id = w_id);
+        course = Course.objects.get(id = week.week_id_id)
+        data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
 
-    context={
-        'questions' : data
-    }
-    return render(request,'userQuizz.html',context)
+        context={
+            'questions' : data
+        }
+        return render(request,'userQuizz.html',context)
+    else:
+        return redirect('login')
 
 
 def userResult(request):
-    time =0
-    form = request.POST.getlist('inquiry')
+    if request.user.is_active:
+        time =0
+        form = request.POST.getlist('inquiry')
 
-    correct = 0
-    wrong = 0
-    tempQues = []
-    tempRes = []
+        correct = 0
+        wrong = 0
+        tempQues = []
+        tempRes = []
 
-    for i in form:
-        if i in request.POST:
-            ques = request.POST[i]
-            tempQues.append(ques)
-            Ques = Quizz.objects.filter(id=i)
-            res = Ques[0].answer
-            tempRes.append(res)
-            if (res == ques):
-                correct += 1
-            else:
-                wrong += 1
+        for i in form:
+            if i in request.POST:
+                ques = request.POST[i]
+                tempQues.append(ques)
+                Ques = Quizz.objects.filter(id=i)
+                res = Ques[0].answer
+                tempRes.append(res)
+                if (res == ques):
+                    correct += 1
+                else:
+                    wrong += 1
 
-    val = Result()
+        val = Result()
 
 
-    # obj = Question.objects.first()
-    # field_value = getattr(obj,'title')
-    # print ("************************************")
-    # print(field_value)
-    # print ("************************************")
-    val.result = [{'questions': form, 'user_answers': tempQues}]
+        # obj = Question.objects.first()
+        # field_value = getattr(obj,'title')
+        # print ("************************************")
+        # print(field_value)
+        # print ("************************************")
+        val.result = [{'questions': form, 'user_answers': tempQues}]
 
-    val.score = str(correct) + '/' + str(20)
+        val.score = str(correct) + '/' + str(20)
 
-    # val.timetaken = str(time)
-    val.user_answer = [{'user_answers': tempQues, 'correct_answer': tempRes}]
-    val.auth_id = (request.user.id)
-    val.save()
-    print(val)
-    return redirect('userdashboard')
+        # val.timetaken = str(time)
+        val.user_answer = [{'user_answers': tempQues, 'correct_answer': tempRes}]
+        val.auth_id = (request.user.id)
+        val.save()
+        print(val)
+        return redirect('userdashboard')
 
-    # except Exception as e:
-    #     messages.add_message(
-    #             request,
-    #             messages.INFO,
-    #             e
-    #         )
-    #     return redirect('/')
+        # except Exception as e:
+        #     messages.add_message(
+        #             request,
+        #             messages.INFO,
+        #             e
+        #         )
+        #     return redirect('/')
+    else:
+        return redirect('login')
 
 
 
@@ -733,3 +749,5 @@ def pricing(request):
 
 
         return render(request,'pricing.html')
+    else:
+        return redirect('login')        
