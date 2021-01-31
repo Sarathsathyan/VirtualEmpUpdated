@@ -46,7 +46,8 @@ def userCfp(request):
                 messages.success(request, "CFP choosed")
                 details.user_cfp = True;
                 details.save()
-                return redirect('userdashboard')
+                #return redirect('userdashboard')
+                return redirect('userprofileedit')
         career_list = CareerCategory.objects.all()
 
         context = {

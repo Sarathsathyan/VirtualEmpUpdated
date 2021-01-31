@@ -41,24 +41,36 @@ class RoleDetail(models.Model):
 class CareerCategory(models.Model):
     category_id=models.IntegerField(default=0)
     category=models.CharField(max_length=255)
-
+    
     def __str__(self):
         return self.category
+    """
+    def __str__(self):
+        return f"pk: {self.pk} category_id: {self.category_id}: {self.category}"
+    """
 class SubCategory(models.Model):
     cat_id=models.ForeignKey(CareerCategory,on_delete=models.CASCADE)
     sub_category=models.CharField(max_length=255)
     create_date=models.DateTimeField(default=datetime.now)
-
+    
     def __str__(self):
         return self.sub_category
+    """
+    def __str__(self):
+        return f"pk: {self.pk}, cat_id: {self.cat_id}, sub_category: {self.sub_category}, create_date: {self.create_date}"
+    """
+
 class CategoryCourse(models.Model):
     cat_id = models.ForeignKey(CareerCategory,on_delete=models.CASCADE)
     sub_id = models.ForeignKey(SubCategory,on_delete=models.CASCADE)
     cfp = models.CharField(max_length=200)
-
+    
     def __str__(self):
         return self.cfp
-
+    """
+    def __str__(self):
+        return f"pk: {self.pk}, cat_id: {self.cat_id}, sub_id: {self.sub_id}, cfp: {self.cfp}"
+    """
 
 class AdminLicense(models.Model):
     key = models.CharField(max_length=100)

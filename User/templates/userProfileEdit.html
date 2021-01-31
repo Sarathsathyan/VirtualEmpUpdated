@@ -955,7 +955,7 @@
                                   {% for i in tech_skills %}
                                   <div class="uk-flex uk-flex-between ">
                                     <p class="my-1 ">&bull; &nbsp; {{i.skill}}</p>
-                                    <form class="tech" name="tech" method="POST">
+                                    <form class="tech" name="tech" method="POST" >
                                       {% csrf_token %}
                                       <input type="text" name="type" value="{{i.category}}" hidden>
                                       <input type="text" name="skill1" value="{{i.skill}}" hidden>
