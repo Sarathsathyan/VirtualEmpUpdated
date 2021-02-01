@@ -55,7 +55,12 @@
                           </div>
                           <div class="">
                               <img src="{% static 'images/money.png' %}" style="height:30px;" alt="">
-                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">10</span>
+                              {% if licenseInfo %}
+                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">{{ licenseInfo.u_wt }}</span>
+                              {% else %}
+                               <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">0</span>
+                              {% endif %}
+
                           </div>
                         </div>
 
@@ -67,7 +72,12 @@
                           <div class="">
 
                               <img src="{% static 'images/token.png' %}" style="height:30px;" alt="">
-                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">10</span>
+                              {% if licenseInfo %}
+                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">{{ licenseInfo.u_mCredits }}</span>
+                              {% else %}
+
+                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">0</span>
+                              {% endif %}
                           </div>
                         </div>
 

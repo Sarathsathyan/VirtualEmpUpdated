@@ -97,13 +97,15 @@ def userLogin(request):
 
 
 def activatecode(request):
+
     user_id = request.user.pk
     license = AdminLicense.objects.all()
     try:
-        user = UserDetails.objects.get(user_id=user_id)
+        user = UserDetails.objects.get(user_id_id=user_id)
         print(user.user_license)
     except:
         print("Error")
+        user=None
         messages.success(request, "Some error occured")
     if request.method == "POST":
         license_key = request.POST['license']
@@ -115,7 +117,7 @@ def activatecode(request):
                     messages.error(request, "Key is already applied")
                     return redirect('register')
                 else:
-                    used_key = UsedLicense(u_key=key.key)
+                    used_key = UsedLicense(u_key=key.key,u_cfp=key.numberCfp,u_mCredits=key.mcCredits,u_wt=key.workTokens,user_id_id=user_id)
                     used_key.save()
                     user.user_license = license_key
 

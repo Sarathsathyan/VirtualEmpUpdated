@@ -5,7 +5,7 @@ from datetime import timezone
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
-from Admin.models import CareerCategory,SubCategory,CategoryCourse
+from Admin.models import CareerCategory,SubCategory,CategoryCourse,UsedLicense
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
 from CSM.models import Quizz,Result
 from CSM.models import Quizz,Result
@@ -15,6 +15,10 @@ from CSM.models import Quizz,Result
 
 def userCfp(request):
     user = request.user
+    try:
+        licenseInfo = UsedLicense.objects.get(user_id_id=user.pk)
+    except:
+        licenseInfo = None
     details = UserDetails.objects.get(user_id_id=user.pk)
     sub_cats = None
     s_courses = None
@@ -54,7 +58,8 @@ def userCfp(request):
         's_courses': s_courses,
         'data': data,
         's_data': s_data,
-        'c_data': c_data
+        'c_data': c_data,
+        'licenseInfo':licenseInfo,
     }
     return render(request, 'userCFP.html', context)
 

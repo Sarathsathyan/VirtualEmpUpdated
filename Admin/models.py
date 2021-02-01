@@ -72,7 +72,11 @@ class AdminLicense(models.Model):
 
 
 class UsedLicense(models.Model):
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     u_key = models.CharField(max_length=100)
+    u_wt = models.CharField(max_length=100,null=True)
+    u_cfp = models.CharField(max_length=100,null=True)
+    u_mCredits = models.CharField(max_length=100,null=True)
 
     u_date = models.DateTimeField(default=datetime.now,null=True)
 
