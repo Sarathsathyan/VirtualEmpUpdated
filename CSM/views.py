@@ -1,5 +1,5 @@
 import random
-
+import re
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from .models import Course,CreateCourse,Week_Unit,Week,Quizz
@@ -12,9 +12,20 @@ def csmDashboard(request):
             if 'courseDelete' in request.POST:
                 print("Delete Course")
                 c_id = request.POST['del_id']
+                
+                c_id=int(c_id[4:])
+                print("c_id is ",c_id)
+                
                 try:
-                    course_del = Course.objects.get(id=c_id).delete()
+
+                    course_object=Course.objects.get(id=c_id)
+                    cat_id=course_object.category.id
+                    #print(cat_id)
+                    createcourse_del=CreateCourse.objects.get(id=cat_id).delete()
+                    #course_del = Course.objects.get(id=c_id).delete()
+                    course_del = course_object.delete()
                     messages.success(request, "Deleted successfully")
+                   
                 except:
                     messages.error(request, "Some error occured")
 
@@ -42,26 +53,43 @@ def chooseType(request):
     if request.method == 'POST':
         if 'category' in request.POST:
             category_id = request.POST['category']
+            print(category_id)
             data = CareerCategory.objects.get(category=category_id)
-            sub_cats = SubCategory.objects.filter(cat_id_id=data.pk)
+            print(data)
+            print(data.pk)
+            #sub_cats = SubCategory.objects.filter(cat_id_id=data.pk)
+            #print(sub_cats = SubCategory.objects.filter(cat_id_id=data.pk))
+            sub_cats = SubCategory.objects.filter(cat_id=data.pk)
+            print(sub_cats)
         if 'first-sub' in request.POST:
             sub = request.POST['first-sub']
+            #print(sub)
             s_data = SubCategory.objects.get(sub_category=sub)
+            #print(s_data)
             s_courses = CategoryCourse.objects.filter(sub_id_id=s_data.pk)
+            #print(s_courses)
         if 'course' in request.POST:
             c_course = request.POST['course']
+            #print(c_course)
             c_data = CategoryCourse.objects.get(cfp=c_course)
+            #print(c_data)
         if 'course-submit' in request.POST:
             m_cat = request.POST['confirm_first_category']
+            #print("m_cat: ", m_cat)
             m_sub = request.POST['confirm_first_role']
+            #print("m_sub: ", m_sub)
             m_cfp = request.POST['course']
-            print(m_cfp)
+            #print(m_cfp)
             data1 = CareerCategory.objects.get(category=m_cat)
+            #print("data1: ",data1)
             data2 = SubCategory.objects.get(sub_category=m_sub)
+            #print("data2: ", data2)
             data3 = CategoryCourse.objects.get(cfp=m_cfp)
+            #print("data3: ",data3)
             datas = CreateCourse(create_user_id=request.user.pk,create_category=data1.category,create_sub=data2.sub_category,
                                  create_course=data3.cfp)
             datas.save()
+            #print("datas: ",datas)
             messages.success(request, "Course Successfully Created Check Database")
             return redirect('csmAddCourse',datas.pk)
     cag_data = CareerCategory.objects.all()
@@ -122,7 +150,63 @@ def csmAddCourse(request,cat_id):
         }
         return render(request,'csm_add_course.html',context)
 
+def csmEdit(request, course_id):
+    if request.user.is_active:
+        course_object=Course.objects.filter(user=request.user)
+        Course_name = course_object.get(id=course_id)
+        inst=RoleDetail.objects.all()
+        if request.method=="POST":
+            Course_name.title = request.POST["title"]
+            Course_name.instructor = request.POST["instructor_name"]
+            Course_name.tagline = request.POST["tagline"]
+            Course_name.short_description = request.POST["description"]
+            Course_name.meta_keywords = request.POST["meta_keywords"]
+            Course_name.meta_description = request.POST["meta_description"]
+            image_file= request.FILES.get('course_image')
+            print("image_file",image_file)
+            Course_name.difficulty_level = request.POST["difficulty_level"]
+            Course_name.course_points = request.POST["course_points"]
+            if  image_file:
+                Course_name.course_image =image_file
+            else:
+                if not Course_name.course_image:
+                    message="Please! Select Image"
+                    return redirect("csmEdit",course_id)
+                    #return render(request,'csm_edit_course.html',{"message":message})
 
+
+            Course_name.difficulty_level = request.POST["difficulty_level"]
+            
+            Course_name.requirements = request.POST["req"]
+            Course_name.learnings = request.POST["learn"]
+            
+            Course_name.save()
+            inst=RoleDetail.objects.all()
+            messages.success(request, "Course Edited Successfully!")
+            return redirect("csmdashboard")
+        f_req, s_req, l_req =re.split("_",Course_name.requirements)
+        print("first ",f_req)
+        print("second ",s_req)
+        print("third ",l_req)
+        f_learn, s_learn, l_learn =re.split("_",Course_name.learnings)
+        first=Course_name.requirements
+        print(first)
+        context={
+            'data': Course_name,
+            'inst': inst,
+            'f_req':f_req, 
+            's_req':s_req, 
+            'l_req':l_req,
+            'f_learn':f_learn, 
+            's_learn':s_learn, 
+            'l_learn':l_learn
+        }
+        print(Course_name)
+        print(Course_name.category.create_category)
+        return render(request,'csm_edit_course.html', context)
+    else:
+        return render("login")
+        
 def csmAddCurriculam(request,curr_id):
     if request.user.is_active:
 
@@ -236,3 +320,4 @@ def csmDeleteQues(request,delId,w_id):
     messages.success(request,
                      "Question deleted")
     return redirect('csmAddQuizz',w_id)
+

@@ -157,3 +157,5 @@ EMAIL_USE_TLS=True
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DATA_UPLOAD_MAX_MEMORY_SIZE=5242880

@@ -86,7 +86,7 @@ CSM Page
                                         <td>{{course.title}}</td>
                                         <td>{{course.category}}</td>
 {#                                        <td>{{course.created}}</td>#}
-                                        <td><a class="uk-button-dark btn btn-dark" href="#" type="button" name="Remove">Edit</a></td>
+                                        <td><a class="uk-button-dark btn btn-dark" href="{% url 'csmEdit' course.pk %}" type="button" name="Edit">Edit</a></td>
 
                                         <td><a class="uk-button-success btn btn-success" href="{% url 'csmAddCurriculam' course.pk %}">Add Curriculum</a></td>
 {#                                        <td><button class="uk-button-red btn btn-alert" type="button" name="Remove">Add Quiz</button></td>#}
