@@ -363,7 +363,7 @@
                             <div class="con">
 
                                 <a href="{% url 'courseIntro' course.pk %}">
-                                  {% if course_image %}
+                                  {% if course.course_image %}
                                     <img src="{{ course.course_image.url }}"  style="height: 400px">
                                   {% else %}
                                     <img src="" alt="">

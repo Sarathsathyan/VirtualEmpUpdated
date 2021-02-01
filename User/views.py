@@ -5,7 +5,7 @@ from datetime import timezone
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
-from Admin.models import CareerCategory,SubCategory,CategoryCourse
+from Admin.models import CareerCategory,SubCategory,CategoryCourse,UsedLicense
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
 from CSM.models import Quizz,Result
 from CSM.models import Quizz,Result
