@@ -327,7 +327,7 @@ def userProfileEdit(request):
                     data.user_bio=bio
                     data.save()
                     messages.success(request,"Updated Contact Info")
-                    return redirect('userprofileEdit')
+                    return redirect('userprofileedit')
 
                 else:
                     address1 = request.POST['address1']
@@ -360,7 +360,7 @@ def userProfileEdit(request):
                         messages.success(request, "Profile pic added")
                 except:
                     messages.error(request,"Complete your contact info to change Pic")
-                    return redirect("userprofileEdit")
+                    return redirect("userProfileEdit")
 
 
             if 'skill' in request.POST:
