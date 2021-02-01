@@ -67,11 +67,11 @@ def userDashboard(request):
         user = request.user
         user_details = UserDetails.objects.get(user_id_id=user.pk)
 
-        allData = CareerChoice.objects.get(user_id_id=user.pk)
+        # allData = CareerChoice.objects.get(user_id_id=user.pk)
 
-        category = allData.cat_id
-        sub = allData.sub_id
-        cour = allData.cfp_id
+        # category = allData.cat_id
+        # sub = allData.sub_id
+        # cour = allData.cfp_id
         if CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=cour):
             createCourse = CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=cour)
         else:
@@ -104,8 +104,11 @@ def userDashboard(request):
 def userCourseIntro(request,course_id):
     if request.user.is_active:
         print(course_id)
+        course = Course.objects.get(id=course_id)
+        week = Week.objects.filter(week_id_id=course.pk)
         context ={
-            'course_id':course_id
+            'course_id':course_id,
+            'week':week,
         }
         return render(request,'userCourseIntro.html',context);
     else:
@@ -119,7 +122,7 @@ def userCourseLesson(request, c_id):
         # data.delete()
         video =None;
         week = Week.objects.filter(week_id_id=course.pk)
-        weekUnit =Week_Unit.objects.all()
+        weekUnit = Week_Unit.objects.all()
         status=None
         if request.method == 'POST':
             if 'start' in request.POST:

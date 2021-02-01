@@ -126,7 +126,7 @@ def csmAddCourse(request,cat_id):
             meta_keywords = request.POST["meta_keywords"]
             meta_description = request.POST["meta_description"]
             course_points = request.POST["course_points"]
-            certificate = request.POST["certificate"]
+            certificate = request.FILES.get('certificate')
             # quiz and certificate details are not added yet
 
             #  Prerequisites
