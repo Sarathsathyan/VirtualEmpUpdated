@@ -67,11 +67,11 @@ def userDashboard(request):
         user = request.user
         user_details = UserDetails.objects.get(user_id_id=user.pk)
 
-        # allData = CareerChoice.objects.get(user_id_id=user.pk)
+        allData = CareerChoice.objects.get(user_id_id=user.pk)
 
-        # category = allData.cat_id
-        # sub = allData.sub_id
-        # cour = allData.cfp_id
+        category = allData.cat_id
+        sub = allData.sub_id
+        cour = allData.cfp_id
         if CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=cour):
             createCourse = CreateCourse.objects.get(create_category=category,create_sub=sub,create_course=cour)
         else:
