@@ -117,7 +117,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_L10N = True
-
+#USE_L10N = False
+#DATETIME_FORMAT='Y-m-d H:i:s'
 USE_TZ = True
 
 # Django Alerts Messages

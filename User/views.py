@@ -9,6 +9,8 @@ from Admin.models import CareerCategory,SubCategory,CategoryCourse
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
 from CSM.models import Quizz,Result
 from CSM.models import Quizz,Result
+import re
+from moviepy.editor import VideoFileClip
 # Create your views here.
 
 # CSM
@@ -103,11 +105,39 @@ def userDashboard(request):
 # user course
 def userCourseIntro(request,course_id):
     if request.user.is_active:
+        print('@@@@@@@@@@')
         print(course_id)
+        course=Course.objects.get(id=course_id)
+        if course:
+            #print("hhhhhhhhhhhhhh")
+            short_desp=course.short_description
+            f_req, s_req, l_req =re.split("_",course.requirements)
+            req_list=[f_req, s_req, l_req]
+            print(len(req_list))
+            f_learn, s_learn, l_learn =re.split("_",course.learnings)
+            learn_list=[f_learn, s_learn, l_learn]
+            print(len(req_list))
+            duration=[]
+            
+            context ={
+                'course_id':course_id,
+                'course_details':course,
+                'short_desp':short_desp,
+                'req_list':[i for i in req_list if i],
+                'learn_list': [i for i in learn_list if i],
+                'lessons': Week.objects.all(),
+                #'lessons': Week.objects.order_by("week_name"),
+                'topics':Week_Unit.objects.all(),
+                #'VideoFileClip':VideoFileClip
+            }
+            for topic in Week_Unit.objects.all():
+                print(topic.video1_duration)
+            return render(request,'userCourseIntro.html',context)
+
         context ={
             'course_id':course_id
         }
-        return render(request,'userCourseIntro.html',context);
+        return render(request,'userCourseIntro.html',context)
     else:
         return redirect('login')
 
@@ -116,7 +146,6 @@ def userCourseLesson(request, c_id):
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
-        # data.delete()
         video =None;
         week = Week.objects.filter(week_id_id=course.pk)
         weekUnit =Week_Unit.objects.all()
@@ -132,7 +161,6 @@ def userCourseLesson(request, c_id):
                     print(current_time)
                     end_date = current_time + datetime.timedelta(days=7)
                     print(end_date)
-
                     data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date)
                     data.save()
                 return redirect('courseLesson',c_id)

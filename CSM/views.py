@@ -4,8 +4,9 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from .models import Course,CreateCourse,Week_Unit,Week,Quizz
 from Admin.models import CategoryCourse,CareerCategory,SubCategory,RoleDetail
+import datetime
 # Create your views here.
-
+from moviepy.editor import VideoFileClip
 def csmDashboard(request):
     if request.user.is_active:
         if request.method == 'POST':
@@ -166,6 +167,7 @@ def csmEdit(request, course_id):
             print("image_file",image_file)
             Course_name.difficulty_level = request.POST["difficulty_level"]
             Course_name.course_points = request.POST["course_points"]
+            Course_name.modified=datetime.datetime.now()
             if  image_file:
                 Course_name.course_image =image_file
             else:
@@ -206,7 +208,16 @@ def csmEdit(request, course_id):
         return render(request,'csm_edit_course.html', context)
     else:
         return render("login")
-        
+
+# function to find duration of video
+def video_duration(seconds):
+    hours=seconds//3600
+    seconds%=3600
+    minutes=seconds//60
+    seconds%=60
+    return f"{hours}:{minutes}:{seconds}"    
+
+
 def csmAddCurriculam(request,curr_id):
     if request.user.is_active:
 
@@ -233,7 +244,21 @@ def csmAddCurriculam(request,curr_id):
                 unit_video2 = request.FILES.get('unit_video2')
                 unit_video3 = request.FILES.get('unit_video3')
                 week = request.POST['wek_id']
-
+                if unit_video1:
+                    clip1=VideoFileClip(unit_video1.temporary_file_path())
+                    video1_duration=video_duration(int(clip1.duration))
+                else:
+                    video1_duration=None
+                if unit_video2:
+                    clip2=VideoFileClip(unit_video2.temporary_file_path())
+                    video2_duration=video_duration(int(clip2.duration))
+                else:
+                    video2_duration=None
+                if unit_video3:
+                    clip3=VideoFileClip(unit_video3.temporary_file_path())
+                    video3_duration=video_duration(int(clip3.duration))
+                else:
+                    video3_duration=None
                 try:
                     week_private = Week.objects.get(week_private=week)
                     if week_private:
@@ -243,15 +268,16 @@ def csmAddCurriculam(request,curr_id):
                             return redirect('csmAddCurriculam', id)
                         print("hellooo")
                         unit = Week_Unit(unit_id_id=week_private.pk,unit_video1=unit_video1, unit_video2=unit_video2, unit_video3=unit_video3,
-                                       uCapOne=unit_captionOne,u_capThree=unit_captionThree,uCap2=unit_captionTwo)
+                                       uCapOne=unit_captionOne,u_capThree=unit_captionThree,uCap2=unit_captionTwo,
+                                       video1_duration=video1_duration, video2_duration=video2_duration,video3_duration=video3_duration)
                         unit.save()
+                        
                         messages.success(request, "Unit added to week")
                     else:
                         messages.error(request, "Wrong Lesson Id")
                 except:
                     print("error")
                     messages.error(request, "Some error occured")
-
             if 'del' in request.POST:
                 print("delete")
                 del_id = request.POST['l_id']
@@ -262,7 +288,8 @@ def csmAddCurriculam(request,curr_id):
                 except:
                     messages.error(request, "Some error occured")
 
-        weeks = Week.objects.order_by("week_name")
+        #weeks = Week.objects.order_by("week_name")
+        weeks=Week.objects.all()
         context = {
             'weeks': weeks,
             'course_title': course_title,

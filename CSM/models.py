@@ -31,6 +31,7 @@ class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(CreateCourse,on_delete=models.CASCADE,null=True)
     created = models.DateTimeField(default=datetime.now, null=True)
+    modified = models.DateTimeField(default=datetime.now, null=True) 
     title = models.CharField(max_length=50)
     tagline=models.CharField(max_length=50)
     short_description=models.CharField(max_length=100)
@@ -69,9 +70,12 @@ class Week_Unit(models.Model):
     unit_video1 = models.FileField(upload_to="Week_Videos/",null=True)
     unit_video2 = models.FileField(upload_to="Week_Videos/",null=True)
     unit_video3 = models.FileField(upload_to="Week_Videos/",null=True)
-    u_capThree = models.CharField(max_length=100,null=True)
-    uCapOne = models.CharField(max_length=150,null=True)
-    uCap2 = models.CharField(max_length=150,null=True)
+    u_capThree = models.CharField(max_length=100,null=True, blank=True)
+    uCapOne = models.CharField(max_length=150,null=True, blank=True)
+    uCap2 = models.CharField(max_length=150,null=True, blank=True)
+    video1_duration=models.TimeField(null=True)
+    video2_duration=models.TimeField(null=True)
+    video3_duration=models.TimeField(null=True)
     def __str__(self):
         return self.unit_caption
 

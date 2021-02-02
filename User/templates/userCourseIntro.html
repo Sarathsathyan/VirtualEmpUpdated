@@ -4,7 +4,7 @@ Course Details
 {% endblock %}
 {% block content %}
 
-    <div id="wrapper">
+    <div id="wrapper" >
 
         <!-- Header Container
         ================================================== -->
@@ -119,11 +119,11 @@ Course Details
 
 
         <!-- content -->
-        <div class="page-content">
+        <div class="page-content" >
 
             <div class="course-details-wrapper topic-1 uk-light pt-5">
 
-                <div class="container p-sm-0">
+                <div class="container p-sm-0" >
 
                     <div uk-grid>
                         <div class="uk-width-2-3@m">
@@ -139,7 +139,8 @@ Course Details
                                     <ul>
                                         <li> Created by <a href="#"> {{ course_details.user.first_name }} {{ course_details.user.last_name }} </a> </li>
                                             <li> Email : {{ course_details.user.email }}</li>
-                                        <li> Last updated : 26/01/2020</li>
+                                        <!--<li> Last updated : 26/01/2020</li> -->
+                                            <li> Last updated : {{course_details.modified|date:'d/m/Y'}}</li>
                                     </ul>
 
                                 </div>
@@ -149,6 +150,10 @@ Course Details
                                     uk-switcher="connect: #course-intro-tab ;animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium">
                                     <li><a href="#">Overview</a></li>
                                     <li><a href="#">Curriculum</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Announcement</a></li>
+                                    <li><a href="#">Reviews</a></li>
+                                    
                                 </ul>
                             </nav>
 
@@ -168,27 +173,39 @@ Course Details
                             <li class="course-description-content">
 
                                 <h4><strong>Description </strong></h4>
-                                <p> {{ course_details.short_description }}</p>
-
+                                <!---<p> {{ course_details.short_description }}</p> --->
+                                <p> {{ short_desp }}</p>
 
                                 <h4><strong> What you will learn </strong></h4>
                                         <div class="" >
                                             <ul class="list-2 uk-child-width-1-2@s" uk-grid >
+                                                
+                                              {% if learn_list%}  
+                                                
                                               {% for i in learn_list %}
                                               <div class="my-0">
                                                 <li>{{i}} </li>
                                               </div>
-
                                               {% endfor %}
+                                              {% else %}
+                                                    <p>NONE</p>
+                                              {% endif %}
                                             </ul>
                                         </div>
 
 
                                     <h4><strong> Requirements </strong></h4>
                                     <ul class="list-1">
-                                      {% for i in req_list %}
-                                        <li>{{i}}</li>
-                                      {% endfor %}
+                                        {% if req_list%}  
+                                                
+                                        {% for i in req_list %}
+                                        <div class="my-0">
+                                          <li>{{i}} </li>
+                                        </div>
+                                        {% endfor %}
+                                        {% else %}
+                                              <p>NONE</p>
+                                        {% endif %}
                                     </ul>
 
 
@@ -205,15 +222,33 @@ Course Details
 
                                 {% for curriculam in lessons %}
                                     <li class="uk-open">
-                                        <a class="uk-accordion-title" href="#"> {{ curriculam.lesson_name }} </a>
+                                        <!--<a class="uk-accordion-title" href="#"> {{ curriculam.lesson_name }} </a> -->
+                                        <a class="uk-accordion-title" href="#"> {{ curriculam.week_name}} </a>
                                         <div class="uk-accordion-content">
 
-                                            <!-- course-video-list -->
+                                            <!-- course-video-list 
                                             {% for topic in topics %}
-                                                {% if topic.topic_id_id == curriculam.pk %}
+                                                {% if topic.week_id_id == curriculam.pk %}
                                             <ul class="course-curriculum-list">
                                                 <li> {{ topic.topic_caption }} <span> {{ topic.video_duration }} </span>
 
+                                            </ul>
+                                                {% endif %}
+
+                                            {% endfor %}
+                                            -->
+                                            {% for topic in topics %}
+                                                {% if topic.unit_id_id == curriculam.pk %}
+                                            <ul class="course-curriculum-list">
+                                                {% if topic.unit_video1 %}
+                                                    <li> {{ topic.uCapOne }} <span> {{ topic.video1_duration | time:'H:i:s' }} </span> </li>
+                                                {% endif %}
+                                                {% if topic.unit_video2 %}
+                                                    <li> {{ topic.uCap2 }} <span> {{ topic.video2_duration | time:'H:i:s'}} </span></li>
+                                                {% endif %}
+                                                {% if topic.unit_video3%}       
+                                                    <li> {{ topic.u_capThree }} <span> {{ topic.video3_duration| time:'H:i:s' }} </span></li>
+                                                {% endif %}
                                             </ul>
                                                 {% endif %}
 
@@ -256,9 +291,10 @@ Course Details
                                         <a href="{% url 'courseLesson' course_id %}"
                                          class="uk-width-1-1 btn btn-default transition-3d-hover play"><i class="uil-play"></i> Start </a>
                                     </div>
+                    
                                 </div>
-
-                                <p class="uk-text-bold"> This Course Incluce </p>
+                                
+                                <p class="uk-text-bold"> This Course Include </p>
 
                                 <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
                                     <div>

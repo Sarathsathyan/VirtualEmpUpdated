@@ -69,7 +69,8 @@
             </div>
 
             <div class="col s12 m12">
-                <form action="/userlogin/userdashboard/userResult/" name="quiz" id="quiz" method="post">
+                <!--<form action="/userlogin/userdashboard/userResult/" name="quiz" id="quiz" method="post"> -->
+                    <form action="{% url 'userResult' %}" name="quiz" id="quiz" method="post">
                     <input type="text" id="time" name="rough" readonly hidden>
                     {% csrf_token %}
 
