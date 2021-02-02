@@ -46,7 +46,7 @@ class Course(models.Model):
 
     # rewards
     course_points=models.IntegerField(default=0)
-    certificate= models.CharField(max_length=200, null=True, blank=True)
+    certificate= models.FileField(upload_to="csm_certificates/",null=True)
 
     # Prerequisite
     requirements=models.TextField(blank=True)
@@ -64,6 +64,7 @@ class Week(models.Model):
 
     def __str__(self):
         return  self.week_name
+
 class Week_Unit(models.Model):
     unit_id = models.ForeignKey(Week,on_delete=models.CASCADE)
     unit_caption = models.CharField(max_length=500,null=True)

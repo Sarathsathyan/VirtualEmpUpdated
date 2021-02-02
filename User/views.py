@@ -5,7 +5,7 @@ from datetime import timezone
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
-from Admin.models import CareerCategory,SubCategory,CategoryCourse
+from Admin.models import CareerCategory,SubCategory,CategoryCourse,UsedLicense
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
 from CSM.models import Quizz,Result
 from CSM.models import Quizz,Result
@@ -107,6 +107,7 @@ def userCourseIntro(request,course_id):
     if request.user.is_active:
         print('@@@@@@@@@@')
         print(course_id)
+<<<<<<< HEAD
         course=Course.objects.get(id=course_id)
         if course:
             #print("hhhhhhhhhhhhhh")
@@ -134,8 +135,13 @@ def userCourseIntro(request,course_id):
                 print(topic.video1_duration)
             return render(request,'userCourseIntro.html',context)
 
+=======
+        course = Course.objects.get(id=course_id)
+        week = Week.objects.filter(week_id_id=course.pk)
+>>>>>>> c89a7b99c1c708f22473d549704baf77b7394a88
         context ={
-            'course_id':course_id
+            'course_id':course_id,
+            'week':week,
         }
         return render(request,'userCourseIntro.html',context)
     else:
@@ -148,7 +154,7 @@ def userCourseLesson(request, c_id):
         data = userProgress.objects.filter(userId_id=request.user.pk)
         video =None;
         week = Week.objects.filter(week_id_id=course.pk)
-        weekUnit =Week_Unit.objects.all()
+        weekUnit = Week_Unit.objects.all()
         status=None
         if request.method == 'POST':
             if 'start' in request.POST:
@@ -355,7 +361,7 @@ def userProfileEdit(request):
                     data.user_bio=bio
                     data.save()
                     messages.success(request,"Updated Contact Info")
-                    return redirect('userprofileEdit')
+                    return redirect('userprofileedit')
 
                 else:
                     address1 = request.POST['address1']
@@ -388,7 +394,7 @@ def userProfileEdit(request):
                         messages.success(request, "Profile pic added")
                 except:
                     messages.error(request,"Complete your contact info to change Pic")
-                    return redirect("userprofileEdit")
+                    return redirect("userProfileEdit")
 
 
             if 'skill' in request.POST:

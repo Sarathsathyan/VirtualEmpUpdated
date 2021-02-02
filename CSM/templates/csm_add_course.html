@@ -580,17 +580,38 @@ CSM Add courses
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-xl-9">
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label">XP Points Per Question</label>
+                                            <div class="col-md-9">
+                                                <input type="number" class="form-control" name="course_points" placeholder="Enter Points">
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="col-xl-9">
-
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
                                         <div class="form-group row mb-3">
                                             <label class="col-md-3 col-form-label">Certificate</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" name="certificate">
-                                                <small class="text-muted"><span
-                                                        class="text-danger"></span> </small>
+                                                <label for="file-upload" class="btn btn-default">
+                                                    <i class='uil-plus'></i>Upload</label>
+                                                
+                                                    <input id="file-upload" name='upload_cont_img' type="file" style="display:none;">
+                                                    <label class="col-form-label" id="uploadFile"></label>
                                             </div>
                                         </div>
+                                        </form>
+                                        <script>
+                                            // document.getElementById("file-upload").onchange = function() {
+                                            // document.getElementById("uploadFile").value = this.value;
+                                            // };
+                                            document.querySelector("#file-upload").onchange = function(){
+                                            document.querySelector("#uploadFile").textContent = this.files[0].name;
+                                            }
+
+                                        </script>
                                     </div>
                                 </div>
 
