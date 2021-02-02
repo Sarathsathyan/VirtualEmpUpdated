@@ -266,9 +266,13 @@
                                         </ul>
                                         <input type="text" value="{{ i.pk }}" id="qId" hidden>
                                         <b>
-                                            <input type="button" class="btn btn-primary" id="startTest"
-                                                   value="Start Test"/>
-                                            <a id="startTest" href="{% url 'userquizz' i.pk %}">ProgressiveTest </a>
+                                            <!--<input type="button" class="btn btn-primary" id="startTest"
+                                                   value="Start Test"/>-->
+                                            <a id="startTest" href="{% url 'userquizz' i.pk %}">
+                                                <input type="button" class="btn btn-primary" id="startTest"
+                                                value="Start Test"/>
+                                                ProgressiveTest 
+                                            </a>
                                         </b>
                                         <input class="lesson_checkbox"
                                                type="checkbox">
