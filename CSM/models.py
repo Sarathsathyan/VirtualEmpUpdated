@@ -45,6 +45,7 @@ class Course(models.Model):
 
     # rewards
     course_points=models.IntegerField(default=0)
+    xp_points=models.IntegerField(default=0)
     certificate= models.FileField(upload_to="csm_certificates/",null=True)
 
     # Prerequisite
