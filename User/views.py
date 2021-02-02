@@ -107,7 +107,7 @@ def userCourseIntro(request,course_id):
     if request.user.is_active:
         print('@@@@@@@@@@')
         print(course_id)
-<<<<<<< HEAD
+
         course=Course.objects.get(id=course_id)
         if course:
             #print("hhhhhhhhhhhhhh")
@@ -135,10 +135,10 @@ def userCourseIntro(request,course_id):
                 print(topic.video1_duration)
             return render(request,'userCourseIntro.html',context)
 
-=======
+
         course = Course.objects.get(id=course_id)
         week = Week.objects.filter(week_id_id=course.pk)
->>>>>>> c89a7b99c1c708f22473d549704baf77b7394a88
+
         context ={
             'course_id':course_id,
             'week':week,
