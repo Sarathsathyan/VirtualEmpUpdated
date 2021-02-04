@@ -127,6 +127,7 @@ def csmAddCourse(request,cat_id):
             meta_keywords = request.POST["meta_keywords"]
             meta_description = request.POST["meta_description"]
             course_points = request.POST["course_points"]
+            xp_points=request.POST["xp_points"]
             certificate = request.FILES.get('certificate')
             # quiz and certificate details are not added yet
 
@@ -134,11 +135,12 @@ def csmAddCourse(request,cat_id):
             requirements = request.POST["req"]
             learnings = request.POST["learn"]
 
-            create = Course(user_id=user.id, title=title, tagline=tagline, short_description=short_description,
+            create = Course(user_id=user.pk, title=title, tagline=tagline, short_description=short_description,
                             instructor=instructor,
                             course_image=image, category_id=data.pk,
                             difficulty_level=difficulty_level, meta_keywords=meta_keywords,
-                            meta_description=meta_description, course_points=course_points, certificate=certificate,
+                            meta_description=meta_description, course_points=course_points,
+                            xp_points_perq=xp_points, certificate=certificate,
                             requirements=requirements, learnings=learnings)
             create.save()
 
@@ -167,6 +169,7 @@ def csmEdit(request, course_id):
             print("image_file",image_file)
             Course_name.difficulty_level = request.POST["difficulty_level"]
             Course_name.course_points = request.POST["course_points"]
+            Course_name.xp_points_perq = request.POST["xp_points"]
             Course_name.modified=datetime.datetime.now()
             if  image_file:
                 Course_name.course_image =image_file

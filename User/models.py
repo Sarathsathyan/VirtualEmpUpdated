@@ -2,13 +2,14 @@ from django.db import models
 
 from django.contrib.auth.models import User
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse)
-from CSM.models import Week_Unit,Week
+from CSM.models import Week_Unit,Week, Course
 # Create your models here.
 
 
 # Career choice
 class CareerChoice(models.Model):
-    user_id = models.ForeignKey(User,models.CASCADE,null=True)
+    #user_id = models.ForeignKey(User,models.CASCADE,null=True)
+    user_id = models.ForeignKey(UserDetails,models.CASCADE,null=True)
     cat_id = models.ForeignKey(CareerCategory,models.CASCADE,null=True)
     sub_id = models.ForeignKey(SubCategory,models.CASCADE,null=True)
     cfp_id = models.ForeignKey(CategoryCourse,models.CASCADE,null=True)
@@ -75,7 +76,7 @@ class userProgress(models.Model):
     status = models.BooleanField(default=False)
     currentTime = models.DateTimeField(null=True)
     endTime = models.DateTimeField(null=True)
-
+    
     def __str__(self):
         return self.status
 
@@ -97,3 +98,9 @@ class pricingSec(models.Model):
 
     def __str__(self):
         return self.cef
+
+class score(models.Model):
+    userId = models.ForeignKey(User,on_delete=models.CASCADE)
+    #week_id=models.ForeignKey(Week, on_delete=models.CASCADE)
+    course_id=models.ForeignKey(Course,on_delete=models.CASCADE)
+    totalxp=models.IntegerField(default=0)
