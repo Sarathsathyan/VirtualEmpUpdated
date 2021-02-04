@@ -101,6 +101,6 @@ class pricingSec(models.Model):
 
 class score(models.Model):
     userId = models.ForeignKey(User,on_delete=models.CASCADE)
-    #week_id=models.ForeignKey(Week, on_delete=models.CASCADE)
+    week_id=models.ForeignKey(Week, on_delete=models.CASCADE)
     course_id=models.ForeignKey(Course,on_delete=models.CASCADE)
     totalxp=models.IntegerField(default=0)

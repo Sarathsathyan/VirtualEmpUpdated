@@ -115,12 +115,8 @@ def userDashboard(request):
 # user course
 def userCourseIntro(request,course_id):
     if request.user.is_active:
-        #print('@@@@@@@@@@')
-        #print(course_id)
-
         course=Course.objects.get(id=course_id)
         if course:
-            
             short_desp=course.short_description
             f_req, s_req, l_req =re.split("_",course.requirements)
             req_list=[f_req, s_req, l_req]
@@ -128,8 +124,28 @@ def userCourseIntro(request,course_id):
             f_learn, s_learn, l_learn =re.split("_",course.learnings)
             learn_list=[f_learn, s_learn, l_learn]
             print(len(req_list))
-            duration=[]
-            
+            topics=Week_Unit.objects.all()
+            clip_duration=0
+            sec=0
+            min=0
+            hr=0
+            for topic in topics:
+                if topic.video1_duration:
+                    sec+= topic.video1_duration.second
+                    min+= topic.video1_duration.minute
+                    hr+=topic.video1_duration.hour
+                if topic.video2_duration:
+                    sec+= topic.video2_duration.second
+                    min+= topic.video2_duration.minute
+                    hr+=topic.video2_duration.hour
+                if topic.video2_duration:
+                    sec+= topic.video3_duration.second
+                    min+= topic.video3_duration.minute
+                    hr+=topic.video3_duration.hour
+            hr=sec//3600
+            sec%=3600
+            min=sec//60
+            sec%=60
             context ={
                 'course_id':course_id,
                 'course_details':course,
@@ -137,9 +153,11 @@ def userCourseIntro(request,course_id):
                 'req_list':[i for i in req_list if i],
                 'learn_list': [i for i in learn_list if i],
                 'lessons': Week.objects.all(),
-                #'lessons': Week.objects.order_by("week_name"),
-                'topics':Week_Unit.objects.all(),
-                #'VideoFileClip':VideoFileClip
+                 #'lessons': Week.objects.order_by("week_name"),
+                'topics':topics,
+                'course_duration_hr':hr, 
+                'course_duration_min':min,
+                'course_duration_sec':sec,
             }
             for topic in Week_Unit.objects.all():
                 print(topic.video1_duration)
@@ -217,11 +235,12 @@ def userprofile(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         user = request.user
         user_details = UserDetails.objects.get(user_id_id=user.pk)
-
         user_education=None
+        #score_ob=score.objects.filter(userId_id=user.pk)
+
         
+        print(score_ob)
         if UserEducation.objects.filter(user_id_id=user_details.pk).exists():
-            
             user_education = UserEducation.objects.filter(user_id_id=user_details.pk)
             try:
                 work = UserWorkExperience.objects.filter(user_id_id=user_details.pk).order_by("-start_year")
@@ -253,10 +272,7 @@ def userprofile(request):
                 'man_skills':man_skills,
                 'lan_skills':lan_skills,
                 #'cfp_name':cfp_name
-
-
-
-                }
+            }
             if UserContact.objects.filter(user_id_id=user_details.pk).exists():
                 user_contact = UserContact.objects.get(user_id_id=user_details.pk)
                 try:
@@ -324,11 +340,16 @@ def userprofile(request):
                         lan_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Languages')
                     except:
                         lan_skills=[]
-
+                    print(request.user.pk)
+                    score_ob=score.objects.filter(userId_id=request.user.pk)
+                    print(score_ob)
                     if score.objects.filter(userId_id=request.user.pk).exists():
-                        score_ob=score.objects.get(userId_id=request.user.pk)
-                        total_xp_earned=score_ob.totalxp
-                        course_points=Course.objects.get(id=score_ob.course_id_id).course_points
+                        score_ob=score.objects.filter(userId_id=request.user.pk)
+                        total_xp_earned=0
+                        for score in score_ob:
+                            total_xp_earned+=score.totalxp
+                        
+                            course_points=Course.objects.get(id=score.course_id_id).course_points
 
                     else:
                         total_xp_earned=0
@@ -740,9 +761,8 @@ def userQuizz(request,w_id):
     if request.user.is_active:
         week = Week.objects.get(id = w_id)
         course = Course.objects.get(id = week.week_id_id)
-        if not score.objects.filter(userId_id=request.user.pk).exists():
-            score_ob=score.objects.create(userId_id=request.user.id,course_id_id=course.pk)
-        #score_ob.course_id=course.id
+        if not score.objects.filter(userId_id=request.user.pk, week_id_id=week.pk).exists():
+            score_ob=score.objects.create(userId_id=request.user.id,course_id_id=course.pk, week_id_id=week.pk)
             score_ob.save()
         data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
 
@@ -766,15 +786,21 @@ def userResult(request):
         tempRes = []
         dic_quizz={}
         for i in form:
+            print("i",i)
             if i in request.POST:
                 ques = request.POST[i]
                 tempQues.append(ques)
                 Ques = Quizz.objects.filter(id=i)
+                #Ques = Quizz.objects.get(id=i)
+                dic_quizz[Ques[0].week_id_id]=0
+                print(Ques[0].week_id_id)
                 print("Ques",Ques)
                 res = Ques[0].answer
                 tempRes.append(res)
                 if (res == ques):
                     correct += 1
+                    #dic_quizz[Ques[0].week_id_id]+=1
+                    dic_quizz[Ques[0].week_id_id]=correct
                 else:
                     wrong += 1
                 
@@ -793,11 +819,20 @@ def userResult(request):
         val.save()
         print("val",val)
         """
-        score_ob=score.objects.get(userId_id=request.user.id)
-        
-        course_ob=Course.objects.get(id=score_ob.course_id_id)
-        score_ob.totalxp += correct * course_ob.xp_points_perq
-        score_ob.save()
+        #score_ob=score.objects.filter(userId_id=request.user.id)
+        print(dic_quizz)
+        for k in dic_quizz.keys():
+            if score.objects.filter(week_id_id=k, userId_id=request.user.id).exists():
+                score_ob=score.objects.get(week_id_id=k, userId_id= request.user.id)
+                course_ob=Course.objects.get(id=score_ob.course_id_id)
+                temp_totalxp=dic_quizz[k] * course_ob.xp_points_perq
+                if temp_totalxp > score_ob.totalxp:
+                    score_ob.totalxp=temp_totalxp
+                    score_ob.save()
+
+
+        #score_ob.totalxp += correct * course_ob.xp_points_perq
+        #score_ob.save()
         return redirect('userdashboard')
 
         # except Exception as e:

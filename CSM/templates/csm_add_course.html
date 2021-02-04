@@ -595,19 +595,19 @@ CSM Add courses
                                         <div class="form-group row mb-3">
                                             <label class="col-md-3 col-form-label">Certificate</label>
                                             <div class="col-md-9">
-                                                <label for="file-upload" class="btn btn-default">
+                                                <label for="certificate" class="btn btn-default">
                                                     <i class='uil-plus'></i>Upload</label>
                                                 
-                                                    <input id="file-upload" name='upload_cont_img' type="file" style="display:none;">
+                                                    <input id="certificate" name='upload_cont_img' type="file" style="display:none;">
                                                     <label class="col-form-label" id="uploadFile"></label>
                                             </div>
                                         </div>
                                         </form>
                                         <script>
-                                            // document.getElementById("file-upload").onchange = function() {
+                                            // document.getElementById("certificate").onchange = function() {
                                             // document.getElementById("uploadFile").value = this.value;
                                             // };
-                                            document.querySelector("#file-upload").onchange = function(){
+                                            document.querySelector("#certificate").onchange = function(){
                                             document.querySelector("#uploadFile").textContent = this.files[0].name;
                                             }
 

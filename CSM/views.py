@@ -7,6 +7,7 @@ from Admin.models import CategoryCourse,CareerCategory,SubCategory,RoleDetail
 import datetime
 # Create your views here.
 from moviepy.editor import VideoFileClip
+
 def csmDashboard(request):
     if request.user.is_active:
         if request.method == 'POST':
@@ -108,7 +109,6 @@ def chooseType(request):
 
 def csmAddCourse(request,cat_id):
     if request.user.is_active:
-
         user = request.user
         inst = RoleDetail.objects.all()
         data = CreateCourse.objects.get(id = cat_id)
@@ -128,6 +128,9 @@ def csmAddCourse(request,cat_id):
             meta_description = request.POST["meta_description"]
             course_points = request.POST["course_points"]
             xp_points=request.POST["xp_points"]
+
+            xp_points = request.POST["xp_points"]
+
             certificate = request.FILES.get('certificate')
             # quiz and certificate details are not added yet
 
@@ -136,11 +139,10 @@ def csmAddCourse(request,cat_id):
             learnings = request.POST["learn"]
 
             create = Course(user_id=user.pk, title=title, tagline=tagline, short_description=short_description,
-                            instructor=instructor,
-                            course_image=image, category_id=data.pk,
+                            instructor=instructor,course_image=image, category_id=data.pk,
                             difficulty_level=difficulty_level, meta_keywords=meta_keywords,
                             meta_description=meta_description, course_points=course_points,
-                            xp_points_perq=xp_points, certificate=certificate,
+                            xp_points_perq=xp_points_perq, certificate=certificate,xp_points=xp_points,
                             requirements=requirements, learnings=learnings)
             create.save()
 
@@ -169,16 +171,27 @@ def csmEdit(request, course_id):
             print("image_file",image_file)
             Course_name.difficulty_level = request.POST["difficulty_level"]
             Course_name.course_points = request.POST["course_points"]
-            Course_name.xp_points_perq = request.POST["xp_points"]
+
+            Course_name.xp_points_perq = request.POST["xp_points_perq"]
+            Course_name.xp_points= request.POST["xp_points"]
+            Course_name.xp_points = request.POST["xp_points"]
+            certificate = request.FILES.get('certificate')
+
             Course_name.modified=datetime.datetime.now()
             if  image_file:
                 Course_name.course_image =image_file
             else:
                 if not Course_name.course_image:
-                    message="Please! Select Image"
+                    message="Please select an image"
                     return redirect("csmEdit",course_id)
-                    #return render(request,'csm_edit_course.html',{"message":message})
 
+                    #return render(request,'csm_edit_course.html',{"message":message})
+            if  certificate:
+                Course_name.certificate =certificate
+            else:
+                if not Course_name.certificate:
+                    message="Please select an image"
+                    return redirect("csmEdit",course_id)
 
             Course_name.difficulty_level = request.POST["difficulty_level"]
             
