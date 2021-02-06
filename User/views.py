@@ -6,7 +6,7 @@ from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
 from Admin.models import CareerCategory,SubCategory,CategoryCourse,UsedLicense
-from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, score
+from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, Score
 from CSM.models import Quizz,Result
 from CSM.models import Quizz,Result
 import re
@@ -53,9 +53,16 @@ def userCfp(request):
                 data = CareerChoice(cat_id_id=data1.pk, sub_id_id=data2.pk, cfp_id_id=data3.pk, user_id_id=user_id.pk)
                 data.save()
                 messages.success(request, "CFP choosed")
-                details.user_cfp = True;
+                details.user_cfp = True
                 details.save()
                 #return redirect('userdashboard')
+                """
+                weeks=Week.objects.all()
+
+                for week in weeks:
+                    score_ob=Score.objects.create(userId_id=request.user.id, week_id_id=week.pk, totalxp=0)
+                    score_ob.save()
+                """
                 return redirect('userprofileedit')
         career_list = CareerCategory.objects.all()
 
@@ -237,9 +244,7 @@ def userprofile(request):
         user_details = UserDetails.objects.get(user_id_id=user.pk)
         user_education=None
         #score_ob=score.objects.filter(userId_id=user.pk)
-
-        
-        print(score_ob)
+        #print(score_ob)
         if UserEducation.objects.filter(user_id_id=user_details.pk).exists():
             user_education = UserEducation.objects.filter(user_id_id=user_details.pk)
             try:
@@ -340,22 +345,19 @@ def userprofile(request):
                         lan_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Languages')
                     except:
                         lan_skills=[]
+                    
                     print(request.user.pk)
-                    score_ob=score.objects.filter(userId_id=request.user.pk)
-                    print(score_ob)
-                    if score.objects.filter(userId_id=request.user.pk).exists():
-                        score_ob=score.objects.filter(userId_id=request.user.pk)
+                    if Score.objects.filter(userId_id=request.user.pk).exists():
+                        score_ob=Score.objects.filter(userId_id=request.user.pk)
                         total_xp_earned=0
                         for score in score_ob:
                             total_xp_earned+=score.totalxp
-                        
-                            course_points=Course.objects.get(id=score.course_id_id).course_points
-
+                            course_points=Course.objects.get(id=score.week_id.week_id_id).course_points
+                    
                     else:
                         total_xp_earned=0
                         course_points=0
-
-
+                    
                     context = {
                         'cfp_details': cfp_details,
                         'user_data': user_details,
@@ -368,25 +370,15 @@ def userprofile(request):
                         'cfp_name':cfp_name,
                         'total_xp_earned':total_xp_earned,
                         'course_points':course_points
-
-
-                        }
-
-
+                    }
                     return render(request, "userProfile.html", context)
-
                 return render(request, "userProfile.html", context)
-
             return render(request,"userProfile.html",context)
-
-
         context = {
             'user_data' : user_details,
             #'cfp_name':cfp_name
-
         }
         return render(request,"userProfile.html",context)
-
     else:
         messages.error(request,"Wrong URL")
         return redirect('logout')
@@ -420,7 +412,6 @@ def userProfileEdit(request):
                     address2 = request.POST['address2']
                     gender = request.POST['gender']
                     bio=request.POST['bio']
-
                     data = UserContact(address1=address1,address2=address2,gender=gender,user_bio=bio,user_id_id=user_detail.pk)
                     data.save()
                     messages.success(request,"Contact Info added")
@@ -430,8 +421,6 @@ def userProfileEdit(request):
                     data = UserContact.objects.get(user_id_id=user_detail.pk)
                     if data.user_pic:
                         pic = request.FILES.get('user-profile-photo')
-
-
                         print(pic)
                         print("hai")
                         data.user_pic = pic
@@ -761,11 +750,13 @@ def userQuizz(request,w_id):
     if request.user.is_active:
         week = Week.objects.get(id = w_id)
         course = Course.objects.get(id = week.week_id_id)
-        if not score.objects.filter(userId_id=request.user.pk, week_id_id=week.pk).exists():
-            score_ob=score.objects.create(userId_id=request.user.id,course_id_id=course.pk, week_id_id=week.pk)
+        
+        if not Score.objects.filter(userId_id=request.user.pk, week_id_id=week.pk).exists():
+            score_ob=Score.objects.create(userId_id=request.user.id,week_id_id=week.pk, totalxp=0)
             score_ob.save()
+        
         data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
-
+        
         context={
             'questions' : data
         }
@@ -800,11 +791,13 @@ def userResult(request):
                 if (res == ques):
                     correct += 1
                     #dic_quizz[Ques[0].week_id_id]+=1
-                    dic_quizz[Ques[0].week_id_id]=correct
+                    #dic_quizz[Ques[0].week_id_id]=correct
                 else:
                     wrong += 1
                 
         val = Result()
+        print("correct",correct)
+        dic_quizz[Ques[0].week_id_id]=correct
         """
         # obj = Question.objects.first()
         # field_value = getattr(obj,'title')
@@ -820,19 +813,16 @@ def userResult(request):
         print("val",val)
         """
         #score_ob=score.objects.filter(userId_id=request.user.id)
-        print(dic_quizz)
+        print("dic_quizz",dic_quizz)
         for k in dic_quizz.keys():
-            if score.objects.filter(week_id_id=k, userId_id=request.user.id).exists():
-                score_ob=score.objects.get(week_id_id=k, userId_id= request.user.id)
-                course_ob=Course.objects.get(id=score_ob.course_id_id)
+            if Score.objects.filter(week_id_id=k, userId_id=request.user.id).exists():
+                score_ob=Score.objects.get(week_id_id=k, userId_id= request.user.id)
+                course_ob=Course.objects.get(id=score_ob.week_id.week_id_id)
                 temp_totalxp=dic_quizz[k] * course_ob.xp_points_perq
                 if temp_totalxp > score_ob.totalxp:
                     score_ob.totalxp=temp_totalxp
                     score_ob.save()
 
-
-        #score_ob.totalxp += correct * course_ob.xp_points_perq
-        #score_ob.save()
         return redirect('userdashboard')
 
         # except Exception as e:
