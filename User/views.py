@@ -187,7 +187,7 @@ def userCourseLesson(request, c_id):
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
-        video =None;
+        video =None
         week = Week.objects.filter(week_id_id=course.pk)
         weekUnit = Week_Unit.objects.all()
         status=None
@@ -232,7 +232,8 @@ def userCourseLesson(request, c_id):
             'video':video,
             'data':data,
             'status':status,
-            'remain':remainingTime
+            'remain':remainingTime,
+            'video_page_image':course.video_page_image
         }
         return render(request,'userCourseLesson.html',context)
     else:

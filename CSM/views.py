@@ -106,23 +106,25 @@ def csmAddCourse(request,cat_id):
             tagline = request.POST["tagline"]
             short_description = request.POST["description"]
             image = request.FILES.get('course_image')
+            video_page_image=request.FILES.get('video_page_image')
             category = request.POST["category"]
             role = request.POST["role"]
             course = request.POST["course"]
-            difficulty_level = request.POST["difficulty_level"]
+            #difficulty_level = request.POST["difficulty_level"]
             # lesson_title=request.POST["lesson_title"]
             # topic=request.POST["topic"]
-            meta_keywords = request.POST["meta_keywords"]
-            meta_description = request.POST["meta_description"]
+            #meta_keywords = request.POST["meta_keywords"]
+            #meta_description = request.POST["meta_description"]
+            trainee_name = request.POST["trainee_name"]
+            trainee_bio = request.POST["trainee_bio"]
             course_points = request.POST["course_points"]
             xp_points_perq=request.POST["xp_points_perq"]
-            certificate = request.FILES.get('certificate')
+            certificate = request.FILES.get('upload_cont_img')
             requirements = request.POST["req"]
             learnings = request.POST["learn"]
             create = Course(user_id=user.pk, title=title, tagline=tagline, short_description=short_description,
-                            instructor=instructor,course_image=image, category_id=data.pk,
-                            difficulty_level=difficulty_level, meta_keywords=meta_keywords,
-                            meta_description=meta_description, course_points=course_points,
+                            instructor=instructor,course_image=image,video_page_image=video_page_image, category_id=data.pk,
+                            trainee_name = trainee_name, trainee_bio = trainee_bio, course_points=course_points,
                             xp_points_perq=xp_points_perq, certificate=certificate,
                             requirements=requirements, learnings=learnings)
             create.save()
@@ -146,32 +148,45 @@ def csmEdit(request, course_id):
             Course_name.instructor = request.POST["instructor_name"]
             Course_name.tagline = request.POST["tagline"]
             Course_name.short_description = request.POST["description"]
-            Course_name.meta_keywords = request.POST["meta_keywords"]
-            Course_name.meta_description = request.POST["meta_description"]
+            #Course_name.meta_keywords = request.POST["meta_keywords"]
+            #Course_name.meta_description = request.POST["meta_description"]
+            Course_name.trainee_name = request.POST["trainee_name"]
+            Course_name.trainee_bio = request.POST["trainee_bio"]
             image_file= request.FILES.get('course_image')
-            print("image_file",image_file)
-            Course_name.difficulty_level = request.POST["difficulty_level"]
+            video_page_image=request.FILES.get('video_page_image')
+            #print("image_file",image_file)
+            #Course_name.difficulty_level = request.POST["difficulty_level"]
             Course_name.course_points = request.POST["course_points"]
 
             Course_name.xp_points_perq = request.POST["xp_points_perq"]
             certificate = request.FILES.get('certificate')
 
             Course_name.modified=datetime.datetime.now()
+            
             if  image_file:
                 Course_name.course_image =image_file
+            
             else:
                 if not Course_name.course_image:
-                    message="Please select an image"
+                    #message="Please select an image"
                     return redirect("csmEdit",course_id)
                     #return render(request,'csm_edit_course.html',{"message":message})
+            
             if  certificate:
                 Course_name.certificate =certificate
             else:
                 if not Course_name.certificate:
-                    message="Please select an image"
+                    #message="Please select an image"
                     return redirect("csmEdit",course_id)
 
-            Course_name.difficulty_level = request.POST["difficulty_level"]
+            if  video_page_image:
+                Course_name.video_page_image = video_page_image
+            else:
+                if not Course_name.video_page_image:
+                    #message="Please select an image for video page"
+                    return redirect("csmEdit",course_id)
+            
+            #Course_name.difficulty_level = request.POST["difficulty_level"]
             
             Course_name.requirements = request.POST["req"]
             Course_name.learnings = request.POST["learn"]
