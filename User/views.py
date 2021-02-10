@@ -28,17 +28,17 @@ def userCfp(request):
         if request.method == 'POST':
             if 'first-category' in request.POST:
                 category_id = request.POST['first-category']
-                
+
                 data = CareerCategory.objects.get(id=category_id)
                 sub_cats = SubCategory.objects.filter(cat_id_id=data.pk)
             if 'first-sub' in request.POST:
                 sub = request.POST['first-sub']
-                
+
                 s_data = SubCategory.objects.get(sub_category=sub)
                 s_courses = CategoryCourse.objects.filter(sub_id_id=s_data.pk)
             if 'course' in request.POST:
                 c_course = request.POST['course']
-                
+
                 c_data = CategoryCourse.objects.get(cfp=c_course)
             if 'confirm_submit' in request.POST:
                 m_cat = request.POST['confirm_first_category']
@@ -162,7 +162,7 @@ def userCourseIntro(request,course_id):
                 'lessons': Week.objects.all(),
                  #'lessons': Week.objects.order_by("week_name"),
                 'topics':topics,
-                'course_duration_hr':hr, 
+                'course_duration_hr':hr,
                 'course_duration_min':min,
                 'course_duration_sec':sec,
             }
@@ -245,7 +245,9 @@ def userprofile(request):
         user_details = UserDetails.objects.get(user_id_id=user.pk)
         user_education=None
         #score_ob=score.objects.filter(userId_id=user.pk)
+
         #print(score_ob)
+
         if UserEducation.objects.filter(user_id_id=user_details.pk).exists():
             user_education = UserEducation.objects.filter(user_id_id=user_details.pk)
             try:
@@ -353,8 +355,10 @@ def userprofile(request):
                         total_xp_earned=0
                         for score in score_ob:
                             total_xp_earned+=score.totalxp
+
                             course_points=Course.objects.get(id=score.week_id.week_id_id).course_points
                     
+
                     else:
                         total_xp_earned=0
                         course_points=0
@@ -795,7 +799,7 @@ def userResult(request):
                     #dic_quizz[Ques[0].week_id_id]=correct
                 else:
                     wrong += 1
-                
+
         val = Result()
         print("correct",correct)
         dic_quizz[Ques[0].week_id_id]=correct
@@ -849,4 +853,4 @@ def pricing(request):
 
         return render(request,'pricing.html')
     else:
-        return redirect('login')        
+        return redirect('login')
