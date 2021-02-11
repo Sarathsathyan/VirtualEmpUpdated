@@ -123,7 +123,6 @@ def csmAddCourse(request,cat_id):
             requirements = request.POST["req"]
             learnings = request.POST["learn"]
             create = Course(user_id=user.pk, title=title, tagline=tagline, short_description=short_description,
-
                             instructor=instructor,course_image=image,video_page_image=video_page_image, category_id=data.pk,
                             trainee_name = trainee_name, trainee_bio = trainee_bio, course_points=course_points,
                             xp_points_perq=xp_points_perq, certificate=certificate,
@@ -164,10 +163,10 @@ def csmEdit(request, course_id):
             certificate = request.FILES.get('certificate')
 
             Course_name.modified=datetime.datetime.now()
-
+            
             if  image_file:
                 Course_name.course_image =image_file
-
+            
             else:
                 if not Course_name.course_image:
                     #message="Please select an image"
@@ -182,7 +181,7 @@ def csmEdit(request, course_id):
                     return redirect("csmEdit",course_id)
 
 
-            Course_name.difficulty_level = request.POST["difficulty_level"]
+            #Course_name.difficulty_level = request.POST["difficulty_level"]
 
 
             if  video_page_image:
@@ -191,9 +190,9 @@ def csmEdit(request, course_id):
                 if not Course_name.video_page_image:
                     #message="Please select an image for video page"
                     return redirect("csmEdit",course_id)
-
+            
             #Course_name.difficulty_level = request.POST["difficulty_level"]
-
+            
             Course_name.requirements = request.POST["req"]
             Course_name.learnings = request.POST["learn"]
 

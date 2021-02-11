@@ -65,8 +65,8 @@ Course Details
                                   </div>
                                   <div class="">
                                       <img src="{% static 'images/money.png' %}" style="height:30px;" alt="">
-                                      {% if licenseInfo %}
-                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">{{ licenseInfo.u_wt }}</span>
+                                      {% if worktokens %}
+                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">{{ worktokens }}</span>
                                       {% else %}
                                        <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">0</span>
                                       {% endif %}
@@ -82,8 +82,8 @@ Course Details
                                   <div class="">
 
                                       <img src="{% static 'images/token.png' %}" style="height:30px;" alt="">
-                                      {% if licenseInfo %}
-                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">{{ licenseInfo.u_mCredits }}</span>
+                                      {% if mcCredits %}
+                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">{{ mcCredits }}</span>
                                       {% else %}
 
                                       <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">0</span>
@@ -287,10 +287,13 @@ Course Details
 
                         <div class="course-details ">
                             <h1 class="text-dark"><b> {{ course_details.title }}</b></h1>
+
                             <h6 class="text-dark"> {{ course_details.meta_description }} </h6>
 
                             <h6 class="text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam </h6>
                             <h5 class="text-dark "><b><a class="uil uil-user mx-2"></a>1200 Enrolled</b></h5>
+                            <h6 class="text-dark"> {{ course_details.tagline }} </h6>
+
 
                             <div class="course-details-info">
 
@@ -323,8 +326,11 @@ Course Details
 
                           <div class="my-0 text-center">
                             <div class="container py-0 rounded px-2" >
-                              <h4 class="text-dark">Instructor Name</h4>
+                              <!--<h4 class="text-dark">Instructor Name</h4>
                               <h6 class="text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</h6>
+                              -->
+                              <h4 class="text-dark">{{course_details.trainee_name}}</h4>
+                              <h6 class="text-dark">{{ course_details.trainee_bio}}</h6>
                             </div>
                           </div>
                       </div>
@@ -341,7 +347,13 @@ Course Details
         <div class="container my-3">
           <div class="uk-child-width-1-2@s uk-flex">
             <div class="mx-2">
-              <button class="uk-button uk-button-primary uk-button-large uk-width-expand" style="border-radius:3px;">Start Course</button>
+
+                <!--<button class="uk-button uk-button-primary uk-button-large uk-width-expand">Start Course</button>
+                -->
+                <a href="{% url 'courseLesson' course_id %}">
+                    <button class="uk-button uk-button-primary uk-button-large uk-width-expand">Start Course</button>
+                </a>
+
             </div>
 
             <div class="mx-2">
