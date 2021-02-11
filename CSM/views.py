@@ -14,10 +14,10 @@ def csmDashboard(request):
             if 'courseDelete' in request.POST:
                 print("Delete Course")
                 c_id = request.POST['del_id']
-                
+
                 c_id=int(c_id[4:])
                 print("c_id is ",c_id)
-                
+
                 try:
 
                     course_object=Course.objects.get(id=c_id)
@@ -27,7 +27,7 @@ def csmDashboard(request):
                     #course_del = Course.objects.get(id=c_id).delete()
                     course_del = course_object.delete()
                     messages.success(request, "Deleted successfully")
-                   
+
                 except:
                     messages.error(request, "Some error occured")
 
@@ -126,6 +126,7 @@ def csmAddCourse(request,cat_id):
                             instructor=instructor,course_image=image,video_page_image=video_page_image, category_id=data.pk,
                             trainee_name = trainee_name, trainee_bio = trainee_bio, course_points=course_points,
                             xp_points_perq=xp_points_perq, certificate=certificate,
+
                             requirements=requirements, learnings=learnings)
             create.save()
 
@@ -171,13 +172,17 @@ def csmEdit(request, course_id):
                     #message="Please select an image"
                     return redirect("csmEdit",course_id)
                     #return render(request,'csm_edit_course.html',{"message":message})
-            
+
             if  certificate:
                 Course_name.certificate =certificate
             else:
                 if not Course_name.certificate:
                     #message="Please select an image"
                     return redirect("csmEdit",course_id)
+
+
+            #Course_name.difficulty_level = request.POST["difficulty_level"]
+
 
             if  video_page_image:
                 Course_name.video_page_image = video_page_image
@@ -190,7 +195,7 @@ def csmEdit(request, course_id):
             
             Course_name.requirements = request.POST["req"]
             Course_name.learnings = request.POST["learn"]
-            
+
             Course_name.save()
             inst=RoleDetail.objects.all()
             messages.success(request, "Course Edited Successfully!")
@@ -205,11 +210,11 @@ def csmEdit(request, course_id):
         context={
             'data': Course_name,
             'inst': inst,
-            'f_req':f_req, 
-            's_req':s_req, 
+            'f_req':f_req,
+            's_req':s_req,
             'l_req':l_req,
-            'f_learn':f_learn, 
-            's_learn':s_learn, 
+            'f_learn':f_learn,
+            's_learn':s_learn,
             'l_learn':l_learn
         }
         print(Course_name)
@@ -224,7 +229,7 @@ def video_duration(seconds):
     seconds%=3600
     minutes=seconds//60
     seconds%=60
-    return f"{hours}:{minutes}:{seconds}"    
+    return f"{hours}:{minutes}:{seconds}"
 
 
 def csmAddCurriculam(request,curr_id):
@@ -279,7 +284,11 @@ def csmAddCurriculam(request,curr_id):
                         unit = Week_Unit(unit_id_id=week_private.pk,unit_video1=unit_video1, unit_video2=unit_video2, unit_video3=unit_video3,
                                        uCapOne=unit_captionOne,u_capThree=unit_captionThree,uCap2=unit_captionTwo,
                                        video1_duration=video1_duration, video2_duration=video2_duration,video3_duration=video3_duration)
-                        unit.save()        
+
+                        unit.save()
+
+                        unit.save()
+
                         messages.success(request, "Unit added to week")
                     else:
                         messages.error(request, "Wrong Lesson Id")
@@ -362,4 +371,3 @@ def csmDeleteQues(request,delId,w_id):
     messages.success(request,
                      "Question deleted")
     return redirect('csmAddQuizz',w_id)
-
