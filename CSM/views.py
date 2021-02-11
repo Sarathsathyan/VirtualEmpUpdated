@@ -181,10 +181,10 @@ def csmEdit(request, course_id):
                     #message="Please select an image"
                     return redirect("csmEdit",course_id)
 
-<<<<<<< HEAD
+
             Course_name.difficulty_level = request.POST["difficulty_level"]
 
-=======
+
             if  video_page_image:
                 Course_name.video_page_image = video_page_image
             else:
@@ -194,7 +194,6 @@ def csmEdit(request, course_id):
 
             #Course_name.difficulty_level = request.POST["difficulty_level"]
 
->>>>>>> d17d77d4c0a1422e52b11065a2bdd87f9a59fbfc
             Course_name.requirements = request.POST["req"]
             Course_name.learnings = request.POST["learn"]
 
@@ -286,12 +285,11 @@ def csmAddCurriculam(request,curr_id):
                         unit = Week_Unit(unit_id_id=week_private.pk,unit_video1=unit_video1, unit_video2=unit_video2, unit_video3=unit_video3,
                                        uCapOne=unit_captionOne,u_capThree=unit_captionThree,uCap2=unit_captionTwo,
                                        video1_duration=video1_duration, video2_duration=video2_duration,video3_duration=video3_duration)
-<<<<<<< HEAD
+
                         unit.save()
 
-=======
                         unit.save()
->>>>>>> d17d77d4c0a1422e52b11065a2bdd87f9a59fbfc
+
                         messages.success(request, "Unit added to week")
                     else:
                         messages.error(request, "Wrong Lesson Id")
