@@ -133,8 +133,10 @@ def activatecode(request):
                         used_key = UsedLicense(u_key=key.key)
                         used_key.save()
                         user.user_license = license_key
-
+                        user.user_workTokens=key.workTokens
+                        user.user_mcCredits=key.mcCredits
                         user.save()
+
                         key.delete()
                         messages.success(request, "License Key applied !")
                         return redirect('usercfp')
@@ -197,7 +199,7 @@ def userRegister(request):
                                      password=password)
             u_id = User.objects.get(username=username)
             addusr = UserDetails(user_id=u_id, user_pass=password, user_phone=userphone, user_unique=unique_id,
-                                 user_license=license_key)
+                                 user_license=license_key, user_mcCredits=0, user_workTokens=0)
             addusr.save()
             ref_user = Reference(user_id=u_id, ref_id=reference_id, used_peoples=None, used_id=None)
             ref_user.save()

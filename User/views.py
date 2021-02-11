@@ -72,7 +72,9 @@ def userCfp(request):
             's_courses': s_courses,
             'data': data,
             's_data': s_data,
-            'c_data': c_data
+            'c_data': c_data,
+            'worktokens':details.user_workTokens,
+            'mcCredits':details.user_mcCredits
         }
         return render(request, 'userCFP.html', context)
     else:
@@ -107,12 +109,15 @@ def userDashboard(request):
             blogs = BlogHeight.objects.all()
         course = Course.objects.get(category_id=createCourse.pk)
         print(course.title)
+        print("user_details.user_mcCredits",user_details.user_mcCredits)
         context={
             'careerChoice' :careerChoice,
             'course':course,
             'blog_cag': blog_cag,
             'blogs': blogs,
             'cour':cour,
+            'mcCredits':user_details.user_mcCredits,
+            'worktokens':user_details.user_workTokens
         }
         return render(request,'userDashboard.html',context)
     else:
@@ -123,6 +128,7 @@ def userDashboard(request):
 def userCourseIntro(request,course_id):
     if request.user.is_active:
         course=Course.objects.get(id=course_id)
+        user_details = UserDetails.objects.get(user_id=request.user.pk)
         if course:
             short_desp=course.short_description
             f_req, s_req, l_req =re.split("_",course.requirements)
@@ -165,6 +171,8 @@ def userCourseIntro(request,course_id):
                 'course_duration_hr':hr, 
                 'course_duration_min':min,
                 'course_duration_sec':sec,
+                'mcCredits':user_details.user_mcCredits,
+                'worktokens':user_details.user_workTokens
             }
             for topic in Week_Unit.objects.all():
                 print(topic.video1_duration)
@@ -177,6 +185,8 @@ def userCourseIntro(request,course_id):
         context ={
             'course_id':course_id,
             'week':week,
+            'mcCredits':user_details.user_mcCredits,
+            'worktokens':user_details.user_workTokens
         }
         return render(request,'userCourseIntro.html',context)
     else:
@@ -184,10 +194,11 @@ def userCourseIntro(request,course_id):
 
 def userCourseLesson(request, c_id):
     if request.user.is_active:
+        user_details = UserDetails.objects.get(user_id=request.user.pk)
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
-        video =None;
+        video =None
         week = Week.objects.filter(week_id_id=course.pk)
         weekUnit = Week_Unit.objects.all()
         status=None
@@ -232,7 +243,10 @@ def userCourseLesson(request, c_id):
             'video':video,
             'data':data,
             'status':status,
-            'remain':remainingTime
+            'remain':remainingTime,
+            'video_page_image':course.video_page_image,
+            'mcCredits':user_details.user_mcCredits,
+            'worktokens':user_details.user_workTokens
         }
         return render(request,'userCourseLesson.html',context)
     else:
@@ -276,6 +290,8 @@ def userprofile(request):
                 'tech_skills':tech_skills,
                 'man_skills':man_skills,
                 'lan_skills':lan_skills,
+                'mcCredits':user_details.user_mcCredits,
+                'worktokens':user_details.user_workTokens
                 #'cfp_name':cfp_name
             }
             if UserContact.objects.filter(user_id_id=user_details.pk).exists():
@@ -312,6 +328,8 @@ def userprofile(request):
                     'tech_skills':tech_skills,
                     'man_skills':man_skills,
                     'lan_skills':lan_skills,
+                    'mcCredits':user_details.user_mcCredits,
+                    'worktokens':user_details.user_workTokens
                     #'cfp_name':cfp_name
 
 
@@ -369,13 +387,17 @@ def userprofile(request):
                         'lan_skills':lan_skills,
                         'cfp_name':cfp_name,
                         'total_xp_earned':total_xp_earned,
-                        'course_points':course_points
+                        'course_points':course_points,
+                        'mcCredits':user_details.user_mcCredits,
+                        'worktokens':user_details.user_workTokens
                     }
                     return render(request, "userProfile.html", context)
                 return render(request, "userProfile.html", context)
             return render(request,"userProfile.html",context)
         context = {
             'user_data' : user_details,
+            'mcCredits':user_details.user_mcCredits,
+            'worktokens':user_details.user_workTokens
             #'cfp_name':cfp_name
         }
         return render(request,"userProfile.html",context)
@@ -660,6 +682,8 @@ def userProfileEdit(request):
             context ={
                 'user_detail' : user_detail,
                 'users' : users,
+                'mcCredits':user_details.user_mcCredits,
+                'worktokens':user_details.user_workTokens
 
 
             }
@@ -716,7 +740,9 @@ def userProfileEdit(request):
                     'work':work,
                     'tech_skills':tech_skills,
                     'man_skills':man_skills,
-                    'lan_skills':lan_skills
+                    'lan_skills':lan_skills,
+                    'mcCredits':user_detail.user_mcCredits,
+                    'worktokens':user_detail.user_workTokens
 
                 }
 
@@ -729,7 +755,9 @@ def userProfileEdit(request):
                     'lan_skills':lan_skills,
                     'user_detail': user_detail,
                     'users': users,
-                    "edd":1
+                    "edd":1,
+                    'mcCredits':user_detail.user_mcCredits,
+                    'worktokens':user_detail.user_workTokens
                 }
                 return render(request,'userProfileEdit.html',context)
             return render(request,'userProfileEdit.html',context)
@@ -738,6 +766,8 @@ def userProfileEdit(request):
                 "idd":1,
                 "edd":1,
                 'user_detail':user_detail,
+                'mcCredits':user_detail.user_mcCredits,
+                'worktokens':user_detail.user_workTokens
             }
             idd =1
             return render(request,'userProfileEdit.html',context)

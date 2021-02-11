@@ -36,20 +36,24 @@ class Course(models.Model):
     tagline=models.CharField(max_length=50)
     short_description=models.CharField(max_length=100)
     course_image=models.ImageField(upload_to='csm_images/',null=True,blank=True)
-
-    difficulty_level=models.CharField(max_length=20, choices=DIFFICULTY_LEVEL,null=True, blank=True)
+    video_page_image=models.ImageField(upload_to='csm_images/',null=True,blank=True)
+    #difficulty_level=models.CharField(max_length=20, choices=DIFFICULTY_LEVEL,null=True, blank=True)
     instructor=models.CharField(max_length=200,null=True, blank=True)
-
+    """
     # meta section
     meta_keywords=models.TextField(blank=True)
     meta_description=models.TextField(blank=True)
+    """
+    #trainee data
+    trainee_name=models.CharField(max_length=64,blank=True)
+    trainee_bio=models.TextField(blank=True)
 
     # rewards
     course_points=models.IntegerField(default=0)
 
     xp_points_perq=models.IntegerField(default=0)
 
-    xp_points=models.IntegerField(default=0)
+    #xp_points=models.IntegerField(default=0)
 
     certificate= models.FileField(upload_to="csm_certificates/",null=True)
 
