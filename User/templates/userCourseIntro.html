@@ -291,18 +291,15 @@ Course Details
                             <h6 class="text-dark"> {{ course_details.meta_description }} </h6>
 
                             <h6 class="text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam </h6>
-                            <h5 class="text-dark "><b><a class="uil uil-user mx-2"></a>1200 Enrolled</b></h5>
                             <h6 class="text-dark"> {{ course_details.tagline }} </h6>
+                            <h5 class="text-dark "><b><a class="uil uil-user mx-2"></a>1200 Enrolled</b></h5>
 
 
                             <div class="course-details-info">
 
                                 <ul>
-                                    <li> Created by <a href="#"> {{ course_details.user.first_name }}
-                                        {{ course_details.user.last_name }} </a> </li>
-                                    <li> Email : {{ course_details.user.email }}</li>
-                                    <!--<li> Last updated : 26/01/2020</li> -->
-                                    <li> Last updated : {{course_details.modified|date:'d/m/Y'}}</li>
+
+                                    <h5 class="text-dark"> Last updated : {{course_details.modified|date:'d/m/Y'}}</h5>
                                 </ul>
 
                             </div>
@@ -351,13 +348,13 @@ Course Details
                 <!--<button class="uk-button uk-button-primary uk-button-large uk-width-expand">Start Course</button>
                 -->
                 <a href="{% url 'courseLesson' course_id %}">
-                    <button class="uk-button uk-button-primary uk-button-large uk-width-expand">Start Course</button>
+                    <button class="uk-button uk-button-primary uk-button-large uk-width-expand" style="border-radius:3px;">Start Course</button>
                 </a>
 
             </div>
 
             <div class="mx-2">
-              <button class="uk-button uk-button-primary uk-button-large uk-width-expand" style="border-radius:3px;"><i class="uil-lock"></i>Start Major Project</button>
+              <button class="uk-button uk-button-primary uk-button-large uk-width-expand" style="border-radius:3px;"><i class="uil-lock"></i> &nbsp; Start Major Project</button>
             </div>
 
 
@@ -497,10 +494,10 @@ Course Details
 
 
                         <div class="m-2 p-2 rounded text-center" style="background:#4b1995">
-                          <h3 class="text-light">This Course Includes</h3>
+                          <h3 class="text-light my-2">This Course Includes</h3>
                         </div>
                         <div class="mx-5">
-                          <div class=" m-2 p-2 rounded text-center" >
+                          <div class=" m-2 p-2 rounded " >
                               <div class="my-2">
                                   <span><i class="uil-youtube-alt"></i> {{course_duration_hr}}hr {{course_duration_min}}min {{course_duration_sec}}sec video</span>
                               </div>
