@@ -8,9 +8,161 @@ Course Details
 
     <!-- Header Container
         ================================================== -->
-    {% include 'userPartials/_header.html' %}
-    
-    
+
+        {% load static %}
+        {#   Header starts  #}
+
+            <header class="header uk-light" uk-sticky style="background:#07192b">
+
+                    <div class="container">
+
+                        <nav uk-navbar>
+
+
+                            <!-- left Side Content -->
+                            <div class="uk-navbar-left">
+         <div class="searchbox uk-visible@s">
+
+                                    <input class="uk-search-input" type="search" placeholder="Search...">
+                                    <button class="btn-searchbox"> </button>
+
+                                </div>
+                                <!-- logo -->
+                                <a href="{% url 'userdashboard' %}" class="logo">
+                                    <img src="{% static 'images/VES.png' %}" alt="">
+                                    <span> Virtual Empleado</span>
+                                </a>
+
+                                <!-- breadcrumbs -->
+                                <nav id="breadcrumbs">
+                                    <ul>
+                                        <!-- <li><a href="/userdashboard/" style="color: black;font-weight: bold;font-size: 20px;"> My Dashboard </a></li> -->
+
+                                    </ul>
+                                </nav>
+
+
+                            </div>
+
+
+                            <!--  Right Side Content   -->
+
+                            <div class="uk-navbar-right">
+
+                                <div class="header-widget" >
+                                    <!-- User icons close mobile-->
+                                    <span class="icon-feather-x icon-small uk-hidden@s"
+                                        uk-toggle="target: .header-widget ; cls: is-active"> </span>
+
+
+                                    <!-- profile-icon-->
+                                <!-- profile-icon-->
+
+                                <div class="uk-flex-inline mt-1 mx-4">
+                                  <div class="mx-2">
+                                    <!-- <h6>MC Creadits</h6> -->
+                                    <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 3px;">Work Tokens</p>
+                                  </div>
+                                  <div class="">
+                                      <img src="{% static 'images/money.png' %}" style="height:30px;" alt="">
+                                      {% if licenseInfo %}
+                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">{{ licenseInfo.u_wt }}</span>
+                                      {% else %}
+                                       <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">0</span>
+                                      {% endif %}
+
+                                  </div>
+                                </div>
+
+                                <div class="uk-flex-inline mt-1">
+                                  <div class="mx-2">
+                                    <!-- <h6>MC Creadits</h6> -->
+                                    <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 3px;">MC Credits</p>
+                                  </div>
+                                  <div class="">
+
+                                      <img src="{% static 'images/token.png' %}" style="height:30px;" alt="">
+                                      {% if licenseInfo %}
+                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">{{ licenseInfo.u_mCredits }}</span>
+                                      {% else %}
+
+                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">0</span>
+                                      {% endif %}
+                                  </div>
+                                </div>
+
+
+                                    {% if user.is_authenticated %}
+
+                                    <a href="#" class="header-widget-icon profile-icon" >
+        {#                                <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="" class="header-profile-icon">#}
+
+                                    <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 5px;"><a class="uil uil-user mx-2"></a>{{ user.first_name }} {{ user.last_name }}</p>
+                                    </a>
+                                {% endif %}
+
+                                    <div uk-dropdown="pos: top-right ;mode:click" class="dropdown-notifications small">
+
+                                        <!-- User Name / Avatar -->
+                                        <a href="profile-1.html">
+
+                                            <div class="dropdown-user-details">
+        {#                                        <div class="dropdown-user-avatar">#}
+        {#                                            <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="">#}
+        {#                                        </div>#}
+                                                {% if user.is_authenticated %}
+                                                <div class="dropdown-user-name" style="font-weight: bold;">
+                                                    {{ user.first_name }} {{ user.last_name }}<span>Trainee <p class="m-0"> Member since : {{ user.date_joined   }} </p> <p class="m-0">Reference ID : {{ reference }} </p></span>
+                                                </div>
+
+                                                {% endif %}
+                                            </div>
+
+                                        </a>
+
+                                        <!-- User menu -->
+
+                                        <ul class="dropdown-user-menu">
+                                            <li>
+                                                <a href="{% url 'userdashboard' %}">
+                                                    <i class="icon-material-outline-dashboard"></i> Dashboard</a>
+
+                                            </li>
+
+                                            <li><a href="{% url 'userprofileedit' %}">
+                                                    <i class="icon-feather-settings"></i> Edit Profile</a>
+                                            </li>
+                                            <li><a href="{% url 'usercfp' %}">
+                                                    <i class="icon-feather-slack"></i> Choose CFP</a>
+                                            </li>
+                                            <li class="menu-divider">
+                                            {% if user.is_authenticated %}
+                                            <li><a href="{% url 'logout' %}">
+                                                    <i class="icon-feather-log-out"></i> Sign Out</a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- icon search-->
+                                <a class="uk-navbar-toggle uk-hidden@s"
+                                    uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#">
+                                    <i class="uil-search icon-small"></i>
+                                </a>
+
+                                <!-- User icons -->
+                                    <a href="#" class="uil-user icon-small uk-hidden@s"
+                                    uk-toggle="target: .header-widget ; cls: is-active">
+                                    </a>
+                            </div>
+                            <!-- End Right Side Content / End -->
+                        </nav>
+                    </div>
+                    <!-- container  / End -->
+                </header>
+
+
+
     <!-- overlay seach on mobile-->
     <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
         style="z-index: 10000;">
@@ -126,23 +278,24 @@ Course Details
     <!-- content -->
     <div class="page-content">
 
-        <div class="course-details-wrapper topic-1 uk-light pt-5">
+        <div class="course-details-wrapper  uk-light pt-5" style="background:#f6bb33;">
 
             <!--<div class="container p-sm-0" >-->
             <div class="container p-sm-0">
                 <div uk-grid>
                     <div class="uk-width-2-3@m">
 
-                        <div class="course-details">
-                            <h1> {{ course_details.title }}</h1>
-                            <p> {{ course_details.meta_description }} </p>
+                        <div class="course-details ">
+                            <h1 class="text-dark"><b> {{ course_details.title }}</b></h1>
+                            <h6 class="text-dark"> {{ course_details.meta_description }} </h6>
 
+                            <h6 class="text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam </h6>
 
 
                             <div class="course-details-info">
 
                                 <ul>
-                                    <li> Created by <a href="#"> {{ course_details.user.first_name }} 
+                                    <li> Created by <a href="#"> {{ course_details.user.first_name }}
                                         {{ course_details.user.last_name }} </a> </li>
                                     <li> Email : {{ course_details.user.email }}</li>
                                     <!--<li> Last updated : 26/01/2020</li> -->
@@ -151,25 +304,71 @@ Course Details
 
                             </div>
                         </div>
-                        <nav class="responsive-tab style-5">
-                            <ul
-                                uk-switcher="connect: #course-intro-tab ;animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium">
-                                <li><a href="#">Overview</a></li>
-                                <li><a href="#">Curriculum</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Announcement</a></li>
-                                <li><a href="#">Reviews</a></li>
-
-                            </ul>
-                        </nav>
 
                     </div>
+
+
+                    <div class="uk-width-1-3 ">
+                      <div class="rounded p-3 my-2" style="background:white;">
+                          <div class="">
+                              <img src="{% static 'images/VE.png'%}" alt="">
+                          </div>
+
+                          <div class="my-3">
+                            <div class="container py-2 rounded text-center" style="background:#4b1995;">
+                              <h2 class="text-white">About Trainee</h2>
+
+                            </div>
+                          </div>
+
+                          <div class="my-0">
+                            <div class="container py-0 rounded px-2" >
+                              <h4 class="text-dark">Instructor Name</h4>
+                              <h6 class="text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</h6>
+                            </div>
+                          </div>
+                      </div>
+
+
+                    </div>
+
+
                 </div>
 
             </div>
         </div>
 
+        <div class="container my-3">
+          <div class="uk-child-width-1-2@s uk-flex">
+            <div class="mx-2">
+              <button class="uk-button uk-button-primary uk-button-large uk-width-expand">Start Course</button>
+            </div>
+
+            <div class="mx-2">
+              <button class="uk-button uk-button-primary uk-button-large uk-width-expand"><i class="uil-lock"></i>Start Major Project</button>
+            </div>
+
+
+          </div>
+        </div>
+
+
         <div class="container">
+
+
+
+          <nav class="responsive-tab style-5">
+              <ul
+                  uk-switcher="connect: #course-intro-tab ;animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium">
+                  <li><a href="#">Overview</a></li>
+                  <li><a href="#">Curriculum</a></li>
+
+
+              </ul>
+          </nav>
+
+
+
 
             <div class="uk-grid-large mt-4 " uk-grid>
                 <div class="uk-width-2-3@m">
@@ -232,7 +431,7 @@ Course Details
                                     <a class="uk-accordion-title" href="#"> {{ curriculam.week_name}} </a>
                                     <div class="uk-accordion-content">
 
-                                        <!-- course-video-list 
+                                        <!-- course-video-list
                                             {% for topic in topics %}
                                                 {% if topic.week_id_id == curriculam.pk %}
                                             <ul class="course-curriculum-list">
@@ -278,58 +477,46 @@ Course Details
                     </ul>
                 </div>
 
-                <div class="uk-width-1-3@m pt-5 ">
-                    <div class="course-card-trailer">
-                        {% if course_details.course_image %}
-                        <div class="course-thumbnail">
-                            <img src="{{ course_details.course_image.url }}" alt="">
-                            <a class="play-button-trigger show" href="#" uk-toggle> </a>
+                <div class="uk-width-1-3@m pt-4 ">
+
+
+                    <div class="container rounded" style="background:white;">
+                      <div class="">
+
+
+                        <div class="m-2 p-2 rounded text-center" style="background:#4b1995">
+                          <h3 class="text-light">The Course Includes</h3>
                         </div>
-                        {% else %}
-                        {% endif %}
-
-
-
-
-                        <div class="p-3 mt-5">
-
-                            <p> 1 Hour Left At This price</p>
-
-                            <div class="uk-child-width-1-2 uk-grid-small mb-4" uk-grid>
-                                <div>
-                                    <a href="{% url 'courseLesson' course_id %}"
-                                        class="uk-width-1-1 btn btn-default transition-3d-hover play"><i
-                                            class="uil-play"></i> Start </a>
-                                </div>
-
-                            </div>
-
-                            <p class="uk-text-bold"> This Course Include </p>
-
-                            <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
-                                <div>
-                                    <span><i class="uil-youtube-alt"></i> {{course_duration_hr}}hr {{course_duration_min}}min {{course_duration_sec}}sec video</span>
-                                </div>
-                                <div>
-                                    <span> <i class="uil-award"></i>  Certificate </span>
-                                </div>
-                                <div>
-                                    <span> <i class="uil-file-alt"></i> {{ lessons.count }} Weeks </span>
-                                </div>
-                                <div>
-                                    <span> <i class="uil-video"></i> {{course_details.course_points}} XP points </span>
-                                </div>
-                                <div>
-                                    <span> <i class="uil-award"></i>24x7 Support </span>
-                                </div>
-                                <div>
-                                    <span> <i class="uil-clock-five"></i> Lifetime access </span>
-                                </div>
-                            </div>
+                        <div class="mx-5">
+                          <div class=" m-2 p-2 rounded " >
+                              <div class="my-2">
+                                  <span><i class="uil-youtube-alt"></i> {{course_duration_hr}}hr {{course_duration_min}}min {{course_duration_sec}}sec video</span>
+                              </div>
+                              <div class="my-2">
+                                  <span> <i class="uil-award"></i>  Certificate </span>
+                              </div>
+                              <div class="my-2">
+                                  <span> <i class="uil-file-alt"></i> {{ lessons.count }} Weeks </span>
+                              </div>
+                              <div class="my-2">
+                                  <span> <i class="uil-video"></i> {{course_details.course_points}} XP points </span>
+                              </div>
+                              <div class="my-2">
+                                  <span> <i class="uil-award"></i>24x7 Support </span>
+                              </div>
+                              <div class="my-2">
+                                  <span> <i class="uil-clock-five"></i> Lifetime access </span>
+                              </div>
+                          </div>
                         </div>
+
+
+                      </div>
                     </div>
 
-                    <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-margin-medium-top"
+
+
+                    <!-- <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-margin-medium-top"
                         data-src="https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80"
                         data-srcset="https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80 650w,
                                           https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=1300&h=866&q=80 1300w"
@@ -338,7 +525,7 @@ Course Details
                             <h3>Complete your course and unlock <br />MAJOR PROJECT</h3>
                             <i class="uil-lock" style="font-size: 5rem; color:#fff;"></i>
                         </center>
-                    </div>
+                    </div> -->
 
                 </div>
 
