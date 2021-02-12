@@ -294,7 +294,8 @@ def userprofile(request):
                 'man_skills':man_skills,
                 'lan_skills':lan_skills,
                 'mcCredits':user_details.user_mcCredits,
-                'worktokens':user_details.user_workTokens
+                'worktokens':user_details.user_workTokens,
+                'numberCfp':user_details.numberCfp
                 #'cfp_name':cfp_name
             }
             if UserContact.objects.filter(user_id_id=user_details.pk).exists():
@@ -332,7 +333,8 @@ def userprofile(request):
                     'man_skills':man_skills,
                     'lan_skills':lan_skills,
                     'mcCredits':user_details.user_mcCredits,
-                    'worktokens':user_details.user_workTokens
+                    'worktokens':user_details.user_workTokens,
+                    'numberCfp':user_details.numberCfp
                     #'cfp_name':cfp_name
 
 
@@ -394,7 +396,8 @@ def userprofile(request):
                         'total_xp_earned':total_xp_earned,
                         'course_points':course_points,
                         'mcCredits':user_details.user_mcCredits,
-                        'worktokens':user_details.user_workTokens
+                        'worktokens':user_details.user_workTokens,
+                        'numberCfp':user_details.numberCfp
                     }
                     return render(request, "userProfile.html", context)
                 return render(request, "userProfile.html", context)
@@ -402,7 +405,8 @@ def userprofile(request):
         context = {
             'user_data' : user_details,
             'mcCredits':user_details.user_mcCredits,
-            'worktokens':user_details.user_workTokens
+            'worktokens':user_details.user_workTokens,
+            'numberCfp':user_details.numberCfp
             #'cfp_name':cfp_name
         }
         return render(request,"userProfile.html",context)
@@ -687,8 +691,9 @@ def userProfileEdit(request):
             context ={
                 'user_detail' : user_detail,
                 'users' : users,
-                'mcCredits':user_details.user_mcCredits,
-                'worktokens':user_details.user_workTokens
+                'mcCredits':user_detail.user_mcCredits,
+                'worktokens':user_detail.user_workTokens,
+                
 
 
             }

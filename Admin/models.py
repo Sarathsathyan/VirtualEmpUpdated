@@ -15,6 +15,7 @@ class UserDetails(models.Model):
     user_cfp = models.BooleanField(default=False,blank=True)
     user_workTokens = models.IntegerField(default=1)
     user_mcCredits = models.IntegerField(default=1)
+    numberCfp = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.user_id) if self.user_id else ''
@@ -46,10 +47,7 @@ class CareerCategory(models.Model):
 
     def __str__(self):
         return self.category
-    """
-    def __str__(self):
-        return f"pk: {self.pk} category_id: {self.category_id}: {self.category}"
-    """
+    
 class SubCategory(models.Model):
     cat_id=models.ForeignKey(CareerCategory,on_delete=models.CASCADE)
     sub_category=models.CharField(max_length=255)
@@ -57,10 +55,7 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.sub_category
-    """
-    def __str__(self):
-        return f"pk: {self.pk}, cat_id: {self.cat_id}, sub_category: {self.sub_category}, create_date: {self.create_date}"
-    """
+    
 
 class CategoryCourse(models.Model):
     cat_id = models.ForeignKey(CareerCategory,on_delete=models.CASCADE)
@@ -69,10 +64,7 @@ class CategoryCourse(models.Model):
 
     def __str__(self):
         return self.cfp
-    """
-    def __str__(self):
-        return f"pk: {self.pk}, cat_id: {self.cat_id}, sub_id: {self.sub_id}, cfp: {self.cfp}"
-    """
+    
 
 class AdminLicense(models.Model):
     key = models.CharField(max_length=100)

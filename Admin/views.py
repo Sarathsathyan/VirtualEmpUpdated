@@ -135,8 +135,8 @@ def activatecode(request):
                         user.user_license = license_key
                         user.user_workTokens=key.workTokens
                         user.user_mcCredits=key.mcCredits
+                        user.numberCfp= key.numberCfp
                         user.save()
-
                         key.delete()
                         messages.success(request, "License Key applied !")
                         return redirect('usercfp')
@@ -180,6 +180,7 @@ def userRegister(request):
             v = validate_email(email)
             val_email = v["email"]
         except EmailNotValidError as e:
+            print("email error ", e)
             messages.error(request, 'Invalid Email ID')
             return redirect('register')
         if password != conform:
