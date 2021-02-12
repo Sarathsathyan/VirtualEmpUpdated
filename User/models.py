@@ -75,6 +75,7 @@ class userProgress(models.Model):
     status = models.BooleanField(default=False)
     currentTime = models.DateTimeField(null=True)
     endTime = models.DateTimeField(null=True)
+    currentWeek = models.IntegerField(default=1,null=True)
 
     def __str__(self):
         return self.status

@@ -206,14 +206,22 @@
                                     </a>
                                     <form method="post">{% csrf_token %}
                                         <input type="text" value="{{ i.pk }}" name="weekId" hidden>
-                                        {% if status %}
-                                        {% else %}
+                                    {% if forloop.counter == start %}
 
-                                            <span style="color: black">
+                                    <span style="color: black">
                                             <button type="submit" style="color: #0c002b;background-color: #0b7ec4"
                                                     name="start">Start</button>
                                         </span>
-                                        {% endif %}
+                                    {% endif %}
+
+{#                                        {% if status %}#}
+{#                                        {% else %}#}
+{##}
+{#                                            <span style="color: black">#}
+{#                                            <button type="submit" style="color: #0c002b;background-color: #0b7ec4"#}
+{#                                                    name="start">Start</button>#}
+{#                                        </span>#}
+{#                                        {% endif %}#}
                                     </form>
 
                                     <div class="uk-accordion-content">
@@ -266,9 +274,12 @@
                                         </ul>
                                         <input type="text" value="{{ i.pk }}" id="qId" hidden>
                                         <b>
+                                            {% if testId %}
                                             <input type="button" class="btn btn-primary" id="startTest"
                                                    value="Start Test"/>
                                             <a id="startTest" href="{% url 'userquizz' i.pk %}">ProgressiveTest </a>
+                                            {% else %}
+                                            {% endif %}
                                         </b>
                                         <input class="lesson_checkbox"
                                                type="checkbox">

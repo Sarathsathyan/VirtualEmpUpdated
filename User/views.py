@@ -117,10 +117,16 @@ def userCourseLesson(request, c_id):
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
         # data.delete()
+        start = 0
+        if not data:
+            start = 1
+
         video =None;
         week = Week.objects.filter(week_id_id=course.pk)
         weekUnit =Week_Unit.objects.all()
         status=None
+        # start test
+        testID = False
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
@@ -132,8 +138,8 @@ def userCourseLesson(request, c_id):
                     print(current_time)
                     end_date = current_time + datetime.timedelta(days=7)
                     print(end_date)
-
-                    data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date)
+                    start = start + 1
+                    data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date, currentWeek=start)
                     data.save()
                 return redirect('courseLesson',c_id)
             if 'videoOne' in request.POST:
@@ -154,6 +160,10 @@ def userCourseLesson(request, c_id):
                 if(d.weekId_id == i.pk):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
+                        if remainingTime.days == 0:
+                            testID = True
+
+
 
 
         print(status)
@@ -163,7 +173,9 @@ def userCourseLesson(request, c_id):
             'video':video,
             'data':data,
             'status':status,
-            'remain':remainingTime
+            'remain':remainingTime,
+            'testId' : testID,
+            'start':start
         }
         return render(request,'userCourseLesson.html',context)
     else:
