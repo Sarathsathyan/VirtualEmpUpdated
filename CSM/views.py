@@ -4,7 +4,9 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from .models import Course,CreateCourse,Week_Unit,Week,Quizz
 from Admin.models import CategoryCourse,CareerCategory,SubCategory,RoleDetail
+import datetime
 # Create your views here.
+from moviepy.editor import VideoFileClip
 
 def csmDashboard(request):
     if request.user.is_active:
@@ -12,10 +14,10 @@ def csmDashboard(request):
             if 'courseDelete' in request.POST:
                 print("Delete Course")
                 c_id = request.POST['del_id']
-                
+
                 c_id=int(c_id[4:])
                 print("c_id is ",c_id)
-                
+
                 try:
 
                     course_object=Course.objects.get(id=c_id)
@@ -25,7 +27,7 @@ def csmDashboard(request):
                     #course_del = Course.objects.get(id=c_id).delete()
                     course_del = course_object.delete()
                     messages.success(request, "Deleted successfully")
-                   
+
                 except:
                     messages.error(request, "Some error occured")
 
@@ -63,33 +65,21 @@ def chooseType(request):
             print(sub_cats)
         if 'first-sub' in request.POST:
             sub = request.POST['first-sub']
-            #print(sub)
             s_data = SubCategory.objects.get(sub_category=sub)
-            #print(s_data)
             s_courses = CategoryCourse.objects.filter(sub_id_id=s_data.pk)
-            #print(s_courses)
         if 'course' in request.POST:
             c_course = request.POST['course']
-            #print(c_course)
             c_data = CategoryCourse.objects.get(cfp=c_course)
-            #print(c_data)
         if 'course-submit' in request.POST:
             m_cat = request.POST['confirm_first_category']
-            #print("m_cat: ", m_cat)
             m_sub = request.POST['confirm_first_role']
-            #print("m_sub: ", m_sub)
             m_cfp = request.POST['course']
-            #print(m_cfp)
             data1 = CareerCategory.objects.get(category=m_cat)
-            #print("data1: ",data1)
             data2 = SubCategory.objects.get(sub_category=m_sub)
-            #print("data2: ", data2)
             data3 = CategoryCourse.objects.get(cfp=m_cfp)
-            #print("data3: ",data3)
             datas = CreateCourse(create_user_id=request.user.pk,create_category=data1.category,create_sub=data2.sub_category,
                                  create_course=data3.cfp)
             datas.save()
-            #print("datas: ",datas)
             messages.success(request, "Course Successfully Created Check Database")
             return redirect('csmAddCourse',datas.pk)
     cag_data = CareerCategory.objects.all()
@@ -107,7 +97,6 @@ def chooseType(request):
 
 def csmAddCourse(request,cat_id):
     if request.user.is_active:
-
         user = request.user
         inst = RoleDetail.objects.all()
         data = CreateCourse.objects.get(id = cat_id)
@@ -117,27 +106,27 @@ def csmAddCourse(request,cat_id):
             tagline = request.POST["tagline"]
             short_description = request.POST["description"]
             image = request.FILES.get('course_image')
+            video_page_image=request.FILES.get('video_page_image')
             category = request.POST["category"]
             role = request.POST["role"]
             course = request.POST["course"]
-            difficulty_level = request.POST["difficulty_level"]
+            #difficulty_level = request.POST["difficulty_level"]
             # lesson_title=request.POST["lesson_title"]
             # topic=request.POST["topic"]
-            meta_keywords = request.POST["meta_keywords"]
-            meta_description = request.POST["meta_description"]
+            #meta_keywords = request.POST["meta_keywords"]
+            #meta_description = request.POST["meta_description"]
+            trainee_name = request.POST["trainee_name"]
+            trainee_bio = request.POST["trainee_bio"]
             course_points = request.POST["course_points"]
-            certificate = request.POST["certificate"]
-            # quiz and certificate details are not added yet
-
-            #  Prerequisites
+            xp_points_perq=request.POST["xp_points_perq"]
+            certificate = request.FILES.get('upload_cont_img')
             requirements = request.POST["req"]
             learnings = request.POST["learn"]
+            create = Course(user_id=user.pk, title=title, tagline=tagline, short_description=short_description,
+                            instructor=instructor,course_image=image,video_page_image=video_page_image, category_id=data.pk,
+                            trainee_name = trainee_name, trainee_bio = trainee_bio, course_points=course_points,
+                            xp_points_perq=xp_points_perq, certificate=certificate,
 
-            create = Course(user_id=user.id, title=title, tagline=tagline, short_description=short_description,
-                            instructor=instructor,
-                            course_image=image, category_id=data.pk,
-                            difficulty_level=difficulty_level, meta_keywords=meta_keywords,
-                            meta_description=meta_description, course_points=course_points, certificate=certificate,
                             requirements=requirements, learnings=learnings)
             create.save()
 
@@ -160,26 +149,53 @@ def csmEdit(request, course_id):
             Course_name.instructor = request.POST["instructor_name"]
             Course_name.tagline = request.POST["tagline"]
             Course_name.short_description = request.POST["description"]
-            Course_name.meta_keywords = request.POST["meta_keywords"]
-            Course_name.meta_description = request.POST["meta_description"]
+            #Course_name.meta_keywords = request.POST["meta_keywords"]
+            #Course_name.meta_description = request.POST["meta_description"]
+            Course_name.trainee_name = request.POST["trainee_name"]
+            Course_name.trainee_bio = request.POST["trainee_bio"]
             image_file= request.FILES.get('course_image')
-            print("image_file",image_file)
-            Course_name.difficulty_level = request.POST["difficulty_level"]
+            video_page_image=request.FILES.get('video_page_image')
+            #print("image_file",image_file)
+            #Course_name.difficulty_level = request.POST["difficulty_level"]
             Course_name.course_points = request.POST["course_points"]
+
+            Course_name.xp_points_perq = request.POST["xp_points_perq"]
+            certificate = request.FILES.get('certificate')
+
+            Course_name.modified=datetime.datetime.now()
+            
             if  image_file:
                 Course_name.course_image =image_file
+            
             else:
                 if not Course_name.course_image:
-                    message="Please! Select Image"
+                    #message="Please select an image"
                     return redirect("csmEdit",course_id)
                     #return render(request,'csm_edit_course.html',{"message":message})
 
+            if  certificate:
+                Course_name.certificate =certificate
+            else:
+                if not Course_name.certificate:
+                    #message="Please select an image"
+                    return redirect("csmEdit",course_id)
 
-            Course_name.difficulty_level = request.POST["difficulty_level"]
+
+            #Course_name.difficulty_level = request.POST["difficulty_level"]
+
+
+            if  video_page_image:
+                Course_name.video_page_image = video_page_image
+            else:
+                if not Course_name.video_page_image:
+                    #message="Please select an image for video page"
+                    return redirect("csmEdit",course_id)
+            
+            #Course_name.difficulty_level = request.POST["difficulty_level"]
             
             Course_name.requirements = request.POST["req"]
             Course_name.learnings = request.POST["learn"]
-            
+
             Course_name.save()
             inst=RoleDetail.objects.all()
             messages.success(request, "Course Edited Successfully!")
@@ -194,11 +210,11 @@ def csmEdit(request, course_id):
         context={
             'data': Course_name,
             'inst': inst,
-            'f_req':f_req, 
-            's_req':s_req, 
+            'f_req':f_req,
+            's_req':s_req,
             'l_req':l_req,
-            'f_learn':f_learn, 
-            's_learn':s_learn, 
+            'f_learn':f_learn,
+            's_learn':s_learn,
             'l_learn':l_learn
         }
         print(Course_name)
@@ -206,7 +222,16 @@ def csmEdit(request, course_id):
         return render(request,'csm_edit_course.html', context)
     else:
         return render("login")
-        
+
+# function to find duration of video
+def video_duration(seconds):
+    hours=seconds//3600
+    seconds%=3600
+    minutes=seconds//60
+    seconds%=60
+    return f"{hours}:{minutes}:{seconds}"
+
+
 def csmAddCurriculam(request,curr_id):
     if request.user.is_active:
 
@@ -233,7 +258,21 @@ def csmAddCurriculam(request,curr_id):
                 unit_video2 = request.FILES.get('unit_video2')
                 unit_video3 = request.FILES.get('unit_video3')
                 week = request.POST['wek_id']
-
+                if unit_video1:
+                    clip1=VideoFileClip(unit_video1.temporary_file_path())
+                    video1_duration=video_duration(int(clip1.duration))
+                else:
+                    video1_duration=None
+                if unit_video2:
+                    clip2=VideoFileClip(unit_video2.temporary_file_path())
+                    video2_duration=video_duration(int(clip2.duration))
+                else:
+                    video2_duration=None
+                if unit_video3:
+                    clip3=VideoFileClip(unit_video3.temporary_file_path())
+                    video3_duration=video_duration(int(clip3.duration))
+                else:
+                    video3_duration=None
                 try:
                     week_private = Week.objects.get(week_private=week)
                     if week_private:
@@ -243,26 +282,38 @@ def csmAddCurriculam(request,curr_id):
                             return redirect('csmAddCurriculam', id)
                         print("hellooo")
                         unit = Week_Unit(unit_id_id=week_private.pk,unit_video1=unit_video1, unit_video2=unit_video2, unit_video3=unit_video3,
-                                       uCapOne=unit_captionOne,u_capThree=unit_captionThree,uCap2=unit_captionTwo)
+                                       uCapOne=unit_captionOne,u_capThree=unit_captionThree,uCap2=unit_captionTwo,
+                                       video1_duration=video1_duration, video2_duration=video2_duration,video3_duration=video3_duration)
+
                         unit.save()
+
+                        unit.save()
+
                         messages.success(request, "Unit added to week")
                     else:
                         messages.error(request, "Wrong Lesson Id")
                 except:
                     print("error")
                     messages.error(request, "Some error occured")
-
             if 'del' in request.POST:
                 print("delete")
                 del_id = request.POST['l_id']
+                #print("lesson ",Lesson.objects.get(id=del_id))
                 try:
+                    """
                     lesson_del = Lesson.objects.get(id=del_id).delete()
                     topic_del = Lesson_Topic.objects.filter(topic_id_id=del_id)
+                    """
+                    print("del_id",del_id)
+                    week_del= Week.objects.get(id=del_id).delete()
+                    week_unit_del=Week_Unit.objects.filter(unit_id_id=del_id)
+                    print(week_unit_del)
                     messages.success(request, "Deleted successfully")
                 except:
                     messages.error(request, "Some error occured")
 
-        weeks = Week.objects.order_by("week_name")
+        #weeks = Week.objects.order_by("week_name")
+        weeks=Week.objects.all()
         context = {
             'weeks': weeks,
             'course_title': course_title,
@@ -320,4 +371,3 @@ def csmDeleteQues(request,delId,w_id):
     messages.success(request,
                      "Question deleted")
     return redirect('csmAddQuizz',w_id)
-

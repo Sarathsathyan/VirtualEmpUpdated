@@ -59,7 +59,7 @@ CSM Add courses
                         uk-switcher="connect: #course-edit-tab ; animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
                         <li class="uk-active"><a href="#"> Basic</a></li>
 <!-- {#                        <li><a href="#"> Curriculum</a></li>#} -->
-                        <li><a href="#">Meta data</a></li>
+                        <li><a href="#">Trainee Data</a></li>
                         <li><a href="#">Prerequisites</a></li>
                         <li><a href="#">Rewards</a></li>
                         <li><a href="#">Finish</a></li>
@@ -150,6 +150,40 @@ CSM Add courses
 
                                             </div>
                                         </div>
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="short_description">Video Page Image</label>
+                                            <div class="col-md-9">
+                                                <input type="file" id="real-file-videoimage" name=" video_page_image"
+                                                 hidden="hidden"/>
+                                             <a class="btn btn-default mb-3"  onclick="" id="Upload-button-videoimage"> <i
+                                                class='uil-plus'></i>Upload</a>
+                                                <span id="custom-text-videoimage">No file choosen</span>
+
+                                                <script type="text/javascript">
+                                const realFileBtn_videoimage = document.getElementById("real-file-videoimage");
+                                const CustomBtn_videoimage = document.getElementById("Upload-button-videoimage");
+                                const customTxt_videoimage = document.getElementById("custom-text-videoimage");
+                                                CustomBtn_videoimage.addEventListener ("click", function() {
+                                                realFileBtn_videoimage.click()
+
+                                                });
+
+                                                realFileBtn_videoimage.addEventListener("change", function() {
+                                              if (realFileBtn_videoimage.value) {
+                                                customTxt_videoimage.innerHTML = realFileBtn_videoimage.value.match(
+                                                  /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                                                )[1];
+                                              } else {
+                                                customTxt_videoimage.innerHTML = "No file chosen, yet.";
+                                              }
+                                            });
+
+                                                </script>
+
+                                            </div>
+                                        </div>
+
+
 
                                         <div class="form-group row mb-3">
                                             <label class="col-md-3 col-form-label" for="course_title">Category<span
@@ -177,7 +211,7 @@ CSM Add courses
                                                     value="{{data.create_course}}" required="" style="border:none;" readonly>
                                             </div>
                                         </div>
-
+                                        <!--
                                         <div class="form-group row mb-3">
                                             <label class="col-md-3 col-form-label" > Difficulty Level <span
                                                     class="required">*</span></label>
@@ -191,7 +225,7 @@ CSM Add courses
 
                                             </div>
                                         </div>
-
+                                        -->
                                     </div>
                                 </div>
                             </li>
@@ -340,8 +374,7 @@ CSM Add courses
                                 <div class="row justify-content-center">
                                     <div class="col-xl-9">
                                         <div class="form-group row mb-3">
-                                            <label class="col-md-3 col-form-label" for="website_keywords">Meta
-                                                keywords</label>
+                                            <label class="col-md-3 col-form-label" for="website_keywords">Trainee Name</label>
                                             <div class="col-md-9">
                                                 <input type="text" class="form-control bootstrap-tag-input"
                                                     name="meta_keywordss" data-role="tagsinput"
@@ -350,17 +383,16 @@ CSM Add courses
                                                     name="meta_keywords"
                                                     style="width: 100%;"> -->
                                                 <div class="bootstrap-tagsinput"><input size="1" type="text"
-                                                        placeholder="" name="meta_keywords">
+                                                        placeholder="" name="trainee_name">
                                                 </div>
                                             </div>
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-xl-9">
                                         <div class="form-group row mb-3">
-                                            <label class="col-md-3 col-form-label" for="meta_description">Meta
-                                                description</label>
+                                            <label class="col-md-3 col-form-label" for="meta_description">Trainee Bio</label>
                                             <div class="col-md-9">
-                                                <input type="text"  name="meta_description" class="form-control" >
+                                                <input type="text"  name="trainee_bio" class="form-control" >
                                             </div>
                                         </div>
                                     </div> <!-- end col -->
@@ -580,17 +612,38 @@ CSM Add courses
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-xl-9">
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label">XP Points Per Question</label>
+                                            <div class="col-md-9">
+                                                <input type="number" class="form-control" name="xp_points_perq" placeholder="Enter Points">
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="col-xl-9">
-
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
                                         <div class="form-group row mb-3">
                                             <label class="col-md-3 col-form-label">Certificate</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" name="certificate">
-                                                <small class="text-muted"><span
-                                                        class="text-danger"></span> </small>
+                                                <label for="certificate" class="btn btn-default">
+                                                    <i class='uil-plus'></i>Upload</label>
+                                                
+                                                    <input id="certificate" name='upload_cont_img' type="file" style="display:none;">
+                                                    <label class="col-form-label" id="uploadFile"></label>
                                             </div>
                                         </div>
+                                        </form>
+                                        <script>
+                                            // document.getElementById("certificate").onchange = function() {
+                                            // document.getElementById("uploadFile").value = this.value;
+                                            // };
+                                            document.querySelector("#certificate").onchange = function(){
+                                            document.querySelector("#uploadFile").textContent = this.files[0].name;
+                                            }
+
+                                        </script>
                                     </div>
                                 </div>
 
@@ -739,11 +792,21 @@ CSM Add courses
 
 
               function validateForm() {
+                
                 var title = document.forms["myForm"]["title"].value;
                 var tagline= document.forms["myForm"]["tagline"].value;
-
+                var instructor_name = document.forms["myForm"]["instructor_name"].value;
+                var coursepoints = document.forms["myForm"]["course_points"].value;
+                var traineename = document.forms["myForm"]["trainee_name"].value;
+                var traineebio= document.forms["myForm"]["trainee_bio"].value;
+                var courseimage=document.forms['myForm']['real-file'].value;
                 if (title == "") {
                 alert("Course Title must not be empty");
+                return false;
+                }
+
+                if (instructor_name == "Choose Instructor") {
+                alert("Instructor must not be empty");
                 return false;
                 }
 
@@ -751,11 +814,24 @@ CSM Add courses
                 alert("Course Tagline must not be empty");
                 return false;
                 }
-
-
+                if (courseimage == "") {
+                alert("No course image selected");
+                return false;
+                }
+                
+                if (coursepoints == "") {
+                alert("Please! Enter Course Points");
+                return false;
+                }
+                if (traineename == "") {
+                alert("Please! Enter Trainee Name");
+                return false;
+                }
+                if (traineebio == "") {
+                alert("Please! Enter Trainee Bio");
+                return false;
+                }
             }
-
-
         </script>
 
             </div>

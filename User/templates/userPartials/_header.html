@@ -47,7 +47,7 @@
 
                             <!-- profile-icon-->
                         <!-- profile-icon-->
-                        
+
                         <div class="uk-flex-inline mt-1 mx-4">
                           <div class="mx-2">
                             <!-- <h6>MC Creadits</h6> -->
@@ -55,8 +55,8 @@
                           </div>
                           <div class="">
                               <img src="{% static 'images/money.png' %}" style="height:30px;" alt="">
-                              {% if licenseInfo %}
-                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">{{ licenseInfo.u_wt }}</span>
+                              {% if worktokens %}
+                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">{{ worktokens }}</span>
                               {% else %}
                                <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">0</span>
                               {% endif %}
@@ -72,8 +72,8 @@
                           <div class="">
 
                               <img src="{% static 'images/token.png' %}" style="height:30px;" alt="">
-                              {% if licenseInfo %}
-                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">{{ licenseInfo.u_mCredits }}</span>
+                              {% if mcCredits %}
+                              <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">{{ mcCredits }}</span>
                               {% else %}
 
                               <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">0</span>

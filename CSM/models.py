@@ -31,21 +31,31 @@ class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(CreateCourse,on_delete=models.CASCADE,null=True)
     created = models.DateTimeField(default=datetime.now, null=True)
+    modified = models.DateTimeField(default=datetime.now, null=True) 
     title = models.CharField(max_length=50)
     tagline=models.CharField(max_length=50)
     short_description=models.CharField(max_length=100)
     course_image=models.ImageField(upload_to='csm_images/',null=True,blank=True)
-
-    difficulty_level=models.CharField(max_length=20, choices=DIFFICULTY_LEVEL,null=True, blank=True)
+    video_page_image=models.ImageField(upload_to='csm_images/',null=True,blank=True)
+    #difficulty_level=models.CharField(max_length=20, choices=DIFFICULTY_LEVEL,null=True, blank=True)
     instructor=models.CharField(max_length=200,null=True, blank=True)
-
+    """
     # meta section
     meta_keywords=models.TextField(blank=True)
     meta_description=models.TextField(blank=True)
+    """
+    #trainee data
+    trainee_name=models.CharField(max_length=64,blank=True)
+    trainee_bio=models.TextField(blank=True)
 
     # rewards
     course_points=models.IntegerField(default=0)
-    certificate= models.CharField(max_length=200, null=True, blank=True)
+
+    xp_points_perq=models.IntegerField(default=0)
+
+    #xp_points=models.IntegerField(default=0)
+
+    certificate= models.FileField(upload_to="csm_certificates/",null=True)
 
     # Prerequisite
     requirements=models.TextField(blank=True)
@@ -63,15 +73,19 @@ class Week(models.Model):
 
     def __str__(self):
         return  self.week_name
+
 class Week_Unit(models.Model):
     unit_id = models.ForeignKey(Week,on_delete=models.CASCADE)
     unit_caption = models.CharField(max_length=500,null=True)
     unit_video1 = models.FileField(upload_to="Week_Videos/",null=True)
     unit_video2 = models.FileField(upload_to="Week_Videos/",null=True)
     unit_video3 = models.FileField(upload_to="Week_Videos/",null=True)
-    u_capThree = models.CharField(max_length=100,null=True)
-    uCapOne = models.CharField(max_length=150,null=True)
-    uCap2 = models.CharField(max_length=150,null=True)
+    u_capThree = models.CharField(max_length=100,null=True, blank=True)
+    uCapOne = models.CharField(max_length=150,null=True, blank=True)
+    uCap2 = models.CharField(max_length=150,null=True, blank=True)
+    video1_duration=models.TimeField(null=True)
+    video2_duration=models.TimeField(null=True)
+    video3_duration=models.TimeField(null=True)
     def __str__(self):
         return self.unit_caption
 

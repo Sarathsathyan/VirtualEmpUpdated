@@ -6,9 +6,11 @@ from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
 from Admin.models import CareerCategory,SubCategory,CategoryCourse,UsedLicense
-from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress
+from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, Score
 from CSM.models import Quizz,Result
 from CSM.models import Quizz,Result
+import re
+from moviepy.editor import VideoFileClip
 # Create your views here.
 
 # CSM
@@ -16,6 +18,7 @@ from CSM.models import Quizz,Result
 def userCfp(request):
     if request.user.is_active:
         user = request.user
+        print(user.pk)
         details = UserDetails.objects.get(user_id_id=user.pk)
         sub_cats = None
         s_courses = None
@@ -25,14 +28,17 @@ def userCfp(request):
         if request.method == 'POST':
             if 'first-category' in request.POST:
                 category_id = request.POST['first-category']
+
                 data = CareerCategory.objects.get(id=category_id)
                 sub_cats = SubCategory.objects.filter(cat_id_id=data.pk)
             if 'first-sub' in request.POST:
                 sub = request.POST['first-sub']
+
                 s_data = SubCategory.objects.get(sub_category=sub)
                 s_courses = CategoryCourse.objects.filter(sub_id_id=s_data.pk)
             if 'course' in request.POST:
                 c_course = request.POST['course']
+
                 c_data = CategoryCourse.objects.get(cfp=c_course)
             if 'confirm_submit' in request.POST:
                 m_cat = request.POST['confirm_first_category']
@@ -41,12 +47,22 @@ def userCfp(request):
                 data1 = CareerCategory.objects.get(category=m_cat)
                 data2 = SubCategory.objects.get(sub_category=m_sub)
                 data3 = CategoryCourse.objects.get(cfp=m_cfp)
-                data = CareerChoice(cat_id_id=data1.pk, sub_id_id=data2.pk, cfp_id_id=data3.pk, user_id_id=user.pk)
+                user_id=UserDetails.objects.get(user_id=user.pk)
+                print(data1.pk, data2.pk, data3.pk)
+                #data = CareerChoice(cat_id_id=data1.pk, sub_id_id=data2.pk, cfp_id_id=data3.pk, user_id_id=user.pk)
+                data = CareerChoice(cat_id_id=data1.pk, sub_id_id=data2.pk, cfp_id_id=data3.pk, user_id_id=user_id.pk)
                 data.save()
                 messages.success(request, "CFP choosed")
-                details.user_cfp = True;
+                details.user_cfp = True
                 details.save()
                 #return redirect('userdashboard')
+                """
+                weeks=Week.objects.all()
+
+                for week in weeks:
+                    score_ob=Score.objects.create(userId_id=request.user.id, week_id_id=week.pk, totalxp=0)
+                    score_ob.save()
+                """
                 return redirect('userprofileedit')
         career_list = CareerCategory.objects.all()
 
@@ -56,7 +72,9 @@ def userCfp(request):
             's_courses': s_courses,
             'data': data,
             's_data': s_data,
-            'c_data': c_data
+            'c_data': c_data,
+            'worktokens':details.user_workTokens,
+            'mcCredits':details.user_mcCredits
         }
         return render(request, 'userCFP.html', context)
     else:
@@ -65,9 +83,11 @@ def userCfp(request):
 def userDashboard(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         user = request.user
-        user_details = UserDetails.objects.get(user_id_id=user.pk)
-
-        allData = CareerChoice.objects.get(user_id_id=user.pk)
+        print("request.user.pk form dashboard", user.pk)
+        #user_details = UserDetails.objects.get(user_id_id=user.pk)
+        #allData = CareerChoice.objects.get(user_id_id=user.pk)
+        user_details = UserDetails.objects.get(user_id=user.pk)
+        allData = CareerChoice.objects.get(user_id_id=user_details.id)
 
         category = allData.cat_id
         sub = allData.sub_id
@@ -78,7 +98,8 @@ def userDashboard(request):
             createCourse = None
             messages.error(request,"Please choose CFP")
             return redirect('usercfp')
-        careerChoice = CareerChoice.objects.get(user_id_id=request.user.pk)
+        #careerChoice = CareerChoice.objects.get(user_id_id=request.user.pk)
+        careerChoice = CareerChoice.objects.get(user_id_id=user_details.id)
         print(careerChoice.cat_id_id)
 
         # Blogs
@@ -88,12 +109,15 @@ def userDashboard(request):
             blogs = BlogHeight.objects.all()
         course = Course.objects.get(category_id=createCourse.pk)
         print(course.title)
+        print("user_details.user_mcCredits",user_details.user_mcCredits)
         context={
             'careerChoice' :careerChoice,
             'course':course,
             'blog_cag': blog_cag,
             'blogs': blogs,
             'cour':cour,
+            'mcCredits':user_details.user_mcCredits,
+            'worktokens':user_details.user_workTokens
         }
         return render(request,'userDashboard.html',context)
     else:
@@ -103,27 +127,81 @@ def userDashboard(request):
 # user course
 def userCourseIntro(request,course_id):
     if request.user.is_active:
-        print(course_id)
+        course=Course.objects.get(id=course_id)
+        user_details = UserDetails.objects.get(user_id=request.user.pk)
+        if course:
+            short_desp=course.short_description
+            f_req, s_req, l_req =re.split("_",course.requirements)
+            req_list=[f_req, s_req, l_req]
+            print(len(req_list))
+            f_learn, s_learn, l_learn =re.split("_",course.learnings)
+            learn_list=[f_learn, s_learn, l_learn]
+            print(len(req_list))
+            topics=Week_Unit.objects.all()
+            clip_duration=0
+            sec=0
+            min=0
+            hr=0
+            for topic in topics:
+                if topic.video1_duration:
+                    sec+= topic.video1_duration.second
+                    min+= topic.video1_duration.minute
+                    hr+=topic.video1_duration.hour
+                if topic.video2_duration:
+                    sec+= topic.video2_duration.second
+                    min+= topic.video2_duration.minute
+                    hr+=topic.video2_duration.hour
+                if topic.video2_duration:
+                    sec+= topic.video3_duration.second
+                    min+= topic.video3_duration.minute
+                    hr+=topic.video3_duration.hour
+            hr=sec//3600
+            sec%=3600
+            min=sec//60
+            sec%=60
+            context ={
+                'course_id':course_id,
+                'course_details':course,
+                'short_desp':short_desp,
+                'req_list':[i for i in req_list if i],
+                'learn_list': [i for i in learn_list if i],
+                'lessons': Week.objects.all(),
+                 #'lessons': Week.objects.order_by("week_name"),
+                'topics':topics,
+                'course_duration_hr':hr,
+                'course_duration_min':min,
+                'course_duration_sec':sec,
+                'mcCredits':user_details.user_mcCredits,
+                'worktokens':user_details.user_workTokens
+            }
+            for topic in Week_Unit.objects.all():
+                print(topic.video1_duration)
+            return render(request,'userCourseIntro.html',context)
+
+
+        course = Course.objects.get(id=course_id)
+        week = Week.objects.filter(week_id_id=course.pk)
+
         context ={
-            'course_id':course_id
+            'course_id':course_id,
+            'week':week,
+            'mcCredits':user_details.user_mcCredits,
+            'worktokens':user_details.user_workTokens
         }
-        return render(request,'userCourseIntro.html',context);
+        return render(request,'userCourseIntro.html',context)
     else:
         return redirect('login')
 
 def userCourseLesson(request, c_id):
     if request.user.is_active:
+        user_details = UserDetails.objects.get(user_id=request.user.pk)
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
-        # data.delete()
-        start = 0
-        if not data:
-            start = 1
 
-        video =None;
+        video =None
         week = Week.objects.filter(week_id_id=course.pk)
-        weekUnit =Week_Unit.objects.all()
+        weekUnit = Week_Unit.objects.all()
         status=None
         # start test
         testID = False
@@ -138,8 +216,9 @@ def userCourseLesson(request, c_id):
                     print(current_time)
                     end_date = current_time + datetime.timedelta(days=7)
                     print(end_date)
-                    start = start + 1
-                    data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date, currentWeek=start)
+
+                    data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date)
+
                     data.save()
                 return redirect('courseLesson',c_id)
             if 'videoOne' in request.POST:
@@ -175,7 +254,10 @@ def userCourseLesson(request, c_id):
             'status':status,
             'remain':remainingTime,
             'testId' : testID,
-            'start':start
+            'video_page_image':course.video_page_image,
+            'mcCredits':user_details.user_mcCredits,
+            'worktokens':user_details.user_workTokens
+
         }
         return render(request,'userCourseLesson.html',context)
     else:
@@ -185,6 +267,11 @@ def userprofile(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         user = request.user
         user_details = UserDetails.objects.get(user_id_id=user.pk)
+        user_education=None
+        #score_ob=score.objects.filter(userId_id=user.pk)
+
+        #print(score_ob)
+
         if UserEducation.objects.filter(user_id_id=user_details.pk).exists():
             user_education = UserEducation.objects.filter(user_id_id=user_details.pk)
             try:
@@ -216,9 +303,10 @@ def userprofile(request):
                 'tech_skills':tech_skills,
                 'man_skills':man_skills,
                 'lan_skills':lan_skills,
-
-
-
+                'mcCredits':user_details.user_mcCredits,
+                'worktokens':user_details.user_workTokens,
+                'numberCfp':user_details.numberCfp
+                #'cfp_name':cfp_name
             }
             if UserContact.objects.filter(user_id_id=user_details.pk).exists():
                 user_contact = UserContact.objects.get(user_id_id=user_details.pk)
@@ -243,7 +331,7 @@ def userprofile(request):
                 except:
                     lan_skills=[]
 
-                # Certificate Retrieval
+                    # Certificate Retrieval
 
 
                 context={
@@ -254,16 +342,23 @@ def userprofile(request):
                     'tech_skills':tech_skills,
                     'man_skills':man_skills,
                     'lan_skills':lan_skills,
-
+                    'mcCredits':user_details.user_mcCredits,
+                    'worktokens':user_details.user_workTokens,
+                    'numberCfp':user_details.numberCfp
+                    #'cfp_name':cfp_name
 
 
                 }
 
+                #if CareerChoice.objects.filter(user_id_id=user_details.pk).exists():
                 if CareerChoice.objects.filter(user_id_id=user_details.pk).exists():
+                    print("")
                     cfp_details = CareerChoice.objects.get(user_id_id=user_details.pk)
+                    cfp_name=cfp_details.cfp_id.cfp
+
                     # CFP  COURSES
-                    lists = Course.objects.filter(category=cfp_details.category_one, role=cfp_details.role_one)
-                    lists2 = Course.objects.filter(category=cfp_details.category_two, role=cfp_details.role_two)
+                    #lists = Course.objects.filter(category=cfp_details.category_one, role=cfp_details.role_one)
+                    #lists2 = Course.objects.filter(category=cfp_details.category_two, role=cfp_details.role_two)
                     try:
                         work = UserWorkExperience.objects.filter(user_id_id=user_details.pk).order_by("-start_year")
                     except:
@@ -283,10 +378,21 @@ def userprofile(request):
                         lan_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Languages')
                     except:
                         lan_skills=[]
+                    
+                    print(request.user.pk)
+                    if Score.objects.filter(userId_id=request.user.pk).exists():
+                        score_ob=Score.objects.filter(userId_id=request.user.pk)
+                        total_xp_earned=0
+                        for score in score_ob:
+                            total_xp_earned+=score.totalxp
 
+                            course_points=Course.objects.get(id=score.week_id.week_id_id).course_points
+                    
 
-
-
+                    else:
+                        total_xp_earned=0
+                        course_points=0
+                    
                     context = {
                         'cfp_details': cfp_details,
                         'user_data': user_details,
@@ -296,23 +402,24 @@ def userprofile(request):
                         'tech_skills':tech_skills,
                         'man_skills':man_skills,
                         'lan_skills':lan_skills,
-
+                        'cfp_name':cfp_name,
+                        'total_xp_earned':total_xp_earned,
+                        'course_points':course_points,
+                        'mcCredits':user_details.user_mcCredits,
+                        'worktokens':user_details.user_workTokens,
+                        'numberCfp':user_details.numberCfp
                     }
-
-
                     return render(request, "userProfile.html", context)
-
                 return render(request, "userProfile.html", context)
-
             return render(request,"userProfile.html",context)
-
-
         context = {
             'user_data' : user_details,
-
+            'mcCredits':user_details.user_mcCredits,
+            'worktokens':user_details.user_workTokens,
+            'numberCfp':user_details.numberCfp
+            #'cfp_name':cfp_name
         }
         return render(request,"userProfile.html",context)
-
     else:
         messages.error(request,"Wrong URL")
         return redirect('logout')
@@ -346,7 +453,6 @@ def userProfileEdit(request):
                     address2 = request.POST['address2']
                     gender = request.POST['gender']
                     bio=request.POST['bio']
-
                     data = UserContact(address1=address1,address2=address2,gender=gender,user_bio=bio,user_id_id=user_detail.pk)
                     data.save()
                     messages.success(request,"Contact Info added")
@@ -356,8 +462,6 @@ def userProfileEdit(request):
                     data = UserContact.objects.get(user_id_id=user_detail.pk)
                     if data.user_pic:
                         pic = request.FILES.get('user-profile-photo')
-
-
                         print(pic)
                         print("hai")
                         data.user_pic = pic
@@ -597,6 +701,9 @@ def userProfileEdit(request):
             context ={
                 'user_detail' : user_detail,
                 'users' : users,
+                'mcCredits':user_detail.user_mcCredits,
+                'worktokens':user_detail.user_workTokens,
+                
 
 
             }
@@ -653,7 +760,9 @@ def userProfileEdit(request):
                     'work':work,
                     'tech_skills':tech_skills,
                     'man_skills':man_skills,
-                    'lan_skills':lan_skills
+                    'lan_skills':lan_skills,
+                    'mcCredits':user_detail.user_mcCredits,
+                    'worktokens':user_detail.user_workTokens
 
                 }
 
@@ -666,7 +775,9 @@ def userProfileEdit(request):
                     'lan_skills':lan_skills,
                     'user_detail': user_detail,
                     'users': users,
-                    "edd":1
+                    "edd":1,
+                    'mcCredits':user_detail.user_mcCredits,
+                    'worktokens':user_detail.user_workTokens
                 }
                 return render(request,'userProfileEdit.html',context)
             return render(request,'userProfileEdit.html',context)
@@ -675,8 +786,8 @@ def userProfileEdit(request):
                 "idd":1,
                 "edd":1,
                 'user_detail':user_detail,
-
-
+                'mcCredits':user_detail.user_mcCredits,
+                'worktokens':user_detail.user_workTokens
             }
             idd =1
             return render(request,'userProfileEdit.html',context)
@@ -687,10 +798,15 @@ def userProfileEdit(request):
 
 def userQuizz(request,w_id):
     if request.user.is_active:
-        week = Week.objects.get(id = w_id);
+        week = Week.objects.get(id = w_id)
         course = Course.objects.get(id = week.week_id_id)
+        
+        if not Score.objects.filter(userId_id=request.user.pk, week_id_id=week.pk).exists():
+            score_ob=Score.objects.create(userId_id=request.user.id,week_id_id=week.pk, totalxp=0)
+            score_ob.save()
+        
         data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
-
+        
         context={
             'questions' : data
         }
@@ -701,43 +817,62 @@ def userQuizz(request,w_id):
 
 def userResult(request):
     if request.user.is_active:
+        print("request.user",request.user)
+        print('request.user.pk',request.user.pk)
         time =0
         form = request.POST.getlist('inquiry')
-
         correct = 0
         wrong = 0
         tempQues = []
         tempRes = []
-
+        dic_quizz={}
         for i in form:
+            print("i",i)
             if i in request.POST:
                 ques = request.POST[i]
                 tempQues.append(ques)
                 Ques = Quizz.objects.filter(id=i)
+                #Ques = Quizz.objects.get(id=i)
+                dic_quizz[Ques[0].week_id_id]=0
+                print(Ques[0].week_id_id)
+                print("Ques",Ques)
                 res = Ques[0].answer
                 tempRes.append(res)
                 if (res == ques):
                     correct += 1
+                    #dic_quizz[Ques[0].week_id_id]+=1
+                    #dic_quizz[Ques[0].week_id_id]=correct
                 else:
                     wrong += 1
 
         val = Result()
-
-
+        print("correct",correct)
+        dic_quizz[Ques[0].week_id_id]=correct
+        """
         # obj = Question.objects.first()
         # field_value = getattr(obj,'title')
         # print ("************************************")
         # print(field_value)
         # print ("************************************")
         val.result = [{'questions': form, 'user_answers': tempQues}]
-
         val.score = str(correct) + '/' + str(20)
-
         # val.timetaken = str(time)
         val.user_answer = [{'user_answers': tempQues, 'correct_answer': tempRes}]
         val.auth_id = (request.user.id)
         val.save()
-        print(val)
+        print("val",val)
+        """
+        #score_ob=score.objects.filter(userId_id=request.user.id)
+        print("dic_quizz",dic_quizz)
+        for k in dic_quizz.keys():
+            if Score.objects.filter(week_id_id=k, userId_id=request.user.id).exists():
+                score_ob=Score.objects.get(week_id_id=k, userId_id= request.user.id)
+                course_ob=Course.objects.get(id=score_ob.week_id.week_id_id)
+                temp_totalxp=dic_quizz[k] * course_ob.xp_points_perq
+                if temp_totalxp > score_ob.totalxp:
+                    score_ob.totalxp=temp_totalxp
+                    score_ob.save()
+
         return redirect('userdashboard')
 
         # except Exception as e:
@@ -763,4 +898,4 @@ def pricing(request):
 
         return render(request,'pricing.html')
     else:
-        return redirect('login')        
+        return redirect('login')

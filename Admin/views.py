@@ -133,7 +133,9 @@ def activatecode(request):
                         used_key = UsedLicense(u_key=key.key)
                         used_key.save()
                         user.user_license = license_key
-
+                        user.user_workTokens=key.workTokens
+                        user.user_mcCredits=key.mcCredits
+                        user.numberCfp= key.numberCfp
                         user.save()
                         key.delete()
                         messages.success(request, "License Key applied !")
@@ -178,6 +180,7 @@ def userRegister(request):
             v = validate_email(email)
             val_email = v["email"]
         except EmailNotValidError as e:
+            print("email error ", e)
             messages.error(request, 'Invalid Email ID')
             return redirect('register')
         if password != conform:
@@ -197,7 +200,7 @@ def userRegister(request):
                                      password=password)
             u_id = User.objects.get(username=username)
             addusr = UserDetails(user_id=u_id, user_pass=password, user_phone=userphone, user_unique=unique_id,
-                                 user_license=license_key)
+                                 user_license=license_key, user_mcCredits=0, user_workTokens=0)
             addusr.save()
             ref_user = Reference(user_id=u_id, ref_id=reference_id, used_peoples=None, used_id=None)
             ref_user.save()
