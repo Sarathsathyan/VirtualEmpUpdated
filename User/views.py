@@ -237,6 +237,12 @@ def userCourseLesson(request, c_id):
 
 
         print(status)
+        if course.video_page_image == None:
+            video_page_image= None
+        else:
+            video_page_image= course.video_page_image
+
+
         context ={
             'week':week,
             'weekUnits':weekUnit,
@@ -244,7 +250,7 @@ def userCourseLesson(request, c_id):
             'data':data,
             'status':status,
             'remain':remainingTime,
-            'video_page_image':course.video_page_image,
+            'video_page_image':video_page_image,
             'mcCredits':user_details.user_mcCredits,
             'worktokens':user_details.user_workTokens
 

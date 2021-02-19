@@ -135,9 +135,12 @@
 
     <div class="container ">
 
-
-        <div class="course-content bg-dark my-2 mx-auto" style="border-radius:10px; background-image: url('{{  video_page_image.url }}') ;background-repeat: no-repeat;background-size: 100%;">
-
+        {% if video_page_image %}
+            <div class="course-content bg-dark my-2 mx-auto" style="border-radius:10px;
+             background-image: url('{{  video_page_image.url }}') ;background-repeat: no-repeat;background-size: 100%;">
+        {% else %}
+            <div class="course-content bg-dark my-2 mx-auto" style="border-radius:10px;">
+        {% endif %}
 
             <!-- <div class="course-header">
 
