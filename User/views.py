@@ -198,10 +198,13 @@ def userCourseLesson(request, c_id):
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
+
         video =None
         week = Week.objects.filter(week_id_id=course.pk)
         weekUnit = Week_Unit.objects.all()
         status=None
+        # start test
+        testID = False
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
@@ -213,7 +216,9 @@ def userCourseLesson(request, c_id):
                     print(current_time)
                     end_date = current_time + datetime.timedelta(days=7)
                     print(end_date)
+
                     data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date)
+
                     data.save()
                 return redirect('courseLesson',c_id)
             if 'videoOne' in request.POST:
@@ -234,6 +239,10 @@ def userCourseLesson(request, c_id):
                 if(d.weekId_id == i.pk):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
+                        if remainingTime.days == 0:
+                            testID = True
+
+
 
 
         print(status)
@@ -403,7 +412,8 @@ def userprofile(request):
                         'course_points':course_points,
                         'mcCredits':user_details.user_mcCredits,
                         'worktokens':user_details.user_workTokens,
-                        'numberCfp':user_details.numberCfp
+                        'numberCfp':user_details.numberCfp,
+                        'course_perc':(total_xp_earned/course_points)*100
                     }
                     return render(request, "userProfile.html", context)
                 return render(request, "userProfile.html", context)
@@ -576,8 +586,6 @@ def userProfileEdit(request):
                     y=11;
                 elif(end_month== 'Dec'):
                     y=12;
-
-
                 num_months = (int(end_year) - int(start_year)) * 12 + (y - x)
 
                 num_years=int(num_months/12)
@@ -597,9 +605,6 @@ def userProfileEdit(request):
                 end_year=request.POST['end-year']
                 company=request.POST['company']
                 state=request.POST['state']
-
-
-
                 if(start_month== 'Jan'):
                     x=1;
                 elif(start_month== 'Feb'):
@@ -700,8 +705,6 @@ def userProfileEdit(request):
                 'mcCredits':user_detail.user_mcCredits,
                 'worktokens':user_detail.user_workTokens,
                 
-
-
             }
 
             try:
