@@ -535,14 +535,14 @@
   }
   
   :root {
-  --course_completion:{{ course_perc }};
+  --course_completion_perc:{{ course_perc }};
   }
   
   .card:nth-child(1) svg circle:nth-child(2)
   {
     /*stroke-dashoffset: calc(440 - (440 * 90) / 100);
     */
-    stroke-dashoffset: calc(440 - (440 * var(--course_completion) ) / 100);
+    stroke-dashoffset: calc(440 - (440 * var(--course_completion_perc) ) / 100);
     stroke: #00ff43;
   }
 
@@ -573,7 +573,7 @@
                           </svg>
                           <div class="number">
                             <!--<h2>50<span>%</span></h2>-->
-                            <h2>{{ course_perc }}<span>%</span></h2>
+                            <h2>{{ total_xp_earned }}<span>XP</span></h2>
                           </div>
                         </div>
                         <h2 class=" mt-3">TOTAL XP</h2>

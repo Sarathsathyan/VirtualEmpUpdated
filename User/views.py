@@ -413,7 +413,7 @@ def userprofile(request):
                         'mcCredits':user_details.user_mcCredits,
                         'worktokens':user_details.user_workTokens,
                         'numberCfp':user_details.numberCfp,
-                        'course_perc':(total_xp_earned/course_points)*100
+                        'course_perc':(total_xp_earned/1000)*100
                     }
                     return render(request, "userProfile.html", context)
                 return render(request, "userProfile.html", context)
