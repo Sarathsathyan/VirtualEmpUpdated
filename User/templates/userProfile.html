@@ -535,14 +535,14 @@
   }
   
   :root {
-  --course_completion_perc:{{ course_perc }};
+  --course_completion:{{ total_xp_earned }};
   }
   
   .card:nth-child(1) svg circle:nth-child(2)
   {
     /*stroke-dashoffset: calc(440 - (440 * 90) / 100);
     */
-    stroke-dashoffset: calc(440 - (440 * var(--course_completion_perc) ) / 100);
+    stroke-dashoffset: calc(440 - (440 * var(--course_completion) ) / 1000);
     stroke: #00ff43;
   }
 
