@@ -81,15 +81,12 @@ class userProgress(models.Model):
     def __str__(self):
         return self.status
 
-
-
 # Pricing section
 class userPricing(models.Model):
     userId = models.ForeignKey(User,on_delete=models.CASCADE)
     cfpCount = models.IntegerField()
     workTokens = models.IntegerField()
     mcCredits = models.IntegerField()
-
 
 class pricingSec(models.Model):
     cef = models.IntegerField()
