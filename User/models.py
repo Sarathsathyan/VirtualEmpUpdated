@@ -73,7 +73,7 @@ class userProgress(models.Model):
     userId = models.ForeignKey(User,on_delete=models.CASCADE)
     course_id = models.ForeignKey(CategoryCourse,on_delete=models.CASCADE)
     weekId = models.ForeignKey(Week,on_delete=models.CASCADE)
-    status = models.BooleanField(default=False)
+    status = models.CharField(default="PENDING",max_length=100,null=True)
     currentTime = models.DateTimeField(null=True)
     endTime = models.DateTimeField(null=True)
     currentWeek = models.IntegerField(default=1,null=True)

@@ -2,8 +2,6 @@
 {% load static %}{% block title %}User-Dashboard{% endblock %}
 {% block content %}
     <body>
-
-
       <style >
         .i1{
           background:#d7f0fd;
@@ -200,32 +198,68 @@
         <div class="page-content">
 
 
-            <form method="post">{% csrf_token %}
-                <div class=" ">
-                    <div class="uk-position-relative uk-visible-toggle uk-light  "
-                         uk-slideshow="ratio: 6:2.3; autoplay: true autoplay-interval: 200" tabindex="-1"
-                         >
-                        <ul class="uk-slideshow-items " >
-                            {% for i in blogs %}
-                                <li>
-                                    {% if i.blog_thumbnail %}
-                                        <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover>
-                                    {% else %}
-                                        <img src="" alt="" uk-cover>
-                                    {% endif %}
-                                    <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
-                                        <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
-                                        <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
-                           uk-slidenav-previous uk-slideshow-item="previous"></a>
-                        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                           uk-slideshow-item="next"></a>
-                    </div>
-                </div>
+          <div class="uk-grid p-3" uk-grid>
+            <div class="uk-width-1-3 ">
+              <div class=" ">
+                  <div class="uk-position-relative uk-visible-toggle uk-light  "
+                       uk-slideshow="ratio: 6:5.04; autoplay: true autoplay-interval: 200" tabindex="-1"
+                        >
+                      <ul class="uk-slideshow-items " style="border-radius:5px;">
+                          {% for i in blogs %}
+                              <li>
+                                  {% if i.blog_thumbnail %}
+                                      <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
+                                  {% else %}
+                                      <img src="" alt="" uk-cover>
+                                  {% endif %}
+                                  <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                                      <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
+                                      <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
+                                  </div>
+                              </li>
+                          {% endfor %}
+                      </ul>
+                      <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
+                         uk-slidenav-previous uk-slideshow-item="previous"></a>
+                      <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                         uk-slideshow-item="next"></a>
+                  </div>
+              </div>
+
+            </div>
+
+
+            <div class="uk-width-expand">
+              <div class=" ">
+                  <div class="uk-position-relative uk-visible-toggle uk-light  "
+                       uk-slideshow="ratio: 6:2.44; autoplay: true autoplay-interval: 200" tabindex="-1"
+                       >
+                      <ul class="uk-slideshow-items " style="border-radius:5px;">
+                          {% for i in blogs %}
+                              <li>
+                                  {% if i.blog_thumbnail %}
+                                      <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
+                                  {% else %}
+                                      <img src="" alt="" uk-cover>
+                                  {% endif %}
+                                  <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                                      <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
+                                      <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
+                                  </div>
+                              </li>
+                          {% endfor %}
+                      </ul>
+                      <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
+                         uk-slidenav-previous uk-slideshow-item="previous"></a>
+                      <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                         uk-slideshow-item="next"></a>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+
+
 
                 <div class=" mx-4 text-right my-1">
                     <form method="post" enctype="multipart/form-data">{% csrf_token %}
@@ -266,59 +300,360 @@
                     </form>
 
                 </div>
-
-
                 <div class="section-header my-4">
                     <div class="section-header-left">
-                        <h1 class="text-center"><strong>Choose your Microcourse by categories</strong></h1>
-                        <h4 class="text-center">Choose your favourite course categories, choose your favourite one start
-                            learning</h4>
+                        <h1 class="text-center"><strong>Achieve Your Goals With VE Campus</strong></h1>
+                    </div>
+                </div>
+           <div class="container my-4 ">
+                  <div class="uk-card  uk-card uk-card-default uk-card-body " style="margin-left: 65px;
+    position: relative;
+    height: 300px;
+    margin-bottom: 80px;
+    border-radius: 5px;
+    width: 90%;
+    border-radius:10px;
+    " >
+
+
+                <div class="uk-grid" uk-grid>
+
+                    <div class="uk-width-1-2">
+                      <h1 class="">Virtual Experience Program</h1>
+                      <h4>Get trained in trending courses. Work on real time projects to get hand on experience</h4>
+                    </div>
+
+                    <div class="uk-width-expand">
+                      <div>
+                            <div class="uk-card uk-card-primary uk-card-body">
+                                <h3 class="uk-card-title">Image Here</h3>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                    <style >
+                      .site-icon {
+                          position: absolute;
+
+                          transform: translateY(+18%);
+
+                        }
+                    </style>
+
+                    <div class="site-icon mx-auto" style="margin-left:36px;">
+                      <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+
+                        <a href="episode-details.html">
+                          <div class="course-card episode-card animate-this" style="width:292.5px;">
+                              <div class="course-card-thumbnail ">
+
+                                  <span class="duration">2:39</span>
+                                  <img src="{% static 'images/episodes/2.png'%}">
+                                  <div class="centered text-center" style="position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);"><h2>DATA SCIENTIST</h2></div>
+
+                              </div>
+                              <div class="course-card-body">
+                                  <h4 class="mb-0"> CFP-1 </h4>
+                              </div>
+                          </div>
+                        </a>
+
+                        <a href="episode-details.html">
+                          <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                              <div class="course-card-thumbnail ">
+
+                                  <span class="duration">2:39</span>
+                                  <img src="{% static 'images/episodes/2.png'%}">
+                                  <span class="play-button-trigger"></span>
+                              </div>
+                              <div class="course-card-body">
+                                  <h4 class="mb-0"> Creating sticky in HTML </h4>
+                              </div>
+                          </div>
+                        </a>
+
+                      </div>
                     </div>
 
 
                 </div>
+            </div>
 
 
-                <div class="container mb-5">
-
-                  <div class="uk-child-width-1-4@s uk-grid">
-                    <div>
-                      <div class="uk-card uk-card-default uk-card-body rounded">
-                          <h1 class=" mt-0"><i class=" i1 icon-material-outline-brush "></i></h1>
-                          <h4> Self Development</h4>
-                          <p> Communications, interviews, personality development</p>
-                        </div>
-                  </div>
+            <div class="container mb-4 " style="margin-top:100px;">
+                   <div class="uk-card  uk-card uk-card-default uk-card-body " style="margin-left: 65px;
+     position: relative;
+     height: 300px;
+     margin-bottom: 80px;
+     border-radius: 5px;
+     width: 90%;
+     border-radius:10px;" >
 
 
-                    <div>
-                      <div class="uk-card uk-card-default uk-card-body rounded">
-                          <h1 class=" mt-0"><i class="i2 icon-material-outline-assessment"></i></h1>
-                          <h4> Business Intelligence</h4>
-                          <p>sales skills, negotiations, project management</p>
-                          </div>
-                  </div>
+                 <div class="uk-grid" uk-grid>
+
+                     <div class="uk-width-1-2">
+                       <h1 class="">Micro Courses</h1>
+                       <h4>Reach 200XP and choose your favourite course categories. Chose your favourite and start learning.</h4>
+                     </div>
+
+                     <div class="uk-width-expand">
+                       <div>
+                         <div class="my-3">
+                           <progress id="js-progressbar" class="uk-progress" value="50" max="100"></progress>
+
+                         </div>
+                             <div class="uk-card uk-card-primary uk-card-body">
+                                 <h3 class="uk-card-title">Image Here</h3>
+                             </div>
+                         </div>
+                     </div>
+                   </div>
+                     <style >
+                       .site-icon1 {
+                           position: absolute;
+
+                           transform: translateY(+15%);
+
+                         }
+                     </style>
+
+                     <div class="site-icon1 mx-auto" style="margin-left:36px;">
+                       <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+
+                         <a href="episode-details.html">
+                           <div class="course-card episode-card animate-this" style="width:292.5px;">
+                               <div class="course-card-thumbnail ">
+
+                                   <span class="duration">2:39</span>
+                                   <img src="{% static 'images/episodes/2.png'%}">
+                                   <span class="play-button-trigger"></span>
+                               </div>
+                               <div class="course-card-body">
+                                   <h4 class="mb-0"> Creating sticky in HTML </h4>
+                               </div>
+                           </div>
+                         </a>
+                         <a href="episode-details.html">
+                           <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                               <div class="course-card-thumbnail ">
+
+                                   <span class="duration">2:39</span>
+                                   <img src="{% static 'images/episodes/2.png'%}">
+                                   <span class="play-button-trigger"></span>
+                               </div>
+                               <div class="course-card-body">
+                                   <h4 class="mb-0"> Creating sticky in HTML </h4>
+                               </div>
+                           </div>
+                         </a>
+                         <a href="episode-details.html">
+                           <div class="course-card episode-card animate-this" style="width:292.5px;">
+                               <div class="course-card-thumbnail ">
+
+                                   <span class="duration">2:39</span>
+                                   <img src="{% static 'images/episodes/2.png'%}">
+                                   <span class="play-button-trigger"></span>
+                               </div>
+                               <div class="course-card-body">
+                                   <h4 class="mb-0"> Creating sticky in HTML </h4>
+                               </div>
+                           </div>
+                         </a>
+
+                       </div>
+                     </div>
 
 
-                  <div>
-                      <div class="uk-card uk-card-default uk-card-body rounded">
-                        <h1 class=" mt-0"><i class="i3 icon-line-awesome-connectdevelop"></i></h1>
+                 </div>
+             </div>
 
-                          <h4>Product Enhancers</h4>
-                          <p>Excel, Coreldraw, Photoshop, Wordpress</p>
+
+
+
+
+
+
+             <div class="container mb-4 " style="margin-top:100px;">
+                    <div class="uk-card  uk-card uk-card-default uk-card-body " style="margin-left: 65px;
+      position: relative;
+      height: 300px;
+      margin-bottom: 80px;
+      border-radius: 5px;
+      width: 90%;
+      border-radius:10px;" >
+
+
+                  <div class="uk-grid" uk-grid>
+
+                      <div class="uk-width-1-2">
+                        <h1 class="">Hiring Program</h1>
+                        <h4>Once reaching 700XP get listed on the placement portal through our placement campaign</h4>
+                      </div>
+
+                      <div class="uk-width-expand">
+                        <div>
+                              <div class="uk-card uk-card-primary uk-card-body">
+                                  <h3 class="uk-card-title">Image Here</h3>
                               </div>
-                  </div>
+                          </div>
+                      </div>
+                    </div>
+                      <style >
+                        .site-icon {
+                            position: absolute;
 
-                  <div>
-                      <div class="uk-card uk-card-default uk-card-body rounded px-4">
-                        <h1 class="  mt-0"><i class="i4 icon-line-awesome-graduation-cap "></i></h1>
-                          <h4 >Knowledge Supplement</h4>
-                          <p>Personal Finance, reasoning, quantitative aptitude</p>
+                            transform: translateY(+20%);
+
+                          }
+                      </style>
+
+                      <div class="site-icon mx-auto" style="margin-left:36px;">
+                        <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+
+                          <a href="episode-details.html">
+                            <div class="course-card episode-card animate-this" style="width:292.5px;">
+                                <div class="course-card-thumbnail ">
+
+                                    <span class="duration">2:39</span>
+                                    <img src="{% static 'images/episodes/2.png'%}">
+                                    <span class="play-button-trigger"></span>
+                                </div>
+                                <div class="course-card-body">
+                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                </div>
                             </div>
-                  </div>
+                          </a>
+                          <a href="episode-details.html">
+                            <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                                <div class="course-card-thumbnail ">
+
+                                    <span class="duration">2:39</span>
+                                    <img src="{% static 'images/episodes/2.png'%}">
+                                    <span class="play-button-trigger"></span>
+                                </div>
+                                <div class="course-card-body">
+                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                </div>
+                            </div>
+                          </a>
+                          <a href="episode-details.html">
+                            <div class="course-card episode-card animate-this" style="width:292.5px;">
+                                <div class="course-card-thumbnail ">
+
+                                    <span class="duration">2:39</span>
+                                    <img src="{% static 'images/episodes/2.png'%}">
+                                    <span class="play-button-trigger"></span>
+                                </div>
+                                <div class="course-card-body">
+                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                </div>
+                            </div>
+                          </a>
+
+                        </div>
+                      </div>
+
 
                   </div>
-                </div>
+              </div>
+
+
+              <div class="container mb-4 " style="margin-top:100px;">
+                     <div class="uk-card  uk-card uk-card-default uk-card-body" style="margin-left: 65px;
+       position: relative;
+       height: 300px;
+       margin-bottom: 80px;
+       border-radius: 5px;
+       width: 90%;
+       border-radius:10px;" >
+
+
+                   <div class="uk-grid" uk-grid>
+
+                       <div class="uk-width-1-2">
+                         <h1 class="">Idea 2 Reality Program</h1>
+                         <h4>I2r will turn your idea to reality. Hop into the campus for prototyping and starting a startup</h4>
+                       </div>
+
+                       <div class="uk-width-expand">
+                         <div>
+                               <div class="uk-card uk-card-primary uk-card-body">
+                                   <h3 class="uk-card-title">Image Here</h3>
+                               </div>
+                           </div>
+                       </div>
+                     </div>
+                       <style >
+                         .site-icon3 {
+                             position: absolute;
+
+                             transform: translateY(+20%);
+
+                           }
+                       </style>
+
+                       <div class="site-icon3 mx-auto" style="margin-left:36px;">
+                         <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match " uk-grid>
+                           <a href="episode-details.html">
+                             <div class="course-card episode-card animate-this" style="width:292.5px;">
+                                 <div class="course-card-thumbnail ">
+
+                                     <span class="duration">2:39</span>
+                                     <img src="{% static 'images/episodes/2.png'%}">
+                                     <span class="play-button-trigger"></span>
+                                 </div>
+                                 <div class="course-card-body">
+                                     <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                 </div>
+                             </div>
+                           </a>
+
+                           <a href="episode-details.html">
+                             <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                                 <div class="course-card-thumbnail ">
+
+                                     <span class="duration">2:39</span>
+                                     <img src="{% static 'images/episodes/2.png'%}">
+                                     <span class="play-button-trigger"></span>
+                                 </div>
+                                 <div class="course-card-body">
+                                     <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                 </div>
+                             </div>
+                           </a>
+
+                           <a href="episode-details.html">
+                             <div class="course-card episode-card animate-this" style="width:292.5px;">
+                                 <div class="course-card-thumbnail ">
+
+                                     <span class="duration">2:39</span>
+                                     <img src="{% static 'images/episodes/2.png'%}">
+                                     <span class="play-button-trigger"></span>
+                                 </div>
+                                 <div class="course-card-body">
+                                     <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                 </div>
+                             </div>
+                           </a>
+
+
+
+                         </div>
+                       </div>
+
+
+                   </div>
+               </div>
+
+
+
+
+
+
 
 <br>
 <br>

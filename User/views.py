@@ -196,7 +196,9 @@ def userCourseLesson(request, c_id):
     if request.user.is_active:
         user_details = UserDetails.objects.get(user_id=request.user.pk)
         current_time = datetime.datetime.now(timezone.utc)
-        course = Course.objects.get(id=c_id)
+        print(c_id)
+        # give c_id in 1
+        course = Course.objects.get(id=1)
         data = userProgress.objects.filter(userId_id=request.user.pk)
 
         video =None
@@ -208,17 +210,14 @@ def userCourseLesson(request, c_id):
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
+
                 if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=week).exists():
                     status = 1
                     print(status)
                 else:
                     current_time = datetime.datetime.now()
-                    print(current_time)
                     end_date = current_time + datetime.timedelta(days=7)
-                    print(end_date)
-
-                    data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status=True,currentTime=current_time,endTime=end_date)
-
+                    data = userProgress(weekId_id=week,userId_id=request.user.pk,course_id_id=course.pk,status='STARTED',currentTime=current_time,endTime=end_date)
                     data.save()
                 return redirect('courseLesson',c_id)
             if 'videoOne' in request.POST:
@@ -241,11 +240,13 @@ def userCourseLesson(request, c_id):
                         remainingTime = d.endTime - current_time
                         if remainingTime.days == 0:
                             testID = True
-
-
-
-
         print(status)
+        if course.video_page_image == None:
+            video_page_image= None
+        else:
+            video_page_image= course.video_page_image
+
+
         context ={
             'week':week,
             'weekUnits':weekUnit,
@@ -253,10 +254,10 @@ def userCourseLesson(request, c_id):
             'data':data,
             'status':status,
             'remain':remainingTime,
-            'testId' : testID,
-            'video_page_image':course.video_page_image,
+            'video_page_image':video_page_image,
             'mcCredits':user_details.user_mcCredits,
-            'worktokens':user_details.user_workTokens
+            'worktokens':user_details.user_workTokens,
+            'testCheck':testID
 
         }
         return render(request,'userCourseLesson.html',context)
@@ -407,7 +408,8 @@ def userprofile(request):
                         'course_points':course_points,
                         'mcCredits':user_details.user_mcCredits,
                         'worktokens':user_details.user_workTokens,
-                        'numberCfp':user_details.numberCfp
+                        'numberCfp':user_details.numberCfp,
+                        #'course_perc':(total_xp_earned/1000)*100
                     }
                     return render(request, "userProfile.html", context)
                 return render(request, "userProfile.html", context)
@@ -580,8 +582,6 @@ def userProfileEdit(request):
                     y=11;
                 elif(end_month== 'Dec'):
                     y=12;
-
-
                 num_months = (int(end_year) - int(start_year)) * 12 + (y - x)
 
                 num_years=int(num_months/12)
@@ -601,9 +601,6 @@ def userProfileEdit(request):
                 end_year=request.POST['end-year']
                 company=request.POST['company']
                 state=request.POST['state']
-
-
-
                 if(start_month== 'Jan'):
                     x=1;
                 elif(start_month== 'Feb'):
@@ -704,8 +701,6 @@ def userProfileEdit(request):
                 'mcCredits':user_detail.user_mcCredits,
                 'worktokens':user_detail.user_workTokens,
                 
-
-
             }
 
             try:

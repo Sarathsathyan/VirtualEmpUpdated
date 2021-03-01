@@ -3,43 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="87ddb306-b5d8-49b8-929b-cdc19587f0a0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Blog/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Blog/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSM/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0002_auto_20201213_0905.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0003_remove_createcourse_create_instructor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0004_auto_20201213_1313.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0005_week_week_unit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0006_week_hello.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0007_remove_week_hello.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0008_remove_week_unit_unit_caption.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0009_delete_week_unit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0010_week_unit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0011_remove_week_unit_unit_video1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0012_week_unit_unit_video1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0013_week_unit_unit_caption.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0014_week_unit_abc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0015_week_unit_u_capone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0016_auto_20201219_0559.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0017_week_unit_ucapone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0018_week_unit_ucap3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0019_auto_20201219_0603.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0020_quizz.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0021_auto_20201219_1639.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0022_quizz_option.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0023_quizz_option_available.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0024_result.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0025_auto_20210201_2133.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0025_auto_20210202_0014.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0026_auto_20210202_1218.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0026_course_xp_points.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0027_course_modified.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0028_merge_20210203_1315.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0029_course_xp_points_perq.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0030_merge_20210204_1039.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0031_auto_20210210_1029.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSM/migrations/0032_remove_course_difficulty_level.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/User/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/userCourseIntro.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userCourseIntro.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/templates/userCourseLesson.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userCourseLesson.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/userDashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userDashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/templates/userProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/User/templates/userProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,16 +61,16 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/static/images" />
-      <recent name="$PROJECT_DIR$/User/templates" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static/css" />
       <recent name="$PROJECT_DIR$/templates/passwordReset" />
       <recent name="$PROJECT_DIR$/MicroCourse/templates/microPartials" />
       <recent name="$PROJECT_DIR$/MicroCourse/partials" />
       <recent name="$PROJECT_DIR$/MicroCourse/templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/images" />
+      <recent name="$PROJECT_DIR$/User/templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -172,6 +141,7 @@
       <workItem from="1613146313105" duration="4837000" />
       <workItem from="1613741264002" duration="1099000" />
       <workItem from="1613919854228" duration="4804000" />
+      <workItem from="1614610142327" duration="1389000" />
     </task>
     <servers />
   </component>
@@ -179,10 +149,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="466" y="154" width="424" height="484" key="FileChooserDialogImpl" timestamp="1613385442798">
+    <state x="466" y="154" width="424" height="484" key="FileChooserDialogImpl" timestamp="1614570259804">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="466" y="154" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1613385442798" />
+    <state x="466" y="154" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1614570259804" />
     <state width="1324" height="220" key="GridCell.Tab.0.bottom" timestamp="1609425872815">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
