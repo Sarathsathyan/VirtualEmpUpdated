@@ -198,7 +198,7 @@ def userCourseLesson(request, c_id):
         current_time = datetime.datetime.now(timezone.utc)
         print(c_id)
         # give c_id in 1
-        course = Course.objects.get(id=1)
+        course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
 
         video =None
@@ -207,6 +207,7 @@ def userCourseLesson(request, c_id):
         status=None
         # start test
         testID = False
+
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
