@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static %}{% load tags %}
 {% block content %}
     <style>
         .course-layouts {
@@ -116,7 +116,7 @@
                                         {% for d in data %}
                                             {% if d.weekId_id == i.pk %}
                                                 {% if d.endTime %}
-                                                    <span class="course_tab_text">{{ remain }}</span>
+                                                    <span class="course_tab_text"> {{ d.endTime|subtract:d.currentTime }}</span>
                                                 {% endif %}
                                             {% endif %}
                                         {% endfor %}

@@ -12,7 +12,9 @@ from CSM.models import Quizz,Result
 import re
 from moviepy.editor import VideoFileClip
 # Create your views here.
+from django import template
 
+register = template.Library()
 # CSM
 
 def userCfp(request):
@@ -215,6 +217,7 @@ def userCourseLesson(request, c_id):
                 if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=week).exists():
                     status = 1
                     print(status)
+                    print("sarath")
                 else:
                     current_time = datetime.datetime.now()
                     end_date = current_time + datetime.timedelta(days=7)
@@ -239,9 +242,10 @@ def userCourseLesson(request, c_id):
                 if(d.weekId_id == i.pk):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
+
                         if remainingTime.days == 0:
                             testID = True
-        print(status)
+
         if course.video_page_image == None:
             video_page_image= None
         else:
@@ -264,6 +268,8 @@ def userCourseLesson(request, c_id):
         return render(request,'userCourseLesson.html',context)
     else:
         return redirect('login')
+
+
 
 def userprofile(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
@@ -796,7 +802,7 @@ def userQuizz(request,w_id):
     if request.user.is_active:
         week = Week.objects.get(id = w_id)
         course = Course.objects.get(id = week.week_id_id)
-        
+
         if not Score.objects.filter(userId_id=request.user.pk, week_id_id=week.pk).exists():
             score_ob=Score.objects.create(userId_id=request.user.id,week_id_id=week.pk, totalxp=0)
             score_ob.save()
@@ -804,19 +810,19 @@ def userQuizz(request,w_id):
         data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
         
         context={
-            'questions' : data
+            'questions' : data,
+            'w_id':w_id
         }
         return render(request,'userQuizz.html',context)
     else:
         return redirect('login')
 
 
-def userResult(request):
+def userResult(request,w_id):
     if request.user.is_active:
-        print("request.user",request.user)
-        print('request.user.pk',request.user.pk)
         time =0
         form = request.POST.getlist('inquiry')
+        print(form)
         correct = 0
         wrong = 0
         tempQues = []
@@ -843,6 +849,7 @@ def userResult(request):
 
         val = Result()
         print("correct",correct)
+        print("Wrong",wrong)
         dic_quizz[Ques[0].week_id_id]=correct
         """
         # obj = Question.objects.first()
@@ -863,13 +870,24 @@ def userResult(request):
         for k in dic_quizz.keys():
             if Score.objects.filter(week_id_id=k, userId_id=request.user.id).exists():
                 score_ob=Score.objects.get(week_id_id=k, userId_id= request.user.id)
+                score_ob.correct = correct
+                score_ob.wrong = wrong
+                score_ob.save()
                 course_ob=Course.objects.get(id=score_ob.week_id.week_id_id)
                 temp_totalxp=dic_quizz[k] * course_ob.xp_points_perq
                 if temp_totalxp > score_ob.totalxp:
                     score_ob.totalxp=temp_totalxp
                     score_ob.save()
 
-        return redirect('userdashboard')
+        print(len(form))
+        context ={
+            'total' : len(form),
+            'correct' : correct,
+            'wrong' : wrong,
+            'w_id':w_id
+        }
+
+        return render(request,'user_result.html',context)
 
         # except Exception as e:
         #     messages.add_message(
@@ -880,6 +898,27 @@ def userResult(request):
         #     return redirect('/')
     else:
         return redirect('login')
+
+
+def unlock(request,w_id):
+    user_id = request.user.pk
+    week = Week.objects.get(id = w_id)
+    next_week = None
+    data=None
+    if userProgress.objects.filter(userId_id=user_id , weekId_id = week.pk).exists():
+        data = userProgress.objects.get(userId_id=user_id , weekId_id = week.pk)
+        print(data.course_id)
+
+    if(week.week_name == 'Week 1'):
+        next_week = 'Week 2'
+        week_data = Week.objects.get(week_name=next_week)
+        print(week_data.week_name)
+        current_time = datetime.datetime.now()
+        end_date = current_time + datetime.timedelta(days=7)
+        next = userProgress(weekId_id=week_data.pk, userId_id=request.user.pk,course_id_id=data.course_id_id,status='STARTED',currentTime=current_time,endTime=end_date)
+        next.save()
+        return redirect('courseLesson',data.course_id_id)
+
 
 
 

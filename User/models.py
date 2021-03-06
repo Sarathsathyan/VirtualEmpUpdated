@@ -102,3 +102,5 @@ class Score(models.Model):
     week_id=models.ForeignKey(Week, on_delete=models.CASCADE)
     #course_id=models.ForeignKey(Course,on_delete=models.CASCADE)
     totalxp=models.IntegerField(default=0)
+    correct = models.IntegerField(null=True)
+    wrong = models.IntegerField(null=True)
