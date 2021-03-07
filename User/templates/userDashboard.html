@@ -3,6 +3,194 @@
 {% block content %}
     <body>
       <style >
+.snip1543 {
+    /* background-color: #fff; */
+    /* color: #ffffff; */
+    /* display: inline-block; */
+    /* font-family: 'Source Sans Pro', sans-serif; */
+    font-size: 16px;
+    /* border-radius: 5px; */
+    margin: 10px 5px;
+    max-width: 415px;
+    max-height: 240px;
+    /* min-width: 230px; */
+    /* overflow: hidden; */
+    /* position: relative; */
+    text-align: left;
+    /* -webkit-transform: translateZ(0); */
+    /* transform: translateZ(0); */
+}
+.uk-width-expand.pl-2 {
+    padding-left: 5px !important;
+}
+a.trail {
+    position: relative !important;
+}
+.course-card.episode-card.animate-this {
+    box-shadow : -10px 10px 14px -5px rgb(25 42 70 / 13%)
+}
+.uk-grid {
+    margin-left: 0px;
+}
+.uk-grid > * {
+    padding-left: 0px!important;
+}
+.snip1543 *,
+.snip1543 *:before,
+.snip1543 *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.45s ease;
+  transition: all 0.45s ease;
+}
+
+.snip1543 img {
+  backface-visibility: hidden;
+  max-width: 100%;
+  max-height:100%;
+  vertical-align: top;
+}
+
+.snip1543:before,
+.snip1543:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  right: 0;
+  content: '';
+  background-color: #191970;
+  -webkit-transition: all 0.45s ease;
+  transition: all 0.45s ease;
+}
+
+.snip1543:before {
+  -webkit-transform: skew(0deg) translateX(-100%);
+  transform: skew(0deg) translateX(-100%);
+}
+
+.snip1543:after {
+  -webkit-transform: skew(0deg) translateX(-100%);
+  transform: skew(0deg) translateX(-100%);
+}
+
+.snip1543 figcaption {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    /* top: 50%; */
+    bottom: 0px;
+    left: -20px;
+    right: 0px;
+    z-index: 1;
+    /* bottom: 0; */
+    padding: 25px 2% 25px 50px;
+}
+
+
+.snip1543 figcaption:before,
+.snip1543 figcaption:after {
+  position: absolute;
+  top: -10px;
+    bottom: -25px;
+    left: -3px;
+    right: -5px;
+  background-color: #191970;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  content: '';
+  z-index: -1;
+}
+
+.snip1543 figcaption:before {
+  -webkit-transform: skew(0deg) translateX(-100%);
+  transform: skew(0deg) translateX(-100%);
+}
+
+.snip1543 figcaption:after {
+  -webkit-transform: skew(0deg) translateX(-100%);
+  transform: skew(0deg) translateX(-100%);
+}
+
+.snip1543 h3,
+.snip1543 p {
+  margin: 0;
+  opacity: 0;
+  letter-spacing: 1px;
+}
+
+.snip1543 h3 {
+  font-family: 'Teko', sans-serif;
+  font-weight: 700;
+  line-height: 1em;
+}
+
+.snip1543 p {
+  font-size: 0.9em;
+}
+
+.snip1543 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.snip1543:hover h3,
+.snip1543.hover h3,
+.snip1543:hover p,
+.snip1543.hover p {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 0.9;
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+}
+
+.snip1543:hover:before,
+.snip1543.hover:before {
+  -webkit-transform: skew(0deg) translateX(0%);
+  transform: skew(0deg) translateX(0%);
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+}
+
+.snip1543:hover:after,
+.snip1543.hover:after {
+  -webkit-transform: skew(0deg) translateX(0%);
+  transform: skew(0deg) translateX(0%);
+}
+
+.snip1543:hover figcaption:before,
+.snip1543.hover figcaption:before {
+  -webkit-transform: skew(0deg) translateX(0%);
+  transform: skew(0deg) translateX(0%);
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+
+.snip1543:hover figcaption:after,
+.snip1543.hover figcaption:after {
+  -webkit-transform: skew(0deg) translateX(0%);
+  transform: skew(0deg) translateX(0%);
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+
+figcaption.courses {
+    align-items: center;
+    position: absolute;
+    /* top: 0%; */
+    display: flex;
+    padding-top: 60px;
+}
+/* Demo purposes only */
+
+
+
+
         .i1{
           background:#d7f0fd;
           border-radius:5px;
@@ -104,202 +292,207 @@
           /* width:55px; */
           color: #0D478C;
         }
+
+        ul.uk-slideshow-items {
+    min-height: 364px!important;
+}
       </style>
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        {% include 'userPartials/_header.html'%}
+    {% include 'userPartials/_header.html'%}
 
-        <!-- overlay seach on mobile-->
-        <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
-             style="z-index: 10000;">
-            <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
-                <form class="uk-search uk-search-navbar uk-width-1-1">
-                    <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
-                </form>
-            </div>
-            <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
-               href="#"></a>
+    <!-- overlay seach on mobile-->
+    <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
+         style="z-index: 10000;">
+        <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
+            <form class="uk-search uk-search-navbar uk-width-1-1">
+                <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+            </form>
+        </div>
+        <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
+           href="#"></a>
+    </div>
+
+
+    <!-- side nav-->
+    <div class="side-nav uk-animation-slide-left-medium">
+
+
+        <div class="side-nav-bg"></div>
+
+        <!-- logo -->
+        <div class="logo uk-visible@s">
+            <a href="{% url 'userdashboard' %}">
+                <img src="{% static 'images/VES.png' %}">
+            </a>
         </div>
 
-
-        <!-- side nav-->
-        <div class="side-nav uk-animation-slide-left-medium">
+        <ul>
 
 
-            <div class="side-nav-bg"></div>
+            <li>
+                <!-- My Profile -->
+                <a href="{% url 'userprofile' %}"> <i class="icon-brand-earlybirds"></i> <span class="tooltips"> My Profile</span></a>
+            </li>
+            <li>
+                <!-- My courses -->
+                <a href="{% url 'userdashboard' %}"> <i class="uil-book-open"></i> <span class="tooltips"> All Courses</span></a>
+            </li>
+            <li>
+                <!-- Projects-->
+                <a href="#"> <i class="uil-cube"></i> <span class="tooltips">
+                        Projects</span></a>
+            </li>
+            <li>
+                <!-- Projects-->
+                <a href="#"> <i class="uil-blogger-alt"></i> <span class="tooltips">
+                        Blogs</span></a>
+            </li>
 
-            <!-- logo -->
-            <div class="logo uk-visible@s">
-                <a href="{% url 'userdashboard' %}">
-                    <img src="{% static 'images/VES.png' %}">
-                </a>
-            </div>
+            <li>
+                <!-- News-->
+                <a href="blog-1.html"> <i class="uil-file-alt"></i> <span class="tooltips"> News</span></a>
+            </li>
 
-            <ul>
+        </ul>
+        <ul class="uk-position-bottom">
+            <li>
 
+                <!-- Lunch information box -->
 
-                <li>
-                    <!-- My Profile -->
-                    <a href="{% url 'userprofile' %}"> <i class="icon-brand-earlybirds"></i> <span class="tooltips"> My Profile</span></a>
-                </li>
-                <li>
-                    <!-- My courses -->
-                    <a href="{% url 'userdashboard' %}"> <i class="uil-book-open"></i> <span class="tooltips"> All Courses</span></a>
-                </li>
-                <li>
-                    <!-- Projects-->
-                    <a href="#"> <i class="uil-cube"></i> <span class="tooltips">
-                            Projects</span></a>
-                </li>
-                <li>
-                    <!-- Projects-->
-                    <a href="#"> <i class="uil-blogger-alt"></i> <span class="tooltips">
-                            Blogs</span></a>
-                </li>
-
-                <li>
-                    <!-- News-->
-                    <a href="blog-1.html"> <i class="uil-file-alt"></i> <span class="tooltips"> News</span></a>
-                </li>
-
-            </ul>
-            <ul class="uk-position-bottom">
-                <li>
-
-                    <!-- Lunch information box -->
-
-                    <div uk-drop="pos: right-bottom ;mode:click ; offset: 10;animation: uk-animation-slide-right-small">
-                        <div class="uk-card-default rounded p-0">
-                            <h5 class="mb-0 p-3 px-4  bg-light"> Night mode</h5>
-                            <div class="p-3 px-4">
-                                <p>Turns the light surfaces of the page dark, creating an experience ideal for night.
-                                </p>
-                                <div class="uk-flex">
-                                    <p class="uk-text-small text-muted">DARK THEME </p>
-                                    <!-- night mode button -->
-                                    <span href="#" id="night-mode" class="btn-night-mode">
-                                        <label class="btn-night-mode-switch">
-                                            <span class="uk-switch-button"></span>
-                                        </label>
-                                    </span>
-                                </div>
-
+                <div uk-drop="pos: right-bottom ;mode:click ; offset: 10;animation: uk-animation-slide-right-small">
+                    <div class="uk-card-default rounded p-0">
+                        <h5 class="mb-0 p-3 px-4  bg-light"> Night mode</h5>
+                        <div class="p-3 px-4">
+                            <p>Turns the light surfaces of the page dark, creating an experience ideal for night.
+                            </p>
+                            <div class="uk-flex">
+                                <p class="uk-text-small text-muted">DARK THEME </p>
+                                <!-- night mode button -->
+                                <span href="#" id="night-mode" class="btn-night-mode">
+                                    <label class="btn-night-mode-switch">
+                                        <span class="uk-switch-button"></span>
+                                    </label>
+                                </span>
                             </div>
+
                         </div>
                     </div>
+                </div>
 
-                </li>
+            </li>
 
-            </ul>
+        </ul>
+    </div>
+
+
+    <div class="page-content">
+
+
+      <div class="uk-grid p-3" uk-grid>
+        <div class="uk-width-1-3 ">
+          <div class=" ">
+              <div class="uk-position-relative uk-visible-toggle uk-light  "
+                   uk-slideshow="ratio: 6:5.15; autoplay: true autoplay-interval: 200" tabindex="-1"
+                    >
+                  <ul class="uk-slideshow-items " style="border-radius:5px; box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px;">
+                      {% for i in blogs %}
+                          <li>
+                              {% if i.blog_thumbnail %}
+                                  <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
+                              {% else %}
+                                  <img src="" alt="" uk-cover>
+                              {% endif %}
+                              <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                                  <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
+                                  <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
+                              </div>
+                          </li>
+                      {% endfor %}
+                  </ul>
+                  <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
+                     uk-slidenav-previous uk-slideshow-item="previous"></a>
+                  <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                     uk-slideshow-item="next"></a>
+              </div>
+          </div>
+
         </div>
 
 
-        <div class="page-content">
-
-
-          <div class="uk-grid p-3" uk-grid>
-            <div class="uk-width-1-3 ">
-              <div class=" ">
-                  <div class="uk-position-relative uk-visible-toggle uk-light  "
-                       uk-slideshow="ratio: 6:5.15; autoplay: true autoplay-interval: 200" tabindex="-1"
-                        >
-                      <ul class="uk-slideshow-items " style="border-radius:5px; box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px;">
-                          {% for i in blogs %}
-                              <li>
-                                  {% if i.blog_thumbnail %}
-                                      <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
-                                  {% else %}
-                                      <img src="" alt="" uk-cover>
-                                  {% endif %}
-                                  <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
-                                      <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
-                                      <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
-                                  </div>
-                              </li>
-                          {% endfor %}
-                      </ul>
-                      <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
-                         uk-slidenav-previous uk-slideshow-item="previous"></a>
-                      <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                         uk-slideshow-item="next"></a>
-                  </div>
+        <div class="uk-width-expand pl-2">
+          <div class=" ">
+              <div class="uk-position-relative uk-visible-toggle uk-light  "
+                   uk-slideshow="ratio: 6:2.44; autoplay: true autoplay-interval: 200" tabindex="-1"
+                   >
+                  <ul class="uk-slideshow-items " style="border-radius:5px;">
+                      {% for i in blogs %}
+                          <li>
+                              {% if i.blog_thumbnail %}
+                                  <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
+                              {% else %}
+                                  <img src="" alt="" uk-cover>
+                              {% endif %}
+                              <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                                  <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
+                                  <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
+                              </div>
+                          </li>
+                      {% endfor %}
+                  </ul>
+                  <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
+                     uk-slidenav-previous uk-slideshow-item="previous"></a>
+                  <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                     uk-slideshow-item="next"></a>
               </div>
-
-            </div>
-
-
-            <div class="uk-width-expand pl-2">
-              <div class=" ">
-                  <div class="uk-position-relative uk-visible-toggle uk-light  "
-                       uk-slideshow="ratio: 6:2.44; autoplay: true autoplay-interval: 200" tabindex="-1"
-                       >
-                      <ul class="uk-slideshow-items " style="border-radius:5px;">
-                          {% for i in blogs %}
-                              <li>
-                                  {% if i.blog_thumbnail %}
-                                      <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
-                                  {% else %}
-                                      <img src="" alt="" uk-cover>
-                                  {% endif %}
-                                  <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
-                                      <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
-                                      <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
-                                  </div>
-                              </li>
-                          {% endfor %}
-                      </ul>
-                      <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
-                         uk-slidenav-previous uk-slideshow-item="previous"></a>
-                      <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                         uk-slideshow-item="next"></a>
-                  </div>
-              </div>
-            </div>
-
           </div>
+        </div>
+
+      </div>
 
 
 
-                <div class=" mx-4 text-right my-1">
-                    <form method="post" enctype="multipart/form-data">{% csrf_token %}
-                        <div class="uk-inline">
-                            <style>
-                                .plus {
-                                    border-radius: 50%;
-                                    -webkit-transition: -webkit-transform .4s ease-in-out;
-                                    transition: transform .4s ease-in-out;
-                                }
+            <div class=" mx-4 text-right my-1">
+                <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="uk-inline">
+                        <style>
+                            .plus {
+                                border-radius: 50%;
+                                -webkit-transition: -webkit-transform .4s ease-in-out;
+                                transition: transform .4s ease-in-out;
+                            }
 
-                                .plus:hover {
-                                    -webkit-transform: rotate(90deg);
-                                    transform: rotate(90deg);
-                                }
-                            </style>
-                            <button type="button" class="plus btn btn-default btn-sm text-white p-2 "
-                                    uk-tooltip="title: Choose What to Display; pos: left"
-                                    style="border-radius: 50%; height:47px;" name="button"><h3 class="text-light"><i
-                                    class="uil uil-plus"></i></h3></button>
-
-
-                            <div uk-dropdown="mode: click" class="pb-0 px-2" style="border-radius:10px;">
-
-                                <div class="uk-margin text-left uk-child-width-auto">
-                                    {% for i in blog_cag %}
-                                        <label><input class="uk-checkbox px-3 py-1 my-1 mx-2" type="checkbox"
-                                                      name="d_blog" value="{{ i.blog_category }}">{{ i.blog_category }}
-                                        </label>
-                                    {% endfor %}
-                                    <button type="submit" class="btn btn-default btn-sm ml-5 mt-2" name="button1">Done
-                                    </button>
-                                </div>
+                            .plus:hover {
+                                -webkit-transform: rotate(90deg);
+                                transform: rotate(90deg);
+                            }
+                        </style>
+                        <button type="button" class="plus btn btn-default btn-sm text-white p-2 "
+                                uk-tooltip="title: Choose What to Display; pos: left"
+                                style="border-radius: 50%; height:47px;" name="button"><h3 class="text-light"><i
+                                class="uil uil-plus"></i></h3></button>
 
 
+                        <div uk-dropdown="mode: click" class="pb-0 px-2" style="border-radius:10px;">
+
+                            <div class="uk-margin text-left uk-child-width-auto">
+                                {% for i in blog_cag %}
+                                    <label><input class="uk-checkbox px-3 py-1 my-1 mx-2" type="checkbox"
+                                                  name="d_blog" value="{{ i.blog_category }}">{{ i.blog_category }}
+                                    </label>
+                                {% endfor %}
+                                <button type="submit" class="btn btn-default btn-sm ml-5 mt-2" name="button1">Done
+                                </button>
                             </div>
-                        </div>
-                    </form>
 
-                </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
                 <div class="section-header my-4">
                     <div class="section-header-left">
                         <h1 class="text-center"><strong>Achieve Your Goals With VE Campus</strong></h1>
@@ -338,43 +531,58 @@
                           transform: translateY(+18%);
 
                         }
+                  
                     </style>
 
                     <div class="site-icon mx-auto" style="margin-left:36px;">
-                      <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+                      <div class="uk-card" uk-grid>
 
-                        <a href="episode-details.html">
-                          <div class="course-card episode-card animate-this" style="width:292.5px;">
+                       
+                          <div class="course-card episode-card animate-this" style="width:292.5px; margin-right: 10px;">
                               <div class="course-card-thumbnail ">
 
-                                  <span class="duration">2:39</span>
-                                  <img src="{% static 'images/dashboard/2.png'%}">
-                                  <div class="centered text-center" style="position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);"><h2>DATA SCIENTIST</h2></div>
+                                <figure class="snip1543">
+                                    <!--<img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                    -->
+                                    {% if course.course_image %}
+                                    <img src="{{ course.course_image.url }}"  style="width:367px; height: 190px; border-radius:10px;">
+                                    {% else %}
+                                    <img src="" alt="">
+                                    {% endif %}
+                                    
+                                    <figcaption>
+                                      <h3 style="color: #fff; padding-bottom: 20px;"><a style="color: #fff;" class="trail" href="{% url 'courseIntro' course.pk %}">Training &rarr;</a></h3>
+                                      <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">Workplace &rarr;</a></h3>
+                                    </figcaption>
+                                    <a href="#"></a>
+                                  </figure>
 
                               </div>
                               <div class="course-card-body">
                                   <h4 class="mb-0"> CFP-1 </h4>
                               </div>
                           </div>
-                        </a>
+                        
 
-                        <a href="episode-details.html">
+                       
                           <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
                               <div class="course-card-thumbnail ">
 
-                                  <span class="duration">2:39</span>
-                                  <img src="{% static 'images/episodes/2.png'%}">
-                                  <span class="play-button-trigger"></span>
+                                <figure class="snip1543">
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                    <figcaption>
+                                        <h3 style="color: #fff; padding-bottom: 20px;"><a style="color: #fff;" class="trail" href="#">Training &rarr;</a></h3>
+                                        <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">Workplace &rarr;</a></h3>
+                                      </figcaption>
+                                    <a href="#"></a>
+                                  </figure>
                               </div>
                               <div class="course-card-body">
                                   <h4 class="mb-0"> Creating sticky in HTML </h4>
                               </div>
                           </div>
-                        </a>
-
+                       
+                       
                       </div>
                     </div>
 
@@ -420,46 +628,61 @@
 
                      <div class="site-icon1 mx-auto" style="margin-left:36px;">
                        <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+                           
 
-                         <a href="episode-details.html">
-                           <div class="course-card episode-card animate-this" style="width:292.5px;">
-                               <div class="course-card-thumbnail ">
 
-                                   <span class="duration">2:39</span>
-                                   <img src="{% static 'images/episodes/2.png'%}">
-                                   <span class="play-button-trigger"></span>
-                               </div>
-                               <div class="course-card-body">
-                                   <h4 class="mb-0"> Creating sticky in HTML </h4>
-                               </div>
-                           </div>
-                         </a>
-                         <a href="episode-details.html">
-                           <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
-                               <div class="course-card-thumbnail ">
 
-                                   <span class="duration">2:39</span>
-                                   <img src="{% static 'images/episodes/2.png'%}">
-                                   <span class="play-button-trigger"></span>
-                               </div>
-                               <div class="course-card-body">
-                                   <h4 class="mb-0"> Creating sticky in HTML </h4>
-                               </div>
-                           </div>
-                         </a>
-                         <a href="episode-details.html">
-                           <div class="course-card episode-card animate-this" style="width:292.5px;">
-                               <div class="course-card-thumbnail ">
+                             <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                              <div class="course-card-thumbnail ">
 
-                                   <span class="duration">2:39</span>
-                                   <img src="{% static 'images/episodes/2.png'%}">
-                                   <span class="play-button-trigger"></span>
-                               </div>
-                               <div class="course-card-body">
-                                   <h4 class="mb-0"> Creating sticky in HTML </h4>
-                               </div>
-                           </div>
-                         </a>
+                                <figure class="snip1543">
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                    <figcaption class="courses">
+                                        <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                      </figcaption>
+                                    <a href="#"></a>
+                                  </figure>
+                              </div>
+                              <div class="course-card-body">
+                                  <h4 class="mb-0"> Creating sticky in HTML </h4>
+                              </div>
+                          </div>
+
+                         
+                          <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+                              <figure class="snip1543">
+                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <figcaption class="courses">
+                                      <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                    </figcaption>
+                                  <a href="#"></a>
+                                </figure>
+                            </div>
+                            <div class="course-card-body">
+                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                            </div>
+                        </div>
+
+
+                        <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+                              <figure class="snip1543">
+                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <figcaption class="courses">
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                    </figcaption>
+                                  <a href="#"></a>
+                                </figure>
+                            </div>
+                            <div class="course-card-body">
+                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                            </div>
+                        </div>
+
+
 
                        </div>
                      </div>
@@ -511,45 +734,59 @@
                       <div class="site-icon mx-auto" style="margin-left:36px;">
                         <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
 
-                          <a href="episode-details.html">
-                            <div class="course-card episode-card animate-this" style="width:292.5px;">
-                                <div class="course-card-thumbnail ">
 
-                                    <span class="duration">2:39</span>
-                                    <img src="{% static 'images/episodes/2.png'%}">
-                                    <span class="play-button-trigger"></span>
-                                </div>
-                                <div class="course-card-body">
-                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
-                                </div>
-                            </div>
-                          </a>
-                          <a href="episode-details.html">
-                            <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
-                                <div class="course-card-thumbnail ">
 
-                                    <span class="duration">2:39</span>
-                                    <img src="{% static 'images/episodes/2.png'%}">
-                                    <span class="play-button-trigger"></span>
-                                </div>
-                                <div class="course-card-body">
-                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
-                                </div>
-                            </div>
-                          </a>
-                          <a href="episode-details.html">
-                            <div class="course-card episode-card animate-this" style="width:292.5px;">
-                                <div class="course-card-thumbnail ">
+                         <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
 
-                                    <span class="duration">2:39</span>
-                                    <img src="{% static 'images/episodes/2.png'%}">
-                                    <span class="play-button-trigger"></span>
-                                </div>
-                                <div class="course-card-body">
-                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
-                                </div>
+                              <figure class="snip1543">
+                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <figcaption class="courses">
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                    </figcaption>
+                                  <a href="#"></a>
+                                </figure>
                             </div>
-                          </a>
+                            <div class="course-card-body">
+                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                            </div>
+                        </div>
+
+
+                        <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+                              <figure class="snip1543">
+                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <figcaption class="courses">
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                    </figcaption>
+                                  <a href="#"></a>
+                                </figure>
+                            </div>
+                            <div class="course-card-body">
+                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                            </div>
+                        </div>
+
+
+                        <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+                              <figure class="snip1543">
+                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <figcaption class="courses">
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                    </figcaption>
+                                  <a href="#"></a>
+                                </figure>
+                            </div>
+                            <div class="course-card-body">
+                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                            </div>
+                        </div>
+
+
 
                         </div>
                       </div>
@@ -595,47 +832,57 @@
 
                        <div class="site-icon3 mx-auto" style="margin-left:36px;">
                          <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match " uk-grid>
-                           <a href="episode-details.html">
-                             <div class="course-card episode-card animate-this" style="width:292.5px;">
-                                 <div class="course-card-thumbnail ">
 
-                                     <span class="duration">2:39</span>
-                                     <img src="{% static 'images/episodes/2.png'%}">
-                                     <span class="play-button-trigger"></span>
-                                 </div>
-                                 <div class="course-card-body">
-                                     <h4 class="mb-0"> Creating sticky in HTML </h4>
-                                 </div>
-                             </div>
-                           </a>
 
-                           <a href="episode-details.html">
-                             <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
-                                 <div class="course-card-thumbnail ">
+                            <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                                <div class="course-card-thumbnail ">
+    
+                                  <figure class="snip1543">
+                                      <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                      <figcaption class="courses">
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                        </figcaption>
+                                      <a href="#"></a>
+                                    </figure>
+                                </div>
+                                <div class="course-card-body">
+                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                </div>
+                            </div>
 
-                                     <span class="duration">2:39</span>
-                                     <img src="{% static 'images/episodes/2.png'%}">
-                                     <span class="play-button-trigger"></span>
-                                 </div>
-                                 <div class="course-card-body">
-                                     <h4 class="mb-0"> Creating sticky in HTML </h4>
-                                 </div>
-                             </div>
-                           </a>
 
-                           <a href="episode-details.html">
-                             <div class="course-card episode-card animate-this" style="width:292.5px;">
-                                 <div class="course-card-thumbnail ">
+                            <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                                <div class="course-card-thumbnail ">
+    
+                                  <figure class="snip1543">
+                                      <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                      <figcaption class="courses">
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                        </figcaption>
+                                      <a href="#"></a>
+                                    </figure>
+                                </div>
+                                <div class="course-card-body">
+                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                </div>
+                            </div>
 
-                                     <span class="duration">2:39</span>
-                                     <img src="{% static 'images/episodes/2.png'%}">
-                                     <span class="play-button-trigger"></span>
-                                 </div>
-                                 <div class="course-card-body">
-                                     <h4 class="mb-0"> Creating sticky in HTML </h4>
-                                 </div>
-                             </div>
-                           </a>
+
+                            <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                                <div class="course-card-thumbnail ">
+    
+                                  <figure class="snip1543">
+                                      <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                      <figcaption class="courses">
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                        </figcaption>
+                                      <a href="#"></a>
+                                    </figure>
+                                </div>
+                                <div class="course-card-body">
+                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                </div>
+                            </div>
 
 
 
@@ -656,37 +903,7 @@
 <br>
 <br>
                 <div class="container ">
-                <div class="row">
-
-                    <p style="font-weight: 500;background: #181c29;color: #f9cc33;font-size: 30px;padding-left: 40px;padding-right: 40px;border-radius: 50px;padding-top: 4px;padding-bottom: 4px;"> <b>&#x2022;</b> &nbsp;{{ cour.cfp }}</p>
-
-                </div>
-
-
-                    <div class="row">
-                        <div class="col-md-6 ">
-                            <div class="con">
-
-                                <a href="{% url 'courseIntro' course.pk %}">
-                                  {% if course.course_image %}
-                                    <img src="{{ course.course_image.url }}"  style="height: 400px; border-radius:10px;">
-                                  {% else %}
-                                    <img src="" alt="">
-                                  {% endif %}
-                                    <!-- <div class="centered">MY TRAINING</div> -->
-
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6" style="border-radius : 14px;">
-                            <div class="con" >
-                                <a href="#">
-                                    <img src="{% static 'images/myworkplac.png' %}" style="height: 400px; border-radius:10px;">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
+            
 
                     <!-- footer
                    ================================================== -->
