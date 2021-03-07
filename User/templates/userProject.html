@@ -1,0 +1,322 @@
+{% extends 'base.html' %}
+{% load static %}{% block title %}User-Dashboard{% endblock %}
+{% block content %}
+    <body>
+
+    <div id="wrapper">
+
+        {% include 'userPartials/_header.html'%}
+
+        <!-- overlay seach on mobile-->
+        <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
+             style="z-index: 10000;">
+            <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
+                <form class="uk-search uk-search-navbar uk-width-1-1">
+                    <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+                </form>
+            </div>
+            <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
+               href="#"></a>
+        </div>
+
+
+        <!-- side nav-->
+        <div class="side-nav uk-animation-slide-left-medium">
+
+
+            <div class="side-nav-bg"></div>
+
+            <!-- logo -->
+            <div class="logo uk-visible@s">
+                <a href="{% url 'userdashboard' %}">
+                    <img src="{% static 'images/VES.png' %}">
+                </a>
+            </div>
+
+            <ul>
+
+
+                <li>
+                    <!-- My Profile -->
+                    <a href="{% url 'userprofile' %}"> <i class="icon-brand-earlybirds"></i> <span class="tooltips"> My Profile</span></a>
+                </li>
+                <li>
+                    <!-- My courses -->
+                    <a href="{% url 'userdashboard' %}"> <i class="uil-book-open"></i> <span class="tooltips"> All Courses</span></a>
+                </li>
+                <li>
+                    <!-- Projects-->
+                    <a href="#"> <i class="uil-cube"></i> <span class="tooltips">
+                            Projects</span></a>
+                </li>
+                <li>
+                    <!-- Projects-->
+                    <a href="#"> <i class="uil-blogger-alt"></i> <span class="tooltips">
+                            Blogs</span></a>
+                </li>
+
+                <li>
+                    <!-- News-->
+                    <a href="blog-1.html"> <i class="uil-file-alt"></i> <span class="tooltips"> News</span></a>
+                </li>
+
+            </ul>
+            <ul class="uk-position-bottom">
+                <li>
+
+                    <!-- Lunch information box -->
+
+                    <div uk-drop="pos: right-bottom ;mode:click ; offset: 10;animation: uk-animation-slide-right-small">
+                        <div class="uk-card-default rounded p-0">
+                            <h5 class="mb-0 p-3 px-4  bg-light"> Night mode</h5>
+                            <div class="p-3 px-4">
+                                <p>Turns the light surfaces of the page dark, creating an experience ideal for night.
+                                </p>
+                                <div class="uk-flex">
+                                    <p class="uk-text-small text-muted">DARK THEME </p>
+                                    <!-- night mode button -->
+                                    <span href="#" id="night-mode" class="btn-night-mode">
+                                        <label class="btn-night-mode-switch">
+                                            <span class="uk-switch-button"></span>
+                                        </label>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="page-content">
+
+            <div class="uk-width-expand">
+              <div class=" ">
+                  <div class="uk-position-relative uk-visible-toggle uk-light  "
+                       uk-slideshow="ratio: 6:1.9; autoplay: true autoplay-interval: 200" tabindex="-1"
+                       >
+                      <ul class="uk-slideshow-items " style="border-radius:5px;">
+                          {% for i in blogs %}
+                              <li>
+                                  {% if i.blog_thumbnail %}
+                                      <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
+                                  {% else %}
+                                      <img src="" alt="" uk-cover>
+                                  {% endif %}
+                                  <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                                      <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
+                                      <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
+                                  </div>
+                              </li>
+                          {% endfor %}
+                      </ul>
+                      <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
+                         uk-slidenav-previous uk-slideshow-item="previous"></a>
+                      <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                         uk-slideshow-item="next"></a>
+                  </div>
+              </div>
+            </div>
+
+
+
+
+
+                <div class=" mx-4 text-right my-1">
+                    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                        <div class="uk-inline">
+                            <style>
+                                .plus {
+                                    border-radius: 50%;
+                                    -webkit-transition: -webkit-transform .4s ease-in-out;
+                                    transition: transform .4s ease-in-out;
+                                }
+
+                                .plus:hover {
+                                    -webkit-transform: rotate(90deg);
+                                    transform: rotate(90deg);
+                                }
+                            </style>
+                            <button type="button" class="plus btn btn-default btn-sm text-white p-2 "
+                                    uk-tooltip="title: Choose What to Display; pos: left"
+                                    style="border-radius: 50%; height:47px;" name="button"><h3 class="text-light"><i
+                                    class="uil uil-plus"></i></h3></button>
+
+
+                            <div uk-dropdown="mode: click" class="pb-0 px-2" style="border-radius:10px;">
+
+                                <div class="uk-margin text-left uk-child-width-auto">
+                                    {% for i in blog_cag %}
+                                        <label><input class="uk-checkbox px-3 py-1 my-1 mx-2" type="checkbox"
+                                                      name="d_blog" value="{{ i.blog_category }}">{{ i.blog_category }}
+                                        </label>
+                                    {% endfor %}
+                                    <button type="submit" class="btn btn-default btn-sm ml-5 mt-2" name="button1">Done
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="section-header my-4">
+                    <div class="section-header-left">
+                        <h2 class="text-center"><strong>We offer You the choice of industry led projects that are based on real time problem cases</strong></h2>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="container">
+
+                  <div class="">
+                    <h1>Projects</h1>
+                  </div>
+                  <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title">Default</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+    </div>
+    <div>
+        <div class="uk-card uk-card-primary uk-card-body">
+            <h3 class="uk-card-title">Primary</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+    </div>
+    <div>
+        <div class="uk-card uk-card-secondary uk-card-body">
+            <h3 class="uk-card-title">Secondary</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+    </div>
+</div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="container ">
+
+
+
+                    <!-- footer
+                   ================================================== -->
+                    {% include 'partials/_footer.html' %}
+
+                </div>
+        </div>
+
+    </div>
+
+
+    <style>
+        .flex-wrapper {
+            display: flex;
+            flex-flow: row nowrap;
+        }
+
+        .single-chart {
+            width: 33%;
+            justify-content: space-around;
+        }
+
+        .circular-chart {
+            display: block;
+            margin: 10px auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 3.8;
+        }
+
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+
+        @keyframes progress {
+            0% {
+                stroke-dasharray: 0 100;
+            }
+        }
+
+        .circular-chart.orange .circle {
+            stroke: #ff9f00;
+        }
+
+        .circular-chart.green .circle {
+            stroke: #4CC790;
+        }
+
+        .circular-chart.blue .circle {
+            stroke: #3c9ee5;
+        }
+
+        .percentage {
+            fill: #666;
+            font-family: sans-serif;
+            font-size: 0.5em;
+            text-anchor: middle;
+        }
+    </style>
+
+    <!-- For Night mode -->
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+
+    </body>
+{% endblock %}

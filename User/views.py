@@ -380,7 +380,7 @@ def userprofile(request):
                         lan_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Languages')
                     except:
                         lan_skills=[]
-                    
+
                     print(request.user.pk)
                     if Score.objects.filter(userId_id=request.user.pk).exists():
                         score_ob=Score.objects.filter(userId_id=request.user.pk)
@@ -389,12 +389,12 @@ def userprofile(request):
                             total_xp_earned+=score.totalxp
 
                             course_points=Course.objects.get(id=score.week_id.week_id_id).course_points
-                    
+
 
                     else:
                         total_xp_earned=0
                         course_points=0
-                    
+
                     context = {
                         'cfp_details': cfp_details,
                         'user_data': user_details,
@@ -701,7 +701,7 @@ def userProfileEdit(request):
                 'users' : users,
                 'mcCredits':user_detail.user_mcCredits,
                 'worktokens':user_detail.user_workTokens,
-                
+
             }
 
             try:
@@ -796,13 +796,13 @@ def userQuizz(request,w_id):
     if request.user.is_active:
         week = Week.objects.get(id = w_id)
         course = Course.objects.get(id = week.week_id_id)
-        
+
         if not Score.objects.filter(userId_id=request.user.pk, week_id_id=week.pk).exists():
             score_ob=Score.objects.create(userId_id=request.user.id,week_id_id=week.pk, totalxp=0)
             score_ob.save()
-        
+
         data = Quizz.objects.filter(course_id_id=course.pk, week_id_id = week.pk)
-        
+
         context={
             'questions' : data
         }
@@ -881,6 +881,23 @@ def userResult(request):
     else:
         return redirect('login')
 
+
+def userProjects(request):
+    blog_cag = BlogCategory.objects.all()
+    blogs = BlogManager.objects.all()
+    if not blogs:
+        blogs = BlogHeight.objects.all()
+
+    context={
+        'blog_cag': blog_cag,
+        'blogs': blogs,
+    }
+    return render(request,'userProject.html',context)
+
+
+def userProjectsDesc(request):
+
+    return render(request,'userProjectDesc.html')
 
 
 def pricing(request):
