@@ -3,18 +3,18 @@
 
 <style media="screen">
     progress[value]::-webkit-progress-value {
-    transition: width 0.5s;
-    background: orange;
-}
+        transition: width 0.5s;
+        background: orange;
+    }
 
 </style>
 {% block content %}
 
- <div id="wrapper">
+    <div id="wrapper">
 
 
-               {% include 'userPartials/_header.html' %}
-{% include 'partials/_alert.html' %}
+        {% include 'userPartials/_header.html' %}
+        {% include 'partials/_alert.html' %}
 
 
         <div id="searchbox">
@@ -25,7 +25,7 @@
                 <div class="search-input-container">
                     <div class="search-input-control">
                         <span class="icon-feather-x btn-close uk-animation-scale-up"
-                            uk-toggle="target: #searchbox; cls: is-active"></span>
+                              uk-toggle="target: #searchbox; cls: is-active"></span>
                         <div class=" uk-animation-slide-bottom">
                             <input type="text" name="search" autofocus required>
                             <p class="search-help">Type the name of the Course</p>
@@ -37,14 +37,14 @@
 
         <!-- overlay seach on mobile-->
         <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
-            style="z-index: 10000;">
+             style="z-index: 10000;">
             <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
                 <form class="uk-search uk-search-navbar uk-width-1-1">
                     <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
                 </form>
             </div>
             <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
-                href="#"></a>
+               href="#"></a>
         </div>
 
         <!-- side nav-->
@@ -56,7 +56,7 @@
             <!-- logo -->
             <div class="logo uk-visible@s">
                 <a href="">
-                   <img src="{% static 'images/VES.png' %}">
+                    <img src="{% static 'images/VES.png' %}">
                 </a>
             </div>
 
@@ -65,11 +65,13 @@
 
                 <li>
                     <!-- My Profile -->
-                    <a href="{% url 'userprofile' %}" style="color:white;"> <i class="icon-brand-earlybirds"></i> <span class="tooltips"> My Profile</span></a>
+                    <a href="{% url 'userprofile' %}" style="color:white;"> <i class="icon-brand-earlybirds"></i> <span
+                            class="tooltips"> My Profile</span></a>
                 </li>
-                  <li>
+                <li>
                     <!-- My courses -->
-                    <a href="" style="color:white;"> <i class="uil-book-open"></i> <span class="tooltips"> All Courses</span></a>
+                    <a href="" style="color:white;"> <i class="uil-book-open"></i> <span
+                            class="tooltips"> All Courses</span></a>
                 </li>
                 <li>
                     <!-- Projects-->
@@ -88,7 +90,8 @@
                 </li>
 
                 <li>
-                    <a href="#" uk-toggle="target: #searchbox; cls: is-active" style="color:white;"> <i class="uil-search-alt"></i></a>
+                    <a href="#" uk-toggle="target: #searchbox; cls: is-active" style="color:white;"> <i
+                            class="uil-search-alt"></i></a>
                 </li>
 
             </ul>
@@ -123,104 +126,100 @@
         </div>
 
 
-
-
         <div class="page-content  ">
-          <div class="uk-container">
-            <div class="section-small">
-                {% include 'partials/_alert.html' %}
+            <div class="uk-container">
+                <div class="section-small">
+                    {% include 'partials/_alert.html' %}
 
-                <h3> Quiz Results ! </h3>
+                    <h3> Quiz Results ! </h3>
 
-                <div class="uk-flex uk-flex-center uk-child-width-1-3">
+                    <div class="uk-flex uk-flex-center uk-child-width-1-3">
 
 
-                            <div class="card mx-2">
-                                <div class="card-body">
-                                    <div class="uk-flex-middle">
-                                        <div class="uk-width-auto  text-center">
-                                            <h4 class="mb-2"> Correct Answers </h4>
-                                            <h1>3/5</h1>
-
-                                        </div>
+                        <div class="card mx-2">
+                            <div class="card-body">
+                                <div class="uk-flex-middle">
+                                    <div class="uk-width-auto  text-center">
+                                        <h4 class="mb-2"> Correct Answers </h4>
+                                        <h1>{{ correct }}/{{ total }}</h1>
 
                                     </div>
+
                                 </div>
-
-
                             </div>
 
 
-                            <div class="card mx-2">
-                                <div class="card-body">
-                                    <div class="uk-flex-middle">
-                                      <div class="uk-width-auto text-center">
-                                          <h4 class="mb-2"> Wrong Answers </h4>
-                                          <h1>2/5</h1>
-
-                                      </div>
-                                    </div>
-                                </div>
+                        </div>
 
 
-                            </div>
-
-                            <div class="card mx-2">
-                                <div class="card-body">
-                                    <div class="uk-flex-middle">
-                                      <div class="uk-width-auto text-center">
-                                          <h4 class="mb-2"> Points gained </h4>
-                                          <h1>+200</h1>
-
-                                      </div>
+                        <div class="card mx-2">
+                            <div class="card-body">
+                                <div class="uk-flex-middle">
+                                    <div class="uk-width-auto text-center">
+                                        <h4 class="mb-2"> Wrong Answers </h4>
+                                        <h1>{{ wrong }}/{{ total }}</h1>
 
                                     </div>
                                 </div>
                             </div>
+
+
+                        </div>
+
+                        <div class="card mx-2">
+                            <div class="card-body">
+                                <div class="uk-flex-middle">
+                                    <div class="uk-width-auto text-center">
+                                        <h4 class="mb-2"> Points gained </h4>
+                                        <h1>+4</h1>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class=" text-center px-auto">
+                        <form action="{% url 'unlockNext' w_id %}" method="post">{% csrf_token %}
+                            <div class="uk-card uk-card-default uk-card-body ">
+                                <h3 class="uk-card-title">Hurrah !!! You Unlock the Next Week</h3>
+
+                                <button class="btn btn-primary btn-lg" name="button" type="submit">Unlock</button>
+                            </div>
+                        </form>
+                    </div>
+
 
                 </div>
-
-                <div class=" text-center px-auto">
-                  <div class="uk-card uk-card-default uk-card-body ">
-                      <h3 class="uk-card-title">Hurrah !!! You Unlock the Next Week</h3>
-
-                      <button class="btn btn-primary btn-lg" name="button">Unlock</button>
-                  </div>
-                </div>
-
-
-
-            </div>
-          </div>
-          </div>
-
-
-
-
-
-                {% include 'partials/_footer.html' %}
             </div>
         </div>
 
- </div>
+
+        {% include 'partials/_footer.html' %}
+    </div>
+    </div>
+
+    </div>
 
     <script>
 
-      document.getElementById("defaultOpen").click();
+        document.getElementById("defaultOpen").click();
 
-      function openCity(evt, cityName) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      document.getElementById(cityName).style.display = "block";
-      evt.currentTarget.className += " active";
-      }
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
 
     </script>
     <!-- For Night mode -->

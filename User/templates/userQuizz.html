@@ -70,7 +70,7 @@
 
             <div class="col s12 m12">
                 <!--<form action="/userlogin/userdashboard/userResult/" name="quiz" id="quiz" method="post"> -->
-                    <form action="{% url 'userResult' %}" name="quiz" id="quiz" method="post">
+                    <form action="{% url 'userResult' w_id %}" name="quiz" id="quiz" method="post">
                     <input type="text" id="time" name="rough" readonly hidden>
                     {% csrf_token %}
 
@@ -88,7 +88,7 @@
                                     <input type="hidden" name="inquiry" value="{{ question.id }}">
                                     <div class="row mt-2">
                                         {% if question.option_available %}
-                                            {#                            <img src="{{ question.img_option1.url }}" width="200px" height="200px" alt="caption"/>#}
+<!--                                            {#                            <img src="{{ question.img_option1.url }}" width="200px" height="200px" alt="caption"/>#}-->
                                             {% for key,value in question.option.items %}
 
                                                 <div class="col s6  mb-1">
