@@ -1,31 +1,91 @@
 {% extends 'base.html' %}
 {% load static %}{% load tags %}
 {% block content %}
-    <style>
-        .course-layouts {
-            margin-top: 60px;
-        }
+<style>
+    form {
+    display: inline;
+    float: right;
+}
+.design {
+    width: 70%;
+    float: left;
+}
+div#wrapper {
+    margin-left: 70px;
+}
+.containerx {
+    margin-left: 5px;
+}
+.course-content.bg-dark.my-2.mx-auto {
+    border-radius: 0px!important;
+}
+.course-content-inner {
+    height: calc(75vh - 5px) !important;
+}
+.uk-margin-large-left.p-2.uk-width-1-2.uk-first-column {
+    padding: 0px;
+    width: 100%;
+    margin-left: 0px!important;
+}
+form.uk-active {
+    float: none;
+    text-align: center;
+}
+.course-video-list-section .uk-accordion-content {
+    margin: 3px;
+    padding-bottom: 10px;
+}
+.syllabus {
+    background: #fff;
+    display: block;
+    text-align: center;
+}
+input#startTest {
+    float: right;
+    width: auto;
+    background: #1f56a5;
+    height: auto;
+}
+button.uk-button.uk-button-left {
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #6c757d;
+    color: #fff;
+    border: 1px solid transparent;
+}
+button.uk-button.uk-button-right {
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: 1px solid transparent;
+}
+    .course-layouts {
+        margin-top: 60px;
+    }
 
-        .vid {
-            background: transparent;
-            color: darkslategray;
-        }
+    .vid {
+        background: transparent;
+        color: darkslategray;
+    }
 
-        .round {
-            font-size: 22px;
-            color: black;
+    .round {
+        font-size: 22px;
+        color: black;
 
-            border-radius: 16px;
-            font-weight: bold;
-            background: seagreen;
-        }
+        border-radius: 16px;
+        font-weight: bold;
+        background: seagreen;
+    }
 
-        #bb {
-            width: 60%;
-            margin-left: 20px;
+    #bb {
+        width: 60%;
+        margin-left: 20px;
 
-        }
-    </style>
+    }
+</style>
 
     <div id="wrapper">
         {% include 'userPartials/_header.html' %}
@@ -42,12 +102,88 @@
                href="#"></a>
         </div>
 
+        <div class="side-nav uk-animation-slide-left-medium">
+
+
+            <div class="side-nav-bg"></div>
+        
+            <!-- logo -->
+            <div class="logo uk-visible@s">
+                <a href="">
+                    <img src="{% static 'images/VES.png' %}">
+                </a>
+            </div>
+        
+            <ul>
+        
+        
+                <li>
+                    <!-- My Profile -->
+                    <a href="{% url 'userprofile' %}" style="color:white;"> <i class="icon-brand-earlybirds"></i> <span
+                            class="tooltips"> My Profile</span></a>
+                </li>
+                <li>
+                    <!-- My courses -->
+                    <a href="" style="color:white;"> <i class="uil-book-open"></i> <span class="tooltips"> All
+                            Courses</span></a>
+                </li>
+                <li>
+                    <!-- Projects-->
+                    <a href="" style="color:white;"> <i class="uil-cube"></i> <span class="tooltips">
+                            Projects</span></a>
+                </li>
+                <li>
+                    <!-- Projects-->
+                    <a href="" style="color:white;"> <i class="uil-blogger-alt"></i> <span class="tooltips">
+                            Blogs</span></a>
+                </li>
+        
+                <li>
+                    <!-- News-->
+                    <a href="blog-1.html" style="color:white;"> <i class="uil-file-alt"></i> <span class="tooltips">
+                            News</span></a>
+                </li>
+        
+                <li>
+                    <a href="#" uk-toggle="target: #searchbox; cls: is-active" style="color:white;"> <i
+                            class="uil-search-alt"></i></a>
+                </li>
+        
+            </ul>
+            <ul class="uk-position-bottom">
+                <li>
+        
+                    <!-- Lunch information box -->
+        
+                    <div uk-drop="pos: right-bottom ;mode:click ; offset: 10;animation: uk-animation-slide-right-small">
+                        <div class="uk-card-default rounded p-0">
+                            <h5 class="mb-0 p-3 px-4  bg-light"> Night mode</h5>
+                            <div class="p-3 px-4">
+                                <p>Turns the light surfaces of the page dark, creating an experience ideal for night.
+                                </p>
+                                <div class="uk-flex">
+                                    <p class="uk-text-small text-muted">DARK THEME </p>
+                                    <!-- night mode button -->
+                                    <span href="#" id="night-mode" class="btn-night-mode">
+                                        <label class="btn-night-mode-switch">
+                                            <span class="uk-switch-button"></span>
+                                        </label>
+                                    </span>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+        
+                </li>
+        
+            </ul>
+        </div>
 
         <div class="container ">
-
+            <div class="design">
             {% if video_page_image %}
-                <div class="course-content bg-dark my-2 mx-auto" style="border-radius:10px;
-                        background-image: url('{{ video_page_image.url }}') ;background-repeat: no-repeat;background-size: 100% 100%;">
+                <div class="course-content bg-dark my-2 mx-auto" style="border-radius:10px; background-image: url('{{ video_page_image.url }}') ;background-repeat: no-repeat;background-size: 100% 100%;">
             {% else %}
                 <div class="course-content bg-dark my-2 mx-auto" style="border-radius:10px;">
             {% endif %}
@@ -90,14 +226,14 @@
 
             </div>
 
-
+        </div>
             <div uk-grid>
                 <div class="uk-margin-large-left p-2 uk-width-1-2  " style="border-radius:10px; ">
-                    <div style="background:#3e416d;">
+                    <div class="syllabus">
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <h3 class="text-white"><strong>Syllabus</strong></h3>
+                            <div class="col-md-12">
+                                <h3 style="color:#1f56a5;"><strong>Syllabus</strong></h3>
                             </div>
 
                         </div>
@@ -120,15 +256,15 @@
                                                 {% endif %}
                                             {% endif %}
                                         {% endfor %}
-                                    </a>
+                                
                                     <form method="post">{% csrf_token %}
                                         <input type="text" value="{{ i.pk }}" name="weekId" hidden>
                                         {% if status %}
                                         {% else %}
                                             {% if not data %}
                                                 {% if forloop.counter == 1 %}
-                                                    <span style="color: black"><button type="submit"
-                                                                                       style="color: #0c002b;background-color: #0b7ec4"
+                                                    <span style="color: black">
+                                                        <button id="course_tab_button" class="uk-button uk-button-default uk-button-small course_tab_button" type="submit" style="color: #0c002b;background-color: #0b7ec4"
                                                                                        name="start">Start</button>
                                                     </span>
                                                 {% endif %}
@@ -144,6 +280,7 @@
 
                                         {% endif %}
                                     </form>
+                                    </a>
 
                                     <div class="uk-accordion-content">
                                         <!-- course-video-list -->
@@ -232,33 +369,23 @@
                             {% endif %}
                         </ul>
                     </div>
-
                 </div>
-                <div class="p-2 uk-width-expand  " style="border-radius:10px; ">
-                    <div class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
-                        <div class="uk-card-badge uk-label">NOTE</div>
-                        <h3 class="uk-card-title p-0 m-0">Download HTML Command Files</h3>
-                        <a href="http://virtualempleado.com/">http://virtualempleado.com/files/downloads/file3443</a>
-                    </div>
-
-                    <div>
-                        <div class="uk-card uk-card-primary uk-card-body">
-                            <h3 class="uk-card-title p-0 m-0">Some FAQ</h3>
-                            <p>Ans given by faculty</p>
-                            <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Got Doubts
-                            </button>
-
-                        </div>
-                    </div>
-
                 </div>
+               
             </div>
             </div>
+            </div>
+           
 
-        </div>
-
-
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-
-{% endblock %}
+            <script>
+                var value = document.getElementById("course_tab_text");
+            if(value != null || value != '') {
+                document.getElementById("course_tab_button").style.visibility = "hidden";
+            } else { 
+              $('.course_tab_button').show();
+            }
+                </script>
+            <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+            
+            
+            {% endblock %}

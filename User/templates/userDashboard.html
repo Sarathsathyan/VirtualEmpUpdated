@@ -59,7 +59,7 @@ a.trail {
   left: -1px;
   right: 0;
   content: '';
-  background-color: #191970;
+  background-color: #fdcf00;
   -webkit-transition: all 0.45s ease;
   transition: all 0.45s ease;
 }
@@ -97,7 +97,7 @@ a.trail {
     bottom: -25px;
     left: -3px;
     right: -5px;
-  background-color: #191970;
+  background-color: #050e46;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
   content: '';
   z-index: -1;
@@ -390,7 +390,7 @@ figcaption.courses {
     <div class="page-content">
 
 
-      <div class="uk-grid p-3" uk-grid>
+      <div class="uk-grid p-1" uk-grid>
         <div class="uk-width-1-3 ">
           <div class=" ">
               <div class="uk-position-relative uk-visible-toggle uk-light  "
@@ -506,14 +506,16 @@ figcaption.courses {
     border-radius: 5px;
     width: 90%;
     border-radius:10px;
+    background: linear-gradient(235deg, #FFFFFF 0%, #000F25 100%), linear-gradient(180deg, #6100FF 0%, #000000 100%), linear-gradient(235deg, #FFA3AC 0%, #FFA3AC 40%, #00043C calc(40% + 1px), #00043C 60%, #005D6C calc(60% + 1px), #005D6C 70%, #00C9B1 calc(70% + 1px), #00C9B1 100%), linear-gradient(125deg, #FFA3AC 0%, #FFA3AC 40%, #00043C calc(40% + 1px), #00043C 60%, #005D6C calc(60% + 1px), #005D6C 70%, #00C9B1 calc(70% + 1px), #00C9B1 100%);
+background-blend-mode: soft-light, screen, darken, normal;
     " >
 
 
                 <div class="uk-grid" uk-grid>
 
                     <div class="uk-width-1-2">
-                      <h1 class="">Virtual Experience Program</h1>
-                      <h4>Get trained in trending courses. Work on real time projects to get hand on experience</h4>
+                      <h1 class="" style="color: white;">Virtual Experience Program</h1>
+                      <h4 style="color: #FFFFFF;">Get trained in trending courses. Work on real time projects to get hand on experience</h4>
                     </div>
 
                     <div class="uk-width-expand">
@@ -545,7 +547,7 @@ figcaption.courses {
                                     <!--<img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
                                     -->
                                     {% if course.course_image %}
-                                    <img src="{{ course.course_image.url }}"  style="width:367px; height: 190px; border-radius:10px;">
+                                    <img src="{{ course.course_image.url }}"  style="width:367px; height: 190px;">
                                     {% else %}
                                     <img src="" alt="">
                                     {% endif %}
@@ -568,17 +570,14 @@ figcaption.courses {
                           <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
                               <div class="course-card-thumbnail ">
 
-                                <figure class="snip1543">
-                                    <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
-                                    <figcaption>
-                                        <h3 style="color: #fff; padding-bottom: 20px;"><a style="color: #fff;" class="trail" href="#">Training &rarr;</a></h3>
-                                        <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">Workplace &rarr;</a></h3>
-                                      </figcaption>
-                                    <a href="#"></a>
-                                  </figure>
+                                <a href="#">
+                                    <img src="{% static 'images/dashboard/bgcolorplus.png'%}" alt="sample108" />
+                                    
+                                    </a>
+                                  
                               </div>
                               <div class="course-card-body">
-                                  <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                  <h4 class="mb-0"> ADD CFP </h4>
                               </div>
                           </div>
                        
@@ -598,14 +597,16 @@ figcaption.courses {
      margin-bottom: 80px;
      border-radius: 5px;
      width: 90%;
-     border-radius:10px;" >
+     border-radius:10px;
+     background: linear-gradient(123deg, #FFFFFF 0%, #00B2FF 100%), linear-gradient(236deg, #BAFF99 0%, #005E64 100%), linear-gradient(180deg, #FFFFFF 0%, #002A5A 100%), linear-gradient(225deg, #0094FF 20%, #BFF4ED 45%, #280F34 45%, #280F34 70%, #FF004E 70%, #E41655 85%, #B30753 85%, #B30753 100%), linear-gradient(135deg, #0E0220 15%, #0E0220 35%, #E40475 35%, #E40475 60%, #48E0E4 60%, #48E0E4 68%, #D7FBF6 68%, #D7FBF6 100%);
+background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 
 
                  <div class="uk-grid" uk-grid>
 
                      <div class="uk-width-1-2">
-                       <h1 class="">Micro Courses</h1>
-                       <h4>Reach 200XP and choose your favourite course categories. Chose your favourite and start learning.</h4>
+                       <h1 class="" style="color: #FFFFFF;">Micro Courses</h1>
+                       <h4 style="color: #FFFFFF;">Reach 200XP and choose your favourite course categories. Chose your favourite and start learning.</h4>
                      </div>
 
                      <div class="uk-width-expand">
@@ -636,7 +637,7 @@ figcaption.courses {
                               <div class="course-card-thumbnail ">
 
                                 <figure class="snip1543">
-                                    <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                    <img src="{% static 'images/dashboard/BI.png'%}" alt="sample108" />
                                     <figcaption class="courses">
                                         <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
                                       </figcaption>
@@ -644,7 +645,7 @@ figcaption.courses {
                                   </figure>
                               </div>
                               <div class="course-card-body">
-                                  <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                  <h4 class="mb-0"> Business Development, sales, etc. </h4>
                               </div>
                           </div>
 
@@ -653,7 +654,7 @@ figcaption.courses {
                             <div class="course-card-thumbnail ">
 
                               <figure class="snip1543">
-                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <img src="{% static 'images/dashboard/PH.png'%}" alt="sample108" />
                                   <figcaption class="courses">
                                       <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
                                     </figcaption>
@@ -661,7 +662,7 @@ figcaption.courses {
                                 </figure>
                             </div>
                             <div class="course-card-body">
-                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                <h4 class="mb-0"> Photoshop, Github, Hosting, etc.  </h4>
                             </div>
                         </div>
 
@@ -670,7 +671,7 @@ figcaption.courses {
                             <div class="course-card-thumbnail ">
 
                               <figure class="snip1543">
-                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <img src="{% static 'images/dashboard/KS.png'%}" alt="sample108" />
                                   <figcaption class="courses">
                                  <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
                                     </figcaption>
@@ -678,7 +679,7 @@ figcaption.courses {
                                 </figure>
                             </div>
                             <div class="course-card-body">
-                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                <h4 class="mb-0"> Personal Finance, Reasoning, quantitative Aptitude, etc. </h4>
                             </div>
                         </div>
 
@@ -704,7 +705,8 @@ figcaption.courses {
       margin-bottom: 80px;
       border-radius: 5px;
       width: 90%;
-      border-radius:10px;" >
+      border-radius:10px;
+      background: linear-gradient(110deg, #FFD9E8 4%, #FFD9E8 40%, #DE95BA calc(40% + 1px), #DE95BA 50%, #7F4A88 calc(50% + 1px), #7F4A88 70%, #4A266A calc(70% + 1px), #4A266A 100%);" >
 
 
                   <div class="uk-grid" uk-grid>
@@ -740,15 +742,28 @@ figcaption.courses {
                             <div class="course-card-thumbnail ">
 
                               <figure class="snip1543">
-                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <img src="{% static 'images/dashboard/resume.png'%} " alt="sample108" />
                                   <figcaption class="courses">
-                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">GET &rarr;</a></h3>
                                     </figcaption>
                                   <a href="#"></a>
                                 </figure>
                             </div>
                             <div class="course-card-body">
-                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                <h4 class="mb-0"> Resume </h4>
+                            </div>
+                        </div>
+
+
+                        <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+                              <img src="{% static 'images/dashboard/0hrs.png'%}" alt="sample108" />
+                                 
+                                  <a href="#"></a>
+                            </div>
+                            <div class="course-card-body">
+                                <h4 class="mb-0"> Total Work Hours  </h4>
                             </div>
                         </div>
 
@@ -757,32 +772,15 @@ figcaption.courses {
                             <div class="course-card-thumbnail ">
 
                               <figure class="snip1543">
-                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                  <img src="{% static 'images/dashboard/HPBG.png'%}" alt="sample108" />
                                   <figcaption class="courses">
-                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">DIVE IN!&rarr;</a></h3>
                                     </figcaption>
                                   <a href="#"></a>
                                 </figure>
                             </div>
                             <div class="course-card-body">
-                                <h4 class="mb-0"> Creating sticky in HTML </h4>
-                            </div>
-                        </div>
-
-
-                        <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
-                            <div class="course-card-thumbnail ">
-
-                              <figure class="snip1543">
-                                  <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
-                                  <figcaption class="courses">
-                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
-                                    </figcaption>
-                                  <a href="#"></a>
-                                </figure>
-                            </div>
-                            <div class="course-card-body">
-                                <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                <h4 class="mb-0"> Hiring Portal </h4>
                             </div>
                         </div>
 
@@ -803,14 +801,15 @@ figcaption.courses {
        margin-bottom: 80px;
        border-radius: 5px;
        width: 90%;
-       border-radius:10px;" >
+       border-radius:10px;
+       background: linear-gradient(60deg, #2B2E4A 0%, #2B2E4A 30%, #E84545 calc(30% + 1px), #E84545 60%, #903749 calc(60% + 1px), #903749 70%, #53354A calc(70% + 1px), #53354A 100%);" >
 
 
                    <div class="uk-grid" uk-grid>
 
                        <div class="uk-width-1-2">
-                         <h1 class="">Idea 2 Reality Program</h1>
-                         <h4>I2r will turn your idea to reality. Hop into the campus for prototyping and starting a startup</h4>
+                         <h1 class="" style="color: white;">Idea 2 Reality Program</h1>
+                         <h4 style="color: white;">I2r will turn your idea to reality. Hop into the campus for prototyping and starting a startup</h4>
                        </div>
 
                        <div class="uk-width-expand">
@@ -838,15 +837,15 @@ figcaption.courses {
                                 <div class="course-card-thumbnail ">
     
                                   <figure class="snip1543">
-                                      <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                      <img src="{% static 'images/dashboard/IDEA.png'%}" alt="sample108" />
                                       <figcaption class="courses">
-                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">DIVE IN &rarr;</a></h3>
                                         </figcaption>
                                       <a href="#"></a>
                                     </figure>
                                 </div>
                                 <div class="course-card-body">
-                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                    <h4 class="mb-0"> IDEATHON CONTEST </h4>
                                 </div>
                             </div>
 
@@ -855,15 +854,15 @@ figcaption.courses {
                                 <div class="course-card-thumbnail ">
     
                                   <figure class="snip1543">
-                                      <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                      <img src="{% static 'images/dashboard/submitidea.png'%}" alt="sample108" />
                                       <figcaption class="courses">
-                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">SUBMIT &rarr;</a></h3>
                                         </figcaption>
                                       <a href="#"></a>
                                     </figure>
                                 </div>
                                 <div class="course-card-body">
-                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                    <h4 class="mb-0"> SUBMIT IDEAS </h4>
                                 </div>
                             </div>
 
@@ -872,15 +871,15 @@ figcaption.courses {
                                 <div class="course-card-thumbnail ">
     
                                   <figure class="snip1543">
-                                      <img src="https://firebasestorage.googleapis.com/v0/b/mvax-master-4cdbe.appspot.com/o/ds.png?alt=media&token=44e8a4f9-d723-41b6-93b4-3e9d09d28d0e" alt="sample108" />
+                                      <img src="{% static 'images/dashboard/viewidea.png'%}" alt="sample108" />
                                       <figcaption class="courses">
-                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">VIEW &rarr;</a></h3>
                                         </figcaption>
                                       <a href="#"></a>
                                     </figure>
                                 </div>
                                 <div class="course-card-body">
-                                    <h4 class="mb-0"> Creating sticky in HTML </h4>
+                                    <h4 class="mb-0"> MY IDEAS </h4>
                                 </div>
                             </div>
 
