@@ -195,7 +195,7 @@ def userRegister(request):
         reference_id = str2 + str(ref)
         try:
             license_key = None
-            first_log=1 
+            first_log=1
             User.objects.create_user(username=username, email=email, first_name=firstname, last_name=lastname,
                                      password=password)
             u_id = User.objects.get(username=username)
@@ -283,10 +283,10 @@ def roleCreation(request):
                         'pass': role_user_password,
                     })
                     #print("start")
-                    
+
                     email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
                     email.send()
-    
+
                     try:
 
                         user = User.objects.create_user(username=role_user_name, email=role_user_email,
@@ -313,7 +313,7 @@ def roleCreation(request):
                                       role_user_name=role_user_name,
                                       role_user_email=role_user_email, role_user_password=role_user_password)
                         role.save()
-                        
+
                     except:
                         messages.error(request, "Some error occured")
                         return redirect("rolecreation")
@@ -615,3 +615,6 @@ def deleteInstructor(request,dId):
         return redirect('instructors')
     else:
         return redirect('login')
+
+def license_generate(request):
+    return render(request,'license_generate.html')
