@@ -59,7 +59,7 @@
 }
 
 html {
-  font-family: Muli, Poppins, Helvetica, sans-serif;
+  font-family: gotham-rounded;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -86,7 +86,7 @@ section {
 
 body {
   margin: 0;
-  font-family: Nunito Sans,sans-serif !important;
+  font-family: gotham-rounded;
   font-size: 15px;
   font-weight: 300;
   line-height: 1.8;
