@@ -914,8 +914,16 @@ def userProjects(request):
 
 
 def userProjectsDesc(request):
+    blog_cag = BlogCategory.objects.all()
+    blogs = BlogManager.objects.all()
+    if not blogs:
+        blogs = BlogHeight.objects.all()
 
-    return render(request,'userProjectDesc.html')
+    context={
+        'blog_cag': blog_cag,
+        'blogs': blogs,
+    }
+    return render(request,'userProjectDesc.html',context)
 
 def unlock(request,w_id):
     user_id = request.user.pk
