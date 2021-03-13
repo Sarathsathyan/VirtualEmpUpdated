@@ -277,22 +277,29 @@ Course Details
 
     <!-- content -->
     <div class="page-content">
-        <div class="container  uk-light pt-5">
+      <div class="container  pt-5">
+        <div class="uk-grid" uk-grid>
 
-            <div class="container ">
+            <div class="course-details uk-light uk-width-2-3">
 
-                        <div class="course-details ">
+                <h1 class="text-dark"><b> {{ course_details.title }}</b></h1>
 
-                            <h1 class="text-dark"><b> {{ course_details.title }}</b></h1>
+                <!--<h6 class="text-dark"> {{ course_details.meta_description }} </h6>-->
 
-                            <!--<h6 class="text-dark"> {{ course_details.meta_description }} </h6>-->
+                <h6 class="text-dark"> {{ course_details.tagline }} </h6>
+                <!-- <h5 class="text-dark "><b><a class="uil uil-user mx-2"></a>1200 Enrolled</b></h5> -->
 
-                            <h6 class="text-dark"> {{ course_details.tagline }} </h6>
-                            <!-- <h5 class="text-dark "><b><a class="uil uil-user mx-2"></a>1200 Enrolled</b></h5> -->
 
-                        </div>
+            </div>
+
+            <div class=" uk-width-expand">
+
+               <a class="uk-button uk-button-primary uk-width-expand my-2 text-white" href="{% url 'courseLesson' course_details.pk %}" >Start Course</a>
+               <a class="uk-button uk-button-primary uk-width-expand my-2 text-white">Major Projects</a>
             </div>
         </div>
+
+      </div>
 
 
 
