@@ -16,7 +16,6 @@ urlpatterns = [
     path('userProjectDesc/', views.userProjectsDesc, name="userprojectsDesc"),
     path('userResult/<int:w_id>/', views.userResult, name="userResult"),
     path('unlockNext/<int:w_id>/', views.unlock, name="unlockNext"),
-
-
     path('pricing/', views.pricing, name="pricing"),
+    path('license_generate/',views.license_generate,name='license_generate'),
 ]

@@ -616,5 +616,3 @@ def deleteInstructor(request,dId):
     else:
         return redirect('login')
 
-def license_generate(request):
-    return render(request,'license_generate.html')
