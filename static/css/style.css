@@ -131,7 +131,7 @@ body {
 
 a,
 .uk-link {
-  color: #949393;
+  color: #ffffff;
   text-decoration: none;
   cursor: pointer;
 }
@@ -140,7 +140,7 @@ a:hover,
 .uk-link:hover,
 .uk-link-toggle:hover .uk-link,
 .uk-link-toggle:focus .uk-link {
-  color: #3e416d;
+  color: #2046ee;
   text-decoration: none;
 }
 

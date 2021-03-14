@@ -522,7 +522,7 @@
     width: 100%;
     height: 100%;
     fill: none;
-    stroke: #666;
+    stroke: #e0e0e0;
     stroke-width: 10;
     stroke-linecap: round;
     transform: translate(5px, 5px);
@@ -543,19 +543,10 @@
     /*stroke-dashoffset: calc(440 - (440 * 90) / 100);
     */
     stroke-dashoffset: calc(440 - (440 * var(--course_completion) ) / 1000);
-    stroke: #00ff43;
+    stroke: #36b37e;
   }
 
-  .card:nth-child(2) svg circle:nth-child(2) {
-    stroke-dashoffset: calc(440 - (440 * 85) / 100);
-    stroke: #00a1ff;
-  }
-
-  .card:nth-child(3) svg circle:nth-child(2) {
-    stroke-dashoffset: calc(440 - (440 * 60) / 100);
-    stroke: #ff04f7;
-
-  }
+  
 
 </style>
 
@@ -576,7 +567,7 @@
                             <h2>{{ total_xp_earned }}<span>XP</span></h2>
                           </div>
                         </div>
-                        <h2 class=" mt-3">TOTAL XP</h2>
+                        <h2 class=" mt-3"><b>TOTAL XP</b></h2>
                       </div>
                     </div>
                   </div>
@@ -654,7 +645,7 @@
                           <div class="uk-width-expand text-left">
 
 
-                            <h5 class="mb-2" style="color: darkblue"> Course XP</h5>
+                            <h5 class="mb-2" style="color: darkblue"><b>Course XP</b></h5>
 
                             <progress class="uk-progress mt-0" id="live2" value="{{total_xp_earned}}"
                               max="{{ course_points }}" style="width: 84%"></progress>
@@ -673,7 +664,7 @@
                           <div class="uk-width-expand text-left">
 
 
-                            <h5 class="mb-2" style="color: darkblue">Major Projects XP</h5>
+                            <h5 class="mb-2" style="color: darkblue"><b>Major Projects XP</b></h5>
 
                             <progress class="uk-progress mt-0" id="live2" value="0" max="1000"
                               style="width: 84%"></progress>
@@ -692,7 +683,7 @@
                           <div class="uk-width-expand text-left">
 
 
-                            <h5 class="mb-2" style="color: darkblue"> Real Time Projects</h5>
+                            <h5 class="mb-2" style="color: darkblue"><b>Real Time Projects</b></h5>
 
                             <progress class="uk-progress mt-0" id="live2" value="0" max="1000"
                               style="width: 84%"></progress>
