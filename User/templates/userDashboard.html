@@ -330,60 +330,57 @@ figcaption.courses {
 
         <ul>
 
-
+          <li>
+            <!-- My Dashboard -->
+            <a href="{% url 'userdashboard' %}"> <i class="icon-material-outline-dashboard"></i> <span class="tooltips"> Dashboard</span></a>
+        </li>
             <li>
                 <!-- My Profile -->
                 <a href="{% url 'userprofile' %}"> <i class="icon-brand-earlybirds"></i> <span class="tooltips"> My Profile</span></a>
             </li>
             <li>
                 <!-- My courses -->
-                <a href="{% url 'userdashboard' %}"> <i class="uil-book-open"></i> <span class="tooltips"> All Courses</span></a>
+                <a href="{% url 'userdashboard' %}"> <i class="icon-material-outline-shopping-cart"></i> <span class="tooltips"> Store</span></a>
             </li>
+           
             <li>
                 <!-- Projects-->
-                <a href="#"> <i class="uil-cube"></i> <span class="tooltips">
-                        Projects</span></a>
-            </li>
-            <li>
-                <!-- Projects-->
-                <a href="#"> <i class="uil-blogger-alt"></i> <span class="tooltips">
+                <a href="blog-1.html"> <i class="uil-blogger-alt"></i> <span class="tooltips">
                         Blogs</span></a>
             </li>
 
-            <li>
-                <!-- News-->
-                <a href="blog-1.html"> <i class="uil-file-alt"></i> <span class="tooltips"> News</span></a>
-            </li>
+           
 
         </ul>
         <ul class="uk-position-bottom">
-            <li>
+          <li>
+              <!-- Lunch information box -->
+              <a href="#">
+                  <i class="uil-paint-tool"></i>
+              </a>
+              <div uk-drop="pos: right-bottom ;mode:click ; offset: 10;animation: uk-animation-slide-right-small">
+                  <div class="uk-card-default rounded p-0">
+                      <h5 class="mb-0 p-3 px-4  bg-light"> Night mode</h5>
+                      <div class="p-3 px-4">
+                          <p>Turns the light surfaces of the page dark, creating an experience ideal for night.
+                          </p>
+                          <div class="uk-flex">
+                              <p class="uk-text-small text-muted">DARK THEME </p>
+                              <!-- night mode button -->
+                              <span href="#" id="night-mode" class="btn-night-mode">
+                                  <label class="btn-night-mode-switch">
+                                      <span class="uk-switch-button"></span>
+                                  </label>
+                              </span>
+                          </div>
 
-                <!-- Lunch information box -->
+                      </div>
+                  </div>
+              </div>
 
-                <div uk-drop="pos: right-bottom ;mode:click ; offset: 10;animation: uk-animation-slide-right-small">
-                    <div class="uk-card-default rounded p-0">
-                        <h5 class="mb-0 p-3 px-4  bg-light"> Night mode</h5>
-                        <div class="p-3 px-4">
-                            <p>Turns the light surfaces of the page dark, creating an experience ideal for night.
-                            </p>
-                            <div class="uk-flex">
-                                <p class="uk-text-small text-muted">DARK THEME </p>
-                                <!-- night mode button -->
-                                <span href="#" id="night-mode" class="btn-night-mode">
-                                    <label class="btn-night-mode-switch">
-                                        <span class="uk-switch-button"></span>
-                                    </label>
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </li>
-
-        </ul>
+          </li>
+         
+      </ul>
     </div>
 
 
