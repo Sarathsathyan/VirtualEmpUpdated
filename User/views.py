@@ -6,7 +6,7 @@ from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
 from Admin.models import CareerCategory,SubCategory,CategoryCourse,UsedLicense
-from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, Score
+from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, Score, userPrice
 from CSM.models import Quizz,Result
 from CSM.models import Quizz,Result
 import re
@@ -944,11 +944,45 @@ def pricing(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         cefPrice =12000
         cfpPath = 1
+        cfpPrice = 3000
+        tokenPrice = 0
+        courseCreditPrice = 0
+        total =0
+        discount =0
         if 'cSubmit' in request.POST:
-            workToken = request.POST['workToken']
-            print("hai")
+            workToken = request.POST['radio3']
+            courseCredits = request.POST['mcRadio2']
+            if int(workToken) == 5:
+                tokenPrice = 3750
+            elif int(workToken) == 8:
+                tokenPrice =5200
+            elif int(workToken) == 15:
+                tokenPrice =6000
+            else:
+                tokenPrice = 0
+
+            if int(courseCredits) == 5:
+                courseCreditPrice = 0
+            elif int(courseCredits) == 8:
+                courseCreditPrice = 1000;
+            elif int(courseCredits) == 15:
+                courseCreditPrice = 1500
+
+            print(tokenPrice)
 
 
-        return render(request,'pricing.html')
+        total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice+courseCreditPrice
+        discount = int(total) - ((int(total) * 30 ) / 100)
+
+        context ={
+            'cefPrice' : cefPrice,
+            'total':total,
+            'cfpPrice':cfpPrice,
+            'tokenPrice':tokenPrice,
+            'courseCreditPrice':courseCreditPrice,
+            'discount':discount
+
+        }
+        return render(request,'pricing.html',context)
     else:
         return redirect('login')

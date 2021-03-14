@@ -318,9 +318,9 @@
                                                                             <div class="uk-card  uk-card-body text-center rounded radiostyle">
                                                                                 <h1 class="display-4">5</h1>
 
-                                                                                <label><input class="uk-radio "
+                                                                                <label><input class="uk-radio " value="5"
                                                                                               type="radio"
-                                                                                              name="radio1" checked>
+                                                                                              name="radio3" checked>
                                                                                 </label>
                                                                             </div>
                                                                         </div>
@@ -329,8 +329,8 @@
                                                                                 <h1 class="display-4">8</h1>
 
                                                                                 <label><input
-                                                                                        class="uk-radio radiostyle"
-                                                                                        type="radio" name="radio2">
+                                                                                        class="uk-radio radiostyle" value="8"
+                                                                                        type="radio" name="radio3">
                                                                                 </label>
                                                                             </div>
                                                                         </div>
@@ -339,7 +339,7 @@
                                                                                 <h1 class="display-4">15</h1>
 
                                                                                 <label><input
-                                                                                        class="uk-radio radiostyle"
+                                                                                        class="uk-radio radiostyle" value="15"
                                                                                         type="radio" name="radio3">
                                                                                 </label>
                                                                             </div>
@@ -370,8 +370,8 @@
                                                                         <div class="uk-card uk-card-default  uk-card-body text-center rounded radiostyle">
                                                                             <h1 class="display-4">5</h1>
 
-                                                                            <label><input class="uk-radio" type="radio"
-                                                                                          name="mcRadio1" checked>
+                                                                            <label><input class="uk-radio" type="radio" value="5"
+                                                                                          name="mcRadio2" checked>
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -379,7 +379,7 @@
                                                                         <div class="uk-card uk-card-default uk-card-body text-center radiostyle rounded">
                                                                             <h1 class="display-4">8</h1>
 
-                                                                            <label><input class="uk-radio" type="radio"
+                                                                            <label><input class="uk-radio" type="radio" value="8"
                                                                                           name="mcRadio2" checked>
                                                                             </label>
                                                                         </div>
@@ -388,8 +388,8 @@
                                                                         <div class="uk-card uk-card-default uk-card-body text-center radiostyle rounded">
                                                                             <h1 class="display-4">15</h1>
 
-                                                                            <label><input class="uk-radio" type="radio"
-                                                                                          name="mcRadio3" checked>
+                                                                            <label><input class="uk-radio" type="radio" value="15"
+                                                                                          name="mcRadio2">
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -427,7 +427,7 @@
                                                     <h6 class="py-0 my-0"><b>Enrollment Fees</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                    <h6 class="py-0 my-0"><b>Rs {{ cefPrice }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -438,7 +438,7 @@
                                                     <h6 class="py-0 my-0"><b>CFP</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                    <h6 class="py-0 my-0"><b>Rs {{ cfpPrice }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -449,7 +449,7 @@
                                                     <h6 class="py-0 my-0"><b>Work Tokens</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                    <h6 class="py-0 my-0"><b>Rs {{ tokenPrice }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -460,7 +460,7 @@
                                                     <h6 class="py-0 my-0"><b>MicroCourses</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                    <h6 class="py-0 my-0"><b>Rs {{ courseCreditPrice }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -472,7 +472,7 @@
                                                     <h6 class="py-0 my-0"><b>Total</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs 12,000</b></h6>
+                                                    <h6 class="py-0 my-0"><b>Rs {{ total }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -485,7 +485,7 @@
                                                     <h6 class="py-0 my-0"><b>30% OFF</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs 2000</b></h6>
+                                                    <h6 class="py-0 my-0"><b>Rs {{ discount }}</b></h6>
                                                 </div>
 
                                             </div>

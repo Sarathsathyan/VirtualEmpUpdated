@@ -96,7 +96,16 @@ class pricingSec(models.Model):
 
     def __str__(self):
         return self.cef
+class userPrice(models.Model):
+    userId = models.ForeignKey(User,on_delete=models.CASCADE)
+    cfpPrice = models.CharField(max_length=100)
+    tokenPrice = models.CharField(max_length=100)
+    courseCreditPrice = models.CharField(max_length=100)
+    totalPrice = models.CharField(max_length=100)
+    cefPrice = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.totalPrice
 class Score(models.Model):
     userId = models.ForeignKey(User,on_delete=models.CASCADE)
     week_id=models.ForeignKey(Week, on_delete=models.CASCADE)
