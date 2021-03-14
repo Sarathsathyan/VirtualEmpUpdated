@@ -27,5 +27,5 @@ urlpatterns = [
     path('deleteStudent/<int:delId>/',views.deleteStu,name='deleteStudent'),
     path('viewTrainee/<int:userId>/',views.adminViewStudent,name='viewStudent'),
 
-    path('license_generate/',views.license_generate,name='license_generate'),
+
 ]
