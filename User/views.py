@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 import datetime
+import uuid
 from datetime import timezone
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
@@ -977,6 +978,8 @@ def pricing(request):
                 courseCreditPrice = 1500
 
             print(tokenPrice)
+            data = userPrice(userId_id=request.user.pk,cfpPrice=cfpPrice,tokenPrice=tokenPrice,courseCreditPrice=courseCreditPrice,totalPrice=total,cefPrice=cefPrice,workToken=workToken,mcCredit=courseCredits)
+            data.save()
 
 
         total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice+courseCreditPrice
@@ -997,9 +1000,15 @@ def pricing(request):
 
 def license_generate(request):
     userId = request.user.pk
-    data = AdminLicense.objects.first()
+    data = userPrice.objects.get(userId_id=request.user.pk)
     if data:
-        license_key = data.key
-        delData = AdminLicense.objects.get(key=license_key)
-        delData.delete()
+        l_id = uuid.uuid4()
+        license_key = l_id
+
+        delData = AdminLicense(key=license_key,numberCfp=1,workTokens=data.workToken,mcCredits=data.mcCredit)
+        delData.save()
+        context={
+            'license':license_key
+        }
+        return render(request, 'license_generate.html',context)
     return render(request,'license_generate.html')
