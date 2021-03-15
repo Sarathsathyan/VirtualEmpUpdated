@@ -387,13 +387,16 @@ def userprofile(request):
                         lan_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Languages')
                     except:
                         lan_skills=[]
-
+                    print("request.user.pk")
                     print(request.user.pk)
+                    
                     if Score.objects.filter(userId_id=request.user.pk).exists():
                         score_ob=Score.objects.filter(userId_id=request.user.pk)
                         total_xp_earned=0
+                        
                         for score in score_ob:
                             total_xp_earned+=score.totalxp
+                            print("total_xp_earned:")
 
                             course_points=Course.objects.get(id=score.week_id.week_id_id).course_points
 
@@ -965,7 +968,7 @@ def pricing(request):
             if int(courseCredits) == 5:
                 courseCreditPrice = 0
             elif int(courseCredits) == 8:
-                courseCreditPrice = 1000;
+                courseCreditPrice = 1000
             elif int(courseCredits) == 15:
                 courseCreditPrice = 1500
 
@@ -974,12 +977,16 @@ def pricing(request):
             data.save()
 
 
-        total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice+courseCreditPrice
+        #total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice+courseCreditPrice
+        total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice
         discount = int(total) - ((int(total) * 30 ) / 100)
+        total_includ_gst= float(total) *1.18
+        print(total_includ_gst)
 
         context ={
             'cefPrice' : cefPrice,
             'total':total,
+            'total_includ_gst': total_includ_gst,
             'cfpPrice':cfpPrice,
             'tokenPrice':tokenPrice,
             'courseCreditPrice':courseCreditPrice,
