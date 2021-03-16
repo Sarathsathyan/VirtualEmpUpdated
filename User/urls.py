@@ -18,4 +18,5 @@ urlpatterns = [
     path('unlockNext/<int:w_id>/', views.unlock, name="unlockNext"),
     path('pricing/', views.pricing, name="pricing"),
     path('license_generate/',views.license_generate,name='license_generate'),
+    path('license_page/',views.license_page,name='license_page'),
 ]

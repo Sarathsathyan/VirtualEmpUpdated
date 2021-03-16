@@ -389,11 +389,11 @@ def userprofile(request):
                         lan_skills=[]
                     print("request.user.pk")
                     print(request.user.pk)
-                    
+
                     if Score.objects.filter(userId_id=request.user.pk).exists():
                         score_ob=Score.objects.filter(userId_id=request.user.pk)
                         total_xp_earned=0
-                        
+
                         for score in score_ob:
                             total_xp_earned+=score.totalxp
                             print("total_xp_earned:")
@@ -1012,3 +1012,7 @@ def license_generate(request):
         }
         return render(request, 'license_generate.html',context)
     return render(request,'license_generate.html')
+
+
+def license_page(request):
+    return render(request,'license_page.html')

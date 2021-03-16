@@ -1,7 +1,5 @@
 {% extends 'base.html' %}{% load static %}
-{% block title %}
-Course Details
-{% endblock %}
+{% block title %}Course Details{% endblock %}
 {% block content %}
 
 <div id="wrapper">
@@ -10,157 +8,9 @@ Course Details
         ================================================== -->
 
         {% load static %}
-        {#   Header starts  #}
+        {% include 'userPartials/_header.html'%}
 
-            <header class="header uk-light" uk-sticky style="background:#07192b">
-
-                    <div class="container">
-
-                        <nav uk-navbar>
-
-
-                            <!-- left Side Content -->
-                            <div class="uk-navbar-left">
-         <div class="searchbox uk-visible@s">
-
-                                    <input class="uk-search-input" type="search" placeholder="Search...">
-                                    <button class="btn-searchbox"> </button>
-
-                                </div>
-                                <!-- logo -->
-                                <a href="{% url 'userdashboard' %}" class="logo">
-                                    <img src="{% static 'images/VES.png' %}" alt="">
-                                    <span> Virtual Empleado</span>
-                                </a>
-
-                                <!-- breadcrumbs -->
-                                <nav id="breadcrumbs">
-                                    <ul>
-                                        <!-- <li><a href="/userdashboard/" style="color: black;font-weight: bold;font-size: 20px;"> My Dashboard </a></li> -->
-
-                                    </ul>
-                                </nav>
-
-
-                            </div>
-
-
-                            <!--  Right Side Content   -->
-
-                            <div class="uk-navbar-right">
-
-                                <div class="header-widget" >
-                                    <!-- User icons close mobile-->
-                                    <span class="icon-feather-x icon-small uk-hidden@s"
-                                        uk-toggle="target: .header-widget ; cls: is-active"> </span>
-
-
-                                    <!-- profile-icon-->
-                                <!-- profile-icon-->
-
-                                <div class="uk-flex-inline mt-1 mx-4">
-                                  <div class="mx-2">
-                                    <!-- <h6>MC Creadits</h6> -->
-                                    <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 3px;">Work Tokens</p>
-                                  </div>
-                                  <div class="">
-                                      <img src="{% static 'images/money.png' %}" style="height:30px;" alt="">
-                                      {% if worktokens %}
-                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">{{ worktokens }}</span>
-                                      {% else %}
-                                       <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;">0</span>
-                                      {% endif %}
-
-                                  </div>
-                                </div>
-
-                                <div class="uk-flex-inline mt-1">
-                                  <div class="mx-2">
-                                    <!-- <h6>MC Creadits</h6> -->
-                                    <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 3px;">MC Credits</p>
-                                  </div>
-                                  <div class="">
-
-                                      <img src="{% static 'images/token.png' %}" style="height:30px;" alt="">
-                                      {% if mcCredits %}
-                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">{{ mcCredits }}</span>
-                                      {% else %}
-
-                                      <span style="color: white;font-size: 18px;text-transform: capitalize;font-weight: bold;padding-top: 5px;">0</span>
-                                      {% endif %}
-                                  </div>
-                                </div>
-
-
-                                    {% if user.is_authenticated %}
-
-                                    <a href="#" class="header-widget-icon profile-icon" >
-        {#                                <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="" class="header-profile-icon">#}
-
-                                    <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 5px;"><a class="uil uil-user mx-2"></a>{{ user.first_name }} {{ user.last_name }}</p>
-                                    </a>
-                                {% endif %}
-
-                                    <div uk-dropdown="pos: top-right ;mode:click" class="dropdown-notifications small">
-
-                                        <!-- User Name / Avatar -->
-                                        <a href="profile-1.html">
-
-                                            <div class="dropdown-user-details">
-        {#                                        <div class="dropdown-user-avatar">#}
-        {#                                            <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="">#}
-        {#                                        </div>#}
-                                                {% if user.is_authenticated %}
-                                                <div class="dropdown-user-name" style="font-weight: bold;">
-                                                    {{ user.first_name }} {{ user.last_name }}<span>Trainee <p class="m-0"> Member since : {{ user.date_joined   }} </p> <p class="m-0">Reference ID : {{ reference }} </p></span>
-                                                </div>
-
-                                                {% endif %}
-                                            </div>
-
-                                        </a>
-
-                                        <!-- User menu -->
-
-                                        <ul class="dropdown-user-menu">
-                                            <li>
-                                                <a href="{% url 'userdashboard' %}">
-                                                    <i class="icon-material-outline-dashboard"></i> Dashboard</a>
-
-                                            </li>
-
-                                            <li><a href="{% url 'userprofileedit' %}">
-                                                    <i class="icon-feather-settings"></i> Edit Profile</a>
-                                            </li>
-                                            <li><a href="{% url 'usercfp' %}">
-                                                    <i class="icon-feather-slack"></i> Choose CFP</a>
-                                            </li>
-                                            <li class="menu-divider">
-                                            {% if user.is_authenticated %}
-                                            <li><a href="{% url 'logout' %}">
-                                                    <i class="icon-feather-log-out"></i> Sign Out</a>
-                                            </li>
-                                            {% endif %}
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- icon search-->
-                                <a class="uk-navbar-toggle uk-hidden@s"
-                                    uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#">
-                                    <i class="uil-search icon-small"></i>
-                                </a>
-
-                                <!-- User icons -->
-                                    <a href="#" class="uil-user icon-small uk-hidden@s"
-                                    uk-toggle="target: .header-widget ; cls: is-active">
-                                    </a>
-                            </div>
-                            <!-- End Right Side Content / End -->
-                        </nav>
-                    </div>
-                    <!-- container  / End -->
-                </header>
-
+            
 
 
     <!-- overlay seach on mobile-->
@@ -231,34 +81,10 @@ Course Details
                 </li>
 
         </ul>
-        <ul class="uk-position-bottom">
-            <li>
+       
 
                 <!-- Lunch information box -->
 
-                <div uk-drop="pos: right-bottom ;mode:click ; offset: 10;animation: uk-animation-slide-right-small">
-                    <div class="uk-card-default rounded p-0">
-                        <h5 class="mb-0 p-3 px-4  bg-light"> Night mode</h5>
-                        <div class="p-3 px-4">
-                            <p>Turns the light surfaces of the page dark, creating an experience ideal for night.
-                            </p>
-                            <div class="uk-flex">
-                                <p class="uk-text-small text-muted">DARK THEME </p>
-                                <!-- night mode button -->
-                                <span href="#" id="night-mode" class="btn-night-mode">
-                                    <label class="btn-night-mode-switch">
-                                        <span class="uk-switch-button"></span>
-                                    </label>
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </li>
-
-        </ul>
     </div>
 
 
@@ -297,7 +123,7 @@ Course Details
           <div class="uk-width-1-3@s ">
             <div class="container pr-2 mb-3 ">
 
-              <div class="container rounded" style="background:white;">
+              <div class="container rounded" style="background:white; box-shadow: 0 5px 15px rgb(0 0 0 / 8%);">
                 <div class="">
 
 
@@ -334,7 +160,7 @@ Course Details
             </div>
 
             <div class="container pr-2">
-              <div class="rounded p-3 my-2" style="background:white;">
+              <div class="rounded p-3 my-2" style="background:white; box-shadow: 0 5px 15px rgb(0 0 0 / 8%);">
                   <div class="text-center">
                       <img src="{% static 'images/lavsya.png'%}" alt="">
                   </div>
@@ -349,7 +175,7 @@ Course Details
                   <div class="my-0 ">
                     <div class="container py-0 rounded px-2" >
 
-                      <h4 class="text-dark text-center">{{course_details.trainee_name}}</h4>
+                      <h4 class="text-dark text-left">{{course_details.trainee_name}}</h4>
                       <h6 class="text-dark">{{ course_details.trainee_bio}}</h6>
                     </div>
                   </div>
@@ -420,7 +246,7 @@ Course Details
                                     <img src="images/photo.jpg" alt="">
                                 </div>
                                 <div class="uk-card-body">
-                                    <h3 class="uk-card-title">Headline</h3>
+                                    <h3 class="uk-card-title text-center">Headline</h3>
                                     <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
                                 </div>
                             </div>
@@ -431,7 +257,7 @@ Course Details
                                     <img src="images/dark.jpg" alt="">
                                 </div>
                                 <div class="uk-card-body">
-                                    <h3 class="uk-card-title">Headline</h3>
+                                    <h3 class="uk-card-title text-center">Headline</h3>
                                     <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
                                 </div>
                             </div>
@@ -442,7 +268,7 @@ Course Details
                                     <img src="images/light.jpg" alt="">
                                 </div>
                                 <div class="uk-card-body">
-                                    <h3 class="uk-card-title">Headline</h3>
+                                    <h3 class="uk-card-title text-center">Headline</h3>
                                     <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
                                 </div>
                             </div>
@@ -453,7 +279,7 @@ Course Details
                                     <img src="images/photo2.jpg" alt="">
                                 </div>
                                 <div class="uk-card-body">
-                                    <h3 class="uk-card-title">Headline</h3>
+                                    <h3 class="uk-card-title text-center">Headline</h3>
                                     <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
                                 </div>
                             </div>
@@ -464,7 +290,7 @@ Course Details
                                     <img src="images/photo3.jpg" alt="">
                                 </div>
                                 <div class="uk-card-body">
-                                    <h3 class="uk-card-title">Headline</h3>
+                                    <h3 class="uk-card-title text-center">Headline</h3>
                                     <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
                                 </div>
                             </div>
