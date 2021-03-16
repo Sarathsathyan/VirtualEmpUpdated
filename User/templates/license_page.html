@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static %}{% block title %}User-Profile{% endblock %}
+{% block content %}
+    <div id="wrapper">
+        {% include 'userPartials/_header.html' %}
+
+        <div id="searchbox">
+
+            <div class="search-overlay"></div>
+
+            <div class="search-input-wrapper">
+                <div class="search-input-container">
+                    <div class="search-input-control">
+                        <span class="icon-feather-x btn-close uk-animation-scale-up"
+                              uk-toggle="target: #searchbox; cls: is-active"></span>
+                        <div class=" uk-animation-slide-bottom">
+                            <input type="text" name="search" autofocus required>
+                            <p class="search-help">Type the name of the Course and book you are looking for</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- overlay seach on mobile-->
+        <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
+             style="z-index: 10000;">
+            <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
+                <form class="uk-search uk-search-navbar uk-width-1-1">
+                    <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+                </form>
+            </div>
+            <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
+               href="#"></a>
+        </div>
+
+
+        <div class="page-content">
+
+            <style media="screen">
+                .page-content-inner1 {
+                    max-width: 1350px;
+                    margin: auto;
+                    padding: 30px;
+                    padding-bottom: 0;
+                    position: relative;
+                }
+            </style>
+            <div class="page-content-inner">
+
+
+
+
+
+              <div class="site-icon mx-auto" style="margin-left:36px;">
+                    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+
+                      <a href="episode-details.html">
+                        <div class="course-card episode-card animate-this" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+                                <span class="duration">2:39</span>
+                                <img src="{% static 'images/episodes/2.png'%}">
+                                <div class="centered text-center" style="position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);"><h2>5</h2>
+  <h2>CFP</h2>
+</div>
+
+                            </div>
+
+                        </div>
+                      </a>
+
+                      <a href="episode-details.html">
+                        <div class="course-card episode-card animate-this" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+                                <span class="duration">2:39</span>
+                                <img src="{% static 'images/episodes/2.png'%}">
+                                <div class="centered text-center" style="position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);"><h2>3</h2>
+<h2>Work Tokens</h2>
+</div>
+
+                            </div>
+
+                        </div>
+                      </a>
+
+
+                      <a href="episode-details.html">
+                        <div class="course-card episode-card animate-this" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+                                <span class="duration">2:39</span>
+                                <img src="{% static 'images/episodes/2.png'%}">
+                                <div class="centered text-center" style="position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);"><h2>8</h2>
+<h2>MC Credits</h2>
+</div>
+
+                            </div>
+
+                        </div>
+                      </a>
+
+
+
+                    </div>
+                  </div>
+
+
+
+              <div class="container uk-width-1-2 text-center mx-auto my-5">
+                <div class="container">
+                  <button class="uk-button uk-button-large btn btn-default" type="button" name="button">Generate License Key</button>
+                </div>
+                <div class="uk-margin">
+                  <input class="uk-input mb-0" type="text" value="{{ license }}" placeholder="Generate License Key" disabled>
+                  <small class="mt-0"><b>*Do not share your license key</b></small>
+                </div>
+                <div class="">
+                  <button type="button" class="uk-button uk-button-large btn btn-default" name="button">Activate Account</button>
+                </div>
+              </div>
+
+
+        </div>
+
+
+        <div class="container">
+
+
+            <div class="section">
+                <div class="text-center mb-lg-5 pb-2 delimiter-bottom">
+
+                    <h2 class="mt-3">Frequently asked question :</h2>
+                </div>
+
+                <div class="uk-child-width-1-2@s" uk-grid>
+
+                    <div>
+                        <h4>How to get started with Courseplus?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                            euismod
+                            tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    </div>
+
+                    <div>
+                        <h4>Can I cancel my subscription?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam ut laoreet dolore
+                            magna
+                            aliquam erat volutpat.</p>
+                    </div>
+
+                    <div>
+                        <h4>How can I create new course?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                            euismod
+                            tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    </div>
+
+                    <div>
+                        <h4>Can I cancel at anytime?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                            euismod
+                            tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    </div>
+
+                    <div>
+                        <h4>How to Choose a plan first?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetue aoreet dolore magna aliquam erat volutpat.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% include 'partials/_footer.html' %}
+
+    </div>
+
+    </div>
+    <!-- For Night mode -->
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+    <script>
+        function increment() {
+            document.getElementById('demoInput').stepUp();
+        }
+
+        function decrement() {
+            document.getElementById('demoInput').stepDown();
+        }
+    </script>
+
+{% endblock %}
