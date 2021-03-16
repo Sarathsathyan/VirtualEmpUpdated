@@ -179,9 +179,11 @@
                     <li> -->
 
                         <div class="">
+                            <form method="post">{% csrf_token %}
                             <div class="uk-grid">
-                                <div class="uk-width-2-3@s">
-                                    <form method="post">{% csrf_token %}
+                                
+                                    <div class="uk-width-2-3@s">
+                                    <!--<form method="post">{% csrf_token %}-->
                                         <div class="uk-card uk-card-default uk-width-expand">
                                             <div class="uk-card-header rounded" style="background: #0e2a47;">
                                                 <div class="uk-grid-small uk-flex-middle" uk-grid>
@@ -334,7 +336,7 @@
 
                                                                                 <label><input class="uk-radio " value="5"
                                                                                               type="radio"
-                                                                                              name="radio3" onclick="findWorkTokenPrice();">
+                                                                                              name="radio3" checked  onclick="findWorkTokenPrice();">
                                                                                 </label>
                                                                             </div>
                                                                             </label>
@@ -394,7 +396,7 @@
                                                                                           name="mcRadio2" checked onclick="mcCreditPrice();">
                                                                                     -->
                                                                                     <input class="uk-radio" type="radio" value="5"
-                                                                                          name="mcRadio2"  onclick="mcCreditPrice();">
+                                                                                          name="mcRadio2" checked onclick="mcCreditPrice();">
 
                                                                             </label>
                                                                         </div>
@@ -424,14 +426,14 @@
                                                     </div>
 
                                                 </div>
-                                                <input type="submit" class=" ml-4 btn btn-default uk-width-expand"
-                                                       id="bb" name="cSubmit" value="Final submit">
+                                                <!--<input type="submit" class=" ml-4 btn btn-default uk-width-expand"
+                                                       id="bb" name="cSubmit" value="Final submit">-->
                                             </div>
 
 
                                         </div>
-                                    </form>
-                                </div>
+                                    <!--</form>-->
+                                    </div>
 
                                 <div class="uk-width-expand">
 
@@ -470,7 +472,7 @@
                                         <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
                                             <div class="uk-flex uk-flex-between">
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b id="wtno">Work Tokens</b></h6>
+                                                    <h6 class="py-0 my-0"><b id="wtno">Work Tokens({{wtokens}})</b></h6>
                                                 </div>
                                                 <div class="">
                                                     <h6 class="py-0 my-0" ><b id="wtokenPrice">Rs {{ tokenPrice }}</b></h6>
@@ -481,7 +483,7 @@
                                         <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
                                             <div class="uk-flex uk-flex-between">
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b id="mcno">MicroCourses</b></h6>
+                                                    <h6 class="py-0 my-0"><b id="mcno">MicroCourses({{mccred}})</b></h6>
                                                 </div>
                                                 <div class="">
                                                     <h6 class="py-0 my-0"><b id="mccreditprice">Rs {{ courseCreditPrice }}</b></h6>
@@ -531,15 +533,18 @@
 
                                     <div class="uk-width-expand text-center my-2">
                                         <div class="">
-                                            <button class=" ml-3 btn btn-default uk-width-expand" id="bb" type=""
-                                                    name="button">Checkout
-                                            </button>
+                                            
+                                            <button type="submit" class=" ml-3 btn btn-default uk-width-expand" id="bb" 
+                                                name="checkoutSubmit">Checkout</button>
+                                            
                                         </div>
                                     </div>
-
+                                
                                 </div>
-
+                                
+                            </form>
                             </div>
+                        
 <!--
                     </li>
 
@@ -654,8 +659,8 @@
     </script>
     <script>
         var wtp=0;
-        var wt_num=0;
-        var mc_num=0;
+        var wt_num=5;
+        var mc_num=5;
         var mccd=0;
         var tp=0;
         function calTotal(){

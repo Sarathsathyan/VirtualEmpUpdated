@@ -1,174 +1,195 @@
 {% extends 'base.html' %}
 {% load static %}{% block title %}User-Profile{% endblock %}
 {% block content %}
-    <div id="wrapper">
-       
+<div id="wrapper">
 
-        
 
-        <!-- overlay seach on mobile-->
-        <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
-             style="z-index: 10000;">
-            <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
-                <form class="uk-search uk-search-navbar uk-width-1-1">
-                    <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
-                </form>
-            </div>
-            <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
-               href="#"></a>
+
+
+    <!-- overlay seach on mobile-->
+    <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
+        style="z-index: 10000;">
+        <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
+            <form class="uk-search uk-search-navbar uk-width-1-1">
+                <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+            </form>
         </div>
-
-
-        <div class="page-content" style="padding-top: 150px ;">
-
-            <style media="screen">
-                .page-content-inner1 {
-                    max-width: 1350px;
-                    max-height: auto;
-                    margin: auto;
-                    padding: 30px;
-                    padding-bottom: 0;
-                    position: relative;
-                }
-            </style>
-            <div class="page-content-inner">
-
-
-
-
-
-              <div class="site-icon mx-auto" style="margin-left:36px;">
-                    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
-
-                      <a>
-                        <div class="course-card episode-card animate-this" style="width:292.5px;">
-                            <div class="course-card-thumbnail ">
-
-                                
-                                <img src="{% static 'images/blue.dark.png'%}">
-                                <div class="centered text-center" style="position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);"><h1 style="color: white;">5</h1>
-  <h3 style="color: white;">CFP</h3>
-</div>
-
-                            </div>
-
-                        </div>
-                      </a>
-
-                      <a>
-                        <div class="course-card episode-card animate-this" style="width:292.5px;">
-                            <div class="course-card-thumbnail ">
-
-                                
-                                <img src="{% static 'images/blue.dark.png'%}">
-                                <div class="centered text-center" style="position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);"><h1 style="color: white;">3</h1>
-<h3 style="color: white;">Work Tokens</h3>
-</div>
-
-                            </div>
-
-                        </div>
-                      </a>
-
-
-                      <a>
-                        <div class="course-card episode-card animate-this" style="width:292.5px;">
-                            <div class="course-card-thumbnail ">
-
-                                
-                                <img src="{% static 'images/blue.dark.png'%}">
-                                <div class="centered text-center" style="position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);"><h1 style="color: white;">8</h1>
-<h3 style="color: white;">MC Credits</h3>
-</div>
-
-                            </div>
-
-                        </div>
-                      </a>
-
-
-
-                    </div>
-                  </div>
-
-
-
-              <div class="container uk-width-1-2 text-center mx-auto my-5">
-                <div class="container">
-                  <button class="uk-button uk-button-large btn btn-default" type="button" name="button">Generate License Key</button>
-                </div>
-                <div class="uk-margin">
-                  <input class="uk-input mb-0" type="text" value="{{ license }}" placeholder="Generate License Key" disabled>
-                  <small class="mt-0"><b>*Do not share your license key</b></small>
-                </div>
-                <div class="">
-                  <button type="button" class="uk-button uk-button-large btn btn-default" name="button">Activate Account<span class="icon-feather-arrow-right"></span></button>
-                </div>
-              </div>
-
-
-        </div>
-
-
-      
-
-
+        <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
+            href="#"></a>
     </div>
 
-    </div>
-    <!-- For Night mode -->
-    <script>
-        (function (window, document, undefined) {
-            'use strict';
-            if (!('localStorage' in window)) return;
-            var nightMode = localStorage.getItem('gmtNightMode');
-            if (nightMode) {
-                document.documentElement.className += ' night-mode';
+
+    <div class="page-content" style="padding-top: 150px ;">
+
+        <style media="screen">
+            .page-content-inner1 {
+                max-width: 1350px;
+                max-height: auto;
+                margin: auto;
+                padding: 30px;
+                padding-bottom: 0;
+                position: relative;
             }
-        })(window, document);
+        </style>
+        <div class="page-content-inner">
 
 
-        (function (window, document, undefined) {
 
-            'use strict';
 
-            // Feature test
-            if (!('localStorage' in window)) return;
 
-            // Get our newly insert toggle
-            var nightMode = document.querySelector('#night-mode');
-            if (!nightMode) return;
+            <div class="site-icon mx-auto" style="margin-left:36px;">
+                <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
 
-            // When clicked, toggle night mode on or off
-            nightMode.addEventListener('click', function (event) {
-                event.preventDefault();
-                document.documentElement.classList.toggle('night-mode');
-                if (document.documentElement.classList.contains('night-mode')) {
-                    localStorage.setItem('gmtNightMode', true);
-                    return;
-                }
-                localStorage.removeItem('gmtNightMode');
-            }, false);
+                    <a>
+                        <div class="course-card episode-card animate-this" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
 
-        })(window, document);
-    </script>
-    <script>
-        function increment() {
-            document.getElementById('demoInput').stepUp();
+
+                                <img src="{% static 'images/blue.dark.png'%}">
+                                <div class="centered text-center" style="position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);">
+                                    <h1 style="color: white;">{{cfp}}</h1>
+                                    <h3 style="color: white;">CFP</h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a>
+                        <div class="course-card episode-card animate-this" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+
+                                <img src="{% static 'images/blue.dark.png'%}">
+                                <div class="centered text-center" style="position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);">
+                                    <h1 style="color: white;">{{ worktoken}}</h1>
+                                    <h3 style="color: white;">Work Tokens</h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </a>
+
+
+                    <a>
+                        <div class="course-card episode-card animate-this" style="width:292.5px;">
+                            <div class="course-card-thumbnail ">
+
+
+                                <img src="{% static 'images/blue.dark.png'%}">
+                                <div class="centered text-center" style="position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);">
+                                    <h1 style="color: white;">{{mccredit}}</h1>
+                                    <h3 style="color: white;">MC Credits</h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </a>
+
+
+
+                </div>
+            </div>
+
+
+
+            <div class="container uk-width-1-2 text-center mx-auto my-5">
+                <!--<form method="POST">{% csrf_token %}-->
+                    <div class="container">
+                        <form method="POST">{% csrf_token %}
+                        <button class="uk-button uk-button-large btn btn-default" type="submit"
+                            name="license_button">Generate License Key</button>
+                        </form>
+                    </div>
+                    <div class="uk-margin">
+                        <input class="uk-input mb-0" type="text"id="license_input" value="{{ license }}"
+                            placeholder="Generate License Key" disabled>
+                        <small class="mt-0"><b>*Do not share your license key</b></small>
+                    </div>
+                    <div class="">
+                        <button type="submit" class="uk-button uk-button-large btn btn-default" name="activate_license_btn" 
+                        onclick="activateCode();">Activate
+                            Account<span class="icon-feather-arrow-right" ></span></button>
+                    </div>
+                <!--</form>-->
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+<!-- For Night mode -->
+<script>
+    (function (window, document, undefined) {
+        'use strict';
+        if (!('localStorage' in window)) return;
+        var nightMode = localStorage.getItem('gmtNightMode');
+        if (nightMode) {
+            document.documentElement.className += ' night-mode';
+        }
+    })(window, document);
+
+
+    (function (window, document, undefined) {
+
+        'use strict';
+
+        // Feature test
+        if (!('localStorage' in window)) return;
+
+        // Get our newly insert toggle
+        var nightMode = document.querySelector('#night-mode');
+        if (!nightMode) return;
+
+        // When clicked, toggle night mode on or off
+        nightMode.addEventListener('click', function (event) {
+            event.preventDefault();
+            document.documentElement.classList.toggle('night-mode');
+            if (document.documentElement.classList.contains('night-mode')) {
+                localStorage.setItem('gmtNightMode', true);
+                return;
+            }
+            localStorage.removeItem('gmtNightMode');
+        }, false);
+
+    })(window, document);
+</script>
+<script>
+    function increment() {
+        document.getElementById('demoInput').stepUp();
+    }
+
+    function decrement() {
+        document.getElementById('demoInput').stepDown();
+    }
+    function activateCode(){
+        var license_data=document.getElementById('license_input').value;
+        if(license_data){
+            document.location.href="{% url 'activatecode'%}";
+        }
+        else{
+            alert("Please! generate license");
         }
 
-        function decrement() {
-            document.getElementById('demoInput').stepDown();
-        }
-    </script>
+    }
+</script>
 
 {% endblock %}

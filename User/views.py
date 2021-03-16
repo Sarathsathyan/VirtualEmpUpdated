@@ -949,14 +949,55 @@ def pricing(request):
         cefPrice =12000
         cfpPath = 1
         cfpPrice = 3000
-        tokenPrice = 0
+        tokenPrice = 3750
         courseCreditPrice = 0
         total =0
         discount =0
-        
+        workToken=5
+        courseCredits=5
+        if 'checkoutSubmit' in request.POST:
+            print("checkout  button")
+            user_id=request.user.pk
+            if 'radio3' in request.POST:
+                print("yes")
+            workToken = request.POST.get('radio3')
+            courseCredits = request.POST.get('mcRadio2')
+            if int(workToken) == 5:
+                tokenPrice = 3750
+            elif int(workToken) == 8:
+                tokenPrice =5200
+            elif int(workToken) == 15:
+                tokenPrice =6000
+            else:
+                tokenPrice = 0
+
+            if int(courseCredits) == 5:
+                courseCreditPrice = 0
+            elif int(courseCredits) == 8:
+                courseCreditPrice = 1000
+            elif int(courseCredits) == 15:
+                courseCreditPrice = 1500
+            if userPrice.objects.filter(userId_id=user_id).exists():
+                print("yes")
+                user_data=userPrice.objects.get(userId_id=user_id)
+                user_data.tokenPrice=tokenPrice
+                user_data.courseCreditPrice=courseCreditPrice
+                user_data.workToken=workToken
+                user_data.mcCredit=courseCredits
+                user_data.save()
+                
+            else:
+                print("no")
+                data = userPrice(userId_id=request.user.pk,cfpPrice=cfpPrice,tokenPrice=tokenPrice,courseCreditPrice=courseCreditPrice,totalPrice=total,cefPrice=cefPrice,workToken=workToken,mcCredit=courseCredits)
+                data.save()
+
+
+            return redirect("license_page")
+        """
         if 'cSubmit' in request.POST:
-            workToken = request.POST['radio3']
-            courseCredits = request.POST['mcRadio2']
+            #return redirect("license_page")
+            #workToken = request.POST['radio3']
+            #courseCredits = request.POST['mcRadio2']
             if int(workToken) == 5:
                 tokenPrice = 3750
             elif int(workToken) == 8:
@@ -976,7 +1017,7 @@ def pricing(request):
             print(tokenPrice)
             data = userPrice(userId_id=request.user.pk,cfpPrice=cfpPrice,tokenPrice=tokenPrice,courseCreditPrice=courseCreditPrice,totalPrice=total,cefPrice=cefPrice,workToken=workToken,mcCredit=courseCredits)
             data.save()
-
+        """
         #total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice+courseCreditPrice
         total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice
         total_includ_gst= float(total) *1.18
@@ -991,10 +1032,13 @@ def pricing(request):
             'cfpPrice':cfpPrice,
             'tokenPrice':tokenPrice,
             'courseCreditPrice':courseCreditPrice,
-            'discount':discount
+            'discount':discount,
+            'wtokens':5,
+            'mccred':5,
 
         }
         return render(request,'pricing.html',context)
+        
     else:
         return redirect('login')
 
@@ -1007,12 +1051,44 @@ def license_generate(request):
 
         delData = AdminLicense(key=license_key,numberCfp=1,workTokens=data.workToken,mcCredits=data.mcCredit)
         delData.save()
+        cfp=1
+        worktoken=data.workToken
+        mccreddit=data.mcCredit
         context={
+            'cfp':cfp,
+            'worktoken':worktoken,
+            'mccredit': mccreddit,
             'license':license_key
         }
-        return render(request, 'license_generate.html',context)
-    return render(request,'license_generate.html')
+        #return render(request, 'license_generate.html',context)
+        return render(request,'license_page.html',context)
+
+    #return render(request,'license_generate.html')
+    return render(request,'license_page.html')
+
 
 
 def license_page(request):
-    return render(request,'license_page.html')
+    if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
+        user_id=request.user.pk
+        if userPrice.objects.filter(userId_id=user_id).exists():
+            user_data=userPrice.objects.get(userId_id=user_id)
+            cfp=1
+            worktoken=user_data.workToken
+            mccreddit=user_data.mcCredit
+            context={
+                'cfp':cfp,
+                'worktoken':worktoken,
+                'mccredit': mccreddit
+            }
+
+        if 'license_button' in request.POST:
+            print("activate")
+            return  redirect('license_generate')
+
+        """elif 'activate_license_btn' in request.POST:
+            print("activate   plz")
+            return redirect('activatecode')"""
+        return render(request,'license_page.html',context)
+    else:
+        return redirect('login')
