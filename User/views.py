@@ -953,6 +953,7 @@ def pricing(request):
         courseCreditPrice = 0
         total =0
         discount =0
+        
         if 'cSubmit' in request.POST:
             workToken = request.POST['radio3']
             courseCredits = request.POST['mcRadio2']
@@ -976,11 +977,11 @@ def pricing(request):
             data = userPrice(userId_id=request.user.pk,cfpPrice=cfpPrice,tokenPrice=tokenPrice,courseCreditPrice=courseCreditPrice,totalPrice=total,cefPrice=cefPrice,workToken=workToken,mcCredit=courseCredits)
             data.save()
 
-
         #total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice+courseCreditPrice
         total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice
-        discount = int(total) - ((int(total) * 30 ) / 100)
         total_includ_gst= float(total) *1.18
+        discount = int(total_includ_gst) - ((int(total_includ_gst) * 30 ) / 100)
+        
         print(total_includ_gst)
 
         context ={

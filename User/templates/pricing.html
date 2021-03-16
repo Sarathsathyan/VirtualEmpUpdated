@@ -334,7 +334,7 @@
 
                                                                                 <label><input class="uk-radio " value="5"
                                                                                               type="radio"
-                                                                                              name="radio3" checked >
+                                                                                              name="radio3" onclick="findWorkTokenPrice();">
                                                                                 </label>
                                                                             </div>
                                                                             </label>
@@ -348,7 +348,7 @@
 
                                                                                 <label><input
                                                                                         class="uk-radio radiostyle" value="8"
-                                                                                        type="radio" name="radio3">
+                                                                                        type="radio" name="radio3" onclick="findWorkTokenPrice();">
                                                                                 </label>
                                                                             </div>
                                                                         </div>
@@ -358,7 +358,7 @@
 
                                                                                 <label><input
                                                                                         class="uk-radio radiostyle" value="15"
-                                                                                        type="radio" name="radio3">
+                                                                                        type="radio" name="radio3" onclick="findWorkTokenPrice();">
                                                                                 </label>
                                                                             </div>
                                                                         </div>
@@ -390,8 +390,12 @@
                                                                         <div class="uk-card uk-card-default  uk-card-body text-center rounded radiostyle">
                                                                             <h1 class="display-4">5</h1>
 
-                                                                            <label><input class="uk-radio" type="radio" value="5"
-                                                                                          name="mcRadio2" checked>
+                                                                            <label><!--<input class="uk-radio" type="radio" value="5"
+                                                                                          name="mcRadio2" checked onclick="mcCreditPrice();">
+                                                                                    -->
+                                                                                    <input class="uk-radio" type="radio" value="5"
+                                                                                          name="mcRadio2"  onclick="mcCreditPrice();">
+
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -400,7 +404,7 @@
                                                                             <h1 class="display-4">8</h1>
 
                                                                             <label><input class="uk-radio" type="radio" value="8"
-                                                                                          name="mcRadio2" >
+                                                                                          name="mcRadio2" onclick="mcCreditPrice();">
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -409,7 +413,7 @@
                                                                             <h1 class="display-4">15</h1>
 
                                                                             <label><input class="uk-radio" type="radio" value="15"
-                                                                                          name="mcRadio2">
+                                                                                          name="mcRadio2" onclick="mcCreditPrice();">
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -455,7 +459,7 @@
                                         <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
                                             <div class="uk-flex uk-flex-between">
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>CFP</b></h6>
+                                                    <h6 class="py-0 my-0"><b>CFP(1)</b></h6>
                                                 </div>
                                                 <div class="">
                                                     <h6 class="py-0 my-0"><b>Rs {{ cfpPrice }}</b></h6>
@@ -466,10 +470,10 @@
                                         <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
                                             <div class="uk-flex uk-flex-between">
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Work Tokens</b></h6>
+                                                    <h6 class="py-0 my-0"><b id="wtno">Work Tokens</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs {{ tokenPrice }}</b></h6>
+                                                    <h6 class="py-0 my-0" ><b id="wtokenPrice">Rs {{ tokenPrice }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -477,10 +481,10 @@
                                         <div class="uk-width-expand my-1 p-2 rounded" style="background:white;">
                                             <div class="uk-flex uk-flex-between">
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>MicroCourses</b></h6>
+                                                    <h6 class="py-0 my-0"><b id="mcno">MicroCourses</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs {{ courseCreditPrice }}</b></h6>
+                                                    <h6 class="py-0 my-0"><b id="mccreditprice">Rs {{ courseCreditPrice }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -492,7 +496,7 @@
                                                     <h6 class="py-0 my-0"><b>Total</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs {{ total }}</b></h6>
+                                                    <h6 class="py-0 my-0"><b id="total_without_gst">Rs {{ total }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -505,7 +509,7 @@
                                                 </div>
                                                 <div class="">
                                                     <!--<h6 class="py-0 my-0"><b>Rs 0000</b></h6>-->
-                                                    <h6 class="py-0 my-0"><b>Rs {{ total_includ_gst }}</b></h6>
+                                                    <h6 class="py-0 my-0"><b id="total_withgst">Rs {{ total_includ_gst }}</b></h6>
                                                 </div>
                                             </div>
 
@@ -518,7 +522,7 @@
                                                     <h6 class="py-0 my-0"><b>30% OFF</b></h6>
                                                 </div>
                                                 <div class="">
-                                                    <h6 class="py-0 my-0"><b>Rs {{ discount }}</b></h6>
+                                                    <h6 class="py-0 my-0"><b id="total_after_discount">Rs {{ discount }}</b></h6>
                                                 </div>
 
                                             </div>
@@ -646,6 +650,62 @@
 
         function decrement() {
             document.getElementById('demoInput').stepDown();
+        }
+    </script>
+    <script>
+        var wtp=0;
+        var wt_num=0;
+        var mc_num=0;
+        var mccd=0;
+        var tp=0;
+        function calTotal(){
+            tp=wtp+mccd+15000;
+            document.getElementById("total_without_gst").innerHTML="Rs "+tp; 
+            document.getElementById("total_withgst").innerHTML="Rs "+tp*1.18; 
+            document.getElementById("total_after_discount").innerHTML="Rs "+(tp*1.18*0.7).toFixed(2); 
+            document.getElementById("wtno").innerHTML="Work Tokens("+wt_num+") "; 
+            document.getElementById("mcno").innerHTML="MicroCourses("+mc_num+") "; 
+
+        }
+        function mcCreditPrice(){
+            var mccredit=document.getElementsByName("mcRadio2");
+            if(mccredit[0].checked && mccredit[0].value==5 ){
+                document.getElementById("mccreditprice").innerHTML="Rs 0"; 
+                mccd=0; 
+                mc_num=5;  
+            }
+            else if(mccredit[1].checked && mccredit[1].value==8){
+                document.getElementById("mccreditprice").innerHTML="Rs 1000"; 
+                mccd=1000;
+                mc_num=8;   
+            }
+            else if(mccredit[2].checked && mccredit[2].value==15){
+                document.getElementById("mccreditprice").innerHTML="Rs 1500"; 
+                mccd=1500;
+                mc_num=15;  
+            }
+            calTotal();
+            
+        }
+        function findWorkTokenPrice(){
+            var wtoken=document.getElementsByName("radio3");
+            
+            if(wtoken[0].checked && wtoken[0].value==5){
+                document.getElementById("wtokenPrice").innerHTML="Rs 3750";   
+                wtp=3750;
+                wt_num=5;
+            }
+            else if(wtoken[1].checked && wtoken[1].value==8){
+                document.getElementById("wtokenPrice").innerHTML="Rs 5200";
+                wtp=5200;
+                wt_num=8;  
+            }
+            else if(wtoken[2].checked && wtoken[2].value==15){
+                document.getElementById("wtokenPrice").innerHTML="Rs 6000";   
+                wtp=6000;
+                wt_num=15;
+            }            
+            calTotal();
         }
     </script>
 
