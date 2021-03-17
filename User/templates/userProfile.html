@@ -73,7 +73,7 @@
             <!-- My courses -->
             <a href="{% url 'userdashboard' %}"> <i class="icon-material-outline-shopping-cart"></i> <span class="tooltips"> Store</span></a>
         </li>
-       
+
         <li>
             <!-- Projects-->
             <a href="blog-1.html"> <i class="uil-blogger-alt"></i> <span class="tooltips">
@@ -535,7 +535,7 @@
     stroke: #36b37e;
   }
 
-  
+
 
 </style>
 
@@ -553,7 +553,10 @@
                           </svg>
                           <div class="number">
                             <!--<h2>50<span>%</span></h2>-->
-                            <h2>{{ total_xp_earned }}<span>XP</span></h2>
+
+                            <h2 ><span id="cfppoints">{{ total_xp_earned }}</span><span>XP</span></h2>
+
+
                           </div>
                         </div>
                         <h2 class=" mt-3"><b>TOTAL XP</b></h2>
@@ -566,10 +569,7 @@
                   <div class="container mx-4 ">
 
                     <div>
-                      <div class="uk-card my-2 uk-card-secondary uk-card-body rounded" style="height:200px; width:200px;">
-                          <h3 class="uk-card-title">Badge</h3>
-
-                      </div>
+                      <img id="b1" style="height:160px;" alt="">
                   </div>
                   </div>
                 </div>
@@ -1031,6 +1031,43 @@
 
 <script>
 
+  var cfp1=document.getElementById('cfppoints').textContent;
+
+  // Badge Immplementation in CFP1
+  if (cfp1 >= 100 && cfp1 < 200) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/c1.png' %}";
+  }
+  else if (cfp1 >= 200 && cfp1 < 300) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/c2.png' %}";
+  }
+  else if (cfp1 >= 300 && cfp1 < 400) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C3.png' %}";
+  }
+  else if (cfp1 >= 400 && cfp1 < 500) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/c4.png' %}";
+  }
+  else if (cfp1 >= 500 && cfp1 < 600) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C5.png' %}";
+  }
+  else if (cfp1 >= 600 && cfp1 < 700) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C6.png' %}";
+  }
+  else if (cfp1 >= 700 && cfp1 < 800) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C7.png' %}";
+  }
+  else if (cfp1 >= 800 && cfp1 < 900) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C8.png' %}";
+  }
+  else if (cfp1 >= 900 && cfp1 < 1000) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C9.png' %}";
+  }
+  else if (cfp1 >= 1000) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C10.png' %}";
+  }
+
+
+
+
   document.getElementById("defaultOpen").click();
 
   function openCity(evt, cityName) {
@@ -1147,77 +1184,47 @@
     document.getElementById("cfp1points300").style.display = "none";
   }
 
-  // Badge Immplementation in CFP1
-  if (cfp1 >= 100 && cfp1 < 200) {
-    document.getElementById("b1").src = "{% static 'images/badges/class1.png' %}";
-  }
-  else if (cfp1 >= 200 && cfp1 < 300) {
-    document.getElementById("b1").src = "{% static 'images/badges/class2.png' %}";
-  }
-  else if (cfp1 >= 300 && cfp1 < 400) {
-    document.getElementById("b1").src = "{% static 'images/badges/class3.png' %}";
-  }
-  else if (cfp1 >= 400 && cfp1 < 500) {
-    document.getElementById("b1").src = "{% static 'images/badges/class4.png' %}";
-  }
-  else if (cfp1 >= 500 && cfp1 < 600) {
-    document.getElementById("b1").src = "{% static 'images/badges/class5.png' %}";
-  }
-  else if (cfp1 >= 600 && cfp1 < 700) {
-    document.getElementById("b1").src = "{% static 'images/badges/class6.png' %}";
-  }
-  else if (cfp1 >= 700 && cfp1 < 800) {
-    document.getElementById("b1").src = "{% static 'images/badges/class7.png' %}";
-  }
-  else if (cfp1 >= 800 && cfp1 < 900) {
-    document.getElementById("b1").src = "{% static 'images/badges/class8.png' %}";
-  }
-  else if (cfp1 >= 900 && cfp1 < 1000) {
-    document.getElementById("b1").src = "{% static 'images/badges/class9.png' %}";
-  }
-  else if (cfp1 >= 1000) {
-    document.getElementById("b1").src = "{% static 'images/badges/class10.png' %}";
-  }
 
-  if (milestone2 >= 300) {
-    document.getElementById("cfp2points300").style.display = "block";
-  }
-  else {
-    document.getElementById("cfp2points300").style.display = "none";
-  }
+
+  // if (milestone2 >= 300) {
+  //   document.getElementById("cfp2points300").style.display = "block";
+  // }
+  // else {
+  //   document.getElementById("cfp2points300").style.display = "none";
+  // }
 
 
   // Badge Immplementation in CFP2
-  if (cfp2 >= 100 && cfp2 < 200) {
-    document.getElementById("b2").src = "{% static 'images/badges/class1.png' %}";
-  }
-  else if (cfp2 >= 200 && cfp2 < 300) {
-    document.getElementById("b2").src = "{% static 'images/badges/class2.png' %}";
-  }
-  else if (cfp2 >= 300 && cfp2 < 400) {
-    document.getElementById("b2").src = "{% static 'images/badges/class3.png' %}";
-  }
-  else if (cfp2 >= 400 && cfp2 < 500) {
-    document.getElementById("b2").src = "{% static 'images/badges/class4.png' %}";
-  }
-  else if (cfp2 >= 500 && cfp2 < 600) {
-    document.getElementById("b2").src = "{% static 'images/badges/class5.png' %}";
-  }
-  else if (cfp2 >= 600 && cfp2 < 700) {
-    document.getElementById("b2").src = "{% static 'images/badges/class6.png' %}";
-  }
-  else if (cfp2 >= 700 && cfp2 < 800) {
-    document.getElementById("b2").src = "{% static 'images/badges/class7.png' %}";
-  }
-  else if (cfp2 >= 800 && cfp2 < 900) {
-    document.getElementById("b2").src = "{% static 'images/badges/class8.png' %}";
-  }
-  else if (cfp2 >= 900 && cfp2 < 1000) {
-    document.getElementById("b2").src = "{% static 'images/badges/class9.png' %}";
-  }
-  else if (cfp2 >= 1000) {
-    document.getElementById("b2").src = "{% static 'images/badges/class10.png' %}";
-  }
+  // if (cfp2 >= 100 && cfp2 < 200) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c1.png' %}";
+  // }
+  // else if (cfp2 >= 200 && cfp2 < 300) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c2.png' %}";
+  // }
+  // else if (cfp2 >= 300 && cfp2 < 400) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c3.png' %}";
+  // }
+  // else if (cfp2 >= 400 && cfp2 < 500) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c4.png' %}";
+  // }
+  // else if (cfp2 >= 500 && cfp2 < 600) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c5.png' %}";
+  // }
+  // else if (cfp2 >= 600 && cfp2 < 700) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c6.png' %}";
+  // }
+  // else if (cfp2 >= 700 && cfp2 < 800) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c7.png' %}";
+  // }
+  // else if (cfp2 >= 800 && cfp2 < 900) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c8.png' %}";
+  // }
+  // else if (cfp2 >= 900 && cfp2 < 1000) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c9.png' %}";
+  // }
+  // else if (cfp2 >= 1000) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c10.png' %}";
+  // }
 
 
 </script>
