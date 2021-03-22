@@ -199,8 +199,6 @@ def userCourseLesson(request, c_id):
     if request.user.is_active:
         user_details = UserDetails.objects.get(user_id=request.user.pk)
         current_time = datetime.datetime.now(timezone.utc)
-        print(c_id)
-        # give c_id in 1
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
 
@@ -243,8 +241,7 @@ def userCourseLesson(request, c_id):
                 if(d.weekId_id == i.pk):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
-
-                        if remainingTime.days == 0:
+                        if remainingTime.days <= 0:
                             testID = True
 
         if course.video_page_image == None:
@@ -263,7 +260,8 @@ def userCourseLesson(request, c_id):
             'video_page_image':video_page_image,
             'mcCredits':user_details.user_mcCredits,
             'worktokens':user_details.user_workTokens,
-            'testCheck':testID
+            'testCheck':testID,
+            'course':course
 
         }
         return render(request,'userCourseLesson.html',context)
