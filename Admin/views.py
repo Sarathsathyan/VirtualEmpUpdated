@@ -7,6 +7,7 @@ from email_validator import validate_email, EmailNotValidError
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import auth
+from User.models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, Score, userPrice
 # EMAIL FROM SETTINGS
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -555,25 +556,105 @@ def deleteStu(request,delId):
         return redirect('adminStudents')
     else:
         return redirect("login")
-
+"""
 def adminViewStudent(request,userId):
     if request.user.is_active:
+        print("userrrrrrrr")
         print(userId)
+        print(request.user.first_name)
         student = User.objects.get(id = userId)
+        print(student.first_name)
         studentUserDetail = UserDetails.objects.get(user_id_id=userId)
         print(studentUserDetail.pk)
         studentContact = UserContact.objects.get(user_id_id=studentUserDetail.pk)
         studentEducation = UserEducation.objects.filter(user_id_id=studentUserDetail.pk)
+        
+        cfp_details = CareerChoice.objects.get(user_id_id=studentUserDetail.pk)
+        cfp_name=cfp_details.cfp_id.cfp
         context ={
             'student':student,
             'studentUserDetail':studentUserDetail,
             'studentContact' :studentContact,
             'studentEducation':studentEducation,
+            'cfp_details':cfp_details,
         }
         return render(request,'adminViewStudent.html',context)
 
     else:
         return redirect("login")
+"""
+def adminViewStudent(request,userId):
+    if request.user.is_active: 
+        print(userId)
+        user_details = UserDetails.objects.get(user_id_id=userId)
+        user=User.objects.get(id=userId)
+        user_education=None
+        work=[]
+        tech_skills=[]
+        man_skills=[]
+        lan_skills=[]
+        user_contact=None
+        cfp_details=None
+        cfp_name=None
+        total_xp_earned=0
+        course_points=0
+        if UserEducation.objects.filter(user_id_id=user_details.pk).exists():
+            user_education = UserEducation.objects.filter(user_id_id=user_details.pk)
+            try:
+                work = UserWorkExperience.objects.filter(user_id_id=user_details.pk).order_by("-start_year")
+            except:
+                work=[]
+            try:
+                tech_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Technical')
+            except:
+                tech_skills=[]
+            try:
+                man_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Management')
+            except:
+                man_skills=[]
+            try:
+                lan_skills=UserSkill.objects.filter(user_id_id=user_details.pk,category='Languages')
+            except:
+                lan_skills=[]
+            
+        if UserContact.objects.filter(user_id_id=user_details.pk).exists():
+            user_contact = UserContact.objects.get(user_id_id=user_details.pk)
+                
+        if CareerChoice.objects.filter(user_id_id=user_details.pk).exists():
+            cfp_details = CareerChoice.objects.get(user_id_id=user_details.pk)
+            cfp_name=cfp_details.cfp_id.cfp 
+            print("cfp",cfp_name)
+            
+        if Score.objects.filter(userId_id=userId).exists():
+            score_ob=Score.objects.filter(userId_id=userId)
+            total_xp_earned=0
+            for score in score_ob:
+                total_xp_earned+=score.totalxp
+                course_points=Course.objects.get(id=score.week_id.week_id_id).course_points
+
+        context = {
+                    'cfp_details': cfp_details,
+                    'user_data': user_details,
+                    'user_contact': user_contact,
+                    'user_education': user_education,
+                    'work':work,
+                    'tech_skills':tech_skills,
+                    'man_skills':man_skills,
+                    'lan_skills':lan_skills,
+                    'cfp_name':cfp_name,
+                    'total_xp_earned':total_xp_earned,
+                    'course_points':course_points,
+                    'mcCredits':user_details.user_mcCredits,
+                    'worktokens':user_details.user_workTokens,
+                    'numberCfp':user_details.numberCfp,  
+                    'user':user,  
+                    }
+        return render(request, "adminViewStudent.html", context)
+        
+    else:
+        messages.error(request,"Wrong URL")
+        return redirect('login')
+
 
 def adminCourses(request):
     if request.user.is_staff and request.user.is_superuser:
