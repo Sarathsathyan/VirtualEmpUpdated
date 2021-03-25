@@ -1,175 +1,206 @@
+
+
 {% extends 'base.html' %}
-{% block title %}
-    Student Info
-{% endblock %}
-{% block content %}{% load static %}
+{% load static %}{% block title %}User-Profile{% endblock %}
 
-    <style>
-        .fil {
-            background: transparent;
-            /* background: white; */
-            border: aliceblue;
-        }
-    </style>
+<style media="screen">
+  progress[value]::-webkit-progress-value {
+    transition: width 0.5s;
+    background: orange;
+  }
+</style>
+{% block content %}
 
-    <div id="wrapper" class="admin-panel">
-
-        {% include 'partials/_header.html' %}
-
-        <!-- content -->
-        <div class="page-content">
-            <div class="page-content-inner">
-
-                <div class="d-flex">
-                    <nav id="breadcrumbs" class="mb-3">
-                        <ul>
-                            <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
-                            <li><a href="{% url 'admindashboard' %}"> Dashboard </a></li>
-                            <li>Students list</li>
-                        </ul>
-                    </nav>
-                </div>
-                {% include 'partials/_alert.html' %}
+<div id="wrapper" class="admin-panel">
 
 
-                <div class="  py-4 mb-4 mx-0" style="border-radius : 10px ;">
-                    {% if user.is_authenticated %}
-                        <!-- <div class=" text-right mx-3">
+  {% include 'partials/_header.html' %}
+  {% include 'partials/_alert.html' %}
+
+
+  <div id="searchbox">
+
+    <div class="search-overlay"></div>
+
+    <div class="search-input-wrapper">
+      <div class="search-input-container">
+        <div class="search-input-control">
+          <span class="icon-feather-x btn-close uk-animation-scale-up"
+            uk-toggle="target: #searchbox; cls: is-active"></span>
+          <div class=" uk-animation-slide-bottom">
+            <input type="text" name="search" autofocus required>
+            <p class="search-help">Type the name of the Course</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- overlay seach on mobile-->
+  <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
+    style="z-index: 10000;">
+    <div class="uk-navbar-item uk-width-expand" style="min-height: 60px;">
+      <form class="uk-search uk-search-navbar uk-width-1-1">
+        <input class="uk-search-input" style="height:10px;" type="search" placeholder="Search..." autofocus>
+      </form>
+    </div>
+    <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+  </div>
+
+
+
+
+
+
+  <div class="page-content  ">
+
+    <br>
+    <div class="page-content-inner  uk-width-expand pt-0">
+      <!--
+                <h2>My Profile</h2> -->
+
+      <!-- <nav class="responsive-tab mb-4">
+                    <li class="#"><a class="uk-active"  href="user-profile.html"></a></li>
+                    <li><a href="user-project.html"></a></li>
+                    <li><a href="user-profile-edit.html"></a></li>
+                </nav> -->
+
+
+      <div class="  py-4 mb-4 mx-0" style="border-radius : 10px ;">
+        {% if user.is_authenticated %}
+        <!-- <div class=" text-right mx-3">
                     <p class="m-0"> Member since {{ user_data.user_date |date   }} </p>
                   </div>
                       <div class=" text-right mx-3">
                         <p class="m-0">Reference ID : {{ reference }} </p>
                       </div> -->
-                        <div class="uk-grid px-0 mx-1 uk-card-default  " style="border-radius:10px;">
+        <div class="uk-grid px-0 mx-1 uk-card-default  " style="border-radius:10px;">
 
-                            <div class="uk-width-1-4@m px-2">
-                                <div class=" text-center py-3 mx-1 mt-2" style="border-radius:10px;">
-                                    <div class="px-4">
-                                        <div class="m-auto ">
-                                            {% if studentContact.user_pic %}
-                                                <div class="user-profile-photo  m-auto "
-                                                     style="border:50%; height:200px; width:200px;">
-                                                    <img src="{{ studentContact.user_pic.url }}" style="border:50%;"
-                                                         alt="">
-                                                </div>
-                                            {% else %}
-                                                <div class="user-profile-photo  m-auto"
-                                                     style="height:250px; width:250px;">
-                                                    <img src="{% static 'images/avatars/home-profile.jpg' %}" alt="">
-                                                </div>
-                                            {% endif %}
-                                        </div>
-                                        <h3 class="mb-1"
-                                            style="font-family:impact;"> {{ student.first_name }} {{ student.last_name }}</h3>
-                                        <h5 class="my-0" style="font-size:14px;"> Employee ID
-                                            : {{ studentUserDetail.user_unique }} </h5>
-                                        <div class="">
-                                            {% if cfp_details.role_one %}
-                                                <p class="mx-1" style="margin-top: 0.50rem;"><span
-                                                        class="badge badge-pill  "
-                                                        style="background:#ffd76b; color:black;  font-size:16px;"> &bull; {{ cfp_details.role_one }}</span>
-                                                </p>
-                                            {% endif %}
-                                            {% if cfp_details.role_two %}
-                                                <p class="mx-1" style="margin-top: 0.50rem;"><span
-                                                        class="badge badge-pill "
-                                                        style="background:#ffd76b; color:black; font-size:16px;"> &bull; {{ cfp_details.role_two }}</span>
-                                                </p>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <style media="screen">
-                                .glyph.fs1.ach1 span:not([class*="mls"]) {
-                                    vertical-align: middle;
-                                    top: -4px;
-                                    height: 100%;
-                                    width: 52px;
-                                    background: #2fcc71;
-                                    display: inline-block;
-                                    /* line-height: 40px; */
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    /* border-radius: 4px; */
-                                    font-size: 24px;
-                                    transition: 0.3s;
-                                    position: relative;
-                                    position: absolute;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                }
-
-                                .glyph.fs1.ach2 span:not([class*="mls"]) {
-                                    vertical-align: middle;
-                                    top: -4px;
-                                    height: 100%;
-                                    width: 52px;
-                                    background: #4d7bf3;
-                                    display: inline-block;
-                                    /* line-height: 40px; */
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    /* border-radius: 4px; */
-                                    font-size: 24px;
-                                    transition: 0.3s;
-                                    position: relative;
-                                    position: absolute;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                }
-
-                                .glyph.fs1.ach3 span:not([class*="mls"]) {
-                                    vertical-align: middle;
-                                    top: -4px;
-                                    height: 100%;
-                                    width: 52px;
-                                    background: #ffa343;
-                                    display: inline-block;
-                                    /* line-height: 40px; */
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    /* border-radius: 4px; */
-                                    font-size: 24px;
-                                    transition: 0.3s;
-                                    position: relative;
-                                    position: absolute;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                }
-
-                                .glyph.fs1.ach4 span:not([class*="mls"]) {
-                                    vertical-align: middle;
-                                    top: -4px;
-                                    height: 100%;
-                                    width: 52px;
-                                    background: #c93de6;
-                                    display: inline-block;
-                                    /* line-height: 40px; */
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    /* border-radius: 4px; */
-                                    font-size: 24px;
-                                    transition: 0.3s;
-                                    position: relative;
-                                    position: absolute;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                }
-                            </style>
+          <div class="uk-width-1-4@m px-2">
+            <div class=" text-center py-3 mx-1 mt-2" style="border-radius:10px;">
+              <div class="px-4">
+                <div class="m-auto ">
+                  {% if user_contact.user_pic %}
+                  <div class="user-profile-photo  m-auto " style="border:50%; height:200px; width:200px;">
+                    <img src="{{ user_contact.user_pic.url }}" style="border:50%;" alt="">
+                  </div>
+                  {% else %}
+                  <div class="user-profile-photo  m-auto" style="height:250px; width:250px;">
+                    <img src="{% static 'images/avatars/home-profile.jpg' %}" alt="">
+                  </div>
+                  {% endif %}
+                </div>
+                <h3 class="mb-1" style="font-family:impact;"> {{ user.first_name }} {{ user.last_name }}</h3>
+                <h5 class="my-0" style="font-size:14px;"> Employee ID : {{ user_data.user_unique }} </h5>
+                <div class="">
+                  {% if cfp_details.role_one %}
+                  <p class="mx-1" style="margin-top: 0.50rem;"><span class="badge badge-pill  "
+                      style="background:#ffd76b; color:black;  font-size:16px;"> &bull; {{cfp_details.role_one}}</span>
+                  </p>
+                  {% endif %}
+                  {% if cfp_details.role_two %}
+                  <p class="mx-1" style="margin-top: 0.50rem;"><span class="badge badge-pill "
+                      style="background:#ffd76b; color:black; font-size:16px;"> &bull; {{cfp_details.role_two}}</span>
+                  </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
 
 
-                            <div class="uk-width-3-4@m " style="background: #ffffff; border-radius:10px;">
 
-                                <div class=" px-0 " style="border-radius:10px;" style="border-radius:10px;">
-                                    <div class="uk-width-expand px-4">
 
-                                        <div class="uk-grid uk-child-width-1-4@m py-4 mt-4" style="background:#004e86;
+          <style media="screen">
+            .glyph.fs1.ach1 span:not([class*="mls"]) {
+              vertical-align: middle;
+              top: -4px;
+              height: 100%;
+              width: 52px;
+              background: #2fcc71;
+              display: inline-block;
+              /* line-height: 40px; */
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              /* border-radius: 4px; */
+              font-size: 24px;
+              transition: 0.3s;
+              position: relative;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+
+            .glyph.fs1.ach2 span:not([class*="mls"]) {
+              vertical-align: middle;
+              top: -4px;
+              height: 100%;
+              width: 52px;
+              background: #4d7bf3;
+              display: inline-block;
+              /* line-height: 40px; */
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              /* border-radius: 4px; */
+              font-size: 24px;
+              transition: 0.3s;
+              position: relative;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+
+            .glyph.fs1.ach3 span:not([class*="mls"]) {
+              vertical-align: middle;
+              top: -4px;
+              height: 100%;
+              width: 52px;
+              background: #ffa343;
+              display: inline-block;
+              /* line-height: 40px; */
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              /* border-radius: 4px; */
+              font-size: 24px;
+              transition: 0.3s;
+              position: relative;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+
+            .glyph.fs1.ach4 span:not([class*="mls"]) {
+              vertical-align: middle;
+              top: -4px;
+              height: 100%;
+              width: 52px;
+              background: #c93de6;
+              display: inline-block;
+              /* line-height: 40px; */
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              /* border-radius: 4px; */
+              font-size: 24px;
+              transition: 0.3s;
+              position: relative;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          </style>
+
+
+
+          <div class="uk-width-3-4@m " style="background: #ffffff; border-radius:10px;">
+
+            <div class=" px-0 " style="border-radius:10px;" style="border-radius:10px;">
+              <div class="uk-width-expand px-4">
+
+                <div class="uk-grid uk-child-width-1-4@m py-4 mt-4" style="background:#004e86;
                             border-radius:10px;
                             /* border-radius: 50px; */
                             background: linear-gradient(145deg, #335dbd, #418cea);
@@ -177,694 +208,705 @@
                             -20px -20px 60px #ffffff;
                             ">
 
-                                            <div class="">
-                                                <div class="uk-flex mx-auto">
-                                                    <span class="icon-line-awesome-cubes mt-2"
-                                                          style="font-size:40px; color:#10346b;"></span>
-                                                    <h1 class="display-4 mt-0" style="color:white;">13</h1>
-                                                </div>
-                                                <div class="">
-                                                    <h5 style="color:#9ac8f3;"> Project Completed</h5>
-                                                </div>
-                                            </div>
+                  <div class="">
+                    <div class="uk-flex mx-auto">
+                      <span class="icon-line-awesome-cubes mt-2" style="font-size:40px; color:#10346b;"></span>
+                      <h1 class="display-4 mt-0" style="color:white;">{{ numberCfp }}</h1>
+                    </div>
+                    <div class="">
+                      <h5 style="color:#9ac8f3;">&nbsp; &nbsp; &nbsp; &nbsp;  CFPs</h5>
+                    </div>
+                  </div>
 
-                                            <div class="">
-                                                <div class="uk-flex">
-                                                    <span class="icon-material-outline-book mt-2"
-                                                          style="font-size:35px; color:#10346b; "></span>
-                                                    <h1 class="display-4 mt-0" style="color:white;">13</h1>
-                                                </div>
-                                                <div class="">
-                                                    <h5 style="color:#9ac8f3;">Project Certification</h5>
-                                                </div>
-                                            </div>
+                  <div class="">
+                    <div class="uk-flex">
+                      <span class="icon-material-outline-book mt-2" style="font-size:35px; color:#10346b; "></span>
+                      <h1 class="display-4 mt-0" style="color:white;">0</h1>
+                    </div>
+                    <div class="">
+                      <h5 style="color:#9ac8f3;">Micro Courses Done</h5>
+                    </div>
+                  </div>
 
-                                            <div class="">
-                                                <div class="uk-flex">
-                                                    <span class="icon-feather-award mt-2"
-                                                          style="font-size:35px; color:#10346b;"></span>
-                                                    <h1 class="display-4 mt-0"
-                                                        style="color:white;">{{ tot_achiev }}</h1>
-                                                </div>
-                                                <div class="">
-                                                    <h5 style="color:#9ac8f3;">Total Achievements</h5>
-                                                </div>
-                                            </div>
+                  <div class="">
+                    <div class="uk-flex">
+                      <span class="icon-feather-award mt-2" style="font-size:35px; color:#10346b;"></span>
+                      <h1 class="display-4 mt-0" style="color:white;">0</h1>
+                    </div>
+                    <div class="">
+                      <h5 style="color:#9ac8f3;">Total Work Hours</h5>
+                    </div>
+                  </div>
 
-                                            <div class="">
-                                                <div class="uk-flex">
-                                                    <span class="icon-material-outline-school mt-2"
-                                                          style="font-size:35px; color:#10346b;"></span>
-                                                    <h1 class="display-4 mt-0"
-                                                        style="color:white;">{{ com_courses }}</h1>
-                                                </div>
-                                                <div class="">
-                                                    <h5 style="color:#9ac8f3;">Course Completed</h5>
-                                                </div>
-                                            </div>
+                  <div class="">
+                    <div class="uk-flex">
+                      <span class="icon-material-outline-school mt-2" style="font-size:35px; color:#10346b;"></span>
+                      <h1 class="display-4 mt-0" style="color:white;">0</h1>
+                    </div>
+                    <div class="">
+                      <h5 style="color:#9ac8f3;">Work Certificates</h5>
+                    </div>
+                  </div>
 
-                                        </div>
+                </div>
 
-                                        <div class="my-2 px-4 mt-3">
-                                            <div class="uk-grid">
-                                                <div class="uk-width-1-4@m my-2">
-                                                    <h1 class="display-1"
-                                                        style="color: #d0e1f1; position: relative; right: 35px; top: 15px;">
-                                                        BIO"</h1>
-                                                </div>
-                                                <div class="uk-width-3-4@m my-3">
-                                                    <p style=" display : block; overflow-wrap: break-word;"
-                                                       style="color:black;"><em
-                                                            style="font-weight: 400;">{{ studentContact.user_bio }}</em>
-                                                    </p>
-                                                </div>
-                                            </div>
+                <div class="my-2 px-4 mt-3">
+                  <div class="uk-grid">
+                    <div class="uk-width-1-4@m my-2">
+                      <h1 class="display-1" style="color: #d0e1f1; position: relative; right: 35px; top: 15px;">BIO"
+                      </h1>
+                    </div>
+                    <div class="uk-width-3-4@m my-3">
+                      <p style=" display : block; overflow-wrap: break-word;" style="color:black;"><em
+                          style="font-weight: 400;">{{user_contact.user_bio}}</em></p>
+                    </div>
+                  </div>
 
-                                        </div>
-                                    </div>
-                                </div>
+                </div>
+              </div>
+            </div>
 
+          </div>
+
+
+
+
+        </div>
+
+        {% endif %}
+      </div>
+
+
+
+
+
+
+      <div class="container">
+        <style>
+          body {
+            font-family: gotham-rounded;
+          }
+
+          /* Style the tab */
+          .tab {
+
+            border-radius: 50px;
+            background: linear-gradient(145deg, #ffffff, #dcdddf);
+            box-shadow: border-radius: 50px;
+            background: linear-gradient(145deg, #dcdddf, #ffffff);
+            box-shadow: 20px 20px 60px #cfd1d3, -20px -20px 60px #ffffff;
+            overflow: hidden;
+            padding: 0px;
+          }
+
+          /* Style the buttons inside the tab */
+          .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            margin-right: 0px;
+            margin-left: 0px;
+            transition: 0.3s;
+            font-size: 21px;
+            color: black;
+            width: 25%;
+          }
+
+          /* Change background color of buttons on hover */
+          .tab button:hover {
+            background-color: white;
+
+            color: black;
+          }
+
+          /* Create an active/current tablink class */
+          .tab button.active {
+            background-color: White;
+
+            color: black;
+          }
+
+          /* Style the tab content */
+          .tabcontent {
+            display: none;
+            padding: 50 px;
+            text-align: center;
+            border-top: none;
+          }
+        </style>
+
+
+
+        <div class="tab ">
+          <button class="tablinks active" onclick="openCity(event, 'cfps')" id="defaultOpen">CFP</button>
+          <button class="tablinks" onclick="openCity(event, 'edu&exp')">EDU & EXP</button>
+          <button class="tablinks" onclick="openCity(event, 'skills')">Skills</button>
+          <button class="tablinks active" onclick="openCity(event, 'certificates')">Certificates</button>
+
+        </div>
+
+
+
+        <div id="cfps" class="tabcontent ">
+
+          <div class="uk-grid uk-child-width-1-2@m">
+
+
+
+            <div class="">
+              <div class="uk-card-default  my-4" style="border-radius:10px;">
+
+
+                <div class="uk-card-default  my-4" style="border-radius:10px;">
+                  <div class=" py-2  px-4 "
+                    style=" border-top-left-radius: 10px; border-top-right-radius: 10px; background: #f9c74f;">
+                    <h4 class="mb-0 text-center" style="color:#07192b;"><strong>{{ cfp_name }} </strong> </h4>
+
+                  </div>
+                  <hr class="m-0">
+
+
+
+                  <div class="uk-flex uk-flex-between uk-flex-middle pt-1 pb-2 px-4">
+
+                    <div class="uk-width-expand">
+
+
+
+
+
+
+<style>
+  @import url(https://fonts.google.com/css?family=Roboto:300,300,500,600,700,800,900);
+
+
+
+  .percent {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    /*-- box-shadow: inset 0 0 50px #000; */
+    background: white;
+    z-index: 1000;
+  }
+
+  .percent .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .percent .number h2 {
+    color: #777;
+    font-weight: 700;
+    font-size: 40px;
+    transition: 0.5s;
+  }
+
+
+  .percent .number h2 span {
+    font-size: 24px;
+    color: #777;
+    transition: 0.5s;
+  }
+
+  .card:hover .percent .number h2 span {
+    color: #fff;
+  }
+
+  .text {
+    position: relative;
+    color: #777;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.5s;
+  }
+
+
+
+  svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    z-index: 1000;
+  }
+
+  svg circle
+  {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #e0e0e0;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+
+  }
+
+  svg circle:nth-child(2) {
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+  }
+
+  :root {
+  --course_completion:{{ total_xp_earned }};
+  }
+
+  .card:nth-child(1) svg circle:nth-child(2)
+  {
+    /*stroke-dashoffset: calc(440 - (440 * 90) / 100);
+    */
+    stroke-dashoffset: calc(440 - (440 * var(--course_completion) ) / 1000);
+    stroke: #36b37e;
+  }
+
+
+
+</style>
+
+
+              <div class="uk-flex uk-flex-center" >
+                <div class="">
+                  <div class="container  mx-4">
+
+                    <div class="card my-2" style="width: 200px; border:2px solid white; box-shadow: rgba(200,200,200,0.7) 0px 0px 0px 0px;">
+                      <div class="box mx-auto">
+                        <div class="percent">
+                          <svg>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                          </svg>
+                          <div class="number">
+                            <!--<h2>50<span>%</span></h2>-->
+
+                            <h2 ><span id="cfppoints">{{ total_xp_earned }}</span><span>XP</span></h2>
+
+
+                          </div>
+                        </div>
+                        <h2 class=" mt-3"><b>TOTAL XP</b></h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="">
+                  <div class="container mx-4 ">
+
+                    <div>
+                      <img id="b1" style="height:160px;" alt="">
+                  </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+                      <!-- <div class="uk-container mb-3 px-0">
+                        <div class="mx-auto px-auto">
+                          <div id="progress2" class="">
+                            <span id="value2">50</span>
+                            <div class="left-half-clipper">
+                              <div class="first50-bar"></div>
+                              <div class="value-bar"></div>
                             </div>
+                          </div>
+                        </div>
 
+                        <progress class="uk-progress progress" id="pro2" max="1000" hidden></progress>
+
+                      </div> -->
+
+
+                      <!-- <div class=" mt-4" id="cfp2points300">
+                        {% if certi2 %}
+
+                        {% else %}
+                        <h4>Congratulations!!! You have reached a milestone</h4>
+                        <form class="cfp2_mile" method="POST">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-default" name="cfp2_m1">Check Your Certificate
+                            Here</button>
+                        </form>
+                        {% endif %}
+                      </div> -->
+                    </div>
+
+
+
+
+                  </div>
+
+
+                  <hr class="mt-0">
+                  <div class=" pt-0 px-5 py-4">
+
+
+                    <div class="">
+
+
+                      <div class="uk-width-expand my-2 uk-grid-small uk-flex-middle">
+
+                        <div class="uk-grid-small uk-flex-middle " uk-grid>
+                          <div class="uk-width-auto">
+                            <button type="button" class="btn btn-danger btn-icon-only">
+                              <span class="d-flex justify-content-center">
+                                <i class="icon-brand-angular icon-small"></i>
+                              </span>
+                            </button>
+                          </div>
+                          <div class="uk-width-expand text-left">
+
+
+                            <h5 class="mb-2"><b>Course XP</b></h5>
+
+                            <progress class="uk-progress mt-0" id="live2" value="{{total_xp_earned}}"
+                              max="{{ course_points }}" style="width: 84%"></progress>
+
+
+                          </div>
+                        </div>
+                        <div class="uk-grid-small uk-flex-middle " uk-grid>
+                          <div class="uk-width-auto">
+                            <button type="button" class="btn btn-danger btn-icon-only">
+                              <span class="d-flex justify-content-center">
+                                <i class="icon-brand-angular icon-small"></i>
+                              </span>
+                            </button>
+                          </div>
+                          <div class="uk-width-expand text-left">
+
+
+                            <h5 class="mb-2"><b>Major Projects XP</b></h5>
+
+                            <progress class="uk-progress mt-0" id="live2" value="0" max="1000"
+                              style="width: 84%"></progress>
+
+
+                          </div>
+                        </div>
+                        <div class="uk-grid-small uk-flex-middle " uk-grid>
+                          <div class="uk-width-auto">
+                            <button type="button" class="btn btn-danger btn-icon-only">
+                              <span class="d-flex justify-content-center">
+                                <i class="icon-brand-angular icon-small"></i>
+                              </span>
+                            </button>
+                          </div>
+                          <div class="uk-width-expand text-left">
+
+
+                            <h5 class="mb-2"><b>Real Time Projects</b></h5>
+
+                            <progress class="uk-progress mt-0" id="live2" value="0" max="1000"
+                              style="width: 84%"></progress>
+
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+
+
+
+
+
+
+        <div id="edu&exp" class="tabcontent">
+
+          <div class="user-details my-3  ">
+            <div class="uk-grid uk-child-width-1-2@m">
+
+
+
+
+              <div class="mt-2 mb-2">
+                <div class="uk-card-default  mt-0 " style="border-radius:10px;">
+                  <div class=" py-2  px-4 uk-flex "
+                    style="background:#101010; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="mx-auto">
+                      <h4 class="mb-0 text-center" style="color:#ffffff;"> Educational Details </h4>
+                    </div>
+
+                    <div class="text-right">
+
+                    </div>
+
+                  </div>
+                  <hr class="m-0">
+
+
+                  <style media="screen">
+                    * {
+                      box-sizing: border-box;
+                    }
+
+
+                    .first {
+                      border-right: 2px solid #eb5e5e;
+                      position: relative;
+
+                    }
+
+                    .first::after {
+                      content: '';
+                      position: absolute;
+                      bottom: 95px;
+                      right: -11px;
+                      width: 20px;
+                      height: 20px;
+                      border-radius: 50%;
+                      border: 4px solid #eb5e5e;
+                      background: #eb5e5e;
+                    }
+                  </style>
+
+                  <div class="py-3">
+                    {% for i in user_education %}
+
+                    <div class="my-0 ">
+                      <div class="uk-grid uk-child-width-1-2" uk-grid>
+
+                        <div class="text-right first p-4">
+                          <div class="p-3 pt-4">
+                            <h5 style="font-family:impact;">{{i.start_month}} {{i.start_year}} - {{i.end_month}}
+                              {{i.end_year}}</h5>
+                            <h5 class="mt-0" id=""><strong>{{i.duration}}</strong> </h5>
+                          </div>
+                        </div>
+
+                        <div class="text-left line p-4 second " id='line'>
+                          <div class="p-3" style="background:#ff6f6f;  border-radius:10px;">
+                            <h5 class="my-0" style="color:white;"><b>{{i.degree}} , {{i.specialization}}</b></h5>
+                            <h6 class="my-0" style="color:#07192b; font-size:15px; font-weight: 700;">CGPA : {{i.gpa}}
+                            </h6>
+                            <h6 class="my-0" style="color:white;">{{i.institution}}</h6>
+                            <h6 class="my-0" style="color:white;">{{i.state}}</h6>
+                          </div>
 
                         </div>
 
-                    {% endif %}
-                    <div class="container">
-                        <style>
-                            body {
-                                font-family: Arial;
-                            }
 
-                            /* Style the tab */
-                            .tab {
+                      </div>
+                    </div>
 
-                                border-radius: 50px;
-                                background: linear-gradient(145deg, #ffffff, #dcdddf);
-                                box-shadow: border-radius: 50px;
-                                background: linear-gradient(145deg, #dcdddf, #ffffff);
-                                box-shadow: 20px 20px 60px #cfd1d3, -20px -20px 60px #ffffff;
-                                overflow: hidden;
-                                padding: 0px;
-                            }
+                    {% endfor %}
+                  </div>
 
-                            /* Style the buttons inside the tab */
-                            .tab button {
-                                background-color: inherit;
-                                float: left;
-                                border: none;
-                                outline: none;
-                                cursor: pointer;
-                                padding: 14px 16px;
-                                margin-right: 0px;
-                                margin-left: 0px;
-                                transition: 0.3s;
-                                font-size: 21px;
-                                color: black;
-                                width: 25%;
-                            }
-
-                            /* Change background color of buttons on hover */
-                            .tab button:hover {
-                                background-color: white;
-
-                                color: black;
-                            }
-
-                            /* Create an active/current tablink class */
-                            .tab button.active {
-                                background-color: White;
-
-                                color: black;
-                            }
-
-                            /* Style the tab content */
-                            .tabcontent {
-                                display: none;
-                                padding: 50px;
-                                text-align: center;
-                                border-top: none;
-                            }
-                        </style>
+                </div>
+              </div>
 
 
-                        <div class="tab ">
-                            <button class="tablinks active" onclick="openCity(event, 'cfps')" id="defaultOpen">CFP
-                            </button>
-                            <button class="tablinks" onclick="openCity(event, 'edu&exp')">EDU & EXP</button>
-                            <button class="tablinks" onclick="openCity(event, 'skills')">Skills</button>
-                            <button class="tablinks active" onclick="openCity(event, 'certificates')">Certificates
-                            </button>
 
+
+
+
+
+
+
+              <div class="mt-2 mb-2 ">
+                <div class="uk-card-default mt-0 " style="border-radius:10px;">
+                  <div class="uk-flex py-2  px-4"
+                    style="background:#101010; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="mx-auto">
+                      <h4 class="mb-0 text-center" style="color:#ffffff;">Work Experience </h4>
+                    </div>
+
+                    <div class="text-right">
+
+                    </div>
+
+                  </div>
+                  <hr class="m-0">
+
+
+                  <style media="screen">
+                    * {
+                      box-sizing: border-box;
+                    }
+
+
+                    .first1 {
+                      border-right: 2px solid blue;
+                      position: relative;
+
+                    }
+
+                    .first1::after {
+                      content: '';
+                      position: absolute;
+                      bottom: 70px;
+                      right: -11px;
+                      width: 20px;
+                      height: 20px;
+                      border-radius: 50%;
+                      border: 2px solid #235cb3;
+                      background: #235cb3;
+                    }
+                  </style>
+
+                  <div class="py-3">
+                    {% for i in work %}
+
+                    <div class="my-0 ">
+                      <div class="uk-grid uk-child-width-1-2" uk-grid>
+
+                        <div class="text-right first1 p-4">
+                          <div class="p-3 pt-4">
+                            <h5 style="font-family:impact;">{{i.start_month}} {{i.start_year}} - {{i.end_month}} {{i.end_year}}</h5>
+                            <h5 class="mt-0" id=""><strong>{{i.duration}}</strong> </h5>
+                          </div>
                         </div>
 
-                        <div id="cfps" class="tabcontent ">
+                        <div class="text-left line p-4 second1" id='line'>
+                          <div class="p-3" style="background:#235cb3; border-radius:10px;">
+                            <h5 class="my-0" style=" color: white;"><b>{{i.job_role}}</b></h5>
+                            <h6 class="my-0" style=" color: white;">{{i.company}}</h6>
+                            <h6 class="my-0" style=" color: white;">{{i.state}}</h6>
+                          </div>
+                        </div>
 
-                            <div class="uk-grid uk-child-width-1-2@m">
-                                <div class="">
 
+                      </div>
+                    </div>
 
-                                    <div class="uk-card-default  my-4" style="border-radius:10px; ">
-                                        <div class=" py-2  px-4"
-                                             style="background: #003554; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                            <h4 class="mb-0 text-center" style="color: #ffffff;">
-                                                <strong>{{ cfp_details.role_one }}</strong></h4>
+                    {% endfor %}
+                  </div>
 
-                                        </div>
-                                        <hr class="m-0">
+                </div>
+              </div>
 
+            </div>
+          </div>
 
-                                        <div class="uk-flex uk-flex-between uk-flex-middle pt-1 pb-2 px-4">
 
-                                            <div class="uk-width-expand">
-                                                <!-- <div class="my-3">
-                                  <h3 class="mb-0" ><span class=" badge badge-pill text-white" style="background:#005c82" >{{ cfp_details.role_one }}</span></h3>
-                                </div> -->
-                                                <div class="uk-container mb-3 px-0">
+        </div>
 
 
-                                                    <!-- Newly Added -->
-                                                    <div class="mx-auto px-auto">
-                                                        <div id="progress1" class="">
-                                                            <span id="value1">jbbh</span>
-                                                            <div class="left-half-clipper ">
-                                                                <div class="first50-bar"></div>
-                                                                <div class="value-bar"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
 
-                                                    <!-- End -->
 
+        <div id="skills" class="tabcontent">
 
-                                                    <progress class="uk-progress progress " id="pro1" max="1000"
-                                                              hidden></progress>
 
-                                                </div>
-                                                <div class=" mt-4" id="cfp1points300">
-                                                    {% if certi1 %}
-                                                    {% else %}
-                                                        <h4>Congratulations!!! You have reached a milestone</h4>
-                                                        <form class="cfp1_mile" method="POST"
-                                                              enctype="multipart/form-data">
-                                                            {% csrf_token %}
-                                                            <!-- <input type="file" name="sss"> -->
-                                                            <button type="submit" class="btn btn-default"
-                                                                    name="cfp1_m1">Check Your Certificate Here
-                                                            </button>
+          <div class="user-details my-3  ">
+            <div class="uk-grid uk-child-width-1-3@m">
 
-                                                        </form>
-                                                    {% endif %}
-                                                </div>
-                                            </div>
 
+              <div class=" pr-2 my-2 ">
+                <div class="uk-card-default mt-0 pb-2" style="border-radius : 10px; background:#fff6ed">
+                  <div class=" py-2  px-4"
+                    style="background:#ffa343; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <h4 class="mb-0 ml-3 text-center"><strong> Technical Skills</strong></h4>
 
-                                            <div class="mx-4 my-2" style="height:50px; width:50px;">
-                                                <img src="" id="b1" alt="">
-                                            </div>
+                  </div>
+                  <hr class="m-0">
 
-                                        </div>
+                  <div class="text-justify pl-5 uk-width-2-3 mx-auto">
+                    {% for i in tech_skills %}
+                    <h5 class="my-3"><strong><i class="icon-line-awesome-dot-circle-o"></i> &nbsp; {{i.skill}}</strong></h5>
+                    {% endfor %}
+                  </div>
 
 
-                                        <hr class="mt-0">
-                                        <div class=" pt-0 px-5 py-4 ">
+                </div>
+              </div>
 
 
-                                            <div class="">
+              <div class=" px-2 my-2">
+                <div class="uk-card-default  mt-0 pb-2" style="border-radius : 10px; background:#f1f5e3;">
+                  <div class=" py-2 px-4"
+                    style="background:#4d7bf3; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <h4 class="mb-0 ml-3 text-center"><strong> Management/Office Skills </strong></h4>
 
+                  </div>
+                  <hr class="m-0">
 
-                                                <div class="uk-width-expand my-2 uk-grid-small uk-flex-middle  ">
+                  <div class="text-justify pl-5 uk-width-2-3 mx-auto ">
+                    {% for i in man_skills %}
+                    <h5 class="my-3"><strong><i class="icon-line-awesome-dot-circle-o"></i> &nbsp; {{i.skill}}</strong></h5>
+                    {% endfor %}
+                  </div>
 
-                                                    <div class="uk-grid-small uk-flex-middle " uk-grid>
-                                                        <div class="uk-width-auto">
-                                                            <button type="button" class="btn btn-danger btn-icon-only">
-                                                    <span class="d-flex justify-content-center">
-                                               <i class="icon-brand-angular icon-small"></i>
-                                                    </span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="uk-width-expand">
-                                                            <h5 class="mb-1"> {{ tag.course_tag }}</h5>
+                </div>
+              </div>
 
 
-                                                            <progress class="uk-progress mt-0" value="{{ tag.points }}"
-                                                                      max="1000" style="width: 87%"></progress>
-                                                        </div>
-                                                    </div>
+              <div class=" px-2 my-2">
+                <div class="uk-card-default  mt-0 pb-2" style="border-radius : 10px; background:#eafaf0">
+                  <div class=" py-2  px-4"
+                    style=" background:#2fcc71; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <h4 class="mb-0 ml-3 text-center"><strong>Languages</strong> </h4>
 
+                  </div>
+                  <hr class="m-0">
 
-                                                </div>
+                  <div class="text-justify pl-5 uk-width-2-3 mx-auto ">
+                    {% for i in lan_skills %}
+                    <h5 class="my-3"><strong><i class="icon-line-awesome-dot-circle-o"></i> &nbsp; {{i.skill}}</strong></h5>
+                    {% endfor %}
+                  </div>
 
-                                            </div>
+                </div>
+              </div>
 
 
-                                            <p>Currently no courses under this category</p>
+            </div>
+          </div>
 
 
-                                        </div>
-                                    </div>
 
-                                </div>
+        </div>
 
 
-                                <div class="">
+        <div id="certificates" class="tabcontent ">
 
+          <div class="user-details my-3  ">
+            <div class="uk-grid uk-child-width-1-3@m">
 
-                                    <div class="uk-card-default  my-4" style="border-radius:10px;">
 
+              <div class=" mb-2 pr-2 my-2">
+                <div class="uk-card-default mt-0 pb-2" style="border-radius : 10px; background:#f9ebfc;">
+                  <div class=" py-2  px-4"
+                    style=" background:#c93de6; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <h4 class="mb-0 ml-3 text-center"><strong>Course Certificates</strong> </h4>
 
-                                        <div class="uk-card-default  my-4" style="border-radius:10px;">
-                                            <div class=" py-2  px-4 "
-                                                 style=" border-top-left-radius: 10px; border-top-right-radius: 10px; background: #f9c74f;">
-                                                <h4 class="mb-0 text-center" style="color:#07192b;"><strong>Data
-                                                    science</strong></h4>
+                  </div>
+                  <hr class="m-0">
 
-                                            </div>
-                                            <hr class="m-0">
-
-
-                                            <div class="uk-flex uk-flex-between uk-flex-middle pt-1 pb-2 px-4">
-
-                                                <div class="uk-width-expand">
-
-                                                    <div class="uk-container mb-3 px-0">
-
-                                                        <!-- Newly Added -->
-                                                        <div class="mx-auto px-auto">
-                                                            <div id="progress2" class="">
-                                                                <span id="value2">50</span>
-                                                                <div class="left-half-clipper">
-                                                                    <div class="first50-bar"></div>
-                                                                    <div class="value-bar"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End -->
-
-
-                                                        <progress class="uk-progress progress" id="pro2" max="1000"
-                                                                  hidden></progress>
-
-                                                    </div>
-                                                    <div class=" mt-4" id="cfp2points300">
-                                                        {% if certi2 %}
-
-                                                        {% else %}
-                                                            <h4>Congratulations!!! You have reached a milestone</h4>
-                                                            <form class="cfp2_mile" method="POST">
-                                                                {% csrf_token %}
-                                                                <button type="submit" class="btn btn-default"
-                                                                        name="cfp2_m1">Check Your Certificate Here
-                                                                </button>
-                                                            </form>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-
-                                                <div class="mx-4 my-2" style="height:50px; width:50px;">
-                                                    <img src="" id="b2" alt="">
-                                                </div>
-
-
-                                            </div>
-
-
-                                            <hr class="mt-0">
-                                            <div class=" pt-0 px-5 py-4">
-
-
-                                                <div class="">
-
-
-                                                    <div class="uk-width-expand my-2 uk-grid-small uk-flex-middle">
-
-                                                        <div class="uk-grid-small uk-flex-middle " uk-grid>
-                                                            <div class="uk-width-auto">
-                                                                <button type="button"
-                                                                        class="btn btn-danger btn-icon-only">
-                                                      <span class="d-flex justify-content-center">
-                                                 <i class="icon-brand-angular icon-small"></i>
-                                                      </span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="uk-width-expand text-left">
-
-
-                                                                <h5 class="mb-2" style="color: darkblue"> Course XP</h5>
-
-                                                                <progress class="uk-progress mt-0" id="live2" value="50"
-                                                                          max="1000" style="width: 84%"></progress>
-
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="uk-grid-small uk-flex-middle " uk-grid>
-                                                            <div class="uk-width-auto">
-                                                                <button type="button"
-                                                                        class="btn btn-danger btn-icon-only">
-                                              <span class="d-flex justify-content-center">
-                                         <i class="icon-brand-angular icon-small"></i>
-                                              </span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="uk-width-expand text-left">
-
-
-                                                                <h5 class="mb-2" style="color: darkblue">Major Projects
-                                                                    XP</h5>
-
-                                                                <progress class="uk-progress mt-0" id="live2" value="0"
-                                                                          max="1000" style="width: 84%"></progress>
-
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="uk-grid-small uk-flex-middle " uk-grid>
-                                                            <div class="uk-width-auto">
-                                                                <button type="button"
-                                                                        class="btn btn-danger btn-icon-only">
-                                      <span class="d-flex justify-content-center">
-                                 <i class="icon-brand-angular icon-small"></i>
-                                      </span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="uk-width-expand text-left">
-
-
-                                                                <h5 class="mb-2" style="color: darkblue"> Real Time
-                                                                    Projects</h5>
-
-                                                                <progress class="uk-progress mt-0" id="live2" value="0"
-                                                                          max="1000" style="width: 84%"></progress>
-
-
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div id="edu&exp" class="tabcontent">
-
-                                <div class="user-details my-3  ">
-                                    <div class="uk-grid uk-child-width-1-2@m">
-
-
-                                        <div class="mt-2 mb-2">
-                                            <div class="uk-card-default  mt-0 " style="border-radius:10px;">
-                                                <div class=" py-2  px-4 uk-flex "
-                                                     style="background:#101010; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                                    <div class="mx-auto">
-                                                        <h4 class="mb-0 text-center" style="color:#ffffff;"> Educational
-                                                            Details </h4>
-                                                    </div>
-
-                                                    <div class="text-right">
-
-                                                    </div>
-
-                                                </div>
-                                                <hr class="m-0">
-
-
-                                                <style media="screen">
-                                                    * {
-                                                        box-sizing: border-box;
-                                                    }
-
-
-                                                    .first {
-                                                        border-right: 2px solid #eb5e5e;
-                                                        position: relative;
-
-                                                    }
-
-                                                    .first::after {
-                                                        content: '';
-                                                        position: absolute;
-                                                        bottom: 95px;
-                                                        right: -11px;
-                                                        width: 20px;
-                                                        height: 20px;
-                                                        border-radius: 50%;
-                                                        border: 4px solid #eb5e5e;
-                                                        background: #eb5e5e;
-                                                    }
-                                                </style>
-
-                                                <div class="py-3">
-                                                    {% for i in studentEducation %}
-
-                                                        <div class="my-0 ">
-                                                            <div class="uk-grid uk-child-width-1-2" uk-grid>
-
-                                                                <div class="text-right first p-4">
-                                                                    <div class="p-3 pt-4">
-                                                                        <h5 style="font-family:impact;">{{ i.start_month }} {{ i.start_year }}
-                                                                            - {{ i.end_month }} {{ i.end_year }}</h5>
-                                                                        <h5 class="mt-0" id="">
-                                                                            <strong>{{ i.duration }}</strong></h5>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="text-left line p-4 second " id='line'>
-                                                                    <div class="p-3"
-                                                                         style="background:#ff6f6f;  border-radius:10px;">
-                                                                        <h5 class="my-0" style="color:white;">
-                                                                            <b>{{ i.degree }}
-                                                                                , {{ i.specialization }}</b></h5>
-                                                                        <h6 class="my-0"
-                                                                            style="color:#07192b; font-size:15px; font-weight: 700;">
-                                                                            CGPA : {{ i.gpa }}</h6>
-                                                                        <h6 class="my-0"
-                                                                            style="color:white;">{{ i.institution }}</h6>
-                                                                        <h6 class="my-0"
-                                                                            style="color:white;">{{ i.state }}</h6>
-                                                                    </div>
-
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
-
-                                                    {% endfor %}
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="mt-2 mb-2 ">
-                                            <div class="uk-card-default mt-0 " style="border-radius:10px;">
-                                                <div class="uk-flex py-2  px-4"
-                                                     style="background:#101010; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                                    <div class="mx-auto">
-                                                        <h4 class="mb-0 text-center" style="color:#ffffff;">Work
-                                                            Experience </h4>
-                                                    </div>
-
-                                                    <div class="text-right">
-
-                                                    </div>
-
-                                                </div>
-                                                <hr class="m-0">
-
-
-                                                <style media="screen">
-                                                    * {
-                                                        box-sizing: border-box;
-                                                    }
-
-
-                                                    .first1 {
-                                                        border-right: 2px solid blue;
-                                                        position: relative;
-
-                                                    }
-
-                                                    .first1::after {
-                                                        content: '';
-                                                        position: absolute;
-                                                        bottom: 70px;
-                                                        right: -11px;
-                                                        width: 20px;
-                                                        height: 20px;
-                                                        border-radius: 50%;
-                                                        border: 2px solid #235cb3;
-                                                        background: #235cb3;
-                                                    }
-                                                </style>
-
-                                                <div class="py-3">
-                                                    {% for i in work %}
-
-                                                        <div class="my-0 ">
-                                                            <div class="uk-grid uk-child-width-1-2" uk-grid>
-
-                                                                <div class="text-right first1 p-4">
-                                                                    <div class="p-3 pt-4">
-                                                                        <h5 style="font-family:impact;">{{ i.start_month }} {{ i.start_year }}
-                                                                            - {{ i.end_month }} {{ i.end_year }}</h5>
-                                                                        <h5 class="mt-0" id="">
-                                                                            <strong>{{ i.duration }}</strong></h5>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="text-left line p-4 second1" id='line'>
-                                                                    <div class="p-3"
-                                                                         style="background:#235cb3; border-radius:10px;">
-                                                                        <h5 class="my-0" style=" color: white;">
-                                                                            <b>{{ i.job_role }}</b></h5>
-                                                                        <h6 class="my-0"
-                                                                            style=" color: white;">{{ i.company }}</h6>
-                                                                        <h6 class="my-0"
-                                                                            style=" color: white;">{{ i.state }}</h6>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
-
-                                                    {% endfor %}
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-                            <div id="skills" class="tabcontent">
-
-
-                                <div class="user-details my-3  ">
-                                    <div class="uk-grid uk-child-width-1-3@m">
-
-
-                                        <div class=" pr-2 my-2 ">
-                                            <div class="uk-card-default mt-0 pb-2"
-                                                 style="border-radius : 10px; background:#fff6ed">
-                                                <div class=" py-2  px-4"
-                                                     style="background:#ffa343; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                                    <h4 class="mb-0 ml-3 text-center"><strong> Technical Skills</strong>
-                                                    </h4>
-
-                                                </div>
-                                                <hr class="m-0">
-
-                                                <div class="text-justify pl-5 uk-width-2-3 mx-auto">
-                                                    {% for i in tech_skills %}
-                                                        <h5 class="my-3"><strong>
-                                                            <svg height="18" width="18">
-                                                                <circle cx="9" cy="9" r="7" stroke="black"
-                                                                        stroke-width="3" fill="black"/>
-                                                                Sorry, your browser does not support inline SVG.
-                                                            </svg> &nbsp; {{ i.skill }}</strong></h5>
-                                                    {% endfor %}
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class=" px-2 my-2">
-                                            <div class="uk-card-default  mt-0 pb-2"
-                                                 style="border-radius : 10px; background:#f1f5e3;">
-                                                <div class=" py-2 px-4"
-                                                     style="background:#4d7bf3; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                                    <h4 class="mb-0 ml-3 text-center"><strong> Management/Office
-                                                        Skills </strong></h4>
-
-                                                </div>
-                                                <hr class="m-0">
-
-                                                <div class="text-justify pl-5 uk-width-2-3 mx-auto ">
-                                                    {% for i in man_skills %}
-                                                        <h5 class="my-3"><strong>
-                                                            <svg height="18" width="18">
-                                                                <circle cx="9" cy="9" r="7" stroke="black"
-                                                                        stroke-width="3" fill="black"/>
-                                                                Sorry, your browser does not support inline SVG.
-                                                            </svg> &nbsp; {{ i.skill }}</strong></h5>
-                                                    {% endfor %}
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class=" px-2 my-2">
-                                            <div class="uk-card-default  mt-0 pb-2"
-                                                 style="border-radius : 10px; background:#eafaf0">
-                                                <div class=" py-2  px-4"
-                                                     style=" background:#2fcc71; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                                    <h4 class="mb-0 ml-3 text-center"><strong>Languages</strong></h4>
-
-                                                </div>
-                                                <hr class="m-0">
-
-                                                <div class="text-justify pl-5 uk-width-2-3 mx-auto ">
-                                                    {% for i in lan_skills %}
-                                                        <h5 class="my-3"><strong>
-                                                            <svg height="18" width="18">
-                                                                <circle cx="9" cy="9" r="7" stroke="black"
-                                                                        stroke-width="3" fill="black"/>
-                                                                Sorry, your browser does not support inline SVG.
-                                                            </svg> &nbsp; {{ i.skill }}</strong></h5>
-                                                    {% endfor %}
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-                            <div id="certificates" class="tabcontent ">
-
-                                <div class="user-details my-3  ">
-                                    <div class="uk-grid uk-child-width-1-3@m">
-
-
-                                        <div class=" mb-2 pr-2 my-2">
-                                            <div class="uk-card-default mt-0 pb-2"
-                                                 style="border-radius : 10px; background:#f9ebfc;">
-                                                <div class=" py-2  px-4"
-                                                     style=" background:#c93de6; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                                    <h4 class="mb-0 ml-3 text-center"><strong>Course
-                                                        Certificates</strong></h4>
-
-                                                </div>
-                                                <hr class="m-0">
-
-                                                <!-- <div class="text-justify pl-5 uk-width-2-3 mx-auto ">
+                  <!-- <div class="text-justify pl-5 uk-width-2-3 mx-auto ">
                                  {% if certificate %}
                                   {% for i in certificate %}
                                       <h5 class="my-3"><strong><svg height="18" width="18">
@@ -879,782 +921,286 @@
                                </div> -->
 
 
-                                            </div>
-                                        </div>
+                </div>
+              </div>
 
 
-                                        <div class=" px-2 my-2">
-                                            <div class="uk-card-default  mt-0 pb-2"
-                                                 style="border-radius : 10px; background:#e8f6f6;">
-                                                <div class=" py-2 px-4"
-                                                     style=" background:#1bb09a; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                                    <h4 class="mb-0 ml-3 text-center"><strong> Project
-                                                        Certificates </strong></h4>
+              <div class=" px-2 my-2">
+                <div class="uk-card-default  mt-0 pb-2" style="border-radius : 10px; background:#e8f6f6;">
+                  <div class=" py-2 px-4"
+                    style=" background:#1bb09a; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <h4 class="mb-0 ml-3 text-center"><strong> Project Certificates </strong></h4>
 
-                                                </div>
-                                                <hr class="m-0">
+                  </div>
+                  <hr class="m-0">
 
-                                                <div class="text-justify pl-5 uk-width-2-3 mx-auto ">
-                                                    <h5 class="my-3"><strong>
-                                                        <svg height="18" width="18">
-                                                            <circle cx="9" cy="9" r="7" stroke="black" stroke-width="3"
-                                                                    fill="black"/>
-                                                            Sorry, your browser does not support inline SVG.
-                                                        </svg> &nbsp; Virtual Empleado <a class="mx-2"> <i
-                                                            class="uil-notebooks"></i> </a> </strong></h5>
-                                                    <h5 class="my-3"><strong>
-                                                        <svg height="18" width="18">
-                                                            <circle cx="9" cy="9" r="7" stroke="black" stroke-width="3"
-                                                                    fill="black"/>
-                                                            Sorry, your browser does not support inline SVG.
-                                                        </svg> &nbsp; DMAC Project <a class="mx-2"> <i
-                                                            class="uil-notebooks"></i> </a> </strong></h5>
+                  <div class="text-justify pl-5 uk-width-2-3 mx-auto ">
+                    <h5 class="my-3"><strong><i class="icon-line-awesome-dot-circle-o"></i> &nbsp; Virtual Empleado <a class="mx-2"> <i class="uil-notebooks"></i> </a> </strong>
+                    </h5>
+                    <h5 class="my-3"><strong><i class="icon-line-awesome-dot-circle-o"></i> &nbsp; DMAC Project <a class="mx-2"> <i class="uil-notebooks"></i> </a> </strong></h5>
 
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-
-                        <style media="screen">
-                            progress[value]::-webkit-progress-value {
-                                transition: width 0.5s;
-                                background: orange;
-                            }
-
-
-                            .progress-circle {
-                                font-size: 40px;
-                                margin: 20px;
-                                position: relative; /* so that children can be absolutely positioned */
-                                padding: 0;
-                                width: 5em;
-                                height: 5em;
-                                background-color: #f4f5f7;
-                                border-radius: 50%;
-                                line-height: 5em;
-                            }
-
-                            .progress-circle:after {
-                                border: none;
-                                position: absolute;
-                                top: 0.35em;
-                                left: 0.35em;
-                                text-align: center;
-                                display: block;
-                                border-radius: 50%;
-                                width: 4.3em;
-                                height: 4.3em;
-                                background-color: white;
-                                content: " ";
-                            }
-
-                            /* Text inside the control */
-                            .progress-circle span {
-                                position: absolute;
-                                line-height: 5em;
-                                width: 5em;
-                                text-align: center;
-                                display: block;
-                                color: #235cb3;
-                                z-index: 2;
-                            }
-
-                            .left-half-clipper {
-                                /* a round circle */
-                                border-radius: 50%;
-                                width: 5em;
-                                height: 5em;
-                                position: absolute; /* needed for clipping */
-                                clip: rect(0, 5em, 5em, 2.5em); /* clips the whole left half*/
-                            }
-
-                            /* when p>50, don't clip left half*/
-                            .progress-circle.over50 .left-half-clipper {
-                                clip: rect(auto, auto, auto, auto);
-                            }
-
-                            .value-bar {
-                                /*This is an overlayed square, that is made round with the border radius,
-                                then it is cut to display only the left half, then rotated clockwise
-                                to escape the outer clipping path.*/
-                                position: absolute; /*needed for clipping*/
-                                clip: rect(0, 2.5em, 5em, 0);
-                                width: 5em;
-                                height: 5em;
-                                border-radius: 50%;
-                                border: 0.45em solid #235cb3; /*The border is 0.35 but making it larger removes visual artifacts */
-                                /*background-color: #4D642D;*/ /* for debug */
-                                box-sizing: border-box;
-
-                            }
-
-                            /* Progress bar filling the whole right half for values above 50% */
-                            .progress-circle.over50 .first50-bar {
-                                /*Progress bar for the first 50%, filling the whole right half*/
-                                position: absolute; /*needed for clipping*/
-                                clip: rect(0, 5em, 5em, 2.5em);
-                                background-color: #235cb3;
-                                border-radius: 50%;
-                                width: 5em;
-                                height: 5em;
-                            }
-
-                            .progress-circle:not(.over50) .first50-bar {
-                                display: none;
-                            }
-
-
-                            /* Progress bar rotation position */
-                            .progress-circle.p0 .value-bar {
-                                display: none;
-                            }
-
-                            .progress-circle.p1 .value-bar {
-                                transform: rotate(4deg);
-                            }
-
-                            .progress-circle.p2 .value-bar {
-                                transform: rotate(7deg);
-                            }
-
-                            .progress-circle.p3 .value-bar {
-                                transform: rotate(11deg);
-                            }
-
-                            .progress-circle.p4 .value-bar {
-                                transform: rotate(14deg);
-                            }
-
-                            .progress-circle.p5 .value-bar {
-                                transform: rotate(18deg);
-                            }
-
-                            .progress-circle.p6 .value-bar {
-                                transform: rotate(22deg);
-                            }
-
-                            .progress-circle.p7 .value-bar {
-                                transform: rotate(25deg);
-                            }
-
-                            .progress-circle.p8 .value-bar {
-                                transform: rotate(29deg);
-                            }
-
-                            .progress-circle.p9 .value-bar {
-                                transform: rotate(32deg);
-                            }
-
-                            .progress-circle.p10 .value-bar {
-                                transform: rotate(36deg);
-                            }
-
-                            .progress-circle.p11 .value-bar {
-                                transform: rotate(40deg);
-                            }
-
-                            .progress-circle.p12 .value-bar {
-                                transform: rotate(43deg);
-                            }
-
-                            .progress-circle.p13 .value-bar {
-                                transform: rotate(47deg);
-                            }
-
-                            .progress-circle.p14 .value-bar {
-                                transform: rotate(50deg);
-                            }
-
-                            .progress-circle.p15 .value-bar {
-                                transform: rotate(54deg);
-                            }
-
-                            .progress-circle.p16 .value-bar {
-                                transform: rotate(58deg);
-                            }
-
-                            .progress-circle.p17 .value-bar {
-                                transform: rotate(61deg);
-                            }
-
-                            .progress-circle.p18 .value-bar {
-                                transform: rotate(65deg);
-                            }
-
-                            .progress-circle.p19 .value-bar {
-                                transform: rotate(68deg);
-                            }
-
-                            .progress-circle.p20 .value-bar {
-                                transform: rotate(72deg);
-                            }
-
-                            .progress-circle.p21 .value-bar {
-                                transform: rotate(76deg);
-                            }
-
-                            .progress-circle.p22 .value-bar {
-                                transform: rotate(79deg);
-                            }
-
-                            .progress-circle.p23 .value-bar {
-                                transform: rotate(83deg);
-                            }
-
-                            .progress-circle.p24 .value-bar {
-                                transform: rotate(86deg);
-                            }
-
-                            .progress-circle.p25 .value-bar {
-                                transform: rotate(90deg);
-                            }
-
-                            .progress-circle.p26 .value-bar {
-                                transform: rotate(94deg);
-                            }
-
-                            .progress-circle.p27 .value-bar {
-                                transform: rotate(97deg);
-                            }
-
-                            .progress-circle.p28 .value-bar {
-                                transform: rotate(101deg);
-                            }
-
-                            .progress-circle.p29 .value-bar {
-                                transform: rotate(104deg);
-                            }
-
-                            .progress-circle.p30 .value-bar {
-                                transform: rotate(108deg);
-                            }
-
-                            .progress-circle.p31 .value-bar {
-                                transform: rotate(112deg);
-                            }
-
-                            .progress-circle.p32 .value-bar {
-                                transform: rotate(115deg);
-                            }
-
-                            .progress-circle.p33 .value-bar {
-                                transform: rotate(119deg);
-                            }
-
-                            .progress-circle.p34 .value-bar {
-                                transform: rotate(122deg);
-                            }
-
-                            .progress-circle.p35 .value-bar {
-                                transform: rotate(126deg);
-                            }
-
-                            .progress-circle.p36 .value-bar {
-                                transform: rotate(130deg);
-                            }
-
-                            .progress-circle.p37 .value-bar {
-                                transform: rotate(133deg);
-                            }
-
-                            .progress-circle.p38 .value-bar {
-                                transform: rotate(137deg);
-                            }
-
-                            .progress-circle.p39 .value-bar {
-                                transform: rotate(140deg);
-                            }
-
-                            .progress-circle.p40 .value-bar {
-                                transform: rotate(144deg);
-                            }
-
-                            .progress-circle.p41 .value-bar {
-                                transform: rotate(148deg);
-                            }
-
-                            .progress-circle.p42 .value-bar {
-                                transform: rotate(151deg);
-                            }
-
-                            .progress-circle.p43 .value-bar {
-                                transform: rotate(155deg);
-                            }
-
-                            .progress-circle.p44 .value-bar {
-                                transform: rotate(158deg);
-                            }
-
-                            .progress-circle.p45 .value-bar {
-                                transform: rotate(162deg);
-                            }
-
-                            .progress-circle.p46 .value-bar {
-                                transform: rotate(166deg);
-                            }
-
-                            .progress-circle.p47 .value-bar {
-                                transform: rotate(169deg);
-                            }
-
-                            .progress-circle.p48 .value-bar {
-                                transform: rotate(173deg);
-                            }
-
-                            .progress-circle.p49 .value-bar {
-                                transform: rotate(176deg);
-                            }
-
-                            .progress-circle.p50 .value-bar {
-                                transform: rotate(180deg);
-                            }
-
-                            .progress-circle.p51 .value-bar {
-                                transform: rotate(184deg);
-                            }
-
-                            .progress-circle.p52 .value-bar {
-                                transform: rotate(187deg);
-                            }
-
-                            .progress-circle.p53 .value-bar {
-                                transform: rotate(191deg);
-                            }
-
-                            .progress-circle.p54 .value-bar {
-                                transform: rotate(194deg);
-                            }
-
-                            .progress-circle.p55 .value-bar {
-                                transform: rotate(198deg);
-                            }
-
-                            .progress-circle.p56 .value-bar {
-                                transform: rotate(202deg);
-                            }
-
-                            .progress-circle.p57 .value-bar {
-                                transform: rotate(205deg);
-                            }
-
-                            .progress-circle.p58 .value-bar {
-                                transform: rotate(209deg);
-                            }
-
-                            .progress-circle.p59 .value-bar {
-                                transform: rotate(212deg);
-                            }
-
-                            .progress-circle.p60 .value-bar {
-                                transform: rotate(216deg);
-                            }
-
-                            .progress-circle.p61 .value-bar {
-                                transform: rotate(220deg);
-                            }
-
-                            .progress-circle.p62 .value-bar {
-                                transform: rotate(223deg);
-                            }
-
-                            .progress-circle.p63 .value-bar {
-                                transform: rotate(227deg);
-                            }
-
-                            .progress-circle.p64 .value-bar {
-                                transform: rotate(230deg);
-                            }
-
-                            .progress-circle.p65 .value-bar {
-                                transform: rotate(234deg);
-                            }
-
-                            .progress-circle.p66 .value-bar {
-                                transform: rotate(238deg);
-                            }
-
-                            .progress-circle.p67 .value-bar {
-                                transform: rotate(241deg);
-                            }
-
-                            .progress-circle.p68 .value-bar {
-                                transform: rotate(245deg);
-                            }
-
-                            .progress-circle.p69 .value-bar {
-                                transform: rotate(248deg);
-                            }
-
-                            .progress-circle.p70 .value-bar {
-                                transform: rotate(252deg);
-                            }
-
-                            .progress-circle.p71 .value-bar {
-                                transform: rotate(256deg);
-                            }
-
-                            .progress-circle.p72 .value-bar {
-                                transform: rotate(259deg);
-                            }
-
-                            .progress-circle.p73 .value-bar {
-                                transform: rotate(263deg);
-                            }
-
-                            .progress-circle.p74 .value-bar {
-                                transform: rotate(266deg);
-                            }
-
-                            .progress-circle.p75 .value-bar {
-                                transform: rotate(270deg);
-                            }
-
-                            .progress-circle.p76 .value-bar {
-                                transform: rotate(274deg);
-                            }
-
-                            .progress-circle.p77 .value-bar {
-                                transform: rotate(277deg);
-                            }
-
-                            .progress-circle.p78 .value-bar {
-                                transform: rotate(281deg);
-                            }
-
-                            .progress-circle.p79 .value-bar {
-                                transform: rotate(284deg);
-                            }
-
-                            .progress-circle.p80 .value-bar {
-                                transform: rotate(288deg);
-                            }
-
-                            .progress-circle.p81 .value-bar {
-                                transform: rotate(292deg);
-                            }
-
-                            .progress-circle.p82 .value-bar {
-                                transform: rotate(295deg);
-                            }
-
-                            .progress-circle.p83 .value-bar {
-                                transform: rotate(299deg);
-                            }
-
-                            .progress-circle.p84 .value-bar {
-                                transform: rotate(302deg);
-                            }
-
-                            .progress-circle.p85 .value-bar {
-                                transform: rotate(306deg);
-                            }
-
-                            .progress-circle.p86 .value-bar {
-                                transform: rotate(310deg);
-                            }
-
-                            .progress-circle.p87 .value-bar {
-                                transform: rotate(313deg);
-                            }
-
-                            .progress-circle.p88 .value-bar {
-                                transform: rotate(317deg);
-                            }
-
-                            .progress-circle.p89 .value-bar {
-                                transform: rotate(320deg);
-                            }
-
-                            .progress-circle.p90 .value-bar {
-                                transform: rotate(324deg);
-                            }
-
-                            .progress-circle.p91 .value-bar {
-                                transform: rotate(328deg);
-                            }
-
-                            .progress-circle.p92 .value-bar {
-                                transform: rotate(331deg);
-                            }
-
-                            .progress-circle.p93 .value-bar {
-                                transform: rotate(335deg);
-                            }
-
-                            .progress-circle.p94 .value-bar {
-                                transform: rotate(338deg);
-                            }
-
-                            .progress-circle.p95 .value-bar {
-                                transform: rotate(342deg);
-                            }
-
-                            .progress-circle.p96 .value-bar {
-                                transform: rotate(346deg);
-                            }
-
-                            .progress-circle.p97 .value-bar {
-                                transform: rotate(349deg);
-                            }
-
-                            .progress-circle.p98 .value-bar {
-                                transform: rotate(353deg);
-                            }
-
-                            .progress-circle.p99 .value-bar {
-                                transform: rotate(356deg);
-                            }
-
-                            .progress-circle.p100 .value-bar {
-                                transform: rotate(360deg);
-                            }
-
-                        </style>
-
-                    </div>
-
-
-                    <!-- footer
-                    ================================================== -->
-                    <div class="footer">
-                        <div class="uk-grid-collapse" uk-grid>
-                            <div class="uk-width-expand@s uk-first-column">
-                                <p>© 2019 <strong>Courseplus</strong>. All Rights Reserved. </p>
-                            </div>
-                            <div class="uk-width-auto@s">
-                                <nav class="footer-nav-icon">
-                                    <ul>
-                                        <li><a href="#"><i class="icon-brand-facebook"></i></a></li>
-                                        <li><a href="#"><i class="icon-brand-dribbble"></i></a></li>
-                                        <li><a href="#"><i class="icon-brand-youtube"></i></a></li>
-                                        <li><a href="#"><i class="icon-brand-twitter"></i></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
 
                 </div>
+              </div>
+
 
             </div>
-
-
-            <!-- For Night mode -->
-            <script>
-
-                document.getElementById("defaultOpen").click();
-
-                function openCity(evt, cityName) {
-                    var i, tabcontent, tablinks;
-                    tabcontent = document.getElementsByClassName("tabcontent");
-                    for (i = 0; i < tabcontent.length; i++) {
-                        tabcontent[i].style.display = "none";
-                    }
-                    tablinks = document.getElementsByClassName("tablinks");
-                    for (i = 0; i < tablinks.length; i++) {
-                        tablinks[i].className = tablinks[i].className.replace(" active", "");
-                    }
-                    document.getElementById(cityName).style.display = "block";
-                    evt.currentTarget.className += " active";
-                }
-
-
-                var total = 0;
-                var tota2 = 0;
-                var proj2 = 0;
-                var proj = 0;
-
-                {% if proj %}
-                    {% for pro in proj %}
-                        {% if pro.proj_role == cfp_details.role_one %}
-                            proj = document.getElementById('live1').value;
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-
-                {% if proj %}
-                    {% for pro in proj %}
-                        {% if pro.proj_role == cfp_details.role_two %}
-                            proj2 = document.getElementById('live2').value;
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-
-
-
-
-                {% for claim in claims %}
-                    {% if claim.user_id == user_data.pk %}
-                        {% for list in lists %}
-                            {% if claim.claim_id_id == list.pk %}
-                                total += {{ claim.points }};
-
-
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-
-                document.getElementById("pro1").value = total + proj;
-                var cfp1 = total + proj;
-                var milestone1 = cfp1;
-
-                // cfp1=999;
-                s1 = Math.floor(cfp1 / 10)
-                if (s1 < 50) {
-                    document.getElementById("progress1").className = "mx-auto progress-circle  p" + s1;
-                } else {
-                    document.getElementById("progress1").className = " mx-auto progress-circle over50 p" + s1;
-                }
-
-
-                document.getElementById("value1").innerHTML = cfp1;
-
-
-                {% for claim in claims %}
-                    {% if claim.user_id == user_data.pk %}
-                        {% for list2 in lists2 %}
-                            {% if claim.claim_id_id == list2.pk %}
-                                tota2 += {{ claim.points }};
-
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-
-                document.getElementById("pro2").value = tota2 + proj2;
-                var cfp2 = tota2 + proj2;
-                var milestone2 = cfp2;
-
-
-                // cfp2=155;
-                // var s2=cfp2/10;
-                s2 = Math.floor(cfp2 / 10)
-                if (s2 < 50) {
-                    document.getElementById("progress2").className = "mx-auto progress-circle  p" + s2;
-                } else {
-                    document.getElementById("progress2").className = "mx-auto progress-circle over50 p" + s2;
-                }
-
-                document.getElementById("value2").innerHTML = cfp2;
-
-
-                // Testing whether the milestone is displaying or not
-                // milestone1=500;
-                // milestone2=500;
-
-
-                if (milestone1 >= 300) {
-                    document.getElementById("cfp1points300").style.display = "block";
-                } else {
-                    document.getElementById("cfp1points300").style.display = "none";
-                }
-
-                // Badge Immplementation in CFP1
-                if (cfp1 >= 100 && cfp1 < 200) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class1.png' %}";
-                } else if (cfp1 >= 200 && cfp1 < 300) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class2.png' %}";
-                } else if (cfp1 >= 300 && cfp1 < 400) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class3.png' %}";
-                } else if (cfp1 >= 400 && cfp1 < 500) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class4.png' %}";
-                } else if (cfp1 >= 500 && cfp1 < 600) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class5.png' %}";
-                } else if (cfp1 >= 600 && cfp1 < 700) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class6.png' %}";
-                } else if (cfp1 >= 700 && cfp1 < 800) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class7.png' %}";
-                } else if (cfp1 >= 800 && cfp1 < 900) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class8.png' %}";
-                } else if (cfp1 >= 900 && cfp1 < 1000) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class9.png' %}";
-                } else if (cfp1 >= 1000) {
-                    document.getElementById("b1").src = "{% static 'images/badges/class10.png' %}";
-                }
-
-                if (milestone2 >= 300) {
-                    document.getElementById("cfp2points300").style.display = "block";
-                } else {
-                    document.getElementById("cfp2points300").style.display = "none";
-                }
-
-
-                // Badge Immplementation in CFP2
-                if (cfp2 >= 100 && cfp2 < 200) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class1.png' %}";
-                } else if (cfp2 >= 200 && cfp2 < 300) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class2.png' %}";
-                } else if (cfp2 >= 300 && cfp2 < 400) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class3.png' %}";
-                } else if (cfp2 >= 400 && cfp2 < 500) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class4.png' %}";
-                } else if (cfp2 >= 500 && cfp2 < 600) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class5.png' %}";
-                } else if (cfp2 >= 600 && cfp2 < 700) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class6.png' %}";
-                } else if (cfp2 >= 700 && cfp2 < 800) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class7.png' %}";
-                } else if (cfp2 >= 800 && cfp2 < 900) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class8.png' %}";
-                } else if (cfp2 >= 900 && cfp2 < 1000) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class9.png' %}";
-                } else if (cfp2 >= 1000) {
-                    document.getElementById("b2").src = "{% static 'images/badges/class10.png' %}";
-                }
-
-
-            </script>
-            <!-- For Night mode -->
-            <script>
-                (function (window, document, undefined) {
-                    'use strict';
-                    if (!('localStorage' in window)) return;
-                    var nightMode = localStorage.getItem('gmtNightMode');
-                    if (nightMode) {
-                        document.documentElement.className += ' night-mode';
-                    }
-                })(window, document);
-
-
-                (function (window, document, undefined) {
-
-                    'use strict';
-
-                    // Feature test
-                    if (!('localStorage' in window)) return;
-
-                    // Get our newly insert toggle
-                    var nightMode = document.querySelector('#night-mode');
-                    if (!nightMode) return;
-
-                    // When clicked, toggle night mode on or off
-                    nightMode.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        document.documentElement.classList.toggle('night-mode');
-                        if (document.documentElement.classList.contains('night-mode')) {
-                            localStorage.setItem('gmtNightMode', true);
-                            return;
-                        }
-                        localStorage.removeItem('gmtNightMode');
-                    }, false);
-
-                })(window, document);
-            </script>
-
+          </div>
 
         </div>
+
+
+      </div>
+
+
+
+
     </div>
+
+
+
+
+    {% include 'partials/_footer.html' %}
+  </div>
+</div>
+
+</div>
+
+<script>
+
+  var cfp1=document.getElementById('cfppoints').textContent;
+
+  // Badge Immplementation in CFP1
+  if (cfp1 >= 100 && cfp1 < 200) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/c1.png' %}";
+  }
+  else if (cfp1 >= 200 && cfp1 < 300) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/c2.png' %}";
+  }
+  else if (cfp1 >= 300 && cfp1 < 400) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C3.png' %}";
+  }
+  else if (cfp1 >= 400 && cfp1 < 500) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/c4.png' %}";
+  }
+  else if (cfp1 >= 500 && cfp1 < 600) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C5.png' %}";
+  }
+  else if (cfp1 >= 600 && cfp1 < 700) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C6.png' %}";
+  }
+  else if (cfp1 >= 700 && cfp1 < 800) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C7.png' %}";
+  }
+  else if (cfp1 >= 800 && cfp1 < 900) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C8.png' %}";
+  }
+  else if (cfp1 >= 900 && cfp1 < 1000) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C9.png' %}";
+  }
+  else if (cfp1 >= 1000) {
+    document.getElementById("b1").src = "{% static 'images/newbadges/C10.png' %}";
+  }
+
+
+
+
+  document.getElementById("defaultOpen").click();
+
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+
+
+
+  var total = 0;
+  var tota2 = 0;
+  var proj2 = 0;
+  var proj = 0;
+
+  {% if proj %}
+  {% for pro in proj %}
+  {% if pro.proj_role == cfp_details.role_one %}
+  proj = document.getElementById('live1').value;
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+
+  {% if proj %}
+  {% for pro in proj %}
+  {% if pro.proj_role == cfp_details.role_two %}
+  proj2 = document.getElementById('live2').value;
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+
+
+
+
+  {% for claim in claims %}
+  {% if claim.user_id == user_data.pk %}
+  {% for list in lists %}
+  {% if claim.claim_id_id == list.pk %}
+  total += {{ claim.points }};
+
+
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
+
+  document.getElementById("pro1").value = total + proj;
+  var cfp1 = total + proj;
+  var milestone1 = cfp1;
+
+  // cfp1=999;
+  s1 = Math.floor(cfp1 / 10)
+  if (s1 < 50) {
+    document.getElementById("progress1").className = "mx-auto progress-circle  p" + s1;
+  }
+  else {
+    document.getElementById("progress1").className = " mx-auto progress-circle over50 p" + s1;
+  }
+
+
+  document.getElementById("value1").innerHTML = cfp1;
+
+
+  {% for claim in claims %}
+  {% if claim.user_id == user_data.pk %}
+  {% for list2 in lists2 %}
+  {% if claim.claim_id_id == list2.pk %}
+  tota2 += {{ claim.points }};
+
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
+
+  document.getElementById("pro2").value = tota2 + proj2;
+  var cfp2 = tota2 + proj2;
+  var milestone2 = cfp2;
+
+
+  // cfp2=155;
+  // var s2=cfp2/10;
+  s2 = Math.floor(cfp2 / 10)
+  if (s2 < 50) {
+    document.getElementById("progress2").className = "mx-auto progress-circle  p" + s2;
+  }
+  else {
+    document.getElementById("progress2").className = "mx-auto progress-circle over50 p" + s2;
+  }
+
+  document.getElementById("value2").innerHTML = cfp2;
+
+
+  // Testing whether the milestone is displaying or not
+  // milestone1=500;
+  // milestone2=500;
+
+
+
+  if (milestone1 >= 300) {
+    document.getElementById("cfp1points300").style.display = "block";
+  }
+  else {
+    document.getElementById("cfp1points300").style.display = "none";
+  }
+
+
+
+  // if (milestone2 >= 300) {
+  //   document.getElementById("cfp2points300").style.display = "block";
+  // }
+  // else {
+  //   document.getElementById("cfp2points300").style.display = "none";
+  // }
+
+
+  // Badge Immplementation in CFP2
+  // if (cfp2 >= 100 && cfp2 < 200) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c1.png' %}";
+  // }
+  // else if (cfp2 >= 200 && cfp2 < 300) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c2.png' %}";
+  // }
+  // else if (cfp2 >= 300 && cfp2 < 400) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c3.png' %}";
+  // }
+  // else if (cfp2 >= 400 && cfp2 < 500) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c4.png' %}";
+  // }
+  // else if (cfp2 >= 500 && cfp2 < 600) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c5.png' %}";
+  // }
+  // else if (cfp2 >= 600 && cfp2 < 700) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c6.png' %}";
+  // }
+  // else if (cfp2 >= 700 && cfp2 < 800) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c7.png' %}";
+  // }
+  // else if (cfp2 >= 800 && cfp2 < 900) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c8.png' %}";
+  // }
+  // else if (cfp2 >= 900 && cfp2 < 1000) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c9.png' %}";
+  // }
+  // else if (cfp2 >= 1000) {
+  //   document.getElementById("b2").src = "{% static 'images/newbadges/c10.png' %}";
+  // }
+
+
+</script>
+<!-- For Night mode -->
+<script>
+  (function (window, document, undefined) {
+    'use strict';
+    if (!('localStorage' in window)) return;
+    var nightMode = localStorage.getItem('gmtNightMode');
+    if (nightMode) {
+      document.documentElement.className += ' night-mode';
+    }
+  })(window, document);
+
+
+  (function (window, document, undefined) {
+
+    'use strict';
+
+    // Feature test
+    if (!('localStorage' in window)) return;
+
+    // Get our newly insert toggle
+    var nightMode = document.querySelector('#night-mode');
+    if (!nightMode) return;
+
+    // When clicked, toggle night mode on or off
+    nightMode.addEventListener('click', function (event) {
+      event.preventDefault();
+      document.documentElement.classList.toggle('night-mode');
+      if (document.documentElement.classList.contains('night-mode')) {
+        localStorage.setItem('gmtNightMode', true);
+        return;
+      }
+      localStorage.removeItem('gmtNightMode');
+    }, false);
+
+  })(window, document);
+</script>
+
 {% endblock %}

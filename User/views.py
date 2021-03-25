@@ -944,28 +944,31 @@ def unlock(request,w_id):
 
 def pricing(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
-        cefPrice =12000
+        #cefPrice =12000
+        cefPrice =18750
         cfpPath = 1
-        cfpPrice = 3000
-        tokenPrice = 3750
+        #cfpPrice = 3000
+        cfpPrice = 0
+        #tokenPrice = 3750
+        tokenPrice = 0
         courseCreditPrice = 0
         total =0
         discount =0
         workToken=5
         courseCredits=5
         if 'checkoutSubmit' in request.POST:
-            print("checkout  button")
             user_id=request.user.pk
-            if 'radio3' in request.POST:
-                print("yes")
             workToken = request.POST.get('radio3')
             courseCredits = request.POST.get('mcRadio2')
             if int(workToken) == 5:
-                tokenPrice = 3750
+                #tokenPrice = 3750
+                tokenPrice = 0
             elif int(workToken) == 8:
-                tokenPrice =5200
-            elif int(workToken) == 15:
-                tokenPrice =6000
+                #tokenPrice =5200
+                tokenPrice = 1450
+            elif int(workToken) == 12:
+                #tokenPrice =6000
+                tokenPrice = 2250
             else:
                 tokenPrice = 0
 
@@ -1018,7 +1021,7 @@ def pricing(request):
         """
         #total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice+courseCreditPrice
         total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice
-        total_includ_gst= float(total) *1.18
+        total_includ_gst= float(total) *1.2
         discount = int(total_includ_gst) - ((int(total_includ_gst) * 30 ) / 100)
         
         print(total_includ_gst)
