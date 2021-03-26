@@ -986,7 +986,7 @@ def pricing(request):
                 user_data.workToken=workToken
                 user_data.mcCredit=courseCredits
                 user_data.save()
-                
+
             else:
                 print("no")
                 data = userPrice(userId_id=request.user.pk,cfpPrice=cfpPrice,tokenPrice=tokenPrice,courseCreditPrice=courseCreditPrice,totalPrice=total,cefPrice=cefPrice,workToken=workToken,mcCredit=courseCredits)
@@ -1023,7 +1023,7 @@ def pricing(request):
         total = cfpPrice+tokenPrice+courseCreditPrice+cefPrice
         total_includ_gst= float(total) *1.2
         discount = int(total_includ_gst) - ((int(total_includ_gst) * 30 ) / 100)
-        
+
         print(total_includ_gst)
 
         context ={
@@ -1039,7 +1039,7 @@ def pricing(request):
 
         }
         return render(request,'pricing.html',context)
-        
+
     else:
         return redirect('login')
 
@@ -1093,3 +1093,7 @@ def license_page(request):
         return render(request,'license_page.html',context)
     else:
         return redirect('login')
+
+
+def major_project_dashboard(request):
+    return render(request,'major_project_dashboard.html')
