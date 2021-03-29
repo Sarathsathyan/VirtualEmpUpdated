@@ -1,0 +1,409 @@
+{% extends 'base.html' %}
+{% block title %}
+Project Manager
+{% endblock %}
+{% load static %}
+
+{% block content %}
+    <div id="wrapper" class="admin-panel">
+
+        <!-- menu -->
+        <div class="page-menu">
+            <!-- btn close on small devices -->
+            <span class="btn-menu-close" uk-toggle="target: #wrapper ; cls: mobile-active"></span>
+            <!-- traiger btn -->
+            <span class="btn-menu-trigger" uk-toggle="target: .page-menu ; cls: menu-large"></span>
+
+            <!-- logo -->
+            <div class="logo uk-visible@s">
+                <a href="{% url 'projectDashboard' %}" class="logo">
+                            <img src="{% static 'images/VES.png' %}" alt="">
+
+                        </a>
+            </div>
+            <div class="page-menu-inner" data-simplebar>
+                <ul class="mt-0">
+                    <li><a href="{% url 'projectDashboard' %}"><i class="uil-home-alt"></i> <span> Dashboard</span></a> </li>
+                    <li><a href="project_manager.html"><i class="uil-youtube-alt"></i> <span> Project Manager</span></a> </li>
+
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- Header Container
+        ================================================== -->
+        {% include 'userPartials/_csm_header.html'%}
+
+        <!-- content -->
+        <div class="page-content">
+            <div class="page-content-inner">
+
+                <div class="d-flex">
+                    <nav id="breadcrumbs" class="mb-3">
+                        <ul>
+                            <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
+                            <li><a href="#"> Project Manager </a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+
+
+                <div class="uk-width-expand mb-5 mt-3">
+                    <div class="card rounded">
+                      <div class=" py-2 px-4">
+                          <h4 class="mb-0">Set CFP Eligibility</h4>
+                      </div>
+                      <hr class="m-0">
+                      <!-- <legend class="uk-legend my-4 text-center">Set CFP Eligibility</legend> -->
+
+                      <div class=" container pt-3 pb-0 px-5 uk-width-expand">
+
+                                <form name="course-cag" method="POST">
+                                  {% csrf_token %}
+                                  <div class="form-group row mb-3">
+                                      <label class="col-md-3 col-form-label"> Category <span
+                                              class="required">*</span></label>
+                                      <div class="col-md-9">
+                                          <select  name="category" required onchange="submit()">
+                                            <option selected disabled>Choose Category</option>
+                                            {% for i in cag_data %}
+                                              {% if i.category == obj.create_category %}
+                                              <option value="{{i.category}}" selected> {{i.category}} </option>
+                                              {% else %}
+                                              <option value="{{i.category}}"> {{i.category}} </option>
+                                              {% endif %}
+                                            {% endfor %}
+                                          </select>
+
+                                      </div>
+
+                                  </div>
+                                </form>
+                        </div>
+
+                        <div class=" container pb-3 px-5 uk-width-expand">
+                                    <form name="cfp-role" method="POST">
+                                      {% csrf_token %}
+                                      <fieldset class="uk-fieldset">
+                                      <div class="form-group row mb-3">
+
+                                          <div class="col-md-9">
+                                              <input type="text" name="c_course" value="{{obj.create_category}}" readonly required hidden>
+                                          </div>
+
+                                      </div>
+
+
+                                      <div class="form-group row mb-3">
+                                          <label class="col-md-3 col-form-label">CFP Roles:<span
+                                                  class="required">*</span></label>
+                                          <div class="col-md-9" style="width:50%;">
+                                            <div class="uk-width-1-2" >
+
+
+                                            <input class="uk-button btn-white uk-width-expand mx-2" style="border:1px solid #3e416d;"vtype="button"  value="Choose From Here">
+                                            <div uk-dropdown="pos: bottom-left" class="uk-width-1-2">
+                                              {% for item in role_list %}
+                                                <ul class="uk-nav uk-dropdown-nav uk-width-expand">
+                                                    <li class="uk-width-expand" ><input class="" name="project_cfp" style="height:15px; width:15px;" id="item{{ forloop.counter }}"  value="{{ item.cfp_role }}" type="checkbox"/>
+                                                      &nbsp;<span class="ml-3">{{item.cfp_role}}</span>
+                                                    </li>
+
+                                                  </ul>
+
+                                              {% endfor %}
+                                            </div>
+                                              </div>
+                                          </div>
+
+                                      </div>
+
+
+                                        <div class="form-group uk-text-center">
+                                          <button  class="btn btn-default px-5 role" name="role" style="float: right; margin-top: -75px;
+                                             margin-right: 31px;" >Save</button>
+                                        </div>
+
+                                       </fieldset>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                <div class="uk-card-default rounded">
+                  <div class=" py-2 px-4">
+                      <h4 class="mb-0">Create Project</h4>
+                  </div>
+                  <hr class="m-0">
+                    <form class="uk-width-expand uk-form-horizontal uk-grid-small p-4" method="POST"  uk-grid enctype="multipart/form-data" >
+                        {% csrf_token %}
+                      <div class="uk-width-3-5@m px-2">
+
+                        <div class="m-3">
+                          <div class="uk-margin">
+                              <label class="uk-form-label" for="form-horizontal-text">Project Title</label>
+                              <div class="uk-form-controls">
+                                  <input class="uk-input" id="form-horizontal-text" type="text" name="project_title" placeholder="Some text...">
+                              </div>
+                          </div>
+
+                          <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Project Description</label>
+                            <div class="uk-form-controls">
+                             <textarea class="uk-textarea" rows="5" name="project_description" placeholder="Enter Description"></textarea>
+                            </div>
+                          </div>
+
+                          <div class="form-group uk-margin my-4">
+                            <label class="uk-form-label" for="form-horizontal-text">Project Thumbnail</label>
+                            <div uk-form-custom class="ml-3" >
+                                <input type="file" name="project_thumbnail" id="real-file">
+                                <a class="btn btn-default" type="button" onclick="" id="Upload-button" tabindex="-1">Select File</a>
+                                <span id="custom-text">No file choosen</span>
+                            </div>
+                            <script type="text/javascript">
+                                  const realFileBtn = document.getElementById("real-file");
+                                  const CustomBtn = document.getElementById("Upload-button");
+                                  const customTxt = document.getElementById("custom-text");
+                                                  CustomBtn.addEventListener ("click", function() {
+                                                  realFileBtn.click()
+
+                                                  });
+
+                                                  realFileBtn.addEventListener("change", function() {
+                                                if (realFileBtn.value) {
+                                                  customTxt.innerHTML = realFileBtn.value.match(
+                                                    /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                                                  )[1];
+                                                } else {
+                                                  customTxt.innerHTML = "No file chosen, yet.";
+                                                }
+                                              });
+
+                            </script>
+                          </div>
+
+                          <div class="uk-margin my-4">
+                              <label class="uk-form-label" for="form-horizontal-text">Project Duration</label>
+                              <div class="uk-form-controls">
+                                  <input class="uk-input" name="project_duration" id="form-horizontal-text" type="number" placeholder="Enter Total Months">
+                              </div>
+                          </div>
+
+                        </div>
+
+
+                      </div>
+
+
+                      <div class="uk-width-2-5@m px-2">
+
+                        <div class="m-3">
+
+
+                          <div class="uk-margin  mt-0">
+                              <label class="uk-form-label" for="form-horizontal-text"><strong>Project Status</strong></label>
+                              <div class="uk-form-controls">
+                                <select  name="progress" required ">
+                                  <option value="To Do" selected>To Do</option>
+                                  <option value="In Progress">In Progress</option>
+                                  <option value="Completed">Completed</option>
+                                </select>
+                              </div>
+                          </div>
+
+                          <!-- <h4 class="uk-text-bold mb-2 col-md-6">Project Status</h4>
+                          <div class="form-group row mb-3 col-md-6">
+                              <div class=" ml-3 ">
+                                  <select  name="category" required onchange="submit()">
+                                    <option value="To Do" selected>To Do</option>
+                                    <option value="In Progress" >In Progress</option>
+                                    <option value="Completed" >Completed</option>
+                                  </select>
+
+                              </div>
+                          </div> -->
+
+
+                          <h4 class="uk-text-bold mb-2"> CFP Eligibility </h4>
+                          <div class="uk-margin">
+                              <label class="uk-form-label" for="form-horizontal-text">Category</label>
+                              <div class="uk-form-controls">
+                                  <input class="uk-input" id="form-horizontal-text" type="text" name="project_category" value="{{obj.create_category}}" readonly>
+                              </div>
+                          </div>
+
+                          <div class="uk-margin">
+                              <label class="uk-form-label" for="form-horizontal-text">CFP Role</label>
+                              <div class="uk-form-controls">
+                                  <input class="uk-input" id="form-horizontal-text" type="text" name="project_role" value="{{obj.create_role}}" readonly>
+                              </div>
+                          </div>
+
+                          <div class="mt-5">
+                              <h4 class="uk-text-bold mb-2"> Set Eligibility Criteria</h4>
+
+                              {% for i in cfp_list %}
+
+                              <div class="uk-margin">
+                                   <label class="uk-form-label" for="form-horizontal-select">{{i}}</label>
+                                   <div class="uk-form-controls">
+                                       <select class="uk-select" id="form-horizontal-select">
+                                           <option>Class 1</option>
+                                           <option>Class 2</option>
+                                           <option>Class 3</option>
+                                           <option>Class 4</option>
+                                           <option>Class 5</option>
+                                           <option>Class 6</option>
+                                           <option>Class 7</option>
+                                           <option>Class 8</option>
+                                           <option>Class 9</option>
+                                           <option>Class 10</option>
+                                       </select>
+                                   </div>
+                               </div>
+
+                                <!-- <div class="uk-flex uk-flex-between mt-3">
+                                    <h6 class="pl-4 text-muted">{{i}}</h6>
+                                  <button class="uk-button uk-width-auto mx-2" type="button">Select</button>
+
+                                  <div uk-dropdown="pos: bottom-left">
+                                      <ul class="uk-nav uk-dropdown-nav">
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 1</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 2</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 3</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 4</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 5</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 6</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 7</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 8</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 9</span></li>
+
+                                          <li class="uk-width-expand" ><input class="" style="height:15px; width:15px;" type="checkbox"/>&nbsp;<span class="ml-3">Class 10</span></li>
+
+                                      </ul>
+                                  </div>
+                                </div> -->
+                                {% endfor %}
+
+
+
+                          </div>
+                          <div class="uk-margin">
+                              <label class="uk-form-label" for="form-horizontal-text">Candidates Required</label>
+                              <div class="uk-form-controls">
+                                  <input class="uk-input" id="form-horizontal-text" type="Number" name="candidates_required" placeholder="Max">
+                              </div>
+                          </div>
+
+                          <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Project Docs</label>
+                            <div uk-form-custom class="ml-3" >
+                                <input type="file"id="real-file" name="project_docs">
+                                <a class="btn btn-default" type="button" onclick="" id="Upload-button" tabindex="-1">Upload</a>
+                            <br>
+                            <span id="custom-text" style="float: right;">No file choosen</span>
+
+                            </div>
+                                            <script type="text/javascript">
+                                                const realFileBtn = document.getElementById("real-file");
+                                                const CustomBtn = document.getElementById("Upload-button");
+                                                const customTxt = document.getElementById("custom-text");
+                                                CustomBtn.addEventListener ("click", function() {
+                                                realFileBtn.click()
+
+                                                });
+
+                                                realFileBtn.addEventListener("change", function() {
+                                              if (realFileBtn.value) {
+                                                customTxt.innerHTML = realFileBtn.value.match(
+                                                  /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                                                )[1];
+                                              } else {
+                                                customTxt.innerHTML = "No file chosen, yet.";
+                                              }
+                                            });
+
+                                        </script>
+                          </div>
+
+
+
+                        </div>
+
+                      </div>
+
+                      <div class=" mx-auto mt-3">
+                        <button class="btn btn-default px-5" name="project_submit">Create Project</button>
+                      </div>
+                    </form>
+
+                </div>
+
+
+
+
+                <!-- footer
+                ================================================== -->
+                {% include 'partials/_footer.html' %}
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- For Night mode -->
+        <script>
+            (function (window, document, undefined) {
+                'use strict';
+                if (!('localStorage' in window)) return;
+                var nightMode = localStorage.getItem('gmtNightMode');
+                if (nightMode) {
+                    document.documentElement.className += ' night-mode';
+                }
+            })(window, document);
+
+
+            (function (window, document, undefined) {
+
+                'use strict';
+
+                // Feature test
+                if (!('localStorage' in window)) return;
+
+                // Get our newly insert toggle
+                var nightMode = document.querySelector('#night-mode');
+                if (!nightMode) return;
+
+                // When clicked, toggle night mode on or off
+                nightMode.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    document.documentElement.classList.toggle('night-mode');
+                    if (document.documentElement.classList.contains('night-mode')) {
+                        localStorage.setItem('gmtNightMode', true);
+                        return;
+                    }
+                    localStorage.removeItem('gmtNightMode');
+                }, false);
+
+            })(window, document);
+        </script>
+
+
+</div>
+
+{% endblock %}

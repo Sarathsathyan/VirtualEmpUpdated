@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'CSM',
     'Blog',
     'MicroCourse',
-    'crispy_forms'
+    'crispy_forms',
+    'MPM',
+    'PCM'
 ]
 
 MIDDLEWARE = [
