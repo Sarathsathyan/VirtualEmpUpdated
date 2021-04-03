@@ -242,6 +242,7 @@ def userCourseLesson(request, c_id):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
                         if remainingTime.days <= 0:
+
                             testID = True
 
         if course.video_page_image == None:
