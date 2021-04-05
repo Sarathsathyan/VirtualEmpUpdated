@@ -4768,7 +4768,7 @@ ul.uk-nav-sub {
   display: block;
   font-size: 1rem;
   line-height: 1.4;
-  color: #333;
+  color: #ffffff;
   overflow: hidden;
   font-weight: 600;
 }
@@ -4788,7 +4788,7 @@ ul.uk-nav-sub {
 /* Hover + Focus */
 .uk-accordion-title:hover,
 .uk-accordion-title:focus {
-  color: #666;
+  color: #d2eeff;
   text-decoration: none;
   outline: none;
 }
