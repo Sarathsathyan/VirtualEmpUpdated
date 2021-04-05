@@ -237,6 +237,8 @@ def roleCreation(request):
                         role_user_id = "CM" + str(100 + (RoleDetail.objects.filter(user_role="CSM").count() + 1))
                     elif user_role == "PCM":
                         role_user_id = "PM" + str(200 + (RoleDetail.objects.filter(user_role="PCM").count() + 1))
+                    elif user_role == "MPM":
+                        role_user_id = "MPM" + str(200 + (RoleDetail.objects.filter(user_role="MPM").count() + 1))
                     elif user_role == "TL":
                         role_user_id = "TL" + str(300 + (RoleDetail.objects.filter(user_role="TL").count() + 1))
                     elif user_role == "Instructor":
@@ -305,6 +307,9 @@ def roleCreation(request):
                         elif user_role == "PCM":
                             user.is_superuser = True
                             user.is_staff = False
+                        elif user_role == "MPM":
+                            user.is_staff = True
+                            user.is_superuser = True
                         elif user_role == "Micro Course":
                             user.is_superuser = False
                             user.is_staff = False
