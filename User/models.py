@@ -81,6 +81,15 @@ class userProgress(models.Model):
     def __str__(self):
         return self.status
 
+class userCompProgress(models.Model):
+    userId = models.ForeignKey(User,on_delete=models.CASCADE)
+    partName=models.CharField(max_length=100)
+    status = models.CharField(default="PENDING",max_length=100,null=True)
+    endTime = models.DateTimeField(null=True)
+    prgressId = models.ForeignKey(userProgress,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.status
+
 # Pricing section
 class userPricing(models.Model):
     userId = models.ForeignKey(User,on_delete=models.CASCADE)
