@@ -269,34 +269,30 @@ var x = setInterval(function() {
         var ch2 = document.getElementById("comp2");
         var ch3 = document.getElementById("comp3");
         if ($(ch1).is(":checked")) {
-            //alert(document.getElementById("vid1").value);
-            //var wk=$('#vid1').data('weekId');
-            //alert(wk);
+            
             var weekId=document.getElementById("vid1").getAttribute("data-weekId");
             
             ajax_fun(document.getElementById("vid1").value,weekId);
         }
         if ($(ch2).is(":checked")) {
-            //alert(document.getElementById("vid2").value);
+            
             var weekId=document.getElementById("vid2").getAttribute("data-weekId");
             ajax_fun(document.getElementById("vid2").value, weekId);
         }
         if ($(ch3).is(":checked")) {
-            //alert(document.getElementById("vid3").value);
+            
             var weekId=document.getElementById("vid3").getAttribute("data-weekId");
             ajax_fun(document.getElementById("vid3").value, weekId);
         }
-        
-
+        console.log(arr[0]);
     }
+    
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         const stime= document.getElementById("left-time");
         const start_time= Date.parse(stime.textContent);
-        //console.log(stime.textContent)
-        //console.log("start_time");
-        //console.log(start_time);
+        
         setInterval(()=>{
             
             const now=new Date().getTime()
@@ -311,6 +307,7 @@ var x = setInterval(function() {
     }, false);
 
 </script>
+
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 
