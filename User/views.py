@@ -1121,3 +1121,26 @@ def license_page(request):
 
 def major_project_dashboard(request):
     return render(request,'major_project_dashboard.html')
+
+
+def user_blog_page(request):
+    blogs=BlogManager.objects.all()
+    context={
+        'blogs':blogs
+    }
+
+    return render(request,'user_blogs_page.html',context)
+
+
+def userblogsdetail(request,id):
+    if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
+        bid=id
+        blog=BlogManager.objects.get(id=bid)
+        context={
+            'blog':blog
+        }
+
+    else:
+        messages.error(request,"Wrong URL")
+        return redirect('logout')
+    return render(request,'user_blog_detail.html',context)
