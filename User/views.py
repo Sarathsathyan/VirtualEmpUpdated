@@ -7,7 +7,7 @@ from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,
 from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
 from Admin.models import CareerCategory,SubCategory,CategoryCourse,UsedLicense,AdminLicense
-from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, Score, userPrice
+from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, userCompProgress, Score, userPrice
 from CSM.models import Quizz,Result
 from CSM.models import Quizz,Result
 import re
@@ -208,7 +208,23 @@ def userCourseLesson(request, c_id):
         status=None
         # start test
         testID = False
-
+        if request.method == 'GET':
+            print("complete___________")
+            if request.GET.get("status") !=None and request.GET.get("status") !=None and request.GET.get("weekId") != None:
+                print(request.GET.get("status"))
+                print(request.GET.get("data"))
+                status=request.GET.get("status")
+                partweek=request.GET.get("data")
+                weekId=request.GET.get("weekId")
+                if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=weekId).exists():
+                    user_ob=userProgress.objects.get(userId_id=request.user.pk, weekId_id=weekId, status="STARTED")
+                    print(user_ob.pk)
+                    if not(userCompProgress.objects.filter(userId_id=request.user.pk, prgressId_id=user_ob.pk, partName=partweek).exists()):
+                        print("_______")
+                        end_time = datetime.datetime.now()
+                        data = userCompProgress.objects.create(userId_id=request.user.pk,endTime=end_time,status= status, prgressId_id=user_ob.pk, partName=partweek)
+                        data.save()
+            
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
@@ -236,12 +252,17 @@ def userCourseLesson(request, c_id):
                 video = Week_Unit.objects.get(id=threeKey)
                 video = video.unit_video3
         remainingTime = 7
+        startTime=current_time
+        
         for i in week:
             for d in data:
                 if(d.weekId_id == i.pk):
                     if(d.endTime):
+                        print(d.endTime - current_time)
                         remainingTime = d.endTime - current_time
+                        startTime=d.endTime
                         if remainingTime.days <= 0:
+
                             testID = True
 
         if course.video_page_image == None:
@@ -256,12 +277,15 @@ def userCourseLesson(request, c_id):
             'video':video,
             'data':data,
             'status':status,
+            'startTime':startTime,
             'remain':remainingTime,
             'video_page_image':video_page_image,
             'mcCredits':user_details.user_mcCredits,
             'worktokens':user_details.user_workTokens,
             'testCheck':testID,
-            'course':course
+            'course':course,
+            'c_id':c_id,
+            'user_cprog':userCompProgress.objects.all()
 
         }
         return render(request,'userCourseLesson.html',context)
