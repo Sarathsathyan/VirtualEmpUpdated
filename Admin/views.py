@@ -59,6 +59,9 @@ def userLogin(request):
                         elif role.user_role == "Micro Course":
                             print("hai")
                             return redirect('microDashboard/')
+                        elif role.user_role == "MPM":
+                            print("poda patty")
+                            return redirect('major_project_dashboard')
 
                         else:
                             messages.error(request, "Error occured in Role")
@@ -309,7 +312,7 @@ def roleCreation(request):
                             user.is_staff = False
                         elif user_role == "MPM":
                             user.is_staff = True
-                            user.is_superuser = True
+                            user.is_superuser = False
                         elif user_role == "Micro Course":
                             user.is_superuser = False
                             user.is_staff = False
