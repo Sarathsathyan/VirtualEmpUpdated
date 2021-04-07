@@ -76,7 +76,7 @@
 
         <li>
             <!-- Projects-->
-            <a href="blog-1.html"> <i class="uil-blogger-alt"></i> <span class="tooltips">
+            <a href="{% url 'user_blog_page' %}"> <i class="uil-blogger-alt"></i> <span class="tooltips">
                     Blogs</span></a>
         </li>
 
@@ -625,9 +625,9 @@
 
                         <div class="uk-grid-small uk-flex-middle " uk-grid>
                           <div class="uk-width-auto">
-                            <button type="button" class="btn btn-danger btn-icon-only">
+                            <button type="button" class="btn btn-success btn-icon-only">
                               <span class="d-flex justify-content-center">
-                                <i class="icon-brand-angular icon-small"></i>
+                                <i class="icon-material-outline-library-books icon-small"></i>
                               </span>
                             </button>
                           </div>
@@ -636,7 +636,7 @@
                             <div class="uk-flex uk-flex-between" style="width:84%;">
                               <h5 class="mb-2"><b>Course XP</b></h5>
                               <!--<small>120/500</small>-->
-                              <small>{{total_xp_earned}}/{{course_points}}</small>
+                              <small>{{ total_xp_earned }}/{{ course_points }}</small>
                             </div>
 
 
@@ -648,9 +648,9 @@
                         </div>
                         <div class="uk-grid-small uk-flex-middle " uk-grid>
                           <div class="uk-width-auto">
-                            <button type="button" class="btn btn-danger btn-icon-only">
+                            <button type="button" class="btn btn-primary btn-icon-only">
                               <span class="d-flex justify-content-center">
-                                <i class="icon-brand-angular icon-small"></i>
+                                <i class="icon-line-awesome-code-fork icon-small"></i>
                               </span>
                             </button>
                           </div>
@@ -671,7 +671,7 @@
                           <div class="uk-width-auto">
                             <button type="button" class="btn btn-danger btn-icon-only">
                               <span class="d-flex justify-content-center">
-                                <i class="icon-brand-angular icon-small"></i>
+                                <i class="icon-line-awesome-rocket icon-small"></i>
                               </span>
                             </button>
                           </div>
