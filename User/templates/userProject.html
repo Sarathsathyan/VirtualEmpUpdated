@@ -48,7 +48,7 @@
                         <!-- My courses -->
                         <a href="{% url 'userdashboard' %}"> <i class="icon-material-outline-shopping-cart"></i> <span class="tooltips"> Store</span></a>
                     </li>
-                   
+
                     <li>
                         <!-- Projects-->
                         <a href="{% url 'user_blog_page' %}"> <i class="uil-blogger-alt"></i> <span class="tooltips">
@@ -91,22 +91,23 @@
             <div class="uk-width-expand">
               <div class=" ">
                   <div class="uk-position-relative uk-visible-toggle uk-light  "
-                       uk-slideshow="ratio: 6:1.9; autoplay: true autoplay-interval: 200" tabindex="-1"
-                       >
+                       uk-slideshow="ratio: 6:1.9; autoplay: true autoplay-interval: 200" tabindex="-1">
                       <ul class="uk-slideshow-items " style="border-radius:5px;">
-                          {% for i in blogs %}
-                              <li>
-                                  {% if i.blog_thumbnail %}
-                                      <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
-                                  {% else %}
-                                      <img src="" alt="" uk-cover>
-                                  {% endif %}
-                                  <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
-                                      <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
-                                      <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
-                                  </div>
-                              </li>
-                          {% endfor %}
+                        <li>
+                            <img src="{% static 'images/book/book.jpg' %}" alt="" uk-cover >
+                            <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                                <h3 class="uk-margin-remove">Artificial Intelligence</h3>
+                                <p class="uk-margin-remove">Check out the new blog</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <img src="{% static 'images/book/book.jpg' %}" alt="" uk-cover >
+                            <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                                <h3 class="uk-margin-remove">Artificial Intelligence></h3>
+                                <p class="uk-margin-remove">Check out the new blog</p>
+                            </div>
+                        </li>
                       </ul>
                       <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
                          uk-slidenav-previous uk-slideshow-item="previous"></a>
@@ -175,26 +176,129 @@
                   <div class="">
                     <h1>Projects</h1>
                   </div>
-                  <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
-    <div>
-        <div class="uk-card uk-card-default uk-card-body">
-            <h3 class="uk-card-title">Default</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        </div>
-    </div>
-    <div>
-        <div class="uk-card uk-card-primary uk-card-body">
-            <h3 class="uk-card-title">Primary</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        </div>
-    </div>
-    <div>
-        <div class="uk-card uk-card-secondary uk-card-body">
-            <h3 class="uk-card-title">Secondary</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        </div>
-    </div>
-</div>
+                  <div class="uk-child-width-1-4@s uk-grid-small uk-grid-match" uk-grid>
+                    <div class="">
+                      <a href="#">
+                          <div class="course-card">
+
+                              <div class="course-card-thumbnail ">
+                                  <img src="{% static 'images/course/1.png'%}" >
+                                  <span class="play-button-trigger"></span>
+                              </div>
+
+                              <div class="course-card-body">
+                                  <div class="course-card-info">
+                                      <div>
+                                          <h6>Buisness</h6>
+                                      </div>
+                                      <div>
+                                          <h5><i class="icon-feather-bookmark icon-small"></i></h5>
+                                      </div>
+                                  </div>
+                                  <h4>Learn Angular Fundamentals</h4>
+                                  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor aliqad . </p>
+                                  <div class="course-card-footer">
+                                      <h5> <i class="icon-feather-film"></i> 12 Lectures </h5>
+                                      <h5> <i class="icon-feather-clock"></i> 64 Hours </h5>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </a>
+                    </div>
+
+                    <div class="">
+                      <a href="#">
+                          <div class="course-card">
+
+                              <div class="course-card-thumbnail ">
+                                  <img src="{% static 'images/course/1.png'%}" >
+                                  <span class="play-button-trigger"></span>
+                              </div>
+
+                              <div class="course-card-body">
+                                  <div class="course-card-info">
+                                      <div>
+                                          <h6>Buisness</h6>
+                                      </div>
+                                      <div>
+                                          <h5><i class="icon-feather-bookmark icon-small"></i></h5>
+                                      </div>
+                                  </div>
+                                  <h4>Learn Angular Fundamentals</h4>
+                                  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor aliqad . </p>
+                                  <div class="course-card-footer">
+                                      <h5> <i class="icon-feather-film"></i> 12 Lectures </h5>
+                                      <h5> <i class="icon-feather-clock"></i> 64 Hours </h5>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </a>
+                    </div>
+
+                    <div class="">
+                      <a href="#">
+                          <div class="course-card">
+
+                              <div class="course-card-thumbnail ">
+                                  <img src="{% static 'images/course/1.png'%}" >
+                                  <span class="play-button-trigger"></span>
+                              </div>
+
+                              <div class="course-card-body">
+                                  <div class="course-card-info">
+                                      <div>
+                                          <h6>Buisness</h6>
+                                      </div>
+                                      <div>
+                                          <h5><i class="icon-feather-bookmark icon-small"></i></h5>
+                                      </div>
+                                  </div>
+                                  <h4>Learn Angular Fundamentals</h4>
+                                  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor aliqad . </p>
+                                  <div class="course-card-footer">
+                                      <h5> <i class="icon-feather-film"></i> 12 Lectures </h5>
+                                      <h5> <i class="icon-feather-clock"></i> 64 Hours </h5>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </a>
+                    </div>
+
+                    <div class="">
+                      <a href="#">
+                          <div class="course-card">
+
+                              <div class="course-card-thumbnail ">
+                                  <img src="{% static 'images/course/1.png'%}" >
+                                  <span class="play-button-trigger"></span>
+                              </div>
+
+                              <div class="course-card-body">
+                                  <div class="course-card-info">
+                                      <div>
+                                          <h6>Buisness</h6>
+                                      </div>
+                                      <div>
+                                          <h5><i class="icon-feather-bookmark icon-small"></i></h5>
+                                      </div>
+                                  </div>
+                                  <h4>Learn Angular Fundamentals</h4>
+                                  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor aliqad . </p>
+                                  <div class="course-card-footer">
+                                      <h5> <i class="icon-feather-film"></i> 12 Lectures </h5>
+                                      <h5> <i class="icon-feather-clock"></i> 64 Hours </h5>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </a>
+                    </div>
+
+
+                  </div>
                 </div>
 
 

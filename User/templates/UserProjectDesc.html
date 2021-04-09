@@ -48,7 +48,7 @@
                         <!-- My courses -->
                         <a href="{% url 'userdashboard' %}"> <i class="icon-material-outline-shopping-cart"></i> <span class="tooltips"> Store</span></a>
                     </li>
-                   
+
                     <li>
                         <!-- Projects-->
                         <a href="{% url 'user_blog_page' %}"> <i class="uil-blogger-alt"></i> <span class="tooltips">
@@ -88,33 +88,34 @@
 
         <div class="page-content">
 
-            <div class="uk-width-expand">
-              <div class=" ">
-                  <div class="uk-position-relative uk-visible-toggle uk-light  "
-                       uk-slideshow="ratio: 6:1.9; autoplay: true autoplay-interval: 200" tabindex="-1"
-                       >
-                      <ul class="uk-slideshow-items " style="border-radius:5px;">
-                          {% for i in blogs %}
-                              <li>
-                                  {% if i.blog_thumbnail %}
-                                      <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
-                                  {% else %}
-                                      <img src="" alt="" uk-cover>
-                                  {% endif %}
-                                  <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
-                                      <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
-                                      <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
-                                  </div>
-                              </li>
-                          {% endfor %}
-                      </ul>
-                      <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
-                         uk-slidenav-previous uk-slideshow-item="previous"></a>
-                      <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                         uk-slideshow-item="next"></a>
-                  </div>
-              </div>
+          <div class="uk-width-expand">
+            <div class=" ">
+                <div class="uk-position-relative uk-visible-toggle uk-light  "
+                     uk-slideshow="ratio: 6:1.9; autoplay: true autoplay-interval: 200" tabindex="-1">
+                    <ul class="uk-slideshow-items " style="border-radius:5px;">
+                      <li>
+                          <img src="{% static 'images/book/book.jpg' %}" alt="" uk-cover >
+                          <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                              <h3 class="uk-margin-remove">Artificial Intelligence</h3>
+                              <p class="uk-margin-remove">Check out the new blog</p>
+                          </div>
+                      </li>
+
+                      <li>
+                          <img src="{% static 'images/book/book.jpg' %}" alt="" uk-cover >
+                          <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                              <h3 class="uk-margin-remove">Artificial Intelligence></h3>
+                              <p class="uk-margin-remove">Check out the new blog</p>
+                          </div>
+                      </li>
+                    </ul>
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
+                       uk-slidenav-previous uk-slideshow-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                       uk-slideshow-item="next"></a>
+                </div>
             </div>
+          </div>
 
 
 

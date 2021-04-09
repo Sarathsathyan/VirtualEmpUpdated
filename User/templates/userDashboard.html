@@ -343,14 +343,14 @@ figcaption.courses {
                 <!-- My courses -->
                 <a href="{% url 'userdashboard' %}"> <i class="icon-material-outline-shopping-cart"></i> <span class="tooltips"> Store</span></a>
             </li>
-           
+
             <li>
                 <!-- Projects-->
                 <a href="{% url 'user_blog_page' %}"> <i class="uil-blogger-alt"></i> <span class="tooltips">
                         Blogs</span></a>
             </li>
 
-           
+
 
         </ul>
         <ul class="uk-position-bottom">
@@ -380,7 +380,7 @@ figcaption.courses {
               </div>
 
           </li>
-         
+
       </ul>
     </div>
 
@@ -395,19 +395,24 @@ figcaption.courses {
                    uk-slideshow="ratio: 6:5.15; autoplay: true autoplay-interval: 200" tabindex="-1"
                     >
                   <ul class="uk-slideshow-items " style="border-radius:5px; box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px;">
-                      {% for i in blogs %}
+
                           <li>
-                              {% if i.blog_thumbnail %}
-                                  <img src="{{ i.blog_thumbnail.url }}" alt="" uk-cover >
-                              {% else %}
-                                  <img src="" alt="" uk-cover>
-                              {% endif %}
+                              <img src="{% static 'images/book/book.jpg' %}" alt="" uk-cover >
                               <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
-                                  <h3 class="uk-margin-remove">{{ i.blog_title }}</h3>
-                                  <p class="uk-margin-remove">{{ i.blog_tagline | truncatewords:12 }}</p>
+                                  <h3 class="uk-margin-remove">Artificial Intelligence</h3>
+                                  <p class="uk-margin-remove">Check out the new blog</p>
                               </div>
                           </li>
-                      {% endfor %}
+
+                          <li>
+                              <img src="{% static 'images/book/book.jpg' %}" alt="" uk-cover >
+                              <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                                  <h3 class="uk-margin-remove">Artificial Intelligence></h3>
+                                  <p class="uk-margin-remove">Check out the new blog</p>
+                              </div>
+                          </li>
+
+
                   </ul>
                   <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
                      uk-slidenav-previous uk-slideshow-item="previous"></a>
@@ -531,13 +536,13 @@ background-blend-mode: soft-light, screen, darken, normal;
                           transform: translateY(+18%);
 
                         }
-                  
+
                     </style>
 
                     <div class="site-icon mx-auto" style="margin-left:36px;">
                       <div class="uk-card" uk-grid>
 
-                       
+
                           <div class="course-card episode-card animate-this" style="width:292.5px; margin-right: 10px;">
                               <div class="course-card-thumbnail ">
 
@@ -549,7 +554,7 @@ background-blend-mode: soft-light, screen, darken, normal;
                                     {% else %}
                                     <img src="" alt="">
                                     {% endif %}
-                                    
+
                                     <figcaption>
                                       <h3 style="color: #fff; padding-bottom: 20px;"><a style="color: #fff;" class="trail" href="{% url 'courseIntro' course.pk %}">Training &rarr;</a></h3>
                                       <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">Workplace &rarr;</a></h3>
@@ -562,24 +567,24 @@ background-blend-mode: soft-light, screen, darken, normal;
                                   <h4 class="mb-0"> CFP-1 </h4>
                               </div>
                           </div>
-                        
 
-                       
+
+
                           <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
                               <div class="course-card-thumbnail ">
 
                                 <a href="#">
                                     <img src="{% static 'images/dashboard/bgcolorplus.png'%}" alt="sample108" />
-                                    
+
                                     </a>
-                                  
+
                               </div>
                               <div class="course-card-body">
                                   <h4 class="mb-0"> ADD CFP </h4>
                               </div>
                           </div>
-                       
-                       
+
+
                       </div>
                     </div>
 
@@ -627,7 +632,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 
                      <div class="site-icon1 mx-auto" style="margin-left:36px;">
                        <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
-                           
+
 
 
 
@@ -647,7 +652,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                               </div>
                           </div>
 
-                         
+
                           <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
                             <div class="course-card-thumbnail ">
 
@@ -757,7 +762,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                             <div class="course-card-thumbnail ">
 
                               <img src="{% static 'images/dashboard/0hrs.png'%}" alt="sample108" />
-                                 
+
                                   <a href="#"></a>
                             </div>
                             <div class="course-card-body">
@@ -833,7 +838,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 
                             <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
                                 <div class="course-card-thumbnail ">
-    
+
                                   <figure class="snip1543">
                                       <img src="{% static 'images/dashboard/IDEA.png'%}" alt="sample108" />
                                       <figcaption class="courses">
@@ -850,7 +855,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 
                             <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
                                 <div class="course-card-thumbnail ">
-    
+
                                   <figure class="snip1543">
                                       <img src="{% static 'images/dashboard/submitidea.png'%}" alt="sample108" />
                                       <figcaption class="courses">
@@ -867,7 +872,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 
                             <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
                                 <div class="course-card-thumbnail ">
-    
+
                                   <figure class="snip1543">
                                       <img src="{% static 'images/dashboard/viewidea.png'%}" alt="sample108" />
                                       <figcaption class="courses">
@@ -900,7 +905,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 <br>
 <br>
                 <div class="container ">
-            
+
 
                     <!-- footer
                    ================================================== -->
