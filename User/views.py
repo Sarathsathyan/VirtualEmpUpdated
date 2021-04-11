@@ -209,18 +209,14 @@ def userCourseLesson(request, c_id):
         # start test
         testID = False
         if request.method == 'GET':
-            print("complete___________")
             if request.GET.get("status") !=None and request.GET.get("status") !=None and request.GET.get("weekId") != None:
-                print(request.GET.get("status"))
-                print(request.GET.get("data"))
                 status=request.GET.get("status")
                 partweek=request.GET.get("data")
                 weekId=request.GET.get("weekId")
                 if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=weekId).exists():
                     user_ob=userProgress.objects.get(userId_id=request.user.pk, weekId_id=weekId, status="STARTED")
-                    print(user_ob.pk)
                     if not(userCompProgress.objects.filter(userId_id=request.user.pk, prgressId_id=user_ob.pk, partName=partweek).exists()):
-                        print("_______")
+
                         end_time = datetime.datetime.now()
                         data = userCompProgress.objects.create(userId_id=request.user.pk,endTime=end_time,status= status, prgressId_id=user_ob.pk, partName=partweek)
                         data.save()
@@ -262,7 +258,6 @@ def userCourseLesson(request, c_id):
                         remainingTime = d.endTime - current_time
                         startTime=d.endTime
                         if remainingTime.days <= 0:
-
                             testID = True
 
         if course.video_page_image == None:

@@ -95,7 +95,7 @@
                             {% for d in data %}
                             {% if d.weekId_id == i.pk %}
                             {% if d.endTime %}
-                            <span class="course_tab_text" id="left-time">{{ startTime|date:"M d, Y H:m:s" }}</span>
+                            <span class="course_tab_text" id="left-time">{{ startTime|date:"M d, Y H:m:s" }}</span>{{ d.status }}
                             {% endif %}
                             {% endif %}
                             {% endfor %}

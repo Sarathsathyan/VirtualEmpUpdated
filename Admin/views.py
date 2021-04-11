@@ -60,9 +60,11 @@ def userLogin(request):
                             print("hai")
                             return redirect('microDashboard/')
                         elif role.user_role == "MPM":
-                            print("poda patty")
-                            return redirect('major_project_dashboard')
 
+                            return redirect('major_project_dashboard')
+                        elif role.user_role == "Trainee":
+                            print("hello trainee")
+                            return redirect('major_project_dashboard')
                         else:
                             messages.error(request, "Error occured in Role")
                 except:
@@ -246,6 +248,8 @@ def roleCreation(request):
                         role_user_id = "TL" + str(300 + (RoleDetail.objects.filter(user_role="TL").count() + 1))
                     elif user_role == "Instructor":
                         role_user_id = "IN" + str(400 + (RoleDetail.objects.filter(user_role="Instructor").count() + 1))
+                    elif user_role == "Trainee":
+                        role_user_id = "Trainee" + str(400 + (RoleDetail.objects.filter(user_role="Trainee").count() + 1))
                     elif user_role == "Blogger":
                         role_user_id = "Blog" + str(500 + (RoleDetail.objects.filter(user_role="Blogger").count() + 1))
                     elif user_role == "Micro Course":
@@ -316,6 +320,8 @@ def roleCreation(request):
                         elif user_role == "Micro Course":
                             user.is_superuser = False
                             user.is_staff = False
+                        elif user_role == "Trainee":
+                            user.is_active= True
                         user.save()
                         u_id = User.objects.get(username=role_user_name)
                         role = RoleDetail(user_id=u_id, role_user_id=role_user_id, user_role=user_role,
