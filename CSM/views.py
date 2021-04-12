@@ -163,10 +163,10 @@ def csmEdit(request, course_id):
             certificate = request.FILES.get('certificate')
 
             Course_name.modified=datetime.datetime.now()
-            
+
             if  image_file:
                 Course_name.course_image =image_file
-            
+
             else:
                 if not Course_name.course_image:
                     #message="Please select an image"
@@ -190,9 +190,9 @@ def csmEdit(request, course_id):
                 if not Course_name.video_page_image:
                     #message="Please select an image for video page"
                     return redirect("csmEdit",course_id)
-            
+
             #Course_name.difficulty_level = request.POST["difficulty_level"]
-            
+
             Course_name.requirements = request.POST["req"]
             Course_name.learnings = request.POST["learn"]
 
@@ -371,3 +371,12 @@ def csmDeleteQues(request,delId,w_id):
     messages.success(request,
                      "Question deleted")
     return redirect('csmAddQuizz',w_id)
+
+
+
+def trainee_dashboard(request):
+    course_object=Course.objects.all();
+    context={
+        'courses': course_object
+    }
+    return render(request,'trainee_dashboard.html',context)
