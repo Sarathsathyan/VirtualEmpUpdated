@@ -10,4 +10,5 @@ urlpatterns =[
     path('editcourse/<int:course_id>',views.csmEdit,name='csmEdit'),
     path('addQuizz/<int:w_id>/', views.csmAddQuizz, name='csmAddQuizz'),
     path('delQuizz/<int:delId>/<int:w_id>', views.csmDeleteQues, name='deleteQues'),
+    path('trainee_dashboard/', views.trainee_dashboard, name='trainee_dashboard'),
 ]
