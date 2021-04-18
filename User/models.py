@@ -71,7 +71,7 @@ class UserSkill(models.Model):
 # start button
 class userProgress(models.Model):
     userId = models.ForeignKey(User,on_delete=models.CASCADE)
-    course_id = models.ForeignKey(CategoryCourse,on_delete=models.CASCADE)
+    # course_id = models.ForeignKey(CategoryCourse,on_delete=models.CASCADE,null=True)
     weekId = models.ForeignKey(Week,on_delete=models.CASCADE)
     status = models.CharField(default="PENDING",max_length=100,null=True)
     currentTime = models.DateTimeField(null=True)
