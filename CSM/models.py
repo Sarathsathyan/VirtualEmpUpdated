@@ -70,6 +70,7 @@ class Week(models.Model):
     week_private = models.CharField(max_length=100,null=True)
     week_name = models.CharField(max_length=100)
     week_date = models.DateTimeField(default=datetime.now,blank=True)
+    week_status = models.CharField(max_length=100,default="PENDING")
 
     def __str__(self):
         return  self.week_name

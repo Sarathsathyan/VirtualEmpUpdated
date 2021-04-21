@@ -3,312 +3,341 @@
 {% block title %}Course lesson{% endblock %}
 {% block content %}
 
-<!-- Wrapper -->
-<div id="wrapper">
-    {% include 'userPartials/_header.html' %}
-    <div class="course-layouts">
+    <!-- Wrapper -->
+    <div id="wrapper">
+        {% include 'userPartials/_header.html' %}
+        <div class="course-layouts">
 
-        <div class="course-content bg-dark">
-        
-            <div class="course-header">
+            <div class="course-content bg-dark">
 
-                <a href="#" class="btn-back" uk-toggle="target: .course-layouts; cls: course-sidebar-collapse">
-                    <i class="icon-feather-chevron-left"></i>
-                </a>
+                <div class="course-header">
 
-                <h4 class="text-white"> {{ course.title }}</h4>
-
-                <div>
-                    <a href="#">
-                        <i class="icon-feather-help-circle btns"></i> </a>
-                    <div uk-drop="pos: bottom-right;mode : click">
-                        <div class="uk-card-default p-4">
-                            <h4> Elementum tellus id mauris faucibuss soluta nobis </h4>
-                            <p class="mt-2 mb-0">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                                diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
-                                suscipit lobortis nisl ut aliquip ex ea commodo consequat. Nam liber tempor cum
-                                soluta nobis eleifend option congue nihil imperdiet</p>
-                        </div>
-                    </div>
-
-                    <a hred="#">
-                        <i class="icon-feather-more-vertical btns"></i>
+                    <a href="#" class="btn-back" uk-toggle="target: .course-layouts; cls: course-sidebar-collapse">
+                        <i class="icon-feather-chevron-left"></i>
                     </a>
-                    <div class="dropdown-option-nav " uk-dropdown="pos: bottom-right ;mode : click">
-                        <ul>
 
-                            <li><a href="#">
+                    <h4 class="text-white"> {{ course.title }}</h4>
+
+                    <div>
+                        <a href="#">
+                            <i class="icon-feather-help-circle btns"></i> </a>
+                        <div uk-drop="pos: bottom-right;mode : click">
+                            <div class="uk-card-default p-4">
+                                <h4> Elementum tellus id mauris faucibuss soluta nobis </h4>
+                                <p class="mt-2 mb-0">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                                    diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+                                    volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+                                    suscipit lobortis nisl ut aliquip ex ea commodo consequat. Nam liber tempor cum
+                                    soluta nobis eleifend option congue nihil imperdiet</p>
+                            </div>
+                        </div>
+
+                        <a hred="#">
+                            <i class="icon-feather-more-vertical btns"></i>
+                        </a>
+                        <div class="dropdown-option-nav " uk-dropdown="pos: bottom-right ;mode : click">
+                            <ul>
+
+                                <li><a href="#">
                                     <i class="icon-feather-bookmark"></i>
                                     Add To Bookmarks</a></li>
-                            <li><a href="#">
+                                <li><a href="#">
                                     <i class="icon-feather-share-2"></i>
                                     Share With Friend </a></li>
 
-                            <li>
-                                <a href="#" id="night-mode" class="btn-night-mode">
-                                    <i class="icon-line-awesome-lightbulb-o"></i> Night mode
-                                    <label class="btn-night-mode-switch">
-                                        <div class="uk-switch-button"></div>
-                                    </label>
-                                </a>
-                            </li>
-                        </ul>
+                                <li>
+                                    <a href="#" id="night-mode" class="btn-night-mode">
+                                        <i class="icon-line-awesome-lightbulb-o"></i> Night mode
+                                        <label class="btn-night-mode-switch">
+                                            <div class="uk-switch-button"></div>
+                                        </label>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+
                     </div>
 
+                </div>
+
+                <div class="course-content-inner "
+                     style="background-image: url('{{ video_page_image.url }}') ; background-repeat: no-repeat;background-size: 100% 100%; ">
+                    <ul>
+                        <li>
+                            <div class="video-responsive">
+
+                                {% if video %}
+                                    <video id="myVideo" controls>
+                                        <source src="{{ video.url }}">
+                                    </video>
+                                {% endif %}
+                            </div>
+                        </li>
+
+                    </ul>
 
                 </div>
 
             </div>
 
-            <div class="course-content-inner " style="background-image: url('{{  video_page_image.url }}') ; background-repeat: no-repeat;background-size: 100% 100%; ">
-                <ul>
-                    <li>
-                        <div class="video-responsive">
-                            
-                            {% if video %}
-                            <video id="myVideo" controls>
-                                <source src="{{ video.url }}">
-                            </video>
-                            {% endif %}
-                        </div>
-                    </li>
+            <!-- course sidebar -->
 
-                </ul>
+            <div class="course-sidebar">
+                <div class="course-sidebar-title">
+                    <h3 style="color: #e6b62e;"> Table of Contents </h3>
+                </div>
+                <div class="course-sidebar-container" data-simplebar>
 
-            </div>
-
-        </div>
-
-        <!-- course sidebar -->
-
-        <div class="course-sidebar">
-            <div class="course-sidebar-title">
-                <h3 style="color: #e6b62e;"> Table of Contents </h3>
-            </div>
-            <div class="course-sidebar-container" data-simplebar>
-
-                <ul class="course-video-list-section" uk-accordion>
-                    {% for i in week %}
-                    <li>
-                        <a class="uk-accordion-title" href="#"> {{ i.week_name }} :
-                            {% for d in data %}
-                            {% if d.weekId_id == i.pk %}
-                            {% if d.endTime %}
-                            <span class="course_tab_text" id="left-time">{{ startTime|date:"M d, Y H:m:s" }}</span>{{ d.status }}
-                            {% endif %}
-                            {% endif %}
-                            {% endfor %}
-                        </a>
-                        <div class="uk-accordion-content">
-                            <!-- course-video-list -->
-                            <form method="post">{% csrf_token %}
-                                <input type="text" value="{{ i.pk }}" name="weekId" hidden>
-                                {% if status %}
-                                {% else %}
-                                {% if not data %}
-                                {% if forloop.counter == 1 %}
-                                <span style="color: black">
-                                    <button type="submit" style="color: #0c002b;background-color: #0b7ec4"
-                                        name="start">Start</button>
-                                </span>
-                                {% endif %}
-                                {% else %}
-                                {% for d in data %}
-                                {% if d.weekId_id == i.pk and d.status == 'PENDING' %}
-                                <span style="color: black"><button type="submit"
-                                        style="color: #0c002b;background-color: #0b7ec4"
-                                        name="start">Start</button></span>
-                                {% else %}
-
-                                {% endif %}{% endfor %}
-                                {% endif %}
-
-                                {% endif %}
-                            </form>
-                            <ul class="course-video-list highlight-watched">
-                                <form method="post">{% csrf_token %}
-                                    {% for j in weekUnits %}
-                                    {% if j.unit_id_id == i.pk %}
+                    <ul class="course-video-list-section" uk-accordion>
+                        {% for i in week %}
+                            <li>
+                                <a class="uk-accordion-title" href="#"> {{ i.week_name }} :
                                     {% for d in data %}
-                                    {% if d.weekId_id == i.pk and d.status == 'STARTED' %}
-                                    <li class="
+                                        {% if d.weekId_id == i.pk %}
+                                            {% if d.endTime %}
+                                                {% if d.status == "STARTED" %}
+                                                    <span class="course_tab_text"
+                                                          id="left-time">{{ startTime|date:"M d, Y H:m:s" }}</span>
+                                                    {{ d.status }}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </a>
+                                <div class="uk-accordion-content">
+                                    <!-- course-video-list -->
+                                    <form method="post">{% csrf_token %}
+                                        <input type="text" value="{{ i.pk }}" name="weekId" hidden>
+                                        {% if status %}
+                                        {% else %}
+                                            {% if not data %}
+                                                {% if forloop.counter == 1 %}
+                                                    <span style="color: black"><button type="submit" style="color: #0c002b;background-color: #0b7ec4" name="start">Start</button></span>
+                                                {% endif %}
+                                            {% else %}
+                                                {% for d in data %}
+                                                    {% if d.weekId_id == i.pk and d.status == 'COMPLETED' %}
+                                                        <span>Completed</span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                
+                                                <span style="color: black"><button type="submit" style="color: #0c002b;background-color: #0b7ec4"
+                                                                                   name="start">Start</button></span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </form>
+                                    <ul class="course-video-list highlight-watched">
+                                        <form method="post">{% csrf_token %}
+                                            {% for j in weekUnits %}
+                                                {% if j.unit_id_id == i.pk %}
+                                                    {% for d in data %}
+                                                        {% if d.weekId_id == i.pk and d.status == 'STARTED' %}
+                                                            <li class="
                                                             {% if d.status == 'STARTED' %}
                                                             watched
                                                             {% endif %}
                                                             ">
-                                        <input type="text" value="{{ j.pk }}" name="uniq" hidden>
-                                        
-                                        <input type="submit" name="videoOne" id="vid1"
-                                            class="vid my-0 py-0 text-left lesson_video_submit" value="{{ j.uCapOne }}" data-weekId="{{d.weekId_id}}"
-                                            style="border:0px solid #c7d3eb;width: 90%">
-                                        <input class="lesson_checkbox" type="checkbox" id="comp1"onchange="add();">
+                                                                <input type="text" value="{{ j.pk }}" name="uniq"
+                                                                       hidden>
 
-                                        <input type="submit" name="videoTwo" id="vid2"
-                                            class="vid my-0 py-0 text-left lesson_video_submit" value="{{ j.uCap2 }}" data-weekId="{{d.weekId_id}}"
-                                            style="border:0px solid #c7d3eb;width: 90%">
-                                        <input class="lesson_checkbox" type="checkbox" id="comp2" onchange="add();">
-                                        
-                                        <input type="submit" name="videoThree" id="vid3"
-                                            class="vid my-0 py-0 text-left lesson_video_submit" data-weekId="{{d.weekId_id}}"
-                                            value="{{ j.u_capThree }}" style="border:0px solid #c7d3eb;width: 90%">
-                                        <input class="lesson_checkbox" type="checkbox" id="comp3" onchange="add();">
-                                        
-                                    </li>
-                                    {% endif %}
-                                    {% endfor %}
-                                    {% endif %}
-                                    {% endfor %}
-                                </form>
-                            </ul>
-                        </div>
-                    </li>
-                    {% endfor %}
+                                                                <input type="submit" name="videoOne" id="vid1"
+                                                                       class="vid my-0 py-0 text-left lesson_video_submit"
+                                                                       value="{{ j.uCapOne }}"
+                                                                       data-weekId="{{ d.weekId_id }}"
+                                                                       style="border:0px solid #c7d3eb;width: 90%">
+                                                                <input class="lesson_checkbox" type="checkbox"
+                                                                       id="comp1" onchange="add();">
+
+                                                                <input type="submit" name="videoTwo" id="vid2"
+                                                                       class="vid my-0 py-0 text-left lesson_video_submit"
+                                                                       value="{{ j.uCap2 }}"
+                                                                       data-weekId="{{ d.weekId_id }}"
+                                                                       style="border:0px solid #c7d3eb;width: 90%">
+                                                                <input class="lesson_checkbox" type="checkbox"
+                                                                       id="comp2" onchange="add();">
+
+                                                                <input type="submit" name="videoThree" id="vid3"
+                                                                       class="vid my-0 py-0 text-left lesson_video_submit"
+                                                                       data-weekId="{{ d.weekId_id }}"
+                                                                       value="{{ j.u_capThree }}"
+                                                                       style="border:0px solid #c7d3eb;width: 90%">
+                                                                <input class="lesson_checkbox" type="checkbox"
+                                                                       id="comp3" onchange="add();">
+
+                                                            </li>
+                                                        {% endif %}
+                                                        <input type="text" value="{{ i.pk }}" id="qId" hidden>
+                                                        {% if testCheck %}
+                                                            {% if d.weekId_id == i.pk %}
+                                                                {% if d.status == "STARTED" %}
+                                                                    <b>
+                                                                        <a id="startTest"
+                                                                           href="{% url 'userquizz' i.pk %}">
+                                                                            <input type="button" class="btn btn-primary"
+                                                                                   id="startTest"
+                                                                                   value="Start Test"/>
+                                                                        </a>
+                                                                    </b>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endif %}
+
+                                                    {% endfor %}
+
+                                                {% endif %}
+                                            {% endfor %}
+                                        </form>
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endfor %}
 
 
-                </ul>
+                    </ul>
+
+                </div>
 
             </div>
 
         </div>
+        {% comment %}timer{% endcomment %}
+        <script>
+            // Set the date we're counting down to
+            var dates = document.getElementById("myVar").value;
+            alert(dates)
+            var countDownDate = new Date(dates).getTime();
+            alert(countDownDate)
+
+            // Update the count down every 1 second
+            var x = setInterval(function () {
+
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Output the result in an element with id="demo"
+                {#document.getElementById("demo").innerHTML = days + "d " + hours + "h "#}
+                {#+ minutes + "m " + seconds + "s ";#}
+                console.log(days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ")
+                console.log("hai")
+
+
+                // If the count down is over, write some text
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("demo").innerHTML = "EXPIRED";
+                    location.reload();
+                }
+            }, 1000);
+        </script>
 
     </div>
-    {% comment %}timer{% endcomment %}
+
+
     <script>
-// Set the date we're counting down to
-var dates = document.getElementById("myVar").value;
-alert(dates)
-var countDownDate = new Date(dates).getTime();
-alert(countDownDate)
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
-
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Output the result in an element with id="demo"
-  {#document.getElementById("demo").innerHTML = days + "d " + hours + "h "#}
-  {#+ minutes + "m " + seconds + "s ";#}
-  console.log(days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ")
-    console.log("hai")
-
-
-  // If the count down is over, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
-}, 1000);
-</script>
-
-</div>
-
-
-<script>
-    (function (window, document, undefined) {
-        'use strict';
-        if (!('localStorage' in window)) return;
-        var nightMode = localStorage.getItem('gmtNightMode');
-        if (nightMode) {
-            document.documentElement.className += ' night-mode';
-        }
-    })(window, document);
-
-
-    (function (window, document, undefined) {
-
-        'use strict';
-
-        // Feature test
-        if (!('localStorage' in window)) return;
-
-        // Get our newly insert toggle
-        var nightMode = document.querySelector('#night-mode');
-        if (!nightMode) return;
-
-        // When clicked, toggle night mode on or off
-        nightMode.addEventListener('click', function (event) {
-            event.preventDefault();
-            document.documentElement.classList.toggle('night-mode');
-            if (document.documentElement.classList.contains('night-mode')) {
-                localStorage.setItem('gmtNightMode', true);
-                return;
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
             }
-            localStorage.removeItem('gmtNightMode');
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+    <script>
+        function ajax_fun(data, weekId) {
+            var req = new XMLHttpRequest();
+            var url = "{% url 'courseLesson' c_id %}?status=" + "Completed" + "&data=" + data + "&weekId=" + weekId;
+            //alert(url)
+            req.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                }
+            };
+            req.open("GET", url, true);
+            req.send();
+        }
+
+        function add() {
+            var ch1 = document.getElementById("comp1");
+            var ch2 = document.getElementById("comp2");
+            var ch3 = document.getElementById("comp3");
+            if ($(ch1).is(":checked")) {
+
+                var weekId = document.getElementById("vid1").getAttribute("data-weekId");
+
+                ajax_fun(document.getElementById("vid1").value, weekId);
+            }
+            if ($(ch2).is(":checked")) {
+
+                var weekId = document.getElementById("vid2").getAttribute("data-weekId");
+                ajax_fun(document.getElementById("vid2").value, weekId);
+            }
+            if ($(ch3).is(":checked")) {
+
+                var weekId = document.getElementById("vid3").getAttribute("data-weekId");
+                ajax_fun(document.getElementById("vid3").value, weekId);
+            }
+            console.log(arr[0]);
+        }
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const stime = document.getElementById("left-time");
+            const start_time = Date.parse(stime.textContent);
+
+            setInterval(() => {
+
+                const now = new Date().getTime()
+                const d = Math.floor((start_time / (1000 * 60 * 60 * 24)) - (now / (1000 * 60 * 60 * 24)))
+                //console.log(d)
+                const h = Math.floor((start_time / (1000 * 60 * 60) - (now / (1000 * 60 * 60))) % 24)
+                //console.log(h)
+                const m = Math.floor((start_time / (1000 * 60) - (now / (1000 * 60))) % 60)
+                const s = Math.floor((start_time / (1000) - (now / (1000))) % 60)
+                stime.innerHTML = d + "days," + h + "h:" + m + "m:" + s + "s"
+            }, 1000)
         }, false);
 
-    })(window, document);
-</script>
-<script>
-    function ajax_fun(data, weekId)
-    {
-        var req = new XMLHttpRequest();
-        var url="{% url 'courseLesson' c_id %}?status="+"Completed"+"&data="+data+"&weekId="+weekId;
-        //alert(url)
-        req.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {        
-            }
-        };
-        req.open("GET", url, true);
-        req.send();
-    }
+    </script>
 
-    function add() {
-        var ch1 = document.getElementById("comp1");
-        var ch2 = document.getElementById("comp2");
-        var ch3 = document.getElementById("comp3");
-        if ($(ch1).is(":checked")) {
-            
-            var weekId=document.getElementById("vid1").getAttribute("data-weekId");
-            
-            ajax_fun(document.getElementById("vid1").value,weekId);
-        }
-        if ($(ch2).is(":checked")) {
-            
-            var weekId=document.getElementById("vid2").getAttribute("data-weekId");
-            ajax_fun(document.getElementById("vid2").value, weekId);
-        }
-        if ($(ch3).is(":checked")) {
-            
-            var weekId=document.getElementById("vid3").getAttribute("data-weekId");
-            ajax_fun(document.getElementById("vid3").value, weekId);
-        }
-        console.log(arr[0]);
-    }
-    
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function(){
-        const stime= document.getElementById("left-time");
-        const start_time= Date.parse(stime.textContent);
-        
-        setInterval(()=>{
-            
-            const now=new Date().getTime()
-            const d= Math.floor((start_time/(1000*60*60*24))- (now/(1000*60*60*24)))
-            //console.log(d)
-            const h= Math.floor((start_time/(1000*60*60)- (now/(1000*60*60)))% 24)
-            //console.log(h)
-            const m=Math.floor((start_time/(1000*60)- (now/(1000*60)))% 60)
-            const s=Math.floor((start_time/(1000)- (now/(1000)))% 60)
-            stime.innerHTML=d+"days,"+h+"h:"+m+"m:"+s+"s"
-        }, 1000)
-    }, false);
-
-</script>
-
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 
 
