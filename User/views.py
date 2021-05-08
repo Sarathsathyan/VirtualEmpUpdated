@@ -201,20 +201,14 @@ def userCourseLesson(request, c_id):
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
-        # d = userProgress.objects.get(id=20)
-        # d.delete()
-        # d = userProgress.objects.get(id=19)
-        # d.delete()
         video =None
         info=None
         if not data:
-            first_data = Week.objects.order_by('id').first()
+            first_data = Week.objects.filter(week_id_id=course.pk)[0]
             info = userProgress(userId_id=request.user.pk,weekId_id=first_data.pk,status="PENDING")
             info.save()
         info = userProgress.objects.filter(userId_id=request.user.pk)
         week = Week.objects.filter(week_id_id=course.pk)
-
-
         weekUnit = Week_Unit.objects.all()
         status=None
         # start test
@@ -263,6 +257,7 @@ def userCourseLesson(request, c_id):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
                         startTime=d.endTime
+                        print(remainingTime.days)
                         if remainingTime.days <= 0:
                             testID = True
 
