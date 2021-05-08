@@ -54,17 +54,16 @@ def userLogin(request):
                         elif role.user_role == "Instructor":
                             return redirect('insDashboard')
                         elif role.user_role == "Blogger":
-                            print("hello")
+                            print("blogger")
                             return redirect('blogManager/')
                         elif role.user_role == "Micro Course":
-                            print("hai")
+                            print("micro course")
                             return redirect('microDashboard/')
                         elif role.user_role == "MPM":
-
                             return redirect('major_project_dashboard')
                         elif role.user_role == "Trainee":
                             print("hello trainee")
-                            return redirect('major_project_dashboard')
+                            return redirect('trainee_dashboard')
                         else:
                             messages.error(request, "Error occured in Role")
                 except:

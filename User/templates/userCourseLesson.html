@@ -93,13 +93,13 @@
                         {% for i in week %}
                             <li>
                                 <a class="uk-accordion-title" href="#"> {{ i.week_name }} :
-                                    {% for d in data %}
+                                    {% for d in info %}
                                         {% if d.weekId_id == i.pk %}
                                             {% if d.endTime %}
                                                 {% if d.status == "STARTED" %}
                                                     <span class="course_tab_text"
                                                           id="left-time">{{ startTime|date:"M d, Y H:m:s" }}</span>
-                                                    {{ d.status }}
+
                                                 {% endif %}
                                             {% endif %}
                                         {% endif %}
@@ -109,36 +109,45 @@
                                     <!-- course-video-list -->
                                     <form method="post">{% csrf_token %}
                                         <input type="text" value="{{ i.pk }}" name="weekId" hidden>
-                                        {% if status %}
-                                        {% else %}
-                                            {% if not data %}
-                                                {% if forloop.counter == 1 %}
-                                                    <span style="color: black"><button type="submit" style="color: #0c002b;background-color: #0b7ec4" name="start">Start</button></span>
+                                        {% for j in info %}
+                                            {% if i.id == j.weekId_id %}
+                                                {% if j.status == "PENDING" %}
+                                                    <span style="color: black"><button type="submit"
+                                                                                       style="color: #0c002b;background-color: #0b7ec4"
+                                                                                       name="start">Start</button></span>
                                                 {% endif %}
-                                            {% else %}
-                                                {% for d in data %}
-                                                    {% if d.weekId_id == i.pk and d.status == 'COMPLETED' %}
-                                                        <span>Completed</span>
-                                                    {% else %}
-                                                    {% endif %}
-                                                {% endfor %}
-                                                
-                                                <span style="color: black"><button type="submit" style="color: #0c002b;background-color: #0b7ec4"
-                                                                                   name="start">Start</button></span>
                                             {% endif %}
-                                        {% endif %}
+                                        {% endfor %}
+{#                                        {% if not data %}#}
+{#                                            {% if forloop.counter == 1 %}#}
+{#                                                <span style="color: black"><button type="submit"#}
+{#                                                                                   style="color: #0c002b;background-color: #0b7ec4"#}
+{#                                                                                   name="start">Start</button></span>#}
+{#                                            {% endif %}#}
+{#                                        {% else %}#}
+{#                                            {% for d in data %}#}
+{#                                                {% if d.weekId_id == i.pk and d.status == 'COMPLETED' %}#}
+{#                                                    <span>Completed</span>#}
+{#                                                {% else %}#}
+{#                                                {% endif %}#}
+{#                                            {% endfor %}#}
+{##}
+{#                                            <span style="color: black"><button type="submit"#}
+{#                                                                               style="color: #0c002b;background-color: #0b7ec4"#}
+{#                                                                               name="start">Start</button></span>#}
+{#                                        {% endif %}#}
+
                                     </form>
                                     <ul class="course-video-list highlight-watched">
                                         <form method="post">{% csrf_token %}
                                             {% for j in weekUnits %}
                                                 {% if j.unit_id_id == i.pk %}
-                                                    {% for d in data %}
+                                                    {% for d in info %}
                                                         {% if d.weekId_id == i.pk and d.status == 'STARTED' %}
                                                             <li class="
                                                             {% if d.status == 'STARTED' %}
                                                             watched
-                                                            {% endif %}
-                                                            ">
+                                                            {% endif %}">
                                                                 <input type="text" value="{{ j.pk }}" name="uniq"
                                                                        hidden>
 
@@ -169,12 +178,11 @@
                                                             </li>
                                                         {% endif %}
                                                         <input type="text" value="{{ i.pk }}" id="qId" hidden>
-                                                        {% if testCheck %}
+                                                        {% if not testCheck %}
                                                             {% if d.weekId_id == i.pk %}
                                                                 {% if d.status == "STARTED" %}
                                                                     <b>
-                                                                        <a id="startTest"
-                                                                           href="{% url 'userquizz' i.pk %}">
+                                                                        <a id="startTest" href="{% url 'userquizz' i.pk %}">
                                                                             <input type="button" class="btn btn-primary"
                                                                                    id="startTest"
                                                                                    value="Start Test"/>

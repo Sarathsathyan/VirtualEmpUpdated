@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'MicroCourse',
     'crispy_forms',
     'MPM',
-    'PCM'
+    'PCM',
+    'Trainee'
 ]
 
 MIDDLEWARE = [
