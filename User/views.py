@@ -200,12 +200,18 @@ def userCourseLesson(request, c_id):
         user_details = UserDetails.objects.get(user_id=request.user.pk)
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
-
         data = userProgress.objects.filter(userId_id=request.user.pk)
-        # d = userProgress.objects.get(id=16)
+        # d = userProgress.objects.get(id=20)
+        # d.delete()
+        # d = userProgress.objects.get(id=19)
         # d.delete()
         video =None
-
+        info=None
+        if not data:
+            first_data = Week.objects.order_by('id').first()
+            info = userProgress(userId_id=request.user.pk,weekId_id=first_data.pk,status="PENDING")
+            info.save()
+        info = userProgress.objects.filter(userId_id=request.user.pk)
         week = Week.objects.filter(week_id_id=course.pk)
 
 
@@ -221,7 +227,6 @@ def userCourseLesson(request, c_id):
                 if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=weekId).exists():
                     user_ob=userProgress.objects.get(userId_id=request.user.pk, weekId_id=weekId, status="STARTED")
                     if not(userCompProgress.objects.filter(userId_id=request.user.pk, prgressId_id=user_ob.pk, partName=partweek).exists()):
-
                         end_time = datetime.datetime.now()
                         data = userCompProgress.objects.create(userId_id=request.user.pk,endTime=end_time,status= status, prgressId_id=user_ob.pk, partName=partweek)
                         data.save()
@@ -229,15 +234,13 @@ def userCourseLesson(request, c_id):
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
-
-                if userProgress.objects.filter(userId_id=request.user.pk, weekId_id=week).exists():
-                    status = 1
-
-                else:
-                    current_time = datetime.datetime.now()
-                    end_date = current_time + datetime.timedelta(days=7)
-                    data = userProgress.objects.create(weekId_id=week,userId_id=request.user.pk,status="STARTED",currentTime=current_time,endTime=end_date)
-                    data.save()
+                user_week = userProgress.objects.get(weekId_id=week)
+                current_time = datetime.datetime.now()
+                end_date = current_time + datetime.timedelta(days=7)
+                user_week.status="STARTED"
+                user_week.currentTime=current_time
+                user_week.endTime=end_date
+                user_week.save()
                 return redirect('courseLesson',c_id)
             if 'videoOne' in request.POST:
                 key = request.POST['uniq']
@@ -255,7 +258,7 @@ def userCourseLesson(request, c_id):
         startTime=current_time
         
         for i in week:
-            for d in data:
+            for d in info:
                 if(d.weekId_id == i.pk):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
@@ -270,6 +273,7 @@ def userCourseLesson(request, c_id):
 
 
         context ={
+            'info':info,
             'week':week,
             'weekUnits':weekUnit,
             'video':video,
@@ -942,18 +946,32 @@ def userProjectsDesc(request):
     return render(request,'userProjectDesc.html')
 
 def unlock(request,w_id):
-    user_id = request.user.pk
-    week = Week.objects.get(id = w_id)
-    next_week = None
-    course = Course.objects.get(id=week.week_id_id)
-
-
-    userData = userProgress.objects.get(weekId_id=w_id , userId_id= request.user.pk)
-    userData.status = "COMPLETED"
-    userData.save()
-    return redirect('courseLesson',course.pk)
-
-    data=None
+    current_data = userProgress.objects.get(weekId_id=w_id)
+    current_data.status="COMPLETED"
+    current_data.save()
+    wId = int(w_id)+1
+    if Week.objects.filter(id=wId).exists():
+        data = Week.objects.get(id=wId)
+        info = userProgress(userId_id=request.user.pk,weekId_id=data.pk,status="PENDING")
+        info.save()
+        datas = data.week_id.pk
+        return redirect('courseLesson',datas)
+    else:
+        messages.error(request,"SOME ERROR OCCURED")
+        return redirect('userdashboard')
+    # print(w_id)
+    # user_id = request.user.pk
+    # week = Week.objects.get(id = w_id)
+    # next_week = None
+    # course = Course.objects.get(id=week.week_id_id)
+    #
+    #
+    # userData = userProgress.objects.get(weekId_id=w_id , userId_id= request.user.pk)
+    # userData.status = "COMPLETED"
+    # userData.save()
+    # return redirect('courseLesson',course.pk)
+    #
+    # data=None
     # if userProgress.objects.filter(userId_id=user_id , weekId_id = week.pk).exists():
     #     data = userProgress.objects.get(userId_id=user_id , weekId_id = week.pk)
     #     print(data.course_id)
