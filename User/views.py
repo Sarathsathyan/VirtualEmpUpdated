@@ -201,6 +201,7 @@ def userCourseLesson(request, c_id):
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
+
         video =None
         info=None
         if not data:
@@ -258,6 +259,7 @@ def userCourseLesson(request, c_id):
                         remainingTime = d.endTime - current_time
                         startTime=d.endTime
                         print(remainingTime.days)
+                        testID=False
                         if remainingTime.days <= 0:
                             testID = True
 
