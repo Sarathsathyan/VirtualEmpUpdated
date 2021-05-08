@@ -97,8 +97,10 @@
                                         {% if d.weekId_id == i.pk %}
                                             {% if d.endTime %}
                                                 {% if d.status == "STARTED" %}
+                                                    {% if not testCheck %}
                                                     <span class="course_tab_text"
                                                           id="left-time">{{ startTime|date:"M d, Y H:m:s" }}</span>
+                                                        {% endif %}
 
                                                 {% endif %}
                                             {% endif %}
@@ -178,7 +180,7 @@
                                                             </li>
                                                         {% endif %}
                                                         <input type="text" value="{{ i.pk }}" id="qId" hidden>
-                                                        {% if not testCheck %}
+                                                        {% if testCheck %}
                                                             {% if d.weekId_id == i.pk %}
                                                                 {% if d.status == "STARTED" %}
                                                                     <b>
