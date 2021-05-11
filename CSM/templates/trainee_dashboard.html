@@ -226,13 +226,13 @@ CSM Page
                     <nav id="breadcrumbs" class="mb-3">
                         <ul>
                             <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
-                            <li><a href="#"> Trainee Dashboard </a></li>
+                            <li><a href="#"> Trainer Dashboard </a></li>
                         </ul>
                     </nav>
                 </div>
 
                 <div class="container">
-                  <h2>Welcome Trainee</h2>
+                  <h2>Welcome Trainer</h2>
                 </div>
 
                 <div class="container my-5">
@@ -247,12 +247,12 @@ CSM Page
 
 
                                                   <img src="{% static 'images/blue.dark.png'%}">
-                                                  <div class="centered text-center" style="position: absolute;
+                                                  <div class="centered text-center" style="width:100%; position: absolute;
                   top: 50%;
                   left: 50%;
                   transform: translate(-50%, -50%);">
-                                                      <h1 style="color: white;">12</h1>
-                                                      <h3 style="color: white;">CFP</h3>
+                                                      <h1 style="color: white;">300</h1>
+                                                      <h3 style="color: white;">Total Students</h3>
                                                   </div>
 
                                               </div>
@@ -266,12 +266,12 @@ CSM Page
 
 
                                                   <img src="{% static 'images/blue.dark.png'%}">
-                                                  <div class="centered text-center" style="position: absolute;
+                                                  <div class="centered text-center" style="width:100%; position: absolute;
                   top: 50%;
                   left: 50%;
                   transform: translate(-50%, -50%);">
-                                                      <h1 style="color: white;">25</h1>
-                                                      <h3 style="color: white;">Work Tokens</h3>
+                                                      <h1 style="color: white;">120</h1>
+                                                      <h3 style="color: white;">Students Completed</h3>
                                                   </div>
 
                                               </div>
@@ -280,24 +280,7 @@ CSM Page
                                       </a>
 
 
-                                      <a>
-                                          <div class="course-card episode-card animate-this" style="width:292.5px;">
-                                              <div class="course-card-thumbnail ">
-
-
-                                                  <img src="{% static 'images/blue.dark.png'%}">
-                                                  <div class="centered text-center" style="position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);">
-                                                      <h1 style="color: white;">15</h1>
-                                                      <h3 style="color: white;">MC Credits</h3>
-                                                  </div>
-
-                                              </div>
-
-                                          </div>
-                                      </a>
+                                   
 
 
 
@@ -310,13 +293,13 @@ CSM Page
                   <div class="uk-flex uk-flex-between">
 
                     <div class="">
-                        <h2>List of Major Projects</h2>
+                        <h2>List of Courses</h2>
                     </div>
                     
                   </div>
 
                   <div class="my-3">
-                    <div class="uk-grid uk-child-width-1-4@m" uk-grid>
+                    <div class="uk-child-width-1-3@m uk-child-width-1-3@s course-card-grid uk-grid" uk-grid>
                       {% for i in courses %}
 
                       <div class="">
@@ -344,8 +327,8 @@ CSM Page
                                     <h4>{{i.title}}</h4>
                                     <p> {{i.tagline}} </p>
                                     <div class="course-card-footer">
-                                        <h5> <i class="icon-feather-film"></i> 12 Lectures </h5>
-                                        <h5> <i class="icon-feather-clock"></i> 64 Hours </h5>
+                                        <h5><span><i class="icon-feather-film"></i>{{ lessons.count }} Weeks</span></h5>
+                                        <h5> <i class="icon-feather-clock"></i>{{course_duration_hr}}hr</h5>
                                     </div>
                                 </div>
 
