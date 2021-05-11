@@ -201,15 +201,17 @@ def userCourseLesson(request, c_id):
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
         data = userProgress.objects.filter(userId_id=request.user.pk)
-
+       
         video =None
         info=None
         if not data:
-            first_data = Week.objects.filter(week_id_id=course.pk)[0]
+            first_data = Week.objects.order_by('id').first()
             info = userProgress(userId_id=request.user.pk,weekId_id=first_data.pk,status="PENDING")
             info.save()
         info = userProgress.objects.filter(userId_id=request.user.pk)
         week = Week.objects.filter(week_id_id=course.pk)
+
+
         weekUnit = Week_Unit.objects.all()
         status=None
         # start test
@@ -229,7 +231,7 @@ def userCourseLesson(request, c_id):
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
-                user_week = userProgress.objects.get(weekId_id=week)
+                user_week = userProgress.objects.get(weekId_id=week,userId_id=request.user.pk)
                 current_time = datetime.datetime.now()
                 end_date = current_time + datetime.timedelta(days=7)
                 user_week.status="STARTED"
@@ -254,15 +256,14 @@ def userCourseLesson(request, c_id):
         
         for i in week:
             for d in info:
-                if(d.weekId_id == i.pk):
+                if(d.weekId_id == i.pk , d.userId_id==request.user.pk):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
                         startTime=d.endTime
-                        print(remainingTime.days)
                         testID=False
                         if remainingTime.days <= 0:
                             testID = True
-
+                          
         if course.video_page_image == None:
             video_page_image= None
         else:
@@ -943,7 +944,7 @@ def userProjectsDesc(request):
     return render(request,'userProjectDesc.html')
 
 def unlock(request,w_id):
-    current_data = userProgress.objects.get(weekId_id=w_id)
+    current_data = userProgress.objects.get(weekId_id=w_id,userId_id=request.user.pk)
     current_data.status="COMPLETED"
     current_data.save()
     wId = int(w_id)+1
