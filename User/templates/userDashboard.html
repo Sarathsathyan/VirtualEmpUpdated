@@ -642,7 +642,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                                 <figure class="snip1543">
                                     <img src="{% static 'images/dashboard/BI.png'%}" alt="sample108" />
                                     <figcaption class="courses">
-                                        <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                        <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="validate()">START &rarr;</a></h3>
                                       </figcaption>
                                     <a href="#"></a>
                                   </figure>
@@ -659,7 +659,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                               <figure class="snip1543">
                                   <img src="{% static 'images/dashboard/PH.png'%}" alt="sample108" />
                                   <figcaption class="courses">
-                                      <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                      <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="validate()">START &rarr;</a></h3>
                                     </figcaption>
                                   <a href="#"></a>
                                 </figure>
@@ -676,7 +676,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                               <figure class="snip1543">
                                   <img src="{% static 'images/dashboard/KS.png'%}" alt="sample108" />
                                   <figcaption class="courses">
-                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">START &rarr;</a></h3>
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="validate()">START &rarr;</a></h3>
                                     </figcaption>
                                   <a href="#"></a>
                                 </figure>
@@ -747,7 +747,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                               <figure class="snip1543">
                                   <img src="{% static 'images/dashboard/resume.png'%} " alt="sample108" />
                                   <figcaption class="courses">
-                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">GET &rarr;</a></h3>
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="alert('Reach 700 SP to unlock');"GET &rarr;</a></h3>
                                     </figcaption>
                                   <a href="#"></a>
                                 </figure>
@@ -777,7 +777,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                               <figure class="snip1543">
                                   <img src="{% static 'images/dashboard/HPBG.png'%}" alt="sample108" />
                                   <figcaption class="courses">
-                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">DIVE IN!&rarr;</a></h3>
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail"  onclick="return alert('Reach 200 SP to unlock');">DIVE IN!&rarr;</a></h3>
                                     </figcaption>
                                   <a href="#"></a>
                                 </figure>
@@ -842,7 +842,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                                   <figure class="snip1543">
                                       <img src="{% static 'images/dashboard/IDEA.png'%}" alt="sample108" />
                                       <figcaption class="courses">
-                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">DIVE IN &rarr;</a></h3>
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="alert('Coming soon');">DIVE IN &rarr;</a></h3>
                                         </figcaption>
                                       <a href="#"></a>
                                     </figure>
@@ -859,7 +859,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                                   <figure class="snip1543">
                                       <img src="{% static 'images/dashboard/submitidea.png'%}" alt="sample108" />
                                       <figcaption class="courses">
-                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">SUBMIT &rarr;</a></h3>
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="alert('Coming soon');">SUBMIT &rarr;</a></h3>
                                         </figcaption>
                                       <a href="#"></a>
                                     </figure>
@@ -876,7 +876,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                                   <figure class="snip1543">
                                       <img src="{% static 'images/dashboard/viewidea.png'%}" alt="sample108" />
                                       <figcaption class="courses">
-                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" href="#">VIEW &rarr;</a></h3>
+                                     <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="alert('Coming soon');">VIEW &rarr;</a></h3>
                                         </figcaption>
                                       <a href="#"></a>
                                     </figure>
@@ -1009,6 +1009,10 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
             }, false);
 
         })(window, document);
+        function validate() {
+            alert("Reach 200 SP to unlock")
+
+        }
     </script>
 
     </body>
