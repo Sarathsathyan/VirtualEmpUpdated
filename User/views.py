@@ -197,6 +197,7 @@ def userCourseIntro(request,course_id):
 
 def userCourseLesson(request, c_id):
     if request.user.is_active:
+        user = request.user
         user_details = UserDetails.objects.get(user_id=request.user.pk)
         current_time = datetime.datetime.now(timezone.utc)
         course = Course.objects.get(id=c_id)
@@ -229,7 +230,7 @@ def userCourseLesson(request, c_id):
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
-                user_week = userProgress.objects.get(weekId_id=week)
+                user_week = userProgress.objects.get(weekId_id=week,userId_id= request.user.pk)
                 current_time = datetime.datetime.now()
                 end_date = current_time + datetime.timedelta(days=7)
                 user_week.status="STARTED"
@@ -254,7 +255,7 @@ def userCourseLesson(request, c_id):
         
         for i in week:
             for d in info:
-                if(d.weekId_id == i.pk):
+                if(d.weekId_id == i.pk ,d.userId_id==user.pk):
                     if(d.endTime):
                         remainingTime = d.endTime - current_time
                         startTime=d.endTime

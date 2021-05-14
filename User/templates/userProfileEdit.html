@@ -237,7 +237,7 @@
                                         {% if user.user_id_id == user_detail.pk %}
                                             {% if user.user_pic %}
                                                 <div class="user-profile-photo-edit  m-auto" style="height:220px; width:220px;">
-                                                    <img src="{{ user.user_pic.url }}"  alt="">
+                                                    <img src="{{ user.user_pic.url }}"  alt="" id="change_pic">
                                                 </div>
                                             {% else %}
                                                 <div class="user-profile-photo-edit  m-auto" style="height:220px; width:220px;">
@@ -262,7 +262,8 @@
                             </div>
                         </div>
                     <span id="custom-text">No file chosen</span>
-                        <button class="btn btn-default m-auto mb-3" type="submit" name="photo">Edit Profile Picture</button>
+                        <button class="btn btn-default m-auto mb-3" type="submit" name="photo" id="edit_pic">Save</button>
+
                     </div>
                     <p>For the best results use an image of at least 128px*128px in .jpg format </p>
                                     <script type="text/javascript">
@@ -1156,6 +1157,19 @@
 
 
         };
+    </script>
+    <script>
+    edit_pic = document.getElementById("edit_pic")
+    edit_pic.style.display="none"
+    real_file = document.getElementById("real-file")
+    change_pic = document.getElementById("change_pic")
+    real_file.onchange = evt => {
+        const [file] = real_file.files
+        if (file) {
+            change_pic.src = URL.createObjectURL(file)
+            edit_pic.style.display="block"
+        }
+    }
     </script>
 
 {% endblock %}
