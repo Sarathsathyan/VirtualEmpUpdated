@@ -226,7 +226,7 @@ def userCourseLesson(request, c_id):
                         end_time = datetime.datetime.now()
                         data = userCompProgress.objects.create(userId_id=request.user.pk,endTime=end_time,status= status, prgressId_id=user_ob.pk, partName=partweek)
                         data.save()
-            
+
         if request.method == 'POST':
             if 'start' in request.POST:
                 week = request.POST['weekId']
@@ -252,7 +252,7 @@ def userCourseLesson(request, c_id):
                 video = video.unit_video3
         remainingTime = 7
         startTime=current_time
-        
+
         for i in week:
             for d in info:
                 if(d.weekId_id == i.pk ,d.userId_id==user.pk):
@@ -1166,3 +1166,6 @@ def userblogsdetail(request,id):
         messages.error(request,"Wrong URL")
         return redirect('logout')
     return render(request,'user_blog_detail.html',context)
+
+def displayOnlineCourse(request):
+    return render(request,'displayOnlineCourse.html')

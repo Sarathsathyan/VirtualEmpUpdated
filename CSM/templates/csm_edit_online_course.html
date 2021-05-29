@@ -33,24 +33,80 @@ CSM Page
                     <nav id="breadcrumbs" class="mb-3">
                         <ul>
                             <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
-                            <li><a href="#"> Dashboard </a></li>
+                            <li><a href="#"> Online Course </a></li>
                         </ul>
                     </nav>
                 </div>
 
 
 
-
-                <div class="uk-grid">
-                  {% include 'partials/_alert.html' %}
-                  <div class="mt-3 ">
-                    <a class="btn btn-default btn-lg " href="{% url 'chooseType' %}">Create Course</a>
-                  </div>
-
-                  <div class="mt-3 ">
-                    <a class="btn btn-default btn-lg " href="{% url 'chooseTypeOnline' %}">Create Online Course</a>
-                  </div>
+              <div class="uk-card-default rounded" style="width: 95%">
+                <div class=" py-2 px-4">
+                    <h4 class="mb-0">Create Course</h4>
                 </div>
+                <hr class="m-0">
+                  <form class="uk-width-expand uk-form-horizontal uk-grid-small p-4" method="POST"  uk-grid enctype="multipart/form-data" >
+                      {% csrf_token %}
+                    <div class="uk-width-1-2@m px-2">
+
+                      <div class="m-3">
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Course Title</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="form-horizontal-text" type="text" name="project_title" placeholder="Some text...">
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                          <label class="uk-form-label" for="form-horizontal-text">Course Description</label>
+                          <div class="uk-form-controls">
+                           <textarea class="uk-textarea" rows="5" name="project_description" placeholder="Enter Description"></textarea>
+                          </div>
+                        </div>
+
+                      </div>
+
+
+                    </div>
+
+
+                    <div class="uk-width-1-2@m px-2">
+
+                      <div class="m-3">
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Date & Time</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="form-horizontal-text" type="datetime-local" name="data_time" >
+                            </div>
+                        </div>
+
+
+                        <h4 class="uk-text-bold mb-2"> Enter the Links </h4>
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Online Classes</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="form-horizontal-text" type="text" name="project_category" value="{{obj.create_category}}" >
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Test MCQ</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="form-horizontal-text" type="text" name="project_role" value="{{obj.create_role}}" >
+                            </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class=" mx-auto mt-3">
+                      <button class="btn btn-default px-5" name="project_submit">Save</button>
+                    </div>
+                  </form>
+
+              </div>
 
 
                   <div class="uk-width-3-4@m my-5" style="width: 95%">
@@ -62,13 +118,13 @@ CSM Page
                               <div class="text-center">
 
                                 <div class="my-auto">
-                                    <legend class="uk-legend">Courses</legend>
+                                    <legend class="uk-legend">Online Courses</legend>
                                 </div>
                               </div>
 
                               <hr style="width:70% mx-auto mt-0">
 
-                              <table class="uk-table uk-table-divider uk-table-striped">
+                              <table class="uk-table uk-table-divider uk-table-striped mt-0">
 
                                 <thead>
                                     <tr>
@@ -84,23 +140,42 @@ CSM Page
                                 <tbody>
 
 
-                                    {% for course in courses %}
                                         <form>
                                     <tr>
-                                        <td>C_ID{{course.id}}</td>
-                                        <td>{{course.title}}</td>
-                                        <td>{{course.category}}</td>
-{#                                        <td>{{course.created}}</td>#}
-                                        <td><a class="uk-button-dark btn btn-dark" href="{% url 'csmEdit' course.pk %}" type="button" name="Edit">Edit</a></td>
+                                        <td>C_ID115151</td>
+                                        <td>Welcome To Css</td>
+                                        <td>WebDev</td>
+<!-- {#                                        <td>{{course.created}}</td>#} -->
+                                        <td><a class="uk-button-success btn btn-success" href="">Start</a></td>
+                                        <td><a class="uk-button-dark btn btn-dark" href="" type="button" name="Edit">Edit</a></td>
 
-                                        <td><a class="uk-button-success btn btn-success" href="{% url 'csmAddCurriculam' course.pk %}">Add Curriculum</a></td>
+
 {#                                        <td><button class="uk-button-red btn btn-alert" type="button" name="Remove">Add Quiz</button></td>#}
-{#                                         <td><a class="uk-button-success btn btn-success" href="{% url 'csmAddQuiz' course.pk %}">Add Quizz</a></td>#}
+{#                                         <td><a class="uk-button-success btn btn-success" href="">Add Quizz</a></td>#}
                                         <td><button class="uk-button-danger btn btn-alert" type="button"  uk-toggle="target: #modal-example">Delete</button></td>
                                             <!-- <i class="icon-feather-delete"></i> -->
                                             <i class="icon-line-awesome-close" style="color: white"></i></a></td>
 
                                     </tr>
+
+                                    <tr>
+                                        <td>C_ID115151</td>
+                                        <td>Welcome To Css</td>
+                                        <td>WebDev</td>
+<!-- {#                                        <td>{{course.created}}</td>#} -->
+                                        <td><a class="uk-button-success btn btn-success" href="">Start</a></td>
+                                        <td><a class="uk-button-dark btn btn-dark" href="" type="button" name="Edit">Edit</a></td>
+
+
+{#                                        <td><button class="uk-button-red btn btn-alert" type="button" name="Remove">Add Quiz</button></td>#}
+{#                                         <td><a class="uk-button-success btn btn-success" href="">Add Quizz</a></td>#}
+                                        <td><button class="uk-button-danger btn btn-alert" type="button"  uk-toggle="target: #modal-example">Delete</button></td>
+                                            <!-- <i class="icon-feather-delete"></i> -->
+                                            <i class="icon-line-awesome-close" style="color: white"></i></a></td>
+
+                                    </tr>
+
+
                                         </form>
                                          <div id="modal-example" uk-modal>
                                             <div class="uk-modal-dialog uk-modal-body">
@@ -118,7 +193,7 @@ CSM Page
                                               </form>
                                             </div>
                                         </div>
-                                    {% endfor %}
+
                               </tbody>
                               </table>
                             </fieldset>
