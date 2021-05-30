@@ -12,6 +12,7 @@ urlpatterns = [
     path('userQuizz/<int:w_id>/', views.userQuizz, name="userquizz"),
     path('user_blog_page/',views.user_blog_page,name='user_blog_page'),
     path('userblogsdetail/<int:id>',views.userblogsdetail,name='userblogsdetail'),
+    path('displayOnlineCourse/',views.displayOnlineCourse,name='displayOnlineCourse'),
 
 
     path('userResult/', views.userResult, name="userResult"),

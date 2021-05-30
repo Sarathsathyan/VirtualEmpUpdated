@@ -1,0 +1,842 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+CSM Add courses
+{% endblock %}
+{% block content %}
+
+    <div id="wrapper" class="admin-panel">
+
+        <!-- menu -->
+        <div class="page-menu">
+            <!-- btn close on small devices -->
+            <span class="btn-menu-close" uk-toggle="target: #wrapper ; cls: mobile-active"></span>
+            <!-- traiger btn -->
+            <span class="btn-menu-trigger" uk-toggle="target: .page-menu ; cls: menu-large"></span>
+
+            <!-- logo -->
+            <div class="logo uk-visible@s">
+                <a href="{% url 'csmdashboard' %}" class="logo">
+                            <img src="{% static 'images/VES.png' %}" alt="">
+
+                        </a>
+
+            </div>
+            <div class="page-menu-inner" data-simplebar>
+                <ul class="mt-0">
+                  <li><a href="{% url 'csmdashboard' %}"><i class="uil-home-alt"></i> <span> Dashboard</span></a> </li>
+                   </li>
+                  <li><a href=""><i class="uil-envelope-alt"></i> <span> Message</span></a> </li>
+                </ul>
+
+
+
+            </div>
+        </div>
+
+        <!-- Header Container
+        ================================================== -->
+        {% include 'csm-tl-project_partials/_csm_header.html' %}
+
+        <!-- content -->
+        <div class="page-content">
+            <div class="page-content-inner">
+
+                <div class="d-flex">
+                    <nav id="breadcrumbs" class="mb-3">
+                        <ul>
+                            <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
+                            <li><a href="{% url 'csmdashboard' %}"> Course </a></li>
+                            <li>Create New Course</li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="card">
+                    <div class="card-header border-bottom-0 py-4">
+                        <h5> Course Manager </h5>
+                    </div>
+                    <ul class="uk-child-width-expand uk-tab"
+                        uk-switcher="connect: #course-edit-tab ; animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
+                        <li class="uk-active"><a href="#"> Basic</a></li>
+<!-- {#                        <li><a href="#"> Curriculum</a></li>#} -->
+                        <li><a href="#">Trainee Data</a></li>
+                        <li><a href="#">Prerequisites</a></li>
+                        <li><a href="#">Rewards</a></li>
+                        <li><a href="#">Finish</a></li>
+                    </ul>
+                    <form method="POST"  enctype="multipart/form-data" onsubmit="return validateForm()" name="myForm">
+                    <div class="card-body">
+                        <ul class="uk-switcher uk-margin" id="course-edit-tab">
+
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-xl-9 m-auto">
+{#             Form                           #}
+
+                                        {% csrf_token %}
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="course_title">Course title<span
+                                                    class="required">*</span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" id="course_title" name="title"
+                                                    placeholder="Enter course title" >
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="course_title">Course Instructor<span
+                                                    class="required">*</span></label>
+                                            <div class="col-md-9">
+                                                <select  name="instructor">
+                                                    <option selected disabled>Choose Instructor</option>
+                                                    {% for i in inst %}
+                                                      {% if i.user_role == "Instructor" %}
+                                                      <option value="{{i.role_user_name}}" > {{i.user_id.first_name}} </option>
+                                                      {% else %}
+                                                      <!-- <option value="{{i.role_user_name}}"> {{i.role_user_name}} </option> -->
+                                                      {% endif %}
+                                                    {% endfor %}
+                                                  </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="course_title">Course tagline<span
+                                                    class="required">*</span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" id="course_title" name="tagline"
+                                                    placeholder="Enter short tagline">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="short_description">Short
+                                                description</label>
+                                            <div class="col-md-9">
+                                                <textarea name="description" id="short_description"
+                                                    class="form-control" placeholder="Enter Description Here"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="short_description">Course Image</label>
+                                            <div class="col-md-9">
+                                                <input type="file" id="real-file" name="course_image"
+                                                 hidden="hidden"/>
+                                             <a class="btn btn-default mb-3"  onclick="" id="Upload-button"> <i
+                                                class='uil-plus'></i>Upload</a>
+                                                <span id="custom-text">No file choosen</span>
+
+                                                <script type="text/javascript">
+                                const realFileBtn = document.getElementById("real-file");
+                                const CustomBtn = document.getElementById("Upload-button");
+                                const customTxt = document.getElementById("custom-text");
+                                                CustomBtn.addEventListener ("click", function() {
+                                                realFileBtn.click()
+
+                                                });
+
+                                                realFileBtn.addEventListener("change", function() {
+                                              if (realFileBtn.value) {
+                                                customTxt.innerHTML = realFileBtn.value.match(
+                                                  /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                                                )[1];
+                                              } else {
+                                                customTxt.innerHTML = "No file chosen, yet.";
+                                              }
+                                            });
+
+                                                </script>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="short_description">Video Page Image</label>
+                                            <div class="col-md-9">
+                                                <input type="file" id="real-file-videoimage" name=" video_page_image"
+                                                 hidden="hidden"/>
+                                             <a class="btn btn-default mb-3"  onclick="" id="Upload-button-videoimage"> <i
+                                                class='uil-plus'></i>Upload</a>
+                                                <span id="custom-text-videoimage">No file choosen</span>
+
+                                                <script type="text/javascript">
+                                const realFileBtn_videoimage = document.getElementById("real-file-videoimage");
+                                const CustomBtn_videoimage = document.getElementById("Upload-button-videoimage");
+                                const customTxt_videoimage = document.getElementById("custom-text-videoimage");
+                                                CustomBtn_videoimage.addEventListener ("click", function() {
+                                                realFileBtn_videoimage.click()
+
+                                                });
+
+                                                realFileBtn_videoimage.addEventListener("change", function() {
+                                              if (realFileBtn_videoimage.value) {
+                                                customTxt_videoimage.innerHTML = realFileBtn_videoimage.value.match(
+                                                  /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                                                )[1];
+                                              } else {
+                                                customTxt_videoimage.innerHTML = "No file chosen, yet.";
+                                              }
+                                            });
+
+                                                </script>
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="course_title">Category<span
+                                                    class="required">*</span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" id="course_title" name="category"
+                                                    value="{{data.create_category}}" required="" style="border:none;" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="course_title">Sub category<span
+                                                    class="required">*</span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" id="course_title" name="role"
+                                                    value="{{data.create_sub}}" required="" style="border:none;" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="course_title">CFP  Course<span
+                                                    class="required">*</span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" id="course_title" name="course"
+                                                    value="{{data.create_course}}" required="" style="border:none;" readonly>
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" > Difficulty Level <span
+                                                    class="required">*</span></label>
+                                            <div class="col-md-9">
+
+                                                <select name="difficulty_level" class="selectpicker">
+                                                    <option value="begin"> Beginner </option>
+                                                    <option value="inter"> Intermediate </option>
+                                                    <option value="adv"> Advanced</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        -->
+                                    </div>
+                                </div>
+                            </li>
+
+{#  Curriculam   #}
+
+{#                            <li>#}
+{##}
+{#                                <div class="row my-3">#}
+{##}
+{#                                  <div class="col-xl-10 m-auto">#}
+{#								    <div class="row">#}
+{##}
+{#                                      <div class="col-xl-10 m-auto lesson_block">#}
+{#                                        <h3>Lessons</h3>#}
+{#                                         <button class="btn btn-default my-3 add_lesson_btn" > Add Lesson </button>#}
+{##}
+{#                                        <ul class="c-curriculum" uk-accordion>#}
+{##}
+{#                                            <li class="uk-open" id="lesson-module">#}
+{#                                                    <a class="uk-accordion-title" href="#"> <i class="uil-folder">#}
+{#                                                  </i><span id="editLesson" contenteditable="True">Lesson title</span></a>#}
+{##}
+{##}
+{#                                                <div class="action-btn">#}
+{#                                                    <a href="#"  class="add_topic_btn"> <i class="uil-plus">  </i> Add Topic </a>#}
+{##}
+{#                                                    <a href="#" class="close-lesson"><i class="icon-feather-x"></i></a>#}
+{#                                                </div>#}
+{#                                                <div class="uk-accordion-content" >#}
+{#                                                    <ul class="sec-list" uk-sortable="handle: .uk-sortable-handle">#}
+{#                                                        <li>#}
+{#                                                            <div class="sec-list-item" id="topic-module">#}
+{#                                                                <div class="uk-width-expand"> <i class="uil-list-ul uk-sortable-handle"></i>#}
+{#                                                                    <label class="mb-0 mx-2">#}
+{#                                                                        <input class="uk-checkbox" type="checkbox">#}
+{#                                                                    </label>#}
+{##}
+{#                                                                    <input class=" uk-input my-auto uk-width-expand " type="text" style="border:none;" name="topic" placeholder="Topic">#}
+{#                                                                </div>#}
+{#                                                                <div>#}
+{#                                                                    <div class="btn-act">#}
+{#                                                                      <div class="aaa">#}
+{#                                                                        <label for="file-input">#}
+{#                                                                       <i class="uil-cloud-download"></i></label>#}
+{##}
+{#                                                                        <input type="file" id="file-input" style="display:none;"/>#}
+{#                                                                      </div>#}
+{##}
+{#                                                                        <a href="#" class="close-topic"><i class="icon-feather-x"></i></a>#}
+{#                                                                    </div>#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </li>#}
+{#                                        </ul>#}
+{##}
+{##}
+{#                                  </div>#}
+{#                                  <!-- end of lesson block -->#}
+{##}
+{#                                  <div class="col-xl-10 m-auto quiz_block">#}
+{##}
+{#                                     <button class="btn btn-default my-3 add_quiz_btn" > Add Quiz </button>#}
+{##}
+{#                                    <ul class="c-curriculum" uk-accordion>#}
+{##}
+{#                                        <li class="uk-open" id="quiz-module">#}
+{##}
+{#                                            <div class="uk-accordion-content" >#}
+{#                                                <ul class="sec-list">#}
+{#                                                    <li>#}
+{#                                                        <div class="sec-list-item" id="quiz-question">#}
+{#                                                            <div class="uk-width-expand">#}
+{#                                                                <label for="number">#}
+{#                                                                    <p id="number">1</p>#}
+{#                                                                </label>#}
+{#                                                                <input class=" uk-input my-auto uk-width-expand " type="text" style="border:none;" name="question" placeholder="Enter your question here">#}
+{#                                                            </div>#}
+{##}
+{#                                                            <div>#}
+{#                                                                <div class="btn-act">#}
+{#                                                                  <div class="right-buttons">#}
+{##}
+{#                                                                    <a href="#" class="close-topic"><i class="icon-feather-x"></i></a>#}
+{##}
+{#                                                                  </div>#}
+{#                                                                </div>#}
+{#                                                                <div class="options">#}
+{#                                                                    <div class="first-section">#}
+{##}
+{#                                                                        <label class="mb-0 mx-2">#}
+{#                                                                            <input class="uk-checkbox" type="checkbox">#}
+{#                                                                        </label>#}
+{#                                                                        <input class=" uk-input my-auto uk-child-width-expand " type="text" style="border:none;" name="option1" id="option1" placeholder="Option A">#}
+{#                                                                        <label class="mb-0 mx-2">#}
+{#                                                                            <input class="uk-checkbox" type="checkbox">#}
+{#                                                                        </label>#}
+{#                                                                        <input class=" uk-input my-auto uk-child-width-expand " type="text" style="border:none;" name="option2" id="option2" placeholder="Option B">#}
+{#                                                                    </div>#}
+{#                                                                    <br>#}
+{#                                                                    <div class="last-section">#}
+{##}
+{#                                                                        <label class="mb-0 mx-2">#}
+{#                                                                            <input class="uk-checkbox" type="checkbox">#}
+{#                                                                        </label>#}
+{#                                                                        <input class=" uk-input my-auto uk-child-width-expand " type="text" style="border:none;" name="option3" id="option3" placeholder="Option C">#}
+{#                                                                        <label class="mb-0 mx-2">#}
+{#                                                                            <input class="uk-checkbox" type="checkbox">#}
+{#                                                                        </label>#}
+{#                                                                        <input class=" uk-input my-auto uk-child-width-expand " type="text" style="border:none;" name="option4" id="option4" placeholder="Option D">#}
+{##}
+{#                                                                    </div>#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{##}
+{##}
+{#                              </div>#}
+{##}
+{##}
+{#                              <!-- end of quiz block -->#}
+{#                                </div>#}
+{#                              </div>#}
+{#                            </div>#}
+{##}
+{##}
+{##}
+{#                            </li>#}
+
+
+
+
+
+
+
+                            <li>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-9">
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="website_keywords">Trainee Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control bootstrap-tag-input"
+                                                    name="meta_keywordss" data-role="tagsinput"
+                                                    style="width: 100%; display: none;">
+                                                 <!--     <input type="text" class="form-control"
+                                                    name="meta_keywords"
+                                                    style="width: 100%;"> -->
+                                                <div class="bootstrap-tagsinput"><input size="1" type="text"
+                                                        placeholder="" name="trainee_name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end col -->
+                                    <div class="col-xl-9">
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label" for="meta_description">Trainee Bio</label>
+                                            <div class="col-md-9">
+                                                <input type="text"  name="trainee_bio" class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+
+                            </li>
+
+
+
+                           <li>
+
+
+                                                          <!-- Add Requirements Section -->
+
+
+                                                                  <div class="row justify-content-center">
+                                                                      <div class="col-xl-9">
+
+                                                                              <a class="btn btn-default text-white  mb-3" type="button" id="addRequirementRow" onclick="addRequirementRow()"><i
+                                                                                      class='uil-plus'></i>Requirements</a>
+
+
+
+                                                                              <table id="RequirementTable" class="uk-width-expand">
+                                                                                <thead>
+                                                                                  <tr>
+                                                                                    <td><input type='text' class='uk-input1'
+                                                                                        placeholder="Any computer will work: Windows, macOS or Linux"></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td><input type='text' class='uk-input1'
+                                                                                        placeholder="Basic programming HTML and CSS."></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td><input type='text' class='uk-input1'
+                                                                                        placeholder="Basic/Minimal understanding of JavaScript"></td>
+                                                                                  </tr>
+                                                                                </thead>
+                                                                              </table>
+
+
+                                                                              <!-- Hidem Input for Requirements -->
+                                                                              <input type="hidden" name="req" id="rout" name="req-string" value='Output:'>
+
+                                                                      </div>
+                                                                  </div>
+
+                                                                  <!-- Javascript For Add Requirements -->
+                                                                  <script>
+
+                                                                      // now, add a new to the TABLE.
+                                                                      function addRequirementRow() {
+                                                                          var empTab = document.getElementById('RequirementTable');
+
+                                                                          var rowCnt = empTab.rows.length;   // table row count.
+                                                                          var tr = empTab.insertRow(rowCnt); // the table row.
+                                                                          tr = empTab.insertRow(rowCnt);
+
+                                                                          for (var c = 0; c < 1; c++) {
+                                                                              var td = document.createElement('td'); // table definition.
+                                                                              td = tr.insertCell(c);
+                                                                                  var ele = document.createElement('input');
+                                                                                  ele.setAttribute('type', 'text');
+                                                                                  ele.setAttribute('placeholder', 'Other Requirements...');
+                                                                                  td.appendChild(ele);
+
+                                                                          }
+                                                                      }
+
+
+                                                                      // function to extract and submit table data.
+                                                                      function Reqsubmit() {
+                                                                          var myTab = document.getElementById('RequirementTable');
+                                                                          var arrValues =new Array()
+
+                                                                          // loop through each row of the table.
+                                                                          for (row = 0; row < myTab.rows.length ; row++) {
+                                                                            // loop through each cell in a row.
+                                                                              for (c = 0; c < myTab.rows[row].cells.length; c++) {
+                                                                                  var element = myTab.rows.item(row).cells[c];
+                                                                                  if (element.childNodes[0].getAttribute('type') == 'text') {
+                                                                                      arrValues.push(element.childNodes[0].value);
+                                                                                  }
+                                                                              }
+                                                                          }
+
+                                                                          var str="";
+                                                                          for(i=0;i<arrValues.length;i++)
+                                                                          {
+                                                                            str=str.concat(arrValues[i])
+                                                                            str=str+'_';
+                                                                          }
+
+                                                                          req_str=str.substring(0,str.length-1)
+
+                                                                          // The final output.
+                                                                          // document.getElementById('Reqoutput').innerHTML = req_str;
+
+                                                                          var ele1=document.getElementById('rout');
+                                                                          ele1.setAttribute('value',req_str);
+                                                                      }
+                                                                  </script>
+                                                          <!-- Add Requirements Section Ends-->
+
+
+
+
+
+                                                          <!-- Add What Will You Learn Section Starts-->
+
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-xl-9">
+
+                                                                              <a class="btn btn-default text-white mb-3" type="button" id="addLearnRow" onclick="addLearnRow()"><i
+                                                                                      class='uil-plus'></i>What Will You Learn</a>
+
+
+
+                                                                              <table id="LearnTable" class="uk-width-expand">
+                                                                                <thead>
+                                                                                  <tr>
+                                                                                    <td><input type='text' class='uk-input1'
+                                                                                        placeholder="Any computer will work: Windows, macOS or Linux"></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td><input type='text' class='uk-input1'
+                                                                                        placeholder="Basic programming HTML and CSS."></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td><input type='text' class='uk-input1'
+                                                                                        placeholder="Basic/Minimal understanding of JavaScript"></td>
+                                                                                  </tr>
+                                                                                </thead>
+                                                                              </table>
+
+                                                                              <!-- Hidem Input for What do you learn -->
+                                                                              <input type="hidden" name="learn" id="lout" name="learn-string" value='Output:''>
+
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <!-- Javascript for What will you Learn -->
+                                                                <script>
+                                                                    // now, add a new to the TABLE.
+                                                                    function addLearnRow() {
+                                                                        var empTab = document.getElementById('LearnTable');
+
+                                                                        var rowCnt = empTab.rows.length;   // table row count.
+                                                                        var tr = empTab.insertRow(rowCnt); // the table row.
+                                                                        tr = empTab.insertRow(rowCnt);
+
+                                                                        for (var c = 0; c < 1; c++) {
+                                                                            var td = document.createElement('td'); // table definition.
+                                                                            td = tr.insertCell(c);
+                                                                                var ele = document.createElement('input');
+                                                                                ele.setAttribute('type', 'text');
+                                                                                ele.setAttribute('placeholder', 'Other Requirements...');
+                                                                                td.appendChild(ele);
+
+                                                                        }
+                                                                    }
+
+
+                                                                    // function to extract and submit table data.
+                                                                    function Learnsubmit() {
+                                                                        var myTab = document.getElementById('LearnTable');
+                                                                        var arrValues =new Array()
+
+                                                                        // loop through each row of the table.
+                                                                        for (row = 0; row < myTab.rows.length ; row++) {
+                                                                          // loop through each cell in a row.
+                                                                            for (c = 0; c < myTab.rows[row].cells.length; c++) {
+                                                                                var element = myTab.rows.item(row).cells[c];
+                                                                                if (element.childNodes[0].getAttribute('type') == 'text') {
+                                                                                    arrValues.push(element.childNodes[0].value);
+                                                                                }
+                                                                            }
+                                                                        }
+
+                                                                        var str="";
+                                                                        for(i=0;i<arrValues.length;i++)
+                                                                        {
+                                                                          str=str.concat(arrValues[i])
+                                                                          str=str+'_';
+                                                                        }
+
+                                                                        learn_str=str.substring(0,str.length-1)
+
+                                                                        // The final output.
+                                                                        // document.getElementById('Learnoutput').innerHTML = learn_str;
+
+
+                                                                        var ele1=document.getElementById('lout');
+                                                                        ele1.setAttribute('value',learn_str);
+                                                                    }
+                                                                </script>
+
+                                                        <!-- Add What Will You Learn Section Ends-->
+
+
+
+                            </li>
+
+
+
+
+                            <li>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-9">
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label">Course Points</label>
+                                            <div class="col-md-9">
+                                                <input type="number" class="form-control" name="course_points" placeholder="Enter Points">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-9">
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label">XP Points Per Question</label>
+                                            <div class="col-md-9">
+                                                <input type="number" class="form-control" name="xp_points_perq" placeholder="Enter Points">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-9">
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                        <div class="form-group row mb-3">
+                                            <label class="col-md-3 col-form-label">Certificate</label>
+                                            <div class="col-md-9">
+                                                <label for="certificate" class="btn btn-default">
+                                                    <i class='uil-plus'></i>Upload</label>
+
+                                                    <input id="certificate" name='upload_cont_img' type="file" style="display:none;">
+                                                    <label class="col-form-label" id="uploadFile"></label>
+                                            </div>
+                                        </div>
+                                        </form>
+                                        <script>
+                                            // document.getElementById("certificate").onchange = function() {
+                                            // document.getElementById("uploadFile").value = this.value;
+                                            // };
+                                            document.querySelector("#certificate").onchange = function(){
+                                            document.querySelector("#uploadFile").textContent = this.files[0].name;
+                                            }
+
+                                        </script>
+                                    </div>
+                                </div>
+
+                            </li>
+
+
+
+                            <li>
+                                <div class="row">
+                                    <div class="col-12 my-lg-5">
+                                        <div class="text-center">
+                                            <h2 class="mt-0"><i class="icon-feather-check-circle text-success"></i></h2>
+                                            <h3 class="mt-0">Done !</h3>
+
+                                            <p class="w-75 mb-2 mx-auto"> Submit This Course For Reweiw  </p>
+
+                                            <div class="mb-3 mt-3">
+                                                <input type="submit" class="btn btn-default" name="course_submit"  onclick="Learnsubmit(); Reqsubmit();">
+                                            </div>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    </form>
+
+                    </div>     <!--End Of card body -->
+                </div>         <!--End Of card -->
+
+
+
+
+                <!-- footer
+                ================================================== -->
+                {% include 'partials/_footer.html' %}
+
+
+
+<!-- add lessson div clone hidden element hari -->
+<div style="display:none" class="clone_lesson_div">
+<ul class="c-curriculum" uk-accordion >
+
+	<li class="uk-open" id="lesson-module">
+
+		<a class="uk-accordion-title" href="#"> <i class="uil-folder"></i>
+			<span id="editLesson" contenteditable="True">Lesson title</span></a>
+
+		<div class="action-btn">
+			<a href="#" class="add_topic_btn"> <i class="uil-plus">  </i> Add Topic </a>
+
+			<a href="#" class="close-lesson"><i class="icon-feather-x"></i></a>
+		</div>
+		<div class="uk-accordion-content" >
+			<ul class="sec-list" uk-sortable="handle: .uk-sortable-handle">
+				<li>
+					<div class="sec-list-item" >
+						<div  class="uk-width-expand"> <i class="uil-list-ul uk-sortable-handle"></i>
+							<label class="mb-0 mx-2">
+								<input class="uk-checkbox" type="checkbox">
+							</label>
+							<input type="text" class=" uk-input my-auto uk-width-expand " type="text" style="border:none;" name="topic" placeholder="Topic">
+						</div>
+						<div>
+              <div class="btn-act">
+                <div class="aaa">
+                  <label for="file-input">
+                 <i class="uil-cloud-download"/></i></label>
+                  <input type="file" id="file-input" style="display:none;"/>
+                </div>
+                  <a href="#" class="close-topic"><i class="icon-feather-x"></i></a>
+              </div>
+						</div>
+					</div>
+				</li>
+
+
+			</ul>
+		</div>
+	</li>
+</ul>
+</div>
+
+<div style="display:none" class="clone_topic_div">
+		<li>
+			<div class="sec-list-item" id="topic-module">
+				<div  class="uk-width-expand"> <i class="uil-list-ul uk-sortable-handle"></i>
+					<label class="mb-0 mx-2">
+						<input class="uk-checkbox" type="checkbox">
+					</label>
+					  <input class=" uk-input my-auto uk-width-expand " type="text" style="border:none;" name="topic" placeholder="Topic">
+				</div>
+				<div>
+          <div class="btn-act">
+            <div class="aaa">
+              <label for="file-input">
+             <i class="uil-cloud-download"/></i></label>
+              <input type="file" id="file-input" style="display:none;"/>
+            </div>
+              <a href="#" class="close-topic"><i class="icon-feather-x"></i></a>
+          </div>
+				</div>
+			</div>
+		</li>
+
+</div>
+<!-- add lessson div clone hidden element hari-->
+
+
+        <!-- For Night mode -->
+        <script>
+            (function (window, document, undefined) {
+                'use strict';
+                if (!('localStorage' in window)) return;
+                var nightMode = localStorage.getItem('gmtNightMode');
+                if (nightMode) {
+                    document.documentElement.className += ' night-mode';
+                }
+            })(window, document);
+
+
+            (function (window, document, undefined) {
+
+                'use strict';
+
+                // Feature test
+                if (!('localStorage' in window)) return;
+
+                // Get our newly insert toggle
+                var nightMode = document.querySelector('#night-mode');
+                if (!nightMode) return;
+
+                // When clicked, toggle night mode on or off
+                nightMode.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    document.documentElement.classList.toggle('night-mode');
+                    if (document.documentElement.classList.contains('night-mode')) {
+                        localStorage.setItem('gmtNightMode', true);
+                        return;
+                    }
+                    localStorage.removeItem('gmtNightMode');
+                }, false);
+
+            })(window, document);
+
+
+
+              function validateForm() {
+
+                var title = document.forms["myForm"]["title"].value;
+                var tagline= document.forms["myForm"]["tagline"].value;
+                var instructor_name = document.forms["myForm"]["instructor_name"].value;
+                var coursepoints = document.forms["myForm"]["course_points"].value;
+                var traineename = document.forms["myForm"]["trainee_name"].value;
+                var traineebio= document.forms["myForm"]["trainee_bio"].value;
+                var courseimage=document.forms['myForm']['real-file'].value;
+                if (title == "") {
+                alert("Course Title must not be empty");
+                return false;
+                }
+
+                if (instructor_name == "Choose Instructor") {
+                alert("Instructor must not be empty");
+                return false;
+                }
+
+                if (tagline == "") {
+                alert("Course Tagline must not be empty");
+                return false;
+                }
+                if (courseimage == "") {
+                alert("No course image selected");
+                return false;
+                }
+
+                if (coursepoints == "") {
+                alert("Please! Enter Course Points");
+                return false;
+                }
+                if (traineename == "") {
+                alert("Please! Enter Trainee Name");
+                return false;
+                }
+                if (traineebio == "") {
+                alert("Please! Enter Trainee Bio");
+                return false;
+                }
+            }
+        </script>
+
+            </div>
+        </div>
+</div>
+
+
+{% endblock %}

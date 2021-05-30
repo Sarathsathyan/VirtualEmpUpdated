@@ -95,6 +95,10 @@ def chooseType(request):
     }
     return render(request,'choseType.html',context)
 
+
+def chooseTypeOnline(request):
+    return render(request,'choseTypeOnline.html')
+
 def csmAddCourse(request,cat_id):
     if request.user.is_active:
         user = request.user
@@ -138,6 +142,14 @@ def csmAddCourse(request,cat_id):
             'inst':inst
         }
         return render(request,'csm_add_course.html',context)
+
+
+
+def csmAddOnlineCourse(request,cat_id):
+    if request.user.is_active:
+        return render(request,'csm_add_online_course.html')
+
+
 
 def csmEdit(request, course_id):
     if request.user.is_active:
@@ -380,3 +392,7 @@ def trainee_dashboard(request):
         'courses': course_object
     }
     return render(request,'trainee_dashboard.html',context)
+
+
+def csmEditOnlineCourse(request):
+    return render(request,'csm_edit_online_course.html')
