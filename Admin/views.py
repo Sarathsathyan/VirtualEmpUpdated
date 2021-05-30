@@ -38,6 +38,7 @@ def userLogin(request):
             print(user.is_superuser)
             if request.user.is_staff and request.user.is_superuser:
                 print('Welcome admin')
+
                 return redirect('admindashboard')
             else:
                 try:
