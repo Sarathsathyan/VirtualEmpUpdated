@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Add curriculum
+{% endblock %}
+{% block content %}
+
+<div id="wrapper" class="admin-panel">
+
+    <!-- menu -->
+    <div class="page-menu">
+        <!-- btn close on small devices -->
+        <span class="btn-menu-close" uk-toggle="target: #wrapper ; cls: mobile-active"></span>
+        <!-- traiger btn -->
+        <span class="btn-menu-trigger" uk-toggle="target: .page-menu ; cls: menu-large"></span>
+
+        <!-- logo -->
+        <div class="logo uk-visible@s">
+            <a href="{% url 'csmdashboard' %}" class="logo">
+                <img src="{% static 'images/VES.png' %}" alt="">
+
+            </a>
+
+        </div>
+        <div class="page-menu-inner" data-simplebar>
+            <ul class="mt-0">
+                <li><a href="{% url 'csmdashboard' %}"><i class="uil-home-alt"></i> <span> Dashboard</span></a> </li>
+                </li>
+                <li><a href=""><i class="uil-envelope-alt"></i> <span> Message</span></a> </li>
+            </ul>
+
+
+
+        </div>
+    </div>
+
+    <!-- Header Container
+        ================================================== -->
+    {% include 'csm-tl-project_partials/_csm_header.html' %}
+
+    <!-- content -->
+    <div class="page-content">
+        <div class="page-content-inner">
+
+            <div class="d-flex">
+                <nav id="breadcrumbs" class="mb-3">
+                    <ul>
+                        <li><a href="#"> <i class="uil-home-alt"></i> </a></li>
+                        <li><a href="{% url 'csmdashboard' %}"> Course </a></li>
+                        <li>Create New Course</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="card">
+                <div class="card-header border-bottom-0 py-4">
+                    <h5> Course Manager </h5>
+                </div>
+                <ul class="uk-child-width-expand uk-tab"
+                    uk-switcher="connect: #course-edit-tab ; animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
+
+                    <li><a href="#"></a>{% include 'partials/_alert.html' %}</li>
+
+                </ul>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="card-body">
+                        <h2>Create Week (Title)</h2>
+                        <ul class="uk-switcher uk-margin" id="course-edit-tab">
+
+
+                            <div class="uk-margin">
+                                <div class="uk-inline d-flex">
+                                    <div id="mt-1" style="width: 600px">
+                                        <input class="uk-input bg-secondary" name="week" type="text"
+                                            placeholder="Enter week" required>
+                                    </div>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <div id="mt-1">
+                                        <button class="btn btn-default" style="width: 267px;height: 44px;"
+                                            name="create">Create Week</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </ul>
+                    </div>
+                </form>
+
+            </div>
+            <!--End Of card body -->
+
+
+            <div class="card rounded">
+                <div class=" container py-4 uk-width-expand">
+                    <!-- <form method="POST">
+                              {% csrf_token %}
+                              <fieldset class="uk-fieldset"> -->
+
+
+
+                    <div class="col-md-8 my-suto">
+                        <legend class="uk-legend">Syllabus</legend>
+                    </div>
+
+                    <hr style="width:70% mx-auto mt-0">
+
+                    <table class="uk-table uk-table-divider">
+                        <thead>
+                            <tr>
+                                <th>week Id </th>
+                                <th>Weeks</th>
+                                <th>Unit Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if weeks %}
+
+                            {% for week in weeks %}
+                            {% if course_title == week.week_id.title %}
+                            <tr>
+                                <td>{{week.week_private}}</td>
+                                <td>{{week.week_name}}</td>
+                                <td>{{week.week_id.title}}</td>
+
+                                <!-- <td><button class="uk-button-danger btn btn-alert" type="button" name="Remove" >Remove</button></td> -->
+
+                                <td><button class="uk-button-success btn btn-success" type="submit"
+                                        uk-toggle="target: #modal-example" name="remove">Add Unit</button></td>
+                                <td><a class="uk-button-dark btn btn-dark" href="#">View/Edit</a></td>
+
+                                <form method="post"
+                                    onSubmit="return confirm('Delete week will delete all topics ! Continue ?') ">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ week.pk }}" name="l_id">
+                                    <td><button class="uk-button-danger btn btn-alert" type="submit" name="del">
+                                            <!--     <i class="icon-feather-delete"></i> -->
+                                            <i class="icon-line-awesome-close" style="color: white"></i>
+                                        </button></td>
+                                </form>
+                                <!-- Remove Button Click Warning Message Modal -->
+                               <div id="modal-example" uk-modal>
+                                    <div class="uk-modal-dialog uk-modal-body" style="width:822px;">
+
+
+                                        <form name="removeentry" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+
+                                            <h2 class="uk-modal-title">Week Unit</h2>
+                                            <div class="row">
+                                                <div class="col-md-6">
+
+                                                  <div class="m-3">
+                                                    <div class="uk-margin">
+                                                        <label class="uk-form-label" for="form-horizontal-text">Course Title</label>
+                                                        <div class="uk-form-controls">
+                                                            <input class="uk-input" id="form-horizontal-text" type="text" name="course_title" placeholder="Some text...">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="uk-margin">
+                                                      <label class="uk-form-label" for="form-horizontal-text">Course Description</label>
+                                                      <div class="uk-form-controls">
+                                                       <textarea class="uk-textarea" rows="5" name="course_desc" placeholder="Enter Description"></textarea>
+                                                      </div>
+                                                    </div>
+
+                                                  </div>
+
+                                                </div>
+
+
+                                                <div class="col-md-6">
+
+                                                  <div class="m-3">
+
+                                                    <div class="uk-margin">
+                                                        <label class="uk-form-label" for="form-horizontal-text">Date & Time</label>
+                                                        <div class="uk-form-controls">
+                                                            <input class="uk-input" id="form-horizontal-text" type="datetime-local" name="data_time" >
+                                                        </div>
+                                                    </div>
+
+
+                                                    <h4 class="uk-text-bold mb-2"> Enter the Links </h4>
+                                                    <div class="uk-margin  my-0 py-0">
+                                                        <label class="uk-form-label" for="form-horizontal-text">Online Classes</label>
+                                                        <div class="uk-form-controls">
+                                                            <input class="uk-input" id="form-horizontal-text" type="text" name="online_class_link" value="" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="uk-margin my-0 py-0">
+                                                        <label class="uk-form-label" for="form-horizontal-text">Test MCQ</label>
+                                                        <div class="uk-form-controls">
+                                                            <input class="uk-input" id="form-horizontal-text" type="text" name="test_link" value="" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="uk-margin my-0 py-0">
+                                                        <label class="uk-form-label" for="form-horizontal-text">Extra Link</label>
+                                                        <div class="uk-form-controls">
+                                                            <input class="uk-input" id="form-horizontal-text" type="text" name="extra_link" value="" >
+                                                        </div>
+                                                    </div>
+
+                                                  </div>
+                                                </div>
+
+                                            </div>
+
+                                            <p>Confirm your unique week id</p>
+                                            <input type="text" name="wek_id" required>
+                                            <button class="uk-button uk-button-default uk-modal-close"
+                                                type="button">Cancel</button>
+                                            <button class="uk-button uk-button-primary" name="addWeekUnit"
+                                                type="Submit">Submit</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    <!-- </fieldset>
+                          </form> -->
+                </div>
+            </div>
+        </div>
+        <!--End Of card -->
+
+        <!-- footer
+                ================================================== -->
+        {% include 'partials/_footer.html' %}
+
+
+
+        <!-- add lessson div clone hidden element hari -->
+
+        <div style="display:none" class="clone_topic_div">
+            <li>
+                <div class="sec-list-item" id="topic-module">
+                    <div class="uk-width-expand"> <i class="uil-list-ul uk-sortable-handle"></i>
+                        <label class="mb-0 mx-2">
+                            <input class="uk-checkbox" type="checkbox">
+                        </label>
+                        <input class=" uk-input my-auto uk-width-expand " type="text" style="border:none;" name="topic"
+                            placeholder="Topic">
+                    </div>
+                    <div>
+                        <div class="btn-act">
+                            <div class="aaa">
+                                <label for="file-input">
+                                    <!--<i class="uil-cloud-download"/></i></label>-->
+                                    <i class="uil-cloud-download"></i>
+                                </label>
+                                <input type="file" id="file-input" style="display:none;" />
+                            </div>
+                            <a href="#" class="close-topic"><i class="icon-feather-x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </div>
+        <!-- add lessson div clone hidden element hari-->
+
+
+        <!-- For Night mode -->
+        <script>
+            (function (window, document, undefined) {
+                'use strict';
+                if (!('localStorage' in window)) return;
+                var nightMode = localStorage.getItem('gmtNightMode');
+                if (nightMode) {
+                    document.documentElement.className += ' night-mode';
+                }
+            })(window, document);
+
+
+            (function (window, document, undefined) {
+
+                'use strict';
+
+                // Feature test
+                if (!('localStorage' in window)) return;
+
+                // Get our newly insert toggle
+                var nightMode = document.querySelector('#night-mode');
+                if (!nightMode) return;
+
+                // When clicked, toggle night mode on or off
+                nightMode.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    document.documentElement.classList.toggle('night-mode');
+                    if (document.documentElement.classList.contains('night-mode')) {
+                        localStorage.setItem('gmtNightMode', true);
+                        return;
+                    }
+                    localStorage.removeItem('gmtNightMode');
+                }, false);
+
+            })(window, document);
+        </script>
+
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

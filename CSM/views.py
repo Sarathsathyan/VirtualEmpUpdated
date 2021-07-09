@@ -2,7 +2,7 @@ import random
 import re
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .models import Course,CreateCourse,Week_Unit,Week,Quizz
+from .models import Course,CreateCourse,Week_Unit,Week,Quizz,Online_Unit
 from Admin.models import CategoryCourse,CareerCategory,SubCategory,RoleDetail
 import datetime
 # Create your views here.
@@ -96,9 +96,6 @@ def chooseType(request):
     return render(request,'choseType.html',context)
 
 
-def chooseTypeOnline(request):
-    return render(request,'choseTypeOnline.html')
-
 def csmAddCourse(request,cat_id):
     if request.user.is_active:
         user = request.user
@@ -113,6 +110,7 @@ def csmAddCourse(request,cat_id):
             video_page_image=request.FILES.get('video_page_image')
             category = request.POST["category"]
             role = request.POST["role"]
+
             course = request.POST["course"]
             #difficulty_level = request.POST["difficulty_level"]
             # lesson_title=request.POST["lesson_title"]
@@ -333,6 +331,79 @@ def csmAddCurriculam(request,curr_id):
         }
         print(course_title)
         return render(request, 'csm_add_curriculam.html', context)
+
+
+    else:
+        messages.error(request,"Wrong url")
+        return redirect('/login')
+
+
+def onlineAddCurriculam(request, curr_id):
+
+    if request.user.is_active:
+        Course_name = Course.objects.get(id=curr_id)
+        course_title = Course_name.title
+        if request.method == 'POST':
+            if 'create' in request.POST:
+                week_name = request.POST['week']
+                if Week.objects.filter(week_id_id=curr_id, week_name=week_name).exists():
+                    messages.error(request, "Week name already exists")
+                    return redirect('csmAddCurriculam', id)
+                week_private = random.randint(112, 1000) * 100
+                data = Week(week_name=week_name, week_private=week_private, week_id_id=curr_id)
+                data.save()
+                messages.success(request, "Week Added")
+                print("success")
+
+            if 'addWeekUnit' in request.POST:
+                course_title_1 = request.POST['course_title']
+                course_desc = request.POST['course_desc']
+                date = request.POST['data_time']
+                online_class_link = request.POST['online_class_link']
+                test_link = request.POST['test_link']
+                extra_link = request.POST['extra_link']
+                week = request.POST['wek_id']
+                week_private = Week.objects.get(week_private=week)
+                if week_private:
+                    print("enter")
+                    if Online_Unit.objects.filter(unit_id_id=week_private.pk, course_title=course_title_1).exists():
+                        messages.error(request, "Unit name already exists")
+                        return redirect('csmAddCurriculam', curr_id)
+                    print("hellooo")
+                    unit = Online_Unit(unit_id_id=week_private.pk, course_title=course_title_1, course_desc=course_desc,
+                                       date=date,
+                                       online_class_link=online_class_link, test_link=test_link, extra_link=extra_link)
+
+                    unit.save()
+
+                    messages.success(request, "Unit added to week")
+                else:
+                    messages.error(request, "Wrong Lesson Id")
+            if 'del' in request.POST:
+                print("delete")
+                del_id = request.POST['l_id']
+                #print("lesson ",Lesson.objects.get(id=del_id))
+                try:
+                    """
+                    lesson_del = Lesson.objects.get(id=del_id).delete()
+                    topic_del = Lesson_Topic.objects.filter(topic_id_id=del_id)
+                    """
+                    print("del_id",del_id)
+                    week_del= Week.objects.get(id=del_id).delete()
+                    week_unit_del=Week_Unit.objects.filter(unit_id_id=del_id)
+                    print(week_unit_del)
+                    messages.success(request, "Deleted successfully")
+                except:
+                    messages.error(request, "Some error occured")
+
+        #weeks = Week.objects.order_by("week_name")
+        weeks=Week.objects.all()
+        context = {
+            'weeks': weeks,
+            'course_title': course_title,
+            'c_id': curr_id,
+        }
+        return render(request, 'online_add_curriculam.html', context)
 
 
     else:

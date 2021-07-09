@@ -117,3 +117,14 @@ class Result(models.Model):
     class Meta:
         db_table = 'results'
 
+
+class Online_Unit(models.Model):
+    unit_id = models.ForeignKey(Week,on_delete=models.CASCADE)
+    course_title = models.CharField(max_length=500,null=True)
+    course_desc = models.CharField(max_length=100,null=True, blank=True)
+    date = models.CharField(max_length=150,null=True, blank=True)
+    online_class_link = models.CharField(max_length=150,null=True, blank=True)
+    test_link = models.CharField(max_length=150,null=True, blank=True)
+    extra_link = models.CharField(max_length=150,null=True, blank=True)
+    def __str__(self):
+        return self.course_title
