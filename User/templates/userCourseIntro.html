@@ -10,7 +10,7 @@
         {% load static %}
         {% include 'userPartials/_header.html'%}
 
-            
+
 
 
     <!-- overlay seach on mobile-->
@@ -73,7 +73,7 @@
                     <!-- My courses -->
                     <a href="{% url 'userdashboard' %}"> <i class="icon-feather-shopping-cart"></i> <span class="tooltips"> Store</span></a>
                 </li>
-               
+
                 <li>
                     <!-- Projects-->
                     <a href="{% url 'user_blog_page' %}"> <i class="uil-blogger-alt"></i> <span class="tooltips">
@@ -81,7 +81,7 @@
                 </li>
 
         </ul>
-       
+
 
                 <!-- Lunch information box -->
 
@@ -107,7 +107,7 @@
 
             <div class=" uk-width-expand">
 
-                <a class="btn btn-danger btn-icon-label uk-first-column" style="border-radius: 5px; padding: 20px;" href="{% url 'courseLesson' course_details.pk %}" ><span class="btn-inner--icon">
+                <a class="btn btn-danger btn-icon-label uk-first-column" style="border-radius: 5px; padding: 20px;" href="{% url 'displayOnlineCourse' course_details.pk %}" ><span class="btn-inner--icon">
                 <i class="icon-material-outline-library-books icon-small"></i>
               </span>
               <span class="btn-inner--text">Start Course</span></a>

@@ -4,7 +4,7 @@ import datetime
 import uuid
 from datetime import timezone
 from Admin.models import (UserDetails,CareerCategory,SubCategory,CategoryCourse,RoleDetail,Reference,CareerCategory,SubCategory,CategoryCourse)
-from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz)
+from CSM.models import (Course,CreateCourse,Week,Week_Unit,Quizz,Online_Unit)
 from Blog.models import (BlogManager,BlogHeight,BlogCategory)
 from Admin.models import CareerCategory,SubCategory,CategoryCourse,UsedLicense,AdminLicense
 from .models import UserContact,UserEducation,UserWorkExperience,UserSkill,CareerChoice,userProgress, userCompProgress, Score, userPrice
@@ -1167,5 +1167,40 @@ def userblogsdetail(request,id):
         return redirect('logout')
     return render(request,'user_blog_detail.html',context)
 
-def displayOnlineCourse(request):
-    return render(request,'displayOnlineCourse.html')
+def displayOnlineCourse(request,id):
+    course=Course.objects.get(id=id)
+    user_details = UserDetails.objects.get(user_id=request.user.pk)
+    if course:
+        weeks=Week.objects.all().filter(week_id=course)
+
+        if request.method=='POST':
+            wid=request.POST['widi']
+            week_data=Week.objects.get(id=wid)
+
+            wd = Online_Unit.objects.get(unit_id=week_data)
+            print(week_data)
+            print(wd)
+            date=wd.date.split('T')[0]
+            time=wd.date.split('T')[1]
+            context={
+                'weeks':weeks,
+                'week_data':week_data,
+                'wd':wd,
+                'date':date,
+                'time':time
+            }
+            return render(request,'displayOnlineCourse.html',context)
+        context={
+            'weeks':weeks
+        }
+        return render(request,'displayOnlineCourse.html',context)
+
+
+    course = Course.objects.get(id=course_id)
+    week = Week.objects.filter(week_id_id=course.pk)
+
+    context ={
+        'course_id':course_id,
+        'week':week,
+    }
+    return render(request,'displayOnlineCourse.html',context)
