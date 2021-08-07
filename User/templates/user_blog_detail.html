@@ -5,7 +5,122 @@
 
       <div id="wrapper">
 
-          {% include 'userPartials/_header.html'%}
+        <header class="header uk-light" uk-sticky style="background:rgb(10, 34, 59)">
+
+            <div class="container">
+
+                <nav uk-navbar>
+
+
+                    <!-- left Side Content -->
+                    <div class="uk-navbar-left">
+ <div class="searchbox uk-visible@s">
+
+                            <input class="uk-search-input" type="search" placeholder="Search...">
+                            <button class="btn-searchbox"> </button>
+
+                        </div>
+                        <!-- logo -->
+                        <a href="{% url 'userdashboard' %}" class="logo">
+                            <img src="{% static 'images/VES.png' %}" alt="">
+                            <span> Virtual Empleado</span>
+                        </a>
+
+                        <!-- breadcrumbs -->
+                        <nav id="breadcrumbs">
+                            <ul>
+                                <!-- <li><a href="/userdashboard/" style="color: black;font-weight: bold;font-size: 20px;"> My Dashboard </a></li> -->
+
+                            </ul>
+                        </nav>
+
+
+                    </div>
+
+
+                    <!--  Right Side Content   -->
+
+                    <div class="uk-navbar-right">
+
+                        <div class="header-widget" >
+                            <!-- User icons close mobile-->
+                            <span class="icon-feather-x icon-small uk-hidden@s"
+                                uk-toggle="target: .header-widget ; cls: is-active"> </span>
+
+
+                            <!-- profile-icon-->
+                        <!-- profile-icon-->
+
+
+                            {% if user.is_authenticated %}
+
+                            <a href="#" class="header-widget-icon profile-icon" >
+{#                                <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="" class="header-profile-icon">#}
+
+                            <p style="color: white;font-size: 16px;text-transform: capitalize;font-weight: bold;padding-top: 5px;"><a class="uil uil-user mx-2"></a>{{ user.first_name }} {{ user.last_name }}</p>
+                            </a>
+                        {% endif %}
+
+                            <div uk-dropdown="pos: top-right ;mode:click" class="dropdown-notifications small">
+
+                                <!-- User Name / Avatar -->
+                                
+
+                                    <div class="dropdown-user-details">
+{#                                        <div class="dropdown-user-avatar">#}
+{#                                            <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="">#}
+{#                                        </div>#}
+                                        {% if user.is_authenticated %}
+                                        <div class="dropdown-user-name" style="font-weight: bold;">
+                                            {{ user.first_name }} {{ user.last_name }}<span><b>Trainee</b> <p class="m-0"> Member since : {{ user.date_joined   }} </p> <p class="m-0">Reference ID : {{ reference }} </p></span>
+                                        </div>
+
+                                        {% endif %}
+                                    </div>
+
+                                
+
+                                <!-- User menu -->
+
+                                <ul class="dropdown-user-menu">
+                                    <li>
+                                        <a href="{% url 'userdashboard' %}">
+                                            <i class="icon-material-outline-dashboard"></i> Dashboard</a>
+
+                                    </li>
+
+                                    <li><a href="{% url 'userprofileedit' %}">
+                                            <i class="icon-feather-settings"></i> Edit Profile</a>
+                                    </li>
+                                 <!--<li><a href="{% url 'usercfp' %}">
+                                            <i class="icon-feather-slack"></i> Choose CFP</a>
+                                    </li>-->
+                                    <li class="menu-divider">
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'logout' %}">
+                                            <i class="icon-feather-log-out"></i> Sign Out</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- icon search-->
+                        <a class="uk-navbar-toggle uk-hidden@s"
+                            uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#">
+                            <i class="uil-search icon-small"></i>
+                        </a>
+
+                        <!-- User icons -->
+                            <a href="#" class="uil-user icon-small uk-hidden@s"
+                            uk-toggle="target: .header-widget ; cls: is-active">
+                            </a>
+                    </div>
+                    <!-- End Right Side Content / End -->
+                </nav>
+            </div>
+            <!-- container  / End -->
+        </header>
+
 
           <!-- overlay seach on mobile-->
           <div class="nav-overlay uk-navbar-left uk-position-relative uk-flex-1 bg-grey uk-light p-2" hidden
@@ -91,7 +206,7 @@
             <div class="container">
 
                 <div uk-grid>
-                    <div class="uk-width-3-4@m">
+                    <div class="uk-width-3-3@m">
 
                         <div class="blog-post single-post">
 
@@ -122,92 +237,9 @@
 
                         </div>
 
-                        <h4>Author </h4>
-
-                        <div class="uk-card-default rounded px-3 pb-md-3"
-                            uk-toggle="cls: uk-flex uk-flex-between@m uk-flex-middle; mode: media; media: @m">
-                            <div class="user-details-card">
-                                <div class="user-details-card-avatar">
-                                    <img src="../assets/images/avatars/avatar-2.jpg" alt="">
-                                </div>
-                                <div class="user-details-card-name">
-                                    Stella Johnson <span> Developer <span> 1 year ago </span> </span>
-                                </div>
-                            </div>
-                            <div>
-                                <strong class="mx-3 uk-visible@s"> Share on </strong>
-
-                                <a href="#" class="btn btn-facebook  rounded-circle btn-icon-only transition-3d-hover">
-                                    <span class="btn-inner--icon">
-                                        <i class="icon-brand-facebook-f"></i>
-                                    </span>
-                                </a>
-
-                                <a href="#" class="btn btn-twitter rounded-circle btn-icon-only transition-3d-hover">
-                                    <span class="btn-inner--icon">
-                                        <i class="icon-brand-twitter"></i>
-                                    </span>
-                                </a>
-
-                                <a href="#"
-                                    class="btn btn-google-plus rounded-circle btn-icon-only transition-3d-hover">
-                                    <span class="btn-inner--icon">
-                                        <i class="icon-brand-google-plus-g"></i>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-
-
                     </div>
 
-                    <div class="uk-width-1-4@m">
-
-                        <h4> Related Articles</h4>
-                        <a href="#">
-                            <div class="uk-card-default mb-4 rounded animate-this uk-inline-clip">
-                                <img src="../assets/images/blog/img-1.jpg" alt="">
-                                <div class="p-3">
-                                    <p class="mb-2"> 10 amazing web demos and experiments </p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="#">
-                            <div class="uk-card-default mb-4 rounded animate-this uk-inline-clip">
-                                <img src="../assets/images/blog/img-2.jpg" alt="">
-                                <div class="p-3">
-                                    <p class="mb-2"> Learn 10 Awesome Web Dev Tools And Resources </p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="#">
-                            <div class="uk-card-default mb-4 rounded animate-this uk-inline-clip">
-                                <img src="../assets/images/blog/img-3.jpg" alt="">
-                                <div class="p-3">
-                                    <p class="mb-2">10 Interesting JavaScript And CSS Libraries </p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="#">
-                            <div class="uk-card-default mb-4 rounded animate-this uk-inline-clip">
-                                <img src="../assets/images/blog/img-4.jpg" alt="">
-                                <div class="p-3">
-                                    <p class="mb-2"> Learn New 10 Interesting JavaScript And CSS Libraries </p>
-                                </div>
-                            </div>
-                        </a>
-
-
-                    </div>
-
-                </div>
-
-
-
-
+                    
                 <!-- footer
                ================================================== -->
                 {% include 'partials/_footer.html' %}

@@ -397,20 +397,36 @@ figcaption.courses {
                   <ul class="uk-slideshow-items " style="border-radius:5px; box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px;">
 
                           <li>
-                              <img src="{% static 'images/book/book.jpg' %}" alt="" uk-cover >
+                              <img src="{% static 'images/book/referrals.png' %}" alt="" uk-cover >
                               <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
-                                  <h3 class="uk-margin-remove">Artificial Intelligence</h3>
-                                  <p class="uk-margin-remove">Check out the new blog</p>
+                                <!--  <h3 class="uk-margin-remove">Artificial Intelligence</h3>
+                                  <p class="uk-margin-remove">Check out the new blog</p> -->
                               </div>
                           </li>
 
                           <li>
-                              <img src="{% static 'images/book/book.jpg' %}" alt="" uk-cover >
+                              <img src="{% static 'images/book/ideathon-21.png' %}" alt="" uk-cover >
                               <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
-                                  <h3 class="uk-margin-remove">Artificial Intelligence></h3>
-                                  <p class="uk-margin-remove">Check out the new blog</p>
+                                 <!-- <h3 class="uk-margin-remove">Artificial Intelligence></h3>
+                                  <p class="uk-margin-remove">Check out the new blog</p> -->
                               </div>
                           </li>
+
+                          <li>
+                            <img src="{% static 'images/book/follow.png' %}" alt="" uk-cover >
+                            <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                               <!-- <h3 class="uk-margin-remove">Artificial Intelligence></h3>
+                                <p class="uk-margin-remove">Check out the new blog</p> -->
+                            </div>
+                        </li>
+
+                        <li>
+                          <img src="{% static 'images/book/storeve.png' %}" alt="" uk-cover >
+                          <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                             <!-- <h3 class="uk-margin-remove">Artificial Intelligence></h3>
+                              <p class="uk-margin-remove">Check out the new blog</p> -->
+                          </div>
+                      </li>
 
 
                   </ul>
@@ -518,7 +534,7 @@ background-blend-mode: soft-light, screen, darken, normal;
 
                     <div class="uk-width-1-2">
                       <h1 class="" style="color: white;">Virtual Experience Program</h1>
-                      <h4 style="color: #FFFFFF;">Get trained in trending courses. Work on real time projects to get hand on experience</h4>
+                      <h4 style="color: #FFFFFF;">Get trained in trending courses. Work on real time projects to bemome an expert</h4>
                     </div>
 
                     <div class="uk-width-expand">
@@ -573,14 +589,14 @@ background-blend-mode: soft-light, screen, darken, normal;
                           <div class="course-card episode-card animate-this mx-2" style="width:292.5px;">
                               <div class="course-card-thumbnail ">
 
-                                <a href="#">
+                                <a>
                                     <img src="{% static 'images/dashboard/bgcolorplus.png'%}" alt="sample108" />
 
                                     </a>
 
                               </div>
                               <div class="course-card-body">
-                                  <h4 class="mb-0"> ADD CFP </h4>
+                                  <h4 class="mb-0"> ADD CFP (Coming Soon) </h4>
                               </div>
                           </div>
 
@@ -609,7 +625,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 
                      <div class="uk-width-1-2">
                        <h1 class="" style="color: #FFFFFF;">Micro Courses</h1>
-                       <h4 style="color: #FFFFFF;">Reach 200XP and choose your favourite course categories. Chose your favourite and start learning.</h4>
+                       <h4 style="color: #FFFFFF;">Choose your favourite short courses from our categories and start start adding your skills.</h4>
                      </div>
 
                      <div class="uk-width-expand">
@@ -716,7 +732,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 
                       <div class="uk-width-1-2">
                         <h1 class="">Hiring Program</h1>
-                        <h4>Once reaching 700XP get listed on the placement portal through our placement campaign</h4>
+                        <h4>Your profile with Experience and skills earned are listed on the placement portal through our placement campaign</h4>
                       </div>
 
                       <div class="uk-width-expand">
@@ -747,7 +763,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                               <figure class="snip1543">
                                   <img src="{% static 'images/dashboard/resume.png'%} " alt="sample108" />
                                   <figcaption class="courses">
-                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="alert('Reach 700 SP to unlock');"GET &rarr;</a></h3>
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="alert('Reach 700XP to unlock');">GET &rarr;</a></h3>
                                     </figcaption>
                                   <a href="#"></a>
                                 </figure>
@@ -777,7 +793,7 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
                               <figure class="snip1543">
                                   <img src="{% static 'images/dashboard/HPBG.png'%}" alt="sample108" />
                                   <figcaption class="courses">
-                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail"  onclick="return alert('Reach 200 SP to unlock');">DIVE IN!&rarr;</a></h3>
+                                 <h3 style="color: #fff;"><a style="color: #fff;" class="trail" onclick="return alert('Reach 700XP to unlock');">DIVE IN!&rarr;</a></h3>
                                     </figcaption>
                                   <a href="#"></a>
                                 </figure>
@@ -1010,8 +1026,13 @@ background-blend-mode: overlay, overlay, overlay, darken, normal;" >
 
         })(window, document);
         function validate() {
-            alert("Reach 200 SP to unlock")
+            alert("Reach 200XP to unlock")
         }
+        
+        function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
     </script>
 
     </body>
